@@ -1,3 +1,12 @@
+---
+author: tech agent
+created: 2026-04-14 09:34:12
+modified: 2026-04-29 11:01:00 GMT+8
+version: v1.0.0
+source: tech agent memory/MEMORY.md
+tags: [tech-agent, MEMORY, 长期记忆]
+---
+
 # MEMORY.md - 长期记忆
 
 ## 🚨 身份认知铁律（每次会话启动必读）
@@ -128,7 +137,7 @@
     - ✅ **备选方案**: 准备重启动、文件移动持久化、或直接 base64 嵌入（小文件）等替代方案
     - 📌 **应用场景**: 截图分享、临时文件下载、局域网调试服务、自动化脚本结果导出
     - 📌 **经验来源**: 淘宝搜索自动化任务（uno男士洗面奶）截图分享失败案例
-    - 📌 **专项文件**: `memory/experience-browser-shared.md`
+    - 📌 **专项文件**: `/home/obsidian_vault/shared/browser/experience-browser.md`
 
 ---
 
@@ -143,7 +152,7 @@
 ## 📚 记忆体系
 - **MEMORY.md**（本文件）：长期宪法，主会话加载
 - **memory/YYYY-MM-DD.md**：每日原始日志，每次会话从零开始
-- **专项经验**: `memory/experience-browser-shared.md`（Chromium CDP 自动化方案）
+- **专项经验**: `/home/obsidian_vault/shared/browser/experience-browser.md`（Chromium CDP 自动化方案）
 - **定期回顾**：每次会话开始读取前一日日志，提炼信息沉淀到 MEMORY.md
 
 ## 🧠 Self-Improvement 技能
@@ -175,16 +184,23 @@
 
 ---
 
-## 📂 专项经验（Projects）
-详细经验已拆分到 `memory/projects/` 目录：
-- `memory/projects/docker-deployment.md` - Docker 编排实战经验（15KB）
-- `memory/projects/browser-automation.md` - 浏览器自动化方案（2.9KB）
-- `memory/projects/memory-system.md` - 记忆归档流程（2.4KB）
-- `memory/projects/backup-system.md` - 备份系统架构（979B）
-- `memory/projects/mission-control.md` - Mission Control 完整安装部署指南（21KB）
-- `memory/projects/daily-organize-summarize.md` - 每日记忆管理系统（7.9KB）
-- `memory/projects/script-automation.md` - 脚本自动化经验（6.5KB）
-- `memory/projects/control-center.md` - OpenClaw Control Center 经验（1.9KB）
+## 📂 专项经验（Knowledge）
+详细经验已归档到 Obsidian 知识库（`/home/obsidian_vault/1-Tech-Memory/knowledge/`）：
+
+| 主题 | 文件 | 说明 |
+|------|------|------|
+| Bash脚本开发 | `bash-deploy.md` | 脚本开发指南与最佳实践 |
+| Docker编排 | `docker-compose.md` | Docker Compose 容器化部署 |
+| 记忆归档 | `memory-system.md` | 记忆归档流程与整理机制 |
+| 备份系统 | `backup-system.md` | 多工作区备份系统架构 |
+| 协作模式 | `collaboration-patterns.md` | 工作区隔离与跨Agent通信 |
+| 浏览器自动化 | `/shared/browser/experience-browser.md` | Chromium CDP 自动化方案 |
+| Mission Control | `mission-control-dashboard.md` | Next.js 应用完整部署 |
+| Control Center | `openclaw-control-center-dashboard.md` | OpenClaw Control Center |
+| QMD+Obsidian | `qmd-obsidian-system.md` | 向量检索与知识库集成 |
+| 经验索引 | `experience-index.md` | 经验文件总索引 |
+
+**访问方式**: `/home/obsidian_vault/1-Tech-Memory/knowledge/`
 
 ---
 
@@ -194,7 +210,7 @@
 | `memory/MULTI_WORKSPACE_BACKUP_SETUP.md` | 多工作区备份完整改造说明 |
 | `reports/2026_AI_Development_Report_Summary.md` | AI大模型发展报告结构化摘要 |
 | `backups/workspaces_monthly_summary_2026-03.md` | 3月份备份执行总结 |
-| `memory/experience-browser-shared.md` | **Chromium CDP 浏览器自动化方案**（绕过 OpenClaw 限制） |
+| `/home/obsidian_vault/shared/browser/experience-browser.md` | **Chromium CDP 浏览器自动化方案**（绕过 OpenClaw 限制） |
 | `/root/.openclaw/share/browser/INSTALL.md` | 完整安装指南（含多代理协作说明、FAQ） |
 | `/root/.openclaw/share/learning-workflow/` | 记忆归档与学习提取工作flow |
 | `/root/.openclaw/share/modernwms/` | Modern WMS 部署文档 |
@@ -228,7 +244,7 @@
 ### 交付物标准化（Delivery Standardization）
 结构化交付物（6部分：背景、流程、验证、错误、建议、模板）
 用户确认接收后立即清理临时报告
-workspace 仅保留核心资产（.learnings/, MEMORY.md, experience-*.md）
+workspace 仅保留核心资产（.learnings/, MEMORY.md → Obsidian, knowledge/*.md）
 - 2026-04-04: 新增 experience-delivery.md 指南 ✅
 
 ---
@@ -409,12 +425,11 @@ qmd get <file>[:line] -l 50
 ```
 
 **应用场景：**
-- `experience-*.md` 文件
-- `memory/experience-*.md` 文件
+- `knowledge/*.md` 文件（Obsidian）
 - 任何独立归档的经验文档
 
 **文件位置：**
-- 优先放在 `memory/experience-*.md`
+- 优先放在 `Obsidian knowledge/*.md`
 - 共享经验放在 `~/.openclaw/share/` 目录
 
 **本条规则固化的原因：**
@@ -843,18 +858,7 @@ curl -s "页面URL" | grep -o "magnet:?xt=[^\"<>]*" | sed "s/&amp;/\&/g" | grep 
 
 ---
 
-## 📂 专项经验索引（2026-04-28 更新）
 
-### 知识库文件
-| 文件 | 说明 |
-|------|------|
-| `knowledge/openclaw-control-center-dashboard.md` | OpenClaw Control Center dashboard部署 |
-| `knowledge/mission-control-dashboard.md` | Mission Control 任务控制dashboard部署 |
-| `knowledge/docker-compose.md` | Docker Compose 容器化部署 |
-
-### 访问方式
-- QMD collection: `tech-knowledge`
-- 路径: `/home/obsidian_vault/1-Tech-Memory/knowledge/`
 
 
 ---
@@ -875,27 +879,6 @@ curl -s "页面URL" | grep -o "magnet:?xt=[^\"<>]*" | sed "s/&amp;/\&/g" | grep 
 
 3. **QMD Collection**
    - `tech-knowledge` → `workspace-tech/tech-knowledge/`
-
-### 📂 当前 workspace-tech/memory/ 结构
-```
-memory/
-├── dreaming/           (保留)
-├── .dreams/           (保留)
-├── experience-backup-system.md
-├── experience-bash.md
-├── experience-browser-shared.md  (软链接)
-├── experience.md
-├── experience-memory-system.md
-└── experience-qmd-obsidian-system.md
-```
-
-### 🗂️ Obsidian 知识库结构
-```
-1-Tech-Memory/
-├── daily/              (37个每日记忆)
-├── knowledge/         (3个专项经验)
-└── MEMORY.md          (长期记忆)
-```
 
 ### 💡 关键教训
 - Obsidian 是最终版本，workspace-tech 是访问入口

@@ -1,3 +1,16 @@
+---
+author: tech agent
+created: 2026-04-28 18:17:38
+modified: 2026-04-29 11:01:00 GMT+8
+version: v1.0.0
+tags:
+  - tech-agent
+  - knowledge
+  - experience
+  - backup
+---
+
+
 # 备份系统架构
 
 ## 备份体系重构（2026-03-31 核心成就）
