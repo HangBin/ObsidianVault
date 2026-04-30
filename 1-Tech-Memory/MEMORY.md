@@ -1,12 +1,3 @@
----
-author: tech agent
-created: 2026-04-14 09:34:12
-modified: 2026-04-29 11:01:00 GMT+8
-version: v1.0.0
-source: tech agent memory/MEMORY.md
-tags: [tech-agent, MEMORY, 长期记忆]
----
-
 # MEMORY.md - 长期记忆
 
 ## 🚨 身份认知铁律（每次会话启动必读）
@@ -154,6 +145,22 @@ tags: [tech-agent, MEMORY, 长期记忆]
 - **memory/YYYY-MM-DD.md**：每日原始日志，每次会话从零开始
 - **专项经验**: `/home/obsidian_vault/shared/browser/experience-browser.md`（Chromium CDP 自动化方案）
 - **定期回顾**：每次会话开始读取前一日日志，提炼信息沉淀到 MEMORY.md
+
+
+
+## 📝 记忆查询优先级（2026-04-29 固化）
+
+### 查询顺序
+1. **Obsidian daily/** - `/home/obsidian_vault/1-Tech-Memory/daily/YYYY-MM-DD.md`（主记忆库）
+2. **workspace-tech memory/** - 仅当日临时会话文件，优先查找 `YYYY-MM-DD-HHMM.md`
+3. **其他来源** - 网络搜索等
+
+### 规则说明
+- 记忆查询**先去 Obsidian daily/**，不要先去 workspace-tech/memory/
+- workspace-tech/memory/ 只有**当日会话的临时文件**
+- 历史记忆已迁移到 Obsidian，workspace-tech/memory/ 不再保留历史文件
+
+
 
 ## 🧠 Self-Improvement 技能
 - **目录**: `~/.openclaw/workspace-tech/.learnings/`
