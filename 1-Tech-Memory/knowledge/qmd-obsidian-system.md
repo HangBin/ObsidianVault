@@ -143,3 +143,12 @@ qmd collection add final-experience --path /root/.openclaw/workspace-final/memor
 - `/root/.openclaw/workspace-tech/qmd_commands.sh` - 集合配置脚本
 - `/root/.cache/qmd/index.sqlite` - QMD 索引文件
 - `/root/.cache/qmd/models/` - 模型缓存目录
+- **2026-04-29** - ✅ 兼容Obsidian等笔记工具
+- **2026-04-29** - ✅ 目标文件：`/home/obsidian_vault/1-Tech-Memory/daily/2026-04-29.md`
+- **2026-04-29** - ✅ 格式：Obsidian兼容Markdown（含frontmatter）
+- **2026-04-29** 2.才能保证把每日的会话写入每日记忆文件，总结经验教训到专项经验文件(如针对如qmd和obsidian的专项经验写入文档qmd-obsidian-system.md)，而不是累加到experience.md文件里
+- **2026-04-29** **规则1：QMD相关经验**
+- **2026-04-29**   ## [YYYY-MM-DD] QMD经验条目
+- **2026-04-29** **规则2：Obsidian相关经验**
+- **2026-04-29** **QMD-Obsidian经验写入模板**：
+- **2026-04-29** 4. 更新经验索引

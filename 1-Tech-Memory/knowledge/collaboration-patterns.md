@@ -131,3 +131,5 @@ else:
 
 *创建时间*: 2026-04-29 11:01 (Asia/Shanghai)
 *来源*: workspace-tech/memory/experience.md (精简版)
+- **2026-04-29** - ✅ 源文件：`/root/.openclaw/workspace-tech/memory/2026-04-29.md`
+- **2026-04-29** **规则5：协作模式相关经验**
