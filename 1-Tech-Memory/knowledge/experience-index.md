@@ -33,3 +33,28 @@
 
 *最后更新*: 2026-04-29 11:01 GMT+8
 *来源*: workspace-tech/memory/experience.md → Obsidian 知识库精简归档
+
+---
+
+## 🔗 图谱关联
+
+> 本文件是经验图谱的索引入口
+
+### 专项经验文件
+- [[backup-system]] - 备份系统架构
+- [[bash-deploy]] - Bash脚本开发指南
+- [[collaboration-patterns]] - 协作模式与工作区管理
+- [[docker-compose]] - Docker编排实战经验
+- [[memory-system]] - 记忆归档流程
+- [[mission-control-dashboard]] - Mission Control部署指南
+- [[openclaw-control-center-dashboard]] - Control Center部署经验
+- [[qmd-obsidian-system]] - QMD+Obsidian记忆存储系统
+
+### 按主题查找
+- **部署相关**: [[docker-compose]] · [[mission-control-dashboard]] · [[openclaw-control-center-dashboard]]
+- **运维相关**: [[backup-system]] · [[bash-deploy]]
+- **记忆相关**: [[memory-system]] · [[qmd-obsidian-system]]
+- **协作相关**: [[collaboration-patterns]]
+
+---
+*图谱关联最后更新: 2026-05-07*

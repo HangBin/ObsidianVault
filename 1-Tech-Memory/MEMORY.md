@@ -891,3 +891,25 @@ curl -s "页面URL" | grep -o "magnet:?xt=[^\"<>]*" | sed "s/&amp;/\&/g" | grep 
 - Obsidian 是最终版本，workspace-tech 是访问入口
 - 迁移后删除旧文件，避免重复维护
 - QMD collection 路径需要与实际文件路径一致
+
+---
+
+## 🔗 图谱关联
+
+> 本文件是长期记忆的核心节点，关联以下专项经验
+
+### 专项经验文件
+- [[backup-system]] - 备份系统架构
+- [[bash-deploy]] - Bash脚本开发指南
+- [[collaboration-patterns]] - 协作模式与工作区管理
+- [[docker-compose]] - Docker编排实战经验
+- [[memory-system]] - 记忆归档流程
+- [[mission-control-dashboard]] - Mission Control部署指南
+- [[openclaw-control-center-dashboard]] - Control Center部署经验
+- [[qmd-obsidian-system]] - QMD+Obsidian记忆存储系统
+
+### 图谱入口
+- [[tech-index]] - 1-Tech-Memory图谱入口（索引所有daily和knowledge文件）
+
+---
+*图谱关联最后更新: 2026-05-07*

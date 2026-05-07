@@ -154,3 +154,27 @@ qmd collection add final-experience --path /root/.openclaw/workspace-final/memor
 - **2026-04-29** 4. 更新经验索引
 - **2026-05-07** - **结果**: ✅ 今日记忆已更新，准备同步到 Obsidian
 - **2026-05-07** - **结果**: ✅ 今日记忆已更新，准备同步到 Obsidian
+
+---
+
+## 🔗 相关条目
+
+> 图谱关联：本文件与以下文件存在直接关系
+
+### 强关联（同一主题）
+- [[memory-system]] - 记忆归档流程（QMD是记忆系统的搜索层）
+- [[2026-04-09]] - QMD系统维护与向量搜索诊断
+- [[2026-04-10]] - QMD集合重构与搜索优化
+- [[2026-04-21]] - QMD索引迁移与向量搜索诊断
+- [[2026-04-29]] - 记忆系统迁移与提示词设计
+
+### 中关联（相关主题）
+- [[openclaw-control-center-dashboard]] - Control Center部署也涉及路径配置
+- [[collaboration-patterns]] - 工作区隔离影响QMD集合配置
+
+### 弱关联（间接参考）
+- [[bash-deploy]] - bash-deploy脚本开发涉及QMD命令
+- [[2026-03-23]] - 工作区配置影响QMD集合路径
+
+---
+*图谱关联最后更新: 2026-05-07*

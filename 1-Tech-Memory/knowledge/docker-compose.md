@@ -521,3 +521,23 @@ docker compose restart
 
 **版本历史**:
 - v1.0 (2026-04-02): 初始版本，基于 OpenClaw Control Center 部署实战总结
+
+---
+
+## 🔗 相关条目
+
+### 强关联
+- [[mission-control-dashboard]] - Mission Control使用Docker Compose部署
+- [[openclaw-control-center-dashboard]] - Control Center也使用Docker Compose
+- [[2026-04-01]] - Mission Control安装部署
+- [[2026-04-02]] - Docker部署方案与容器化原则
+
+### 中关联
+- [[bash-deploy]] - 部署脚本开发遵循Bash最佳实践
+- [[backup-system]] - Docker容器备份策略
+
+### 弱关联
+- [[2026-03-31]] - 备份体系涉及Docker环境
+
+---
+*图谱关联最后更新: 2026-05-07*

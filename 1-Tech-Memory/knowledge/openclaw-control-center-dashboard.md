@@ -74,3 +74,22 @@ nohup env UI_MODE=true node --import tsx src/index.ts > /tmp/occ.log 2>&1 &
 
 ---
 创建时间：2026-04-09
+---
+
+## 🔗 相关条目
+
+### 强关联
+- [[docker-compose]] - Control Center使用Docker Compose部署
+- [[mission-control-dashboard]] - 同为Dashboard系统
+- [[2026-04-02]] - Docker部署方案
+- [[2026-04-08]] - 浏览器控制与截图分享
+
+### 中关联
+- [[bash-deploy]] - 部署脚本开发
+- [[qmd-obsidian-system]] - Control Center配置涉及路径管理
+
+### 弱关联
+- [[2026-04-01]] - Mission Control部署经验可参考
+
+---
+*图谱关联最后更新: 2026-05-07*
