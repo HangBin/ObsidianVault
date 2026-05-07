@@ -136,6 +136,7 @@
 - **任务ID**: c01cd541-734c-43f7-8960-180f1c857539
 - **执行时间**: 每天 08:00（周一到周五，Asia/Shanghai）
 - **推送方式**: webchat 直接发到这里
+- **文件存储**: `/home/obsidian_vault/2-Final-Memory/report/morning-analysis-YYYY-MM-DD.md`
 - **报告格式**: 详版早盘分析
   - 🌡️ 市场温度
   - 🧭 市场风向
@@ -148,6 +149,7 @@
 - **任务ID**: dc65ec4b-f949-44ca-8750-d91265c2da29
 - **执行时间**: 每天 15:30（周一到周五，Asia/Shanghai）
 - **推送方式**: webchat 直接发到这里
+- **文件存储**: `/home/obsidian_vault/2-Final-Memory/report/portfolio-analysis-YYYY-MM-DD.md`
 - **报告格式**: 详版尾盘分析
   - 📊 今日大盘表现（上证/深证/创业板涨跌）
   - 🔥 今日热点板块与持仓关联分析
@@ -280,6 +282,7 @@ EMORY.md - Final 财务总监长期记忆
 - **任务ID**: c01cd541-734c-43f7-8960-180f1c857539
 - **执行时间**: 每天 08:00（周一到周五，Asia/Shanghai）
 - **推送方式**: webchat 直接发到这里
+- **文件存储**: `/home/obsidian_vault/2-Final-Memory/report/morning-analysis-YYYY-MM-DD.md`
 - **报告格式**: 详版早盘分析
   - 🌡️ 市场温度
   - 🧭 市场风向
@@ -292,6 +295,7 @@ EMORY.md - Final 财务总监长期记忆
 - **任务ID**: dc65ec4b-f949-44ca-8750-d91265c2da29
 - **执行时间**: 每天 15:30（周一到周五，Asia/Shanghai）
 - **推送方式**: webchat 直接发到这里
+- **文件存储**: `/home/obsidian_vault/2-Final-Memory/report/portfolio-analysis-YYYY-MM-DD.md`
 - **报告格式**: 详版尾盘分析
   - 📊 今日大盘表现（上证/深证/创业板涨跌）
   - 🔥 今日热点板块与持仓关联分析
@@ -394,6 +398,87 @@ memory/
 ```
 
 ---
+
+
+
+## 📅 每日定时报告配置清单
+
+### 一、定时任务（cron）
+
+#### 任务1：早盘分析
+
+- **任务名称**: 每日投资建议报告
+- **任务ID**: c01cd541-734c-43f7-8960-180f1c857539
+- **执行时间**: 每天 09:10（周一到周五，Asia/Shanghai）
+- **sessionTarget**: isolated
+- **delivery**: none（通过 sessions_send 主动推送）
+
+#### 任务2：尾盘分析
+
+- **任务名称**: 每日尾盘分析报告
+- **任务ID**: dc65ec4b-f949-44ca-8750-d91265c2da29
+- **执行时间**: 每天 15:30（周一到周五，Asia/Shanghai）
+- **sessionTarget**: isolated
+- **delivery**: none（通过 sessions_send 主动推送）
+
+---
+
+### 二、文件存储路径
+
+#### 早盘分析报告
+
+- **目录**: `/home/obsidian_vault/2-Final-Memory/report/`
+- **文件名格式**: `morning-analysis-YYYY-MM-DD.md`
+- **示例**: `morning-analysis-2026-05-08.md`
+
+#### 尾盘分析报告
+
+- **目录**: `/home/obsidian_vault/2-Final-Memory/report/`
+- **文件名格式**: `portfolio-analysis-YYYY-MM-DD.md`
+- **示例**: `portfolio-analysis-2026-05-07.md`
+
+---
+
+### 三、报告内容要求
+
+#### 早盘分析（开盘前）
+
+1. 🌡️ 市场温度
+2. 🧭 市场风向
+3. 😤 投资情绪
+4. 📰 行业政策
+5. 📋 每只持仓具体操作建议
+
+- **重点关注**: 深亏区止损机会 + 浅亏区拐点信号
+
+#### 尾盘分析（收盘后）
+
+1. 📊 今日大盘表现（上证/深证/创业板涨跌）
+2. 🔥 今日热点板块与持仓关联分析
+3. 📋 每只持仓今日表现回顾
+4. 💰 盈亏变化估算
+5. 🎯 明日操作建议
+
+- **重点关注**: 深亏区止损/反弹信号 + 浅亏区拐点
+
+---
+
+### 四、推送方式
+
+- 生成报告后，使用 `sessions_send` 工具发送到 `label="final"` 的会话
+- 报告同时存储到上述文件路径
+
+---
+
+### 五、相关文件
+
+- 持仓档案: `/home/obsidian_vault/2-Final-Memory/MEMORY.md`
+- 报告目录: `/home/obsidian_vault/2-Final-Memory/report/`
+- 本配置文件: `/root/.openclaw/share/daily-report-config.md`
+
+---
+
+
 
 ## 🔮 QMD 使用指南（更新 2026-04-21）
 
