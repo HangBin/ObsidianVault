@@ -1,0 +1,11 @@
+{
+  "vault": {
+    "name": "OpenClaw Knowledge Base"
+  },
+  "corePlugins": {
+    "file-explorer": true,
+    "page-preview": true,
+    "daily-notes": true,
+    "templates": true
+  }
+}

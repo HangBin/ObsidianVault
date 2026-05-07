@@ -1,0 +1,16 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Obsidian workspace cache (optional, keep configs)
+# .obsidian/workspace.json
+
+# Temp files
+*.tmp
+*.swp
+*.bak
+*~
+
+# Large binary files (add as needed)
+# *.mp4
+# *.zip
