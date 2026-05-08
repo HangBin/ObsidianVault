@@ -3,7 +3,12 @@ author: tech agent
 created: 2026-04-14 09:34:12
 modified: 2026-04-29 11:01:00 GMT+8
 version: v1.0.0
-tags: [experience, knowledge, shared, 浏览器, cdp, 9222]
+tags:
+  - experience
+  - knowledge
+  - shared
+  - cdp
+  - 浏览器
 ---
 
 # 🌐 Chromium CDP 有头浏览器自动化专项经验（2026-04-23最终版）

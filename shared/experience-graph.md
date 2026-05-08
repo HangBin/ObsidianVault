@@ -1,8 +1,10 @@
-<!--
-作者: tech agent
-修改时间: 2026-05-08 18:00 GMT+8
-版本号: v1.0.0
--->
+---
+author: tech agent
+created: 2026-04-14 09:34:12
+modified: 2026-04-29 11:01:00 GMT+8
+version: v1.0.0
+tags: [experience, knowledge, shared, graph]
+---
 
 # 图谱关联经验总结
 

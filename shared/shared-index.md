@@ -15,7 +15,7 @@ aliases: [Shared Index, 共享目录图谱]
 
 | 文件 | 主题 | 标签 |
 |------|------|------|
-| [[browser/experience-browser]] | 🌐 Chromium CDP 有头浏览器自动化专项经验（2026-04-23最终版） | #experience #knowledge #shared #浏览器 #cdp #9222 |
+| [[browser/experience-browser]] | 🌐 Chromium CDP 有头浏览器自动化专项经验（2026-04-23最终版） | #experience #knowledge #shared #浏览器 #cdp |
 
 ---
 
