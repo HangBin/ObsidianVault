@@ -546,3 +546,10 @@ bash ~/.openclaw/scripts/backup_all_workspaces.sh
 - 风险提示补充（波动应对策略）
 - 触发条件具体化（价格点位和操作建议）
 
+
+## Promoted From Short-Term Memory (2026-05-08)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:9:9 -->
+- **决策**: 先读取归档经验文档，再查找3月份日志文件，按规范执行归档 [score=0.829 recalls=0 avg=0.620 source=memory/2026-05-03.md:9-9]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:15:17 -->
+- **工具**: read **路径**: `/home/obsidian_vault/shared/experience-archive.md` **结果**: 成功读取归档经验文档，学习到： [score=0.829 recalls=0 avg=0.620 source=memory/2026-05-03.md:15-17]

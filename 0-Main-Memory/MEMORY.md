@@ -112,3 +112,8 @@ cat /root/.openclaw/share/browser/experience-browser.md
 
 *最后更新: 2026-04-21 10:02*
 *精简参考: tech/EXPERIENCE-MEMORY-OPTIMIZE.md*
+
+## Promoted From Short-Term Memory (2026-05-08)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-01.md:22:22 -->
+- OpenClaw心跳轮询 [score=0.821 recalls=0 avg=0.620 source=memory/2026-05-01.md:22-22]

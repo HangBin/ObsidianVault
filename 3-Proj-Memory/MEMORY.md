@@ -143,3 +143,8 @@ experience*.md       ← 专项经验详细教程
 
 <!-- openclaw-memory-promotion:memory:memory/2026-04-21.md:263:266 -->
 - | 场景 | 教训 | |------|------| | MEMORY.md 过大 | 精简+外移到专项文档+QMD 检索历史 | | 共享文档 QMD 索引 | 用 share 集合直接索引源路径，不依赖软链接 | [score=0.883 recalls=0 avg=0.620 source=memory/2026-04-21.md:263-266]
+
+## Promoted From Short-Term Memory (2026-05-08)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:13:13 -->
+- **触发**: 大梦要求学习归档经验文档并归档3月份记忆 [score=0.829 recalls=0 avg=0.620 source=memory/2026-05-03.md:13-13]

@@ -226,3 +226,10 @@ netstat -tlnp | grep 9222
 
 <!-- openclaw-memory-promotion:memory:memory/2026-04-24.md:44:44 -->
 - **错误根源**: [score=0.884 recalls=0 avg=0.620 source=memory/2026-04-24.md:44-44]
+
+## Promoted From Short-Term Memory (2026-05-08)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:4:5 -->
+- **触发**: 用户指令"学习归档经验，将3月份记忆归档" **工具**: read, exec, write (Python脚本) [score=0.884 recalls=0 avg=0.620 source=memory/2026-05-03.md:4-5]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:14:14 -->
+- **结果**: 归档完成，目录结构规范 [score=0.884 recalls=0 avg=0.620 source=memory/2026-05-03.md:14-14]
