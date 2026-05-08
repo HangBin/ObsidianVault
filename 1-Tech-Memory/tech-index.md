@@ -7,7 +7,7 @@ aliases: [Tech Index, 图谱入口]
 
 # 🧠 Tech Agent 图谱入口
 
-> 本文件是 [[1-Tech-Memory]] 知识图谱的入口节点，关联所有 daily/ 和 knowledge/ 文件。
+> 本文件是Tech技术总监知识图谱的入口节点，关联所有 daily/ 和 knowledge/ 文件。
 
 ---
 
