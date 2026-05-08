@@ -178,3 +178,5 @@ qmd collection add final-experience --path /root/.openclaw/workspace-final/memor
 
 ---
 *图谱关联最后更新: 2026-05-07*
+- **2026-05-08** - **结果**: ✅ 关联 27 个 daily、5 个 knowledge、6 个 archive、3 个 report 文件
+- **2026-05-08** - **结果**: ✅ 3个索引文件 + 17个归档标题修复
