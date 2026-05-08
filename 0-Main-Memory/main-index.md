@@ -1,7 +1,10 @@
 ---
 created: 2026-05-08
 modified: 2026-05-08 11:34 GMT+8
-tags: [main-agent, index, graph]
+tags:
+- main-agent
+- index
+- graph
 aliases: [Main Index, 图谱入口]
 ---
 

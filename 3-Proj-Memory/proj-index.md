@@ -1,7 +1,10 @@
 ---
 created: 2026-05-08
 modified: 2026-05-08 11:34 GMT+8
-tags: [proj-agent, index, graph]
+tags:
+- proj-agent
+- index
+- graph
 aliases: [Proj Index, 图谱入口]
 ---
 

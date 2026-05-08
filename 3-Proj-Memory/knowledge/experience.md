@@ -3,7 +3,10 @@ author: proj agent
 created: 2026-05-01 22:09:50 GMT+8
 modified: 2026-05-01 22:09:50 GMT+8
 version: v1.0.0
-tags: [proj-agent, knowledge, experience]
+tags:
+- proj-agent
+- knowledge
+- experience
 ---
 
 # experience.md - 项目总监经验沉淀

@@ -1,7 +1,10 @@
 ---
 created: 2026-05-08
 modified: 2026-05-08 11:34 GMT+8
-tags: [media-agent, index, graph]
+tags:
+- media-agent
+- index
+- graph
 aliases: [Media Index, 图谱入口]
 ---
 

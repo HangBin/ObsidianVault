@@ -1,7 +1,9 @@
 ---
 title: qmd-obsidian-system.md
 created: 2026-05-03 17:00:01
-tags: [knowledge, experience]
+tags:
+- knowledge
+- experience
 ---
 
 # qmd-obsidian-system

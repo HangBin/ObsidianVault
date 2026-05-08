@@ -1,7 +1,9 @@
 ---
 title: collaboration-patterns.md
 created: 2026-05-07 16:00:01
-tags: [knowledge, experience]
+tags:
+- knowledge
+- experience
 ---
 
 # collaboration-patterns
