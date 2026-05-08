@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Personal/person-index.md",
+                "file": "Personal/personal-index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "person-index"
+              "title": "personal-index"
             }
           }
         ]
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Personal/person-index.md",
+                "file": "Personal/personal-index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "person-index 的大纲"
+              "title": "personal-index 的大纲"
             }
           },
           {
@@ -197,8 +197,11 @@
   },
   "active": "7eba790dad5dbdd4",
   "lastOpenFiles": [
-    "Personal/技术资料/Obsidian/插件.md",
     "Personal/person-index.md",
+    "Personal/personal-index.md",
+    "Personal/技术资料/Obsidian/插件.md",
+    "Personal/LLM个人知识库搭建指南.md",
+    "3-Proj-Memory/proj-index.md",
     "Personal/保险理财/未命名.md",
     "Personal/保险理财/理杏仁温度查看.md",
     "Personal/保险理财/基金.md",
@@ -213,7 +216,6 @@
     "0-Main-Memory/daily/2026-05-02.md.REMOTE.md",
     "0-Main-Memory/daily/2026-05-02.md.LOCAL.md",
     "2-Final-Memory/MEMORY.md",
-    "Personal/LLM个人知识库搭建指南.md",
     "2-Final-Memory/final-index - 副本.md",
     "0-Main-Memory/main-index - 副本.md",
     "4-Media-Memory/media-index.md.BASE.md",
@@ -221,8 +223,6 @@
     "4-Media-Memory/media-index.md.LOCAL.md",
     "0-Main-Memory/archive/2026-03.md",
     "0-Main-Memory/main-index.md",
-    "1-Tech-Memory/tech-index.md",
-    "0-Main-Memory/archive/history-2026-03/2026-03-26.md",
     "0-Main-Memory/daily/2026-04-04.md.filepart",
     "3-Proj-Memory/daily/2026-04-08.md.filepart",
     "0-Main-Memory/knowledge/experience.md.filepart",
