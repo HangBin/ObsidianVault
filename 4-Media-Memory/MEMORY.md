@@ -233,3 +233,8 @@ netstat -tlnp | grep 9222
 - **触发**: 用户指令"学习归档经验，将3月份记忆归档" **工具**: read, exec, write (Python脚本) [score=0.884 recalls=0 avg=0.620 source=memory/2026-05-03.md:4-5]
 <!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:14:14 -->
 - **结果**: 归档完成，目录结构规范 [score=0.884 recalls=0 avg=0.620 source=memory/2026-05-03.md:14-14]
+
+## Promoted From Short-Term Memory (2026-05-08)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:20:21 -->
+- **触发**: 用户指令"更新MEMORY.md等文件中针对共享经验文档shared相关的索引位置" **工具**: read, edit [score=0.845 recalls=0 avg=0.620 source=memory/2026-05-03.md:20-21]

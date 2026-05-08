@@ -28,6 +28,7 @@
 | Mission Control | `mission-control-dashboard.md` | ✅ 已迁移 |
 | Control Center | `openclaw-control-center-dashboard.md` | ✅ 已迁移 |
 | QMD+Obsidian | `qmd-obsidian-system.md` | ✅ 已迁移 |
+| 图谱关联经验 | `experience-graph.md` | ✅ 新建 |
 
 ---
 
@@ -49,12 +50,14 @@
 - [[mission-control-dashboard]] - Mission Control部署指南
 - [[openclaw-control-center-dashboard]] - Control Center部署经验
 - [[qmd-obsidian-system]] - QMD+Obsidian记忆存储系统
+- [[experience-graph]] - 图谱关联经验总结
 
 ### 按主题查找
 - **部署相关**: [[docker-compose]] · [[mission-control-dashboard]] · [[openclaw-control-center-dashboard]]
 - **运维相关**: [[backup-system]] · [[bash-deploy]]
 - **记忆相关**: [[memory-system]] · [[qmd-obsidian-system]]
 - **协作相关**: [[collaboration-patterns]]
+- **图谱相关**: [[experience-graph]]
 
 ---
-*图谱关联最后更新: 2026-05-07*
+*图谱关联最后更新: 2026-05-08*
