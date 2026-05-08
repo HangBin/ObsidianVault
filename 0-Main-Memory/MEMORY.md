@@ -117,3 +117,8 @@ cat /root/.openclaw/share/browser/experience-browser.md
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-01.md:22:22 -->
 - OpenClaw心跳轮询 [score=0.821 recalls=0 avg=0.620 source=memory/2026-05-01.md:22-22]
+
+## Promoted From Short-Term Memory (2026-05-08)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-01.md:39:39 -->
+- OpenClaw心跳轮询 [score=0.821 recalls=0 avg=0.620 source=memory/2026-05-01.md:39-39]
