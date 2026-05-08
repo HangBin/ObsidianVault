@@ -7,7 +7,7 @@ aliases: [Final Index, 图谱入口]
 
 # 🧠 Final Agent 图谱入口
 
-> 本文件是 [[2-Final-Memory]] 知识图谱的入口节点，关联所有 daily/、knowledge/、archive/、report/ 文件。
+> 本文件是Final财务总监知识图谱的入口节点，关联所有 daily/、knowledge/、archive/、report/ 文件。
 
 ---
 
