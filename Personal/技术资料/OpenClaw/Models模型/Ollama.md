@@ -1,8 +1,3 @@
----
-tags:
-  - openclaw
-  - models
----
 
 接入本地Ollama配置的openclaw.json示例
 
@@ -55,4 +50,3 @@ curl -X POST http://192.168.1.210:18789/v1/chat/completions \
     }
   }
 ```
-

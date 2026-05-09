@@ -57,26 +57,11 @@ OpenClaw本身就有模型降级机制，那么接下来我们就开始配置
 
 #### 三、模型配置
 
+##### 1. [[Ollama]]
+##### 2. [[DeepSeak]]
 
 
-2. DeepSeak
-```bash
-      "deepseek": {
-        "baseUrl": "https://api.deepseek.com",
-        "apiKey": "你的DeepSeek API Key",
-        "api": "openai-completions",
-        "models": [
-          {
-            "id": "deepseek-chat",
-            "name": "DeepSeek 快速模式"
-          },
-          {
-            "id": "deepseek-reasoner",
-            "name": "DeepSeek 推理模式"
-          }
-        ]
-      }
-```
+
 
 
 

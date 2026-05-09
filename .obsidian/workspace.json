@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "c1fd36367c13c016",
+        "id": "a8006540b33893a5",
         "type": "tabs",
         "children": [
           {
-            "id": "bdf4038253dbb088",
+            "id": "0032e60463c8066f",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "关系图谱"
+              "type": "markdown",
+              "state": {
+                "file": "Personal/技术资料/OpenClaw/Skill技能/基础使用技能.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "基础使用技能"
             }
           }
         ]
@@ -90,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "1-Tech-Memory/daily/2026-03-22.md",
+                "file": "Personal/技术资料/OpenClaw/Skill技能/基础使用技能.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "2026-03-22 的反向链接列表"
+              "title": "基础使用技能 的反向链接列表"
             }
           },
           {
@@ -152,12 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "Personal/技术资料/OpenClaw/Skill技能/基础使用技能.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大纲"
+              "title": "基础使用技能 的大纲"
             }
           },
           {
@@ -170,6 +175,16 @@
               },
               "icon": "lucide-info",
               "title": "插件的笔记属性"
+            }
+          },
+          {
+            "id": "03badfbb8c84a0c4",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
             }
           }
         ],
@@ -187,37 +202,39 @@
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
-      "bases:新建数据库": false
+      "bases:新建数据库": false,
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "bdf4038253dbb088",
+  "active": "0032e60463c8066f",
   "lastOpenFiles": [
+    "Personal/技术资料/OpenClaw/Skill技能/基础使用技能 capability-evolver安装配置.md",
+    "Personal/技术资料/OpenClaw/Skill技能/基础使用技能.md",
+    "Personal/技术资料/OpenClaw/Skill技能/skill命令.md",
+    "Personal/技术资料/OpenClaw/Skill技能/知识库Obsidian.md",
+    "Personal/技术资料/OpenClaw/Skill技能/无标题Markdown.md",
+    "Personal/技术资料/OpenClaw/Skill技能/批量安装脚本.md",
+    "Personal/技术资料/OpenClaw/Skill技能/基础使用技能 self-improving-agent安装配置.md",
+    "Personal/技术资料/OpenClaw/Skill技能/基础使用技能 free-ride(白嫖神器).md",
+    "1-Tech-Memory/MEMORY.md",
+    "Personal/技术资料/Obsidian/插件.md",
+    "Personal/技术资料/Claude/安装配置.md",
+    "Personal/personal-index.md",
+    "Personal/技术资料/OpenClaw/Models模型/openclaw模型配置.md",
+    "Personal/技术资料/Claude",
+    "Personal/技术资料/OpenClaw/Models模型/Ollama.md",
+    "Personal/技术资料/OpenClaw/Models模型/DeepSeak.md",
+    "Personal/技术资料/OpenClaw/Models模型/模型配置-Ollama.md",
+    "Personal/技术资料/OpenClaw/Models模型/模型配置-阿里千问百炼.md",
+    "Personal/技术资料/OpenClaw/Models模型/常用命令.md",
+    "Personal/技术资料/OpenClaw/Models模型/模型配置-Google Gemma4.md",
+    "Personal/技术资料/OpenClaw/安装QMD CLI和SQLite.md",
+    "Personal/技术资料/OpenClaw/QMD命令.md",
+    "Personal/技术资料/OpenClaw/部署安装--一键安装.md",
     "4-Media-Memory/media-index.md",
     "1-Tech-Memory/knowledge/collaboration-patterns.md",
     "3-Proj-Memory/proj-index.md",
     "2-Final-Memory/final-index.md",
-    "1-Tech-Memory/tech-index.md",
-    "0-Main-Memory/main-index.md",
-    "0-Main-Memory/MEMORY.md",
-    "4-Media-Memory/archive/history-2026-03/2026-03-25.md",
-    "3-Proj-Memory/archive/2026-03.md",
-    "shared/shared-index.md",
-    "1-Tech-Memory/knowledge/qmd-obsidian-system.md",
-    "1-Tech-Memory/knowledge/openclaw-control-center-dashboard.md",
-    "1-Tech-Memory/knowledge/mission-control-dashboard.md",
-    "1-Tech-Memory/knowledge/memory-system.md",
-    "1-Tech-Memory/knowledge/experience-index.md",
-    "1-Tech-Memory/knowledge/experience-graph.md",
-    "1-Tech-Memory/knowledge/docker-compose.md",
-    "1-Tech-Memory/knowledge/bash-deploy.md",
-    "1-Tech-Memory/knowledge/backup-system.md",
-    "reply_to_current.md",
-    "4-Media-Memory/daily/2026-04-09.md",
-    "1-Tech-Memory/daily/2026-04-19.md",
-    "1-Tech-Memory/daily/2026-04-18.md",
-    "4-Media-Memory/knowledge/experience.md",
-    "Personal/personal-index.md",
-    "Personal/技术资料/OpenClaw/Agents代理/无标题Markdown.md",
     "0-Main-Memory/daily/2026-04-04.md.filepart",
     "3-Proj-Memory/daily/2026-04-08.md.filepart",
     "0-Main-Memory/knowledge/experience.md.filepart",
@@ -227,7 +244,6 @@
     "未命名.base",
     "Personal/技术资料/Obsidian",
     "Personal/技术资料/OpenClaw/Models模型",
-    "Personal/技术资料/OpenClaw/Agents代理",
     "未命名.canvas"
   ]
 }
