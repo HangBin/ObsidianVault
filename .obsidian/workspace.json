@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Personal/技术资料/OpenClaw/Skill技能/基础使用技能.md",
+                "file": "Personal/personal-index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "基础使用技能"
+              "title": "personal-index"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Personal/技术资料/OpenClaw/Skill技能/基础使用技能.md",
+                "file": "Personal/personal-index.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "基础使用技能 的反向链接列表"
+              "title": "personal-index 的反向链接列表"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Personal/技术资料/OpenClaw/Skill技能/基础使用技能.md",
+                "file": "Personal/personal-index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "基础使用技能 的大纲"
+              "title": "personal-index 的大纲"
             }
           },
           {
@@ -208,33 +208,33 @@
   },
   "active": "03badfbb8c84a0c4",
   "lastOpenFiles": [
-    "Personal/技术资料/OpenClaw/Skill技能/基础使用技能 capability-evolver安装配置.md",
-    "Personal/技术资料/OpenClaw/Skill技能/基础使用技能.md",
-    "Personal/技术资料/OpenClaw/Skill技能/skill命令.md",
-    "Personal/技术资料/OpenClaw/Skill技能/知识库Obsidian.md",
-    "Personal/技术资料/OpenClaw/Skill技能/无标题Markdown.md",
+    "Personal/技术资料/OpenClaw/Models模型/openclaw模型配置.md",
+    "Personal/技术资料/OpenClaw/Models模型/scnet.md",
+    "Personal/技术资料/OpenClaw/Models模型/DeepSeak.md",
+    "Personal/技术资料/OpenClaw/QMD命令.md",
     "Personal/技术资料/OpenClaw/Skill技能/批量安装脚本.md",
+    "Personal/技术资料/OpenClaw/Skill技能/无标题Markdown.md",
+    "Personal/技术资料/OpenClaw/Skill技能/skill命令.md",
+    "Personal/技术资料/OpenClaw/Skill技能/基础使用技能.md",
+    "Personal/技术资料/OpenClaw/Skill技能/基础使用技能 capability-evolver安装配置.md",
+    "Personal/技术资料/OpenClaw/Skill技能/知识库Obsidian.md",
     "Personal/技术资料/OpenClaw/Skill技能/基础使用技能 self-improving-agent安装配置.md",
     "Personal/技术资料/OpenClaw/Skill技能/基础使用技能 free-ride(白嫖神器).md",
     "1-Tech-Memory/MEMORY.md",
     "Personal/技术资料/Obsidian/插件.md",
     "Personal/技术资料/Claude/安装配置.md",
     "Personal/personal-index.md",
-    "Personal/技术资料/OpenClaw/Models模型/openclaw模型配置.md",
     "Personal/技术资料/Claude",
     "Personal/技术资料/OpenClaw/Models模型/Ollama.md",
-    "Personal/技术资料/OpenClaw/Models模型/DeepSeak.md",
     "Personal/技术资料/OpenClaw/Models模型/模型配置-Ollama.md",
     "Personal/技术资料/OpenClaw/Models模型/模型配置-阿里千问百炼.md",
     "Personal/技术资料/OpenClaw/Models模型/常用命令.md",
     "Personal/技术资料/OpenClaw/Models模型/模型配置-Google Gemma4.md",
     "Personal/技术资料/OpenClaw/安装QMD CLI和SQLite.md",
-    "Personal/技术资料/OpenClaw/QMD命令.md",
     "Personal/技术资料/OpenClaw/部署安装--一键安装.md",
     "4-Media-Memory/media-index.md",
     "1-Tech-Memory/knowledge/collaboration-patterns.md",
     "3-Proj-Memory/proj-index.md",
-    "2-Final-Memory/final-index.md",
     "0-Main-Memory/daily/2026-04-04.md.filepart",
     "3-Proj-Memory/daily/2026-04-08.md.filepart",
     "0-Main-Memory/knowledge/experience.md.filepart",
