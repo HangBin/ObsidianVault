@@ -188,7 +188,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 6
       }
     ],
     "direction": "horizontal",
@@ -206,7 +206,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "0032e60463c8066f",
+  "active": "03badfbb8c84a0c4",
   "lastOpenFiles": [
     "Personal/技术资料/OpenClaw/Skill技能/基础使用技能 capability-evolver安装配置.md",
     "Personal/技术资料/OpenClaw/Skill技能/基础使用技能.md",
