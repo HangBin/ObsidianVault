@@ -973,23 +973,3 @@ sudo systemctl restart mission-control
 2. **环境变量优先级**: `.env.local` > `.env.minimal` > systemd EnvironmentFile
 3. **systemd 限制**: EnvironmentFile 不支持注释，需纯净版
 4. **验证链**: 构建文件 → 服务环境 → 浏览器缓存 → 最终用户
-
----
-
-## 🔗 相关条目
-
-### 强关联
-- [[docker-compose]] - Mission Control使用Docker Compose部署
-- [[openclaw-control-center-dashboard]] - Control Center与Mission Control同为Dashboard
-- [[2026-04-01]] - Mission Control安装部署
-- [[2026-04-04]] - 服务迁移标准化
-
-### 中关联
-- [[bash-deploy]] - 部署脚本开发
-- [[memory-system]] - Mission Control监控记忆系统状态
-
-### 弱关联
-- [[2026-03-31]] - 备份体系涉及Mission Control
-
----
-*图谱关联最后更新: 2026-05-07*
