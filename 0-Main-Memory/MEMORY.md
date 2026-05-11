@@ -122,3 +122,27 @@ cat /root/.openclaw/share/browser/experience-browser.md
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-01.md:39:39 -->
 - OpenClaw心跳轮询 [score=0.821 recalls=0 avg=0.620 source=memory/2026-05-01.md:39-39]
+
+## Promoted From Short-Term Memory (2026-05-09)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:28:29 -->
+- **触发**: 用户指令"学习shared/experience-archive.md，将3月份记忆归档" **工具**: read, exec, write (Python脚本) [score=0.861 recalls=0 avg=0.620 source=memory/2026-05-03.md:28-29]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:37:37 -->
+- **结果**: ✅ 归档完成 [score=0.861 recalls=0 avg=0.620 source=memory/2026-05-03.md:37-37]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:40:43 -->
+- **触发**: 用户反馈"日期标题要写在当天日记之前，不要写在结尾处" **问题**: 归档脚本把原始文件末尾的 `## [date] 补充记录` 保留在了内容块末尾 **解决方案**: Python 脚本将每个内容块末尾的日期标记剥离并移到开头 **结果**: ✅ 6个日期标题全部移到开头 [score=0.861 recalls=0 avg=0.620 source=memory/2026-05-03.md:40-43]
+
+## Promoted From Short-Term Memory (2026-05-09)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:46:49 -->
+- **触发**: 用户反馈"时间条目应该是三级标题" **问题**: 时间条目是二级标题，应改为三级 **操作**: 两次修复脚本（第一次多加#，第二次修正）+ 修复3月31日残留一级标题 **结果**: ✅ 标题层级统一：一级=月度、二级=日期、三级=时间条目 [score=0.861 recalls=0 avg=0.620 source=memory/2026-05-03.md:46-49]
+
+## Promoted From Short-Term Memory (2026-05-09)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:1:1 -->
+- 🌙 Dream Diary - 2026-05-03 [score=0.839 recalls=0 avg=0.620 source=memory/2026-05-03.md:1-1]
+
+## Promoted From Short-Term Memory (2026-05-11)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-04.md:1:1 -->
+- 🌙 Dream Diary - 2026-05-04 [score=0.845 recalls=0 avg=0.620 source=memory/2026-05-04.md:1-1]

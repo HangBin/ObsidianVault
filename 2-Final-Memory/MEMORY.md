@@ -128,3 +128,37 @@ EMORY.md - Final 财务总监长期记忆
 - **决策**: 先读取归档经验文档，再查找3月份日志文件，按规范执行归档 [score=0.829 recalls=0 avg=0.620 source=memory/2026-05-03.md:9-9]
 <!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:15:17 -->
 - **工具**: read **路径**: `/home/obsidian_vault/shared/experience-archive.md` **结果**: 成功读取归档经验文档，学习到： [score=0.829 recalls=0 avg=0.620 source=memory/2026-05-03.md:15-17]
+
+## Promoted From Short-Term Memory (2026-05-09)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:7:7 -->
+- **用户消息**: "你学习下/home/obsidian_vault/shared/experience-archive.md的归档经验，将你的3月份记忆归档一下" [score=0.887 recalls=0 avg=0.620 source=memory/2026-05-03.md:7-7]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:27:29 -->
+- **工具**: exec **命令**: `find /home/obsidian_vault -name "2026-03-*.md"` **结果**: 找到5个3月份daily文件：2026-03-27.md 至 2026-03-31.md [score=0.887 recalls=0 avg=0.620 source=memory/2026-05-03.md:27-29]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:35:37 -->
+- **工具**: exec **命令**: `mkdir -p /home/obsidian_vault/2-Final-Memory/archive/history-2026-03` **结果**: 成功创建归档目录 [score=0.823 recalls=0 avg=0.620 source=memory/2026-05-03.md:35-37]
+
+## Promoted From Short-Term Memory (2026-05-09)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:43:45 -->
+- **工具**: write **路径**: `/root/.openclaw/workspace-final/archive-2026-03.md` **结果**: 创建Python归档脚本，包含frontmatter移除、标题层级调整、合并、验证功能 [score=0.855 recalls=0 avg=0.620 source=memory/2026-05-03.md:43-45]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:59:61 -->
+- **工具**: read **路径**: `/home/obsidian_vault/2-Final-Memory/archive/2026-03.md` **结果**: 发现标题层级问题——"注意事项"、"会话记录"使用了2级标题（##），不符合规范 [score=0.855 recalls=0 avg=0.620 source=memory/2026-05-03.md:59-61]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:51:53 -->
+- **工具**: exec **命令**: `python3 archive-2026-03.py` **结果**: 第一次归档完成，生成归档文件并清理daily目录 [score=0.823 recalls=0 avg=0.620 source=memory/2026-05-03.md:51-53]
+
+## Promoted From Short-Term Memory (2026-05-09)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:67:67 -->
+- **用户消息**: "你没看到共享经验文档里的经验教训吗？为什么"注意事项"、"会话记录"是2级标题？" [score=0.855 recalls=0 avg=0.620 source=memory/2026-05-03.md:67-67]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:69:70 -->
+- **问题分析**: 归档脚本的 `adjust_headings` 函数逻辑不完善，没有将原始文件中的非日期类2级标题降为3级 **决策**: 修正脚本并重新归档 [score=0.855 recalls=0 avg=0.620 source=memory/2026-05-03.md:69-70]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:76:78 -->
+- **工具**: exec **命令**: `cp /home/obsidian_vault/2-Final-Memory/archive/history-2026-03/*.md /home/obsidian_vault/2-Final-Memory/daily/` **结果**: 5个原始文件已恢复到daily目录 [score=0.823 recalls=0 avg=0.620 source=memory/2026-05-03.md:76-78]
+
+## Promoted From Short-Term Memory (2026-05-11)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:84:86 -->
+- **工具**: exec **命令**: `rm /home/obsidian_vault/2-Final-Memory/archive/2026-03.md` **结果**: 旧归档文件已删除 [score=0.843 recalls=0 avg=0.620 source=memory/2026-05-03.md:84-86]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:92:94 -->
+- **工具**: write（覆盖） **路径**: `/root/.openclaw/workspace-final/archive-2026-03.py` **修正内容**: `adjust_headings` 函数中，将非日期格式的 `##` 标题（如"注意事项"、"会话记录"）降为 `###`，仅保留 `## [日期]` 格式的2级标题 [score=0.843 recalls=0 avg=0.620 source=memory/2026-05-03.md:92-94]

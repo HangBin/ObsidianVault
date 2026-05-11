@@ -238,3 +238,8 @@ netstat -tlnp | grep 9222
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:20:21 -->
 - **触发**: 用户指令"更新MEMORY.md等文件中针对共享经验文档shared相关的索引位置" **工具**: read, edit [score=0.845 recalls=0 avg=0.620 source=memory/2026-05-03.md:20-21]
+
+## Promoted From Short-Term Memory (2026-05-09)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:28:28 -->
+- **结果**: 所有索引更新完成 ✅ [score=0.893 recalls=0 avg=0.620 source=memory/2026-05-03.md:28-28]

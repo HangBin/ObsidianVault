@@ -148,3 +148,19 @@ experience*.md       ← 专项经验详细教程
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:13:13 -->
 - **触发**: 大梦要求学习归档经验文档并归档3月份记忆 [score=0.829 recalls=0 avg=0.620 source=memory/2026-05-03.md:13-13]
+
+## Promoted From Short-Term Memory (2026-05-09)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:24:24 -->
+- **归档经验要点（已学习）**: [score=0.848 recalls=0 avg=0.620 source=memory/2026-05-03.md:24-24]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:2:5 -->
+- author: proj agent created: 2026-05-03 17:25:00 GMT+8 modified: 2026-05-03 17:30:00 GMT+8 version: v1.0.0 [score=0.823 recalls=0 avg=0.620 source=memory/2026-05-03.md:2-5]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:36:36 -->
+- **触发**: 大梦要求更新 MEMORY.md 和 TOOLS.md 中针对 shared 相关索引位置 [score=0.823 recalls=0 avg=0.620 source=memory/2026-05-03.md:36-36]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:6:6 -->
+- tags: [proj-agent, daily-log] [score=0.813 recalls=0 avg=0.620 source=memory/2026-05-03.md:6-6]
+
+## Promoted From Short-Term Memory (2026-05-09)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:38:38 -->
+- **更新内容**: [score=0.813 recalls=0 avg=0.620 source=memory/2026-05-03.md:38-38]
