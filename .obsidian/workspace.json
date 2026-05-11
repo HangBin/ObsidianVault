@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "ac80f7ce95d471dd",
+        "id": "598d309161041ffa",
         "type": "tabs",
         "children": [
           {
-            "id": "4c81a317424f85fd",
+            "id": "1f6d15f142d0fa1d",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "2-Final-Memory/final-index.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "final-index"
+              "title": "新标签页"
             }
           }
         ]
@@ -155,13 +151,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "2-Final-Memory/final-index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "final-index 的大纲"
+              "title": "大纲"
             }
           },
           {
@@ -169,11 +164,9 @@
             "type": "leaf",
             "state": {
               "type": "file-properties",
-              "state": {
-                "file": "2-Final-Memory/final-index.md"
-              },
+              "state": {},
               "icon": "lucide-info",
-              "title": "final-index的笔记属性"
+              "title": "笔记属性"
             }
           },
           {
@@ -205,10 +198,19 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4c81a317424f85fd",
+  "active": "1f6d15f142d0fa1d",
   "lastOpenFiles": [
-    "2-Final-Memory/archive/2026-03.md",
+    "Personal/技术资料/OpenClaw/OpenClaw-index.md",
+    "Personal/技术资料/OpenClaw/Models模型/Ollama.md",
+    "Personal/personal-index.md",
     "2-Final-Memory/final-index.md",
+    "Personal/技术资料/OpenClaw/openclaw命令.md",
+    "Personal/技术资料/OpenClaw/Models模型/openclaw模型配置.md",
+    "Personal/技术资料/OpenClaw/Models模型/DeepSeak.md",
+    "Personal/技术资料/OpenClaw/Models模型/scnet.md",
+    "2-Final-Memory/report/portfolio-analysis-2026-05-11.pdf",
+    "2-Final-Memory/report/morning-analysis-2026-05-11.pdf",
+    "2-Final-Memory/archive/2026-03.md",
     "2-Final-Memory/report/report-index.md",
     "2-Final-Memory/report/morning-analysis-2026-05-08.md",
     "2-Final-Memory/portfolio.md",
@@ -226,13 +228,6 @@
     "2-Final-Memory/knowledge/qmd-obsidian-system.md",
     "2-Final-Memory/knowledge/tools-reference.md",
     "2-Final-Memory/knowledge/experience.md",
-    "2-Final-Memory/knowledge/collaboration-patterns.md",
-    "2-Final-Memory/knowledge/bash-deploy.md",
-    "2-Final-Memory/daily/2026-04-03.md",
-    "2-Final-Memory/archive/history-2026-03/2026-03-31.md",
-    "2-Final-Memory/archive/history-2026-03/2026-03-30.md",
-    "2-Final-Memory/archive/history-2026-03/2026-03-28.md",
-    "2-Final-Memory/archive/history-2026-03/2026-03-27.md",
     "Personal/技术资料/Claude",
     "0-Main-Memory/daily/2026-04-04.md.filepart",
     "3-Proj-Memory/daily/2026-04-08.md.filepart",
@@ -241,8 +236,6 @@
     "1-Tech-Memory/daily/2026-04-10.md.filepart",
     "1-Tech-Memory/daily/2026-04-14.md.filepart",
     "未命名.base",
-    "Personal/技术资料/Obsidian",
-    "Personal/技术资料/OpenClaw/Models模型",
     "未命名.canvas"
   ]
 }
