@@ -48,18 +48,31 @@
 
 ### **用户定义的报告tags格式**
 ```markdown
-tags: report, 2026-05-11, analysis
-tags: report, 2026-05-11, analysis, morning  # 早版报告专用
+---
+tags:
+ - report
+ - analysis
+ - 2026-05-11
+---
+
+---
+tags:
+ - report
+ - analysis
+ - 2026-05-11
+ - morning  # 早版报告专用
+---
 ```
 
 ### **格式要点（必须遵守）**
 1. **tags属性位置**：必须在Markdown文件第二行，紧接标题后
-2. **tags格式**：
-   - 持仓分析报告：`tags: report, YYYY-MM-DD, analysis`
-   - 早版分析报告：`tags: report, YYYY-MM-DD, analysis, morning`
-   - 投资建议报告：`tags: report, YYYY-MM-DD, analysis`
-3. **日期格式**：必须与文件名中的日期一致
-4. **属性值**：固定为`report`、`YYYY-MM-DD`、`analysis`三个值，早版报告额外加`morning`
+2. **tags格式**：使用YAML格式，以`---`包围，每行一个属性
+3. **标准格式**：
+   - 持仓分析报告：`report`、`analysis`、`YYYY-MM-DD`
+   - 早版分析报告：`report`、`analysis`、`YYYY-MM-DD`、`morning`
+   - 投资建议报告：`report`、`analysis`、`YYYY-MM-DD`
+4. **日期格式**：必须与文件名中的日期一致
+5. **属性值**：固定为`report`、`analysis`、`YYYY-MM-DD`，早版报告额外加`morning`
 
 ### **适用范围**
 - 所有持仓分析报告（portfolio-analysis-YYYY-MM-DD.md）
@@ -70,18 +83,23 @@ tags: report, 2026-05-11, analysis, morning  # 早版报告专用
 ```markdown
 # 报告标题
 tags: report, analysis
-❌ 缺少日期
+❌ 错误的格式，必须使用YAML格式
 ```
 
 ```markdown
 # 报告标题
-tags: report, 2026-05-11
-❌ 缺少analysis
+tags:
+ - report
+ - analysis
+❌ 缺少日期
 ```
 
 ```markdown
 # 早版报告标题
-tags: report, 2026-05-11, analysis
+tags:
+ - report
+ - analysis
+ - 2026-05-11
 ❌ 早版报告缺少morning属性
 ```
 
@@ -91,14 +109,12 @@ tags: report, 2026-05-11, analysis
 - 必须严格遵守，形成肌肉反射
 
 ### **背景说明**
-- 用户要求："报告要加上obsidion的tags属性，属性值为：report、2026-05-11、analysis"
-- 用户补充："再加一个，早盘加一个morning属性"
-- 用户强调："把这点更新到长期记忆里"
-- 含义：tags属性规范与内容质量同等重要
+- 用户纠正："Obsidian tags属性规范写的不对，正确的格式如下：--- tags: - report - analysis - 2026-05-07 - morning ---"
+- 含义：必须使用正确的YAML格式，Obsidian才能识别
 
 ---
 
-**格式规范生效时间**：2026-05-11 10:52  
+**格式规范生效时间**：2026-05-11 12:28  
 **责任人**：Final 财务总监  
 **状态**：✅ 已记录到MEMORY.md，作为强制标准执行
 

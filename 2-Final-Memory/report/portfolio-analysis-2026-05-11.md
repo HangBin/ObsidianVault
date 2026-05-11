@@ -1,6 +1,11 @@
 # 📊 2026年5月11日 持仓分析报告
 
-tags: report, 2026-05-11, analysis
+---
+tags:
+ - report
+ - analysis
+ - 2026-05-11
+---
 
 ## 🎯 核心结论
 

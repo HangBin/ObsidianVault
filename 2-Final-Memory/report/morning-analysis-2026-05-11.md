@@ -1,6 +1,12 @@
 # 📊 2026年5月11日 详版早盘分析报告
 
-tags: report, 2026-05-11, analysis, morning
+---
+tags:
+ - report
+ - analysis
+ - 2026-05-11
+ - morning
+---
 
 ## 📈 一、市场温度
 
