@@ -44,10 +44,63 @@
    - 推荐建仓时需明确标注"重新建仓"
 4. 根据最新数据给建议，不得凭印象操作
 
-**报告格式规范**：
-- 所有分析报告文件必须包含 YAML frontmatter tags 属性
-- 格式：
-- 位置：文件顶部，在标题之前
+## 📊 报告文件Obsidian tags属性规范（强制标准）
+
+### **用户定义的报告tags格式**
+```markdown
+tags: report, 2026-05-11, analysis
+tags: report, 2026-05-11, analysis, morning  # 早版报告专用
+```
+
+### **格式要点（必须遵守）**
+1. **tags属性位置**：必须在Markdown文件第二行，紧接标题后
+2. **tags格式**：
+   - 持仓分析报告：`tags: report, YYYY-MM-DD, analysis`
+   - 早版分析报告：`tags: report, YYYY-MM-DD, analysis, morning`
+   - 投资建议报告：`tags: report, YYYY-MM-DD, analysis`
+3. **日期格式**：必须与文件名中的日期一致
+4. **属性值**：固定为`report`、`YYYY-MM-DD`、`analysis`三个值，早版报告额外加`morning`
+
+### **适用范围**
+- 所有持仓分析报告（portfolio-analysis-YYYY-MM-DD.md）
+- 所有早版分析报告（morning-analysis-YYYY-MM-DD.md）
+- 所有投资建议报告
+
+### **违规示例（错误示范）**
+```markdown
+# 报告标题
+tags: report, analysis
+❌ 缺少日期
+```
+
+```markdown
+# 报告标题
+tags: report, 2026-05-11
+❌ 缺少analysis
+```
+
+```markdown
+# 早版报告标题
+tags: report, 2026-05-11, analysis
+❌ 早版报告缺少morning属性
+```
+
+### **强制要求**
+- 此规范固化为**强制输出标准**
+- 任何违反格式的回复都将被用户指正
+- 必须严格遵守，形成肌肉反射
+
+### **背景说明**
+- 用户要求："报告要加上obsidion的tags属性，属性值为：report、2026-05-11、analysis"
+- 用户补充："再加一个，早盘加一个morning属性"
+- 用户强调："把这点更新到长期记忆里"
+- 含义：tags属性规范与内容质量同等重要
+
+---
+
+**格式规范生效时间**：2026-05-11 10:52  
+**责任人**：Final 财务总监  
+**状态**：✅ 已记录到MEMORY.md，作为强制标准执行
 
 **违规记录**：
 - 2026-05-08：对已清仓的中航机遇领航C(018957)给出"减仓30%锁利"建议，实际持仓仅剩8.74元。原因：未读最新持仓档案，凭印象操作。
