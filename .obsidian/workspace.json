@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2-Final-Memory/MEMORY.md",
+                "file": "2-Final-Memory/report/portfolio-analysis-2026-05-11.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "MEMORY"
+              "title": "portfolio-analysis-2026-05-11"
             }
           }
         ]
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 277.5
+    "width": 287.5
   },
   "right": {
     "id": "0e180bccd1dca825",
@@ -155,13 +155,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "2-Final-Memory/MEMORY.md",
+                "file": "2-Final-Memory/report/portfolio-analysis-2026-05-11.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "MEMORY 的大纲"
+              "title": "portfolio-analysis-2026-05-11 的大纲"
             }
           },
           {
@@ -170,10 +170,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "2-Final-Memory/MEMORY.md"
+                "file": "2-Final-Memory/report/portfolio-analysis-2026-05-11.md"
               },
               "icon": "lucide-info",
-              "title": "MEMORY的笔记属性"
+              "title": "portfolio-analysis-2026-05-11的笔记属性"
             }
           },
           {
@@ -207,15 +207,16 @@
   },
   "active": "4c81a317424f85fd",
   "lastOpenFiles": [
-    "2-Final-Memory/portfolio.md",
-    "2-Final-Memory/MEMORY.md",
-    "2-Final-Memory/final-index.md",
-    "2-Final-Memory/report/portfolio-analysis-2026-05-11.md",
-    "2-Final-Memory/report/portfolio-analysis-2026-05-08.md",
-    "2-Final-Memory/report/portfolio-analysis-2026-05-07.md",
     "2-Final-Memory/report/morning-analysis-2026-05-11.md",
+    "2-Final-Memory/report/portfolio-analysis-2026-05-08.md",
+    "2-Final-Memory/report/portfolio-analysis-2026-05-1111.md",
+    "2-Final-Memory/report/portfolio-analysis-2026-05-11.md",
+    "2-Final-Memory/report/portfolio-analysis-2026-05-07.md",
     "2-Final-Memory/report/morning-analysis-2026-05-08.md",
     "2-Final-Memory/report/morning-analysis-2026-05-07.md",
+    "2-Final-Memory/MEMORY.md",
+    "2-Final-Memory/portfolio.md",
+    "2-Final-Memory/final-index.md",
     "2-Final-Memory/daily/2026-04-07.md",
     "2-Final-Memory/daily/2026-04-04.md",
     "2-Final-Memory/daily/2026-04-01.md",
@@ -232,7 +233,6 @@
     "2-Final-Memory/archive/history-2026-03/2026-03-28.md",
     "2-Final-Memory/archive/history-2026-03/2026-03-27.md",
     "1-Tech-Memory/daily/2026-05-11.md",
-    "1-Tech-Memory/daily/2026-05-09.md",
     "Personal/技术资料/Claude",
     "0-Main-Memory/daily/2026-04-04.md.filepart",
     "3-Proj-Memory/daily/2026-04-08.md.filepart",
