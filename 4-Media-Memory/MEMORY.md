@@ -243,3 +243,8 @@ netstat -tlnp | grep 9222
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:28:28 -->
 - **结果**: 所有索引更新完成 ✅ [score=0.893 recalls=0 avg=0.620 source=memory/2026-05-03.md:28-28]
+
+## Promoted From Short-Term Memory (2026-05-12)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-07.md:19:19 -->
+- **💡 关键教训 — edit 工具格式限制**: [score=0.819 recalls=0 avg=0.620 source=memory/2026-05-07.md:19-19]

@@ -164,3 +164,10 @@ experience*.md       ← 专项经验详细教程
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:38:38 -->
 - **更新内容**: [score=0.813 recalls=0 avg=0.620 source=memory/2026-05-03.md:38-38]
+
+## Promoted From Short-Term Memory (2026-05-12)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-07.md:12:13 -->
+- **触发**: 大梦老板指令 **工具**: read → edit → write [score=0.805 recalls=0 avg=0.620 source=memory/2026-05-07.md:12-13]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-07.md:24:25 -->
+- **结果**: ✅ TOOLS.md 更新完成，所有变更已写入工作区 **决策**: 按 final 财务总监提供的指南完整同步工具配置 [score=0.805 recalls=0 avg=0.620 source=memory/2026-05-07.md:24-25]
