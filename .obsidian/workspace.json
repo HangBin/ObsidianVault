@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "598d309161041ffa",
+        "id": "c007bd266d5cc095",
         "type": "tabs",
         "children": [
           {
-            "id": "1f6d15f142d0fa1d",
+            "id": "d79387b82c81120f",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "关系图谱"
+              "type": "markdown",
+              "state": {
+                "file": "2-Final-Memory/daily/2026-05-03.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2026-05-03"
             }
           }
         ]
@@ -151,12 +155,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "2-Final-Memory/daily/2026-05-03.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大纲"
+              "title": "2026-05-03 的大纲"
             }
           },
           {
@@ -164,9 +169,11 @@
             "type": "leaf",
             "state": {
               "type": "file-properties",
-              "state": {},
+              "state": {
+                "file": "2-Final-Memory/daily/2026-05-03.md"
+              },
               "icon": "lucide-info",
-              "title": "笔记属性"
+              "title": "2026-05-03的笔记属性"
             }
           },
           {
@@ -198,8 +205,27 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "1f6d15f142d0fa1d",
+  "active": "d79387b82c81120f",
   "lastOpenFiles": [
+    "2-Final-Memory/daily/2026-05-01.md",
+    "Personal/技术资料/Claude/安装配置claude.md",
+    "Pasted image 20260512213634.png",
+    "C58F8D09701F6FDA228E109372DA20D8.png",
+    "Personal/技术资料/Claude/安装配置.md",
+    "Personal/技术资料/Claude/Claude-index.md",
+    "Personal/技术资料/AI大模型/账号申请/DeepSeek 模型.md",
+    "Personal/技术资料/AI大模型/账号申请/openAI账号申请.md",
+    "Personal/技术资料/AI大模型/AI-index.md",
+    "Personal/技术资料/AI大模型/账号申请",
+    "Personal/技术资料/AI大模型/BotSharp 新建智能体对话.md",
+    "Personal/技术资料/AI大模型/AI各模型特点.md",
+    "Personal/技术资料/AI大模型/AI使用技巧、提示词.md",
+    "Personal/技术资料/OpenClaw/Agents代理/无标题Markdown.md.md",
+    "Personal/技术资料/AI大模型/BotSharp 开源机器学习平台.md",
+    "Personal/技术资料/AI大模型/目前主流的AI agent框架.md",
+    "Personal/personal-index.md",
+    "Personal/技术资料/AI大模型",
+    "Personal/技术资料/OpenClaw/OpenClaw-index.md",
     "training-obsidian-migration.md",
     "2-Final-Memory/report/morning-analysis-2026-05-11.md",
     "morning-analysis-2026-05-11.md",
@@ -208,34 +234,17 @@
     "1-Tech-Memory/daily/2026-05-11.md",
     "1-Tech-Memory/daily/2026-05-09.md",
     "1-Tech-Memory/daily/2026-05-08.md",
-    "Personal/技术资料/Claude/安装配置.md",
-    "Personal/技术资料/OpenClaw/OpenClaw-index.md",
     "Personal/技术资料/OpenClaw/Models模型/Ollama.md",
-    "Personal/personal-index.md",
     "2-Final-Memory/final-index.md",
     "Personal/技术资料/OpenClaw/openclaw命令.md",
-    "Personal/技术资料/OpenClaw/Models模型/openclaw模型配置.md",
-    "Personal/技术资料/OpenClaw/Models模型/DeepSeak.md",
-    "Personal/技术资料/OpenClaw/Models模型/scnet.md",
     "2-Final-Memory/report/portfolio-analysis-2026-05-11.pdf",
     "2-Final-Memory/report/morning-analysis-2026-05-11.pdf",
-    "2-Final-Memory/archive/2026-03.md",
-    "2-Final-Memory/report/morning-analysis-2026-05-08.md",
-    "2-Final-Memory/portfolio.md",
-    "2-Final-Memory/report/portfolio-analysis-2026-05-11.md",
-    "2-Final-Memory/report/portfolio-analysis-2026-05-08.md",
-    "2-Final-Memory/report/portfolio-analysis-2026-05-1111.md",
-    "2-Final-Memory/report/portfolio-analysis-2026-05-07.md",
-    "2-Final-Memory/report/morning-analysis-2026-05-07.md",
-    "2-Final-Memory/MEMORY.md",
     "Personal/技术资料/Claude",
     "0-Main-Memory/daily/2026-04-04.md.filepart",
     "3-Proj-Memory/daily/2026-04-08.md.filepart",
     "0-Main-Memory/knowledge/experience.md.filepart",
     "2-Final-Memory/daily/2026-04-04.md.filepart",
     "1-Tech-Memory/daily/2026-04-10.md.filepart",
-    "1-Tech-Memory/daily/2026-04-14.md.filepart",
-    "未命名.base",
     "未命名.canvas"
   ]
 }

@@ -30,9 +30,17 @@ aliases: [Personal Index, 个人知识库图谱]
 | ------ | --- |
 | [[插件]] | 插件  |
 
+### Claude
+
+- [[Claude-index]] - Claude相关资料，安装配置等
+
 ### OpenClaw
 
 - [[OpenClaw-index]] - OpenClaw相关资料，模型、人格文件、agents等
+
+### AI大模型
+
+- [[AI-index]] - AI agent模型相关资料等
 
 ### Windows
 
