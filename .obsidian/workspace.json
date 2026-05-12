@@ -11,10 +11,10 @@
             "id": "1f6d15f142d0fa1d",
             "type": "leaf",
             "state": {
-              "type": "empty",
+              "type": "graph",
               "state": {},
-              "icon": "lucide-file",
-              "title": "新标签页"
+              "icon": "lucide-git-fork",
+              "title": "关系图谱"
             }
           }
         ]
@@ -74,7 +74,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 287.5
+    "width": 292.5
   },
   "right": {
     "id": "0e180bccd1dca825",
@@ -200,6 +200,15 @@
   },
   "active": "1f6d15f142d0fa1d",
   "lastOpenFiles": [
+    "training-obsidian-migration.md",
+    "2-Final-Memory/report/morning-analysis-2026-05-11.md",
+    "morning-analysis-2026-05-11.md",
+    "2-Final-Memory/report/report-index.md",
+    "1-Tech-Memory/tech-index.md",
+    "1-Tech-Memory/daily/2026-05-11.md",
+    "1-Tech-Memory/daily/2026-05-09.md",
+    "1-Tech-Memory/daily/2026-05-08.md",
+    "Personal/技术资料/Claude/安装配置.md",
     "Personal/技术资料/OpenClaw/OpenClaw-index.md",
     "Personal/技术资料/OpenClaw/Models模型/Ollama.md",
     "Personal/personal-index.md",
@@ -211,23 +220,14 @@
     "2-Final-Memory/report/portfolio-analysis-2026-05-11.pdf",
     "2-Final-Memory/report/morning-analysis-2026-05-11.pdf",
     "2-Final-Memory/archive/2026-03.md",
-    "2-Final-Memory/report/report-index.md",
     "2-Final-Memory/report/morning-analysis-2026-05-08.md",
     "2-Final-Memory/portfolio.md",
     "2-Final-Memory/report/portfolio-analysis-2026-05-11.md",
-    "2-Final-Memory/report/morning-analysis-2026-05-11.md",
     "2-Final-Memory/report/portfolio-analysis-2026-05-08.md",
     "2-Final-Memory/report/portfolio-analysis-2026-05-1111.md",
     "2-Final-Memory/report/portfolio-analysis-2026-05-07.md",
     "2-Final-Memory/report/morning-analysis-2026-05-07.md",
     "2-Final-Memory/MEMORY.md",
-    "2-Final-Memory/daily/2026-04-07.md",
-    "2-Final-Memory/daily/2026-04-04.md",
-    "2-Final-Memory/daily/2026-04-01.md",
-    "0-Main-Memory/MEMORY.md",
-    "2-Final-Memory/knowledge/qmd-obsidian-system.md",
-    "2-Final-Memory/knowledge/tools-reference.md",
-    "2-Final-Memory/knowledge/experience.md",
     "Personal/技术资料/Claude",
     "0-Main-Memory/daily/2026-04-04.md.filepart",
     "3-Proj-Memory/daily/2026-04-08.md.filepart",
