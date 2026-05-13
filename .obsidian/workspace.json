@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "c007bd266d5cc095",
+        "id": "93003f3e9010b4e4",
         "type": "tabs",
         "children": [
           {
-            "id": "d79387b82c81120f",
+            "id": "dcc27d08e7f1fd19",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2-Final-Memory/daily/2026-05-03.md",
+                "file": "Personal/技术资料/AI大模型/账号申请/openAI账号申请.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-05-03"
+              "title": "openAI账号申请"
             }
           }
         ]
@@ -155,13 +155,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "2-Final-Memory/daily/2026-05-03.md",
+                "file": "Personal/技术资料/AI大模型/账号申请/openAI账号申请.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "2026-05-03 的大纲"
+              "title": "openAI账号申请 的大纲"
             }
           },
           {
@@ -205,38 +205,38 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d79387b82c81120f",
+  "active": "dcc27d08e7f1fd19",
   "lastOpenFiles": [
+    "Personal/技术资料/OpenClaw/窗口命令.md",
+    "Personal/技术资料/Windows/Git/命令.md",
+    "Personal/技术资料/Windows/Git/安装配置Git.md",
+    "Personal/技术资料/Windows/Git/生成公钥.md",
+    "Personal/技术资料/Windows/vmware/VMware共享文件夹设置.md",
+    "Personal/技术资料/Windows/vmware/VMware报错处理.md",
+    "Personal/技术资料/Windows/vmware/VMware网络设置.md",
+    "Personal/技术资料/Windows/vmware/VMware虚拟机网络配置.md",
+    "Personal/技术资料/OpenClaw/Models模型/模型配置-英伟达nvidia.md",
+    "Personal/技术资料/OpenClaw/Models模型/模型配置-豆包.md",
+    "Personal/技术资料/OpenClaw/人格文件相关/1. AI助手灵魂三件套.md",
+    "Personal/技术资料/OpenClaw/人格文件相关/AGENTS.md — 工作手册.md",
+    "Personal/技术资料/OpenClaw/人格文件相关/HEARTBEAT.md -- 心跳任务.md",
+    "Personal/技术资料/OpenClaw/人格文件相关/USER.md — 用户画像.md",
+    "Personal/技术资料/OpenClaw/人格文件相关/安全.md",
+    "Personal/技术资料/OpenClaw/人格文件相关/新闻助手的设置.md",
+    "Personal/技术资料/OpenClaw/其他/定时任务.md",
+    "3-Proj-Memory/MEMORY.md",
     "2-Final-Memory/daily/2026-05-01.md",
-    "Personal/技术资料/Claude/安装配置claude.md",
+    "2-Final-Memory/daily/2026-05-03.md",
+    "2-Final-Memory/daily/2026-05-07.md",
+    "2-Final-Memory/daily/2026-05-08.md",
+    "2-Final-Memory/knowledge/experience.md",
+    "2-Final-Memory/knowledge/qmd-obsidian-system.md",
+    "2-Final-Memory/MEMORY.md",
+    "2-Final-Memory/portfolio.md",
     "Pasted image 20260512213634.png",
     "C58F8D09701F6FDA228E109372DA20D8.png",
-    "Personal/技术资料/Claude/安装配置.md",
-    "Personal/技术资料/Claude/Claude-index.md",
-    "Personal/技术资料/AI大模型/账号申请/DeepSeek 模型.md",
-    "Personal/技术资料/AI大模型/账号申请/openAI账号申请.md",
-    "Personal/技术资料/AI大模型/AI-index.md",
     "Personal/技术资料/AI大模型/账号申请",
-    "Personal/技术资料/AI大模型/BotSharp 新建智能体对话.md",
-    "Personal/技术资料/AI大模型/AI各模型特点.md",
-    "Personal/技术资料/AI大模型/AI使用技巧、提示词.md",
-    "Personal/技术资料/OpenClaw/Agents代理/无标题Markdown.md.md",
-    "Personal/技术资料/AI大模型/BotSharp 开源机器学习平台.md",
-    "Personal/技术资料/AI大模型/目前主流的AI agent框架.md",
-    "Personal/personal-index.md",
     "Personal/技术资料/AI大模型",
-    "Personal/技术资料/OpenClaw/OpenClaw-index.md",
-    "training-obsidian-migration.md",
-    "2-Final-Memory/report/morning-analysis-2026-05-11.md",
-    "morning-analysis-2026-05-11.md",
-    "2-Final-Memory/report/report-index.md",
-    "1-Tech-Memory/tech-index.md",
-    "1-Tech-Memory/daily/2026-05-11.md",
-    "1-Tech-Memory/daily/2026-05-09.md",
-    "1-Tech-Memory/daily/2026-05-08.md",
-    "Personal/技术资料/OpenClaw/Models模型/Ollama.md",
-    "2-Final-Memory/final-index.md",
-    "Personal/技术资料/OpenClaw/openclaw命令.md",
     "2-Final-Memory/report/portfolio-analysis-2026-05-11.pdf",
     "2-Final-Memory/report/morning-analysis-2026-05-11.pdf",
     "Personal/技术资料/Claude",
