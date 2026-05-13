@@ -4,24 +4,39 @@
     "type": "split",
     "children": [
       {
-        "id": "93003f3e9010b4e4",
+        "id": "70f3eea49916b934",
         "type": "tabs",
         "children": [
           {
-            "id": "dcc27d08e7f1fd19",
+            "id": "806a556baacd996c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Personal/技术资料/Obsidian/插件.md",
+                "file": "Personal/技术资料/OpenClaw/Models模型/openclaw模型配置.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "插件"
+              "title": "openclaw模型配置"
+            }
+          },
+          {
+            "id": "75be70f4f4983b0a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Personal/技术资料/Claude/安装配置claude.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "安装配置claude"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -89,79 +104,18 @@
         "type": "tabs",
         "children": [
           {
-            "id": "1ce867eeff524e8b",
-            "type": "leaf",
-            "state": {
-              "type": "all-properties",
-              "state": {
-                "sortOrder": "frequency",
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-archive",
-              "title": "添加笔记属性"
-            }
-          },
-          {
-            "id": "8c8b290ffc7e37fe",
-            "type": "leaf",
-            "state": {
-              "type": "backlink",
-              "state": {
-                "collapseAll": true,
-                "extraContext": false,
-                "sortOrder": "alphabetical",
-                "showSearch": false,
-                "searchQuery": "",
-                "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-coming-in",
-              "title": "反向链接"
-            }
-          },
-          {
-            "id": "88300ba83feae72e",
-            "type": "leaf",
-            "state": {
-              "type": "outgoing-link",
-              "state": {
-                "file": "1-Tech-Memory/daily/2026-03-22.md",
-                "linksCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-going-out",
-              "title": "2026-03-22 的出链列表"
-            }
-          },
-          {
-            "id": "60aac7c61738d77f",
-            "type": "leaf",
-            "state": {
-              "type": "tag",
-              "state": {
-                "sortOrder": "frequency",
-                "useHierarchy": false,
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-tags",
-              "title": "标签"
-            }
-          },
-          {
             "id": "84315368ed63b8cf",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "Personal/技术资料/Obsidian/插件.md",
+                "file": "Personal/技术资料/Claude/安装配置claude.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "插件 的大纲"
+              "title": "安装配置claude 的大纲"
             }
           },
           {
@@ -170,10 +124,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "2-Final-Memory/daily/2026-05-03.md"
+                "file": "Personal/技术资料/Claude/安装配置claude.md"
               },
               "icon": "lucide-info",
-              "title": "2026-05-03的笔记属性"
+              "title": "安装配置claude的笔记属性"
             }
           },
           {
@@ -185,13 +139,45 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
+          },
+          {
+            "id": "8c8b290ffc7e37fe",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Personal/技术资料/Claude/安装配置claude.md",
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "安装配置claude 的反向链接列表"
+            }
+          },
+          {
+            "id": "88300ba83feae72e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Personal/技术资料/Claude/安装配置claude.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "安装配置claude 的出链列表"
+            }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 313.5
+    "width": 327.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -205,35 +191,37 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e70f2ba6abb89a04",
+  "active": "75be70f4f4983b0a",
   "lastOpenFiles": [
-    "Personal/技术资料/Claude/Claude-index.md",
-    "Personal/技术资料/Claude/安装配置claude.md",
-    "Personal/技术资料/Claude/安装配置.md",
-    "Personal/技术资料/AI大模型/BotSharp 新建智能体对话.md",
-    "Personal/技术资料/AI大模型/BotSharp 开源机器学习平台.md",
-    "Personal/技术资料/AI大模型/AI使用技巧、提示词.md",
+    "2-Final-Memory/report/portfolio-analysis-2026-05-13.md",
+    "Personal/技术资料/OpenClaw/Models模型/OpenRouter.md",
+    "Personal/技术资料/OpenClaw/Models模型/openclaw模型配置.md",
+    "Personal/技术资料/OpenClaw/Models模型/Ollama.md",
+    "Personal/技术资料/OpenClaw/Models模型/DeepSeak.md",
+    "Personal/技术资料/AI大模型/账号申请/openAI账号申请.md",
+    "Personal/技术资料/AI大模型/账号申请/DeepSeek 模型.md",
+    "Personal/技术资料/OpenClaw/常用对话指令.md",
+    "Personal/技术资料/OpenClaw/部署安装--docker方式.md",
+    "Personal/技术资料/OpenClaw/部署安装--一键安装.md",
+    "Personal/技术资料/OpenClaw/安装QMD CLI和SQLite.md",
+    "Personal/技术资料/OpenClaw/Models模型/scnet.md",
+    "Personal/技术资料/OpenClaw/Models模型/模型配置-Google Gemma4.md",
+    "Personal/技术资料/OpenClaw/Models模型/模型配置-英伟达nvidia.md",
+    "Personal/技术资料/OpenClaw/Models模型/模型配置-腾讯云.md",
+    "Personal/技术资料/OpenClaw/Models模型/模型配置-豆包.md",
+    "Personal/技术资料/OpenClaw/Models模型/模型配置-阿里千问百炼.md",
+    "Personal/技术资料/OpenClaw/Models模型/常用命令.md",
     "Personal/技术资料/AI大模型/AI各模型特点.md",
     "Personal/技术资料/AI大模型/AI-index.md",
     "Personal/技术资料/AI大模型/目前主流的AI agent框架.md",
-    "Personal/技术资料/AI大模型/账号申请/openAI账号申请.md",
-    "Personal/技术资料/AI大模型/账号申请/DeepSeek 模型.md",
-    "Personal/技术资料/OpenClaw/窗口命令.md",
-    "Personal/技术资料/Windows/Git/命令.md",
-    "Personal/技术资料/Windows/Git/安装配置Git.md",
-    "Personal/技术资料/Windows/Git/生成公钥.md",
-    "Personal/技术资料/Windows/vmware/VMware共享文件夹设置.md",
-    "Personal/技术资料/Windows/vmware/VMware报错处理.md",
-    "Personal/技术资料/Windows/vmware/VMware网络设置.md",
-    "Personal/技术资料/Windows/vmware/VMware虚拟机网络配置.md",
-    "Personal/技术资料/OpenClaw/Models模型/模型配置-英伟达nvidia.md",
-    "Personal/技术资料/OpenClaw/Models模型/模型配置-豆包.md",
-    "Personal/技术资料/OpenClaw/人格文件相关/1. AI助手灵魂三件套.md",
-    "Personal/技术资料/OpenClaw/人格文件相关/AGENTS.md — 工作手册.md",
-    "Personal/技术资料/OpenClaw/人格文件相关/HEARTBEAT.md -- 心跳任务.md",
-    "Personal/技术资料/OpenClaw/人格文件相关/USER.md — 用户画像.md",
-    "Personal/技术资料/OpenClaw/人格文件相关/安全.md",
-    "Pasted image 20260512213634.png",
+    "Personal/技术资料/AI大模型/Codex/安装配置.md",
+    "Personal/技术资料/Claude/安装配置claude.md",
+    "images/Pasted image 20260512213634.png",
+    "images",
+    "2-Final-Memory/report/midday-analysis-2026-05-13.md",
+    "1-Tech-Memory/daily/2026-05-13.md",
+    "Personal/技术资料/AI大模型/Codex",
+    "Personal/技术资料/AI大模型/BotSharp 新建智能体对话.md",
     "C58F8D09701F6FDA228E109372DA20D8.png",
     "Personal/技术资料/AI大模型/账号申请",
     "Personal/技术资料/AI大模型",
@@ -243,8 +231,6 @@
     "0-Main-Memory/daily/2026-04-04.md.filepart",
     "3-Proj-Memory/daily/2026-04-08.md.filepart",
     "0-Main-Memory/knowledge/experience.md.filepart",
-    "2-Final-Memory/daily/2026-04-04.md.filepart",
-    "1-Tech-Memory/daily/2026-04-10.md.filepart",
     "未命名.canvas"
   ]
 }

@@ -62,6 +62,7 @@ OpenClaw本身就有模型降级机制，那么接下来我们就开始配置
 ##### 3. [[scnet|超算互联网]]
 MiniMax-M2.5 1000万免费额度
 sk-MTIxLTExMTE5ODA4NzUyLTE3NzQ2MjU0OTY3Njc=
+#### 4. [[OpenRouter|OpenRoute]]
 
 
 

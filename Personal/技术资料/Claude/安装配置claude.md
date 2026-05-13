@@ -42,6 +42,7 @@ winget install Anthropic.ClaudeCode
 添加`"hasCompletedOnboarding": true`，保存并且关闭，绕过软件对地区的检测
 按两次`ctrl+C`可以关闭claude，回到正常的命令界面
 
+#### 1. 配置kimi
 添加一段配置，用来指定它使用的模型
 ```bash
   "env": {
@@ -50,6 +51,13 @@ winget install Anthropic.ClaudeCode
     "ANTHROPIC_MODEL": "kimi-k2.6"
   },
 ```
+#### 2. 配置OpenRouter
+
+设置环境变量 $env:OPENROUTER_API_KEY="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"
+
+使用 Claude（通过 OpenRouter）
+claude --api-url https://openrouter.ai/api/v1 "你是什么模型？"
+
 ### MCP
 Claude Code去连接外部工具的一个接口
 
@@ -64,6 +72,17 @@ skill资源网站：`https://skillhub.cn/`
 
 - `Hyperframes` 通过编程来剪辑视频的Skills
 	通过命令安装：`npx skills add heygen-com/hyperframes`
+
+
+`安装这个skill，skill项目地址为: https://github.com/anthropics/skills/tree/main/skills/skill-creator`
+
+可以直接让Claude Code读取下面这两个链接里所有的Skills，然后告诉它你的需求，让它帮你看看社区里有没有已经造好的轮子。
+```
+读取下面网页里面所有的 Skills，当我给你提出我的需求之后，匹配最合适的，并且返回它的链接。  
+https://github.com/anthropics/skills
+
+https://github.com/ComposioHQ/awesome-claude-skills
+```
 
 ### 内置命令
 - `@` 可以选择一个工作目录下的文件，比如之前生成的Markdown文件
