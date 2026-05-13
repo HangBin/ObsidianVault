@@ -146,3 +146,8 @@ cat /root/.openclaw/share/browser/experience-browser.md
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-04.md:1:1 -->
 - 🌙 Dream Diary - 2026-05-04 [score=0.845 recalls=0 avg=0.620 source=memory/2026-05-04.md:1-1]
+
+## Promoted From Short-Term Memory (2026-05-13)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-07.md:4:5 -->
+- **来源**: 外部通知（可能是 tech 或 cron 任务触发） **内容**: 每日8:30推送重要财经消息的定时任务已设置完成 [score=0.897 recalls=0 avg=0.620 source=memory/2026-05-07.md:4-5]

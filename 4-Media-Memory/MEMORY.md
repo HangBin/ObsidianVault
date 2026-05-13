@@ -248,3 +248,10 @@ netstat -tlnp | grep 9222
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-07.md:19:19 -->
 - **💡 关键教训 — edit 工具格式限制**: [score=0.819 recalls=0 avg=0.620 source=memory/2026-05-07.md:19-19]
+
+## Promoted From Short-Term Memory (2026-05-13)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-07.md:12:12 -->
+- **变更内容**: [score=0.877 recalls=0 avg=0.620 source=memory/2026-05-07.md:12-12]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-07.md:4:5 -->
+- **触发**: 用户指令 — 读取 final 财务总监提供的工具更新指南并更新 TOOLS.md **工具**: read × 3 → edit (失败) → write [score=0.855 recalls=0 avg=0.620 source=memory/2026-05-07.md:4-5]
