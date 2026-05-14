@@ -12,3 +12,4 @@ tags: [knowledge, experience]
 - **2026-05-14** **结果**: ✅ 创建成功，同时写入Obsidian vault和workspace本地副本
 - **2026-05-14** - ✅ 删除 /root/.openclaw/workspace-final/skills/tushare-stock-skill/
 - **2026-05-14** - ✅ 删除 /root/.openclaw/workspace-final/skills/tushare-stock-skill/
+- **2026-05-14** - ✅ 删除 /root/.openclaw/workspace-final/skills/tushare-stock-skill/
