@@ -73,34 +73,22 @@ aliases: [Main Index, 图谱入口]
 
 ## 二、专项经验（knowledge/）
 
-| 文件 | 主题 |
-|------|------|
-| [[experience]] | 调度主管经验沉淀 |
-| [[index]] | 经验库总索引 |
-| [[main-dispatches]] | 调度日志总结 - 历史归档 |
-| [[main-system]] | 系统运维经验 - 问题与解决方案 |
-| [[main-violations]] | 经验教训库 - 违规与教训记录 |
-| [[patterns]] | 工程模式库 - 最佳实践与工作流 |
+| 文件                      | 主题                  |
+| ----------------------- | ------------------- |
+| [[experience]]          | 调度主管经验沉淀            |
+| [[index]]               | 经验库总索引              |
+| [[main-dispatches]]     | 调度日志总结 - 历史归档       |
+| [[main-system]]         | 系统运维经验 - 问题与解决方案    |
+| [[main-violations]]     | 经验教训库 - 违规与教训记录     |
+| [[patterns]]            | 工程模式库 - 最佳实践与工作流    |
 | [[qmd-obsidian-system]] | qmd-obsidian-system |
+|                         |                     |
 
 ---
 
 ## 三、Shared 共享经验
 
-### browser
-
-| 文件 | 主题 | 标签 |
-|------|------|------|
-| [[browser/experience-browser]] | 🌐 Chromium CDP 有头浏览器自动化专项经验（2026-04-23最终版） | #experience #knowledge #shared #浏览器 #cdp |
-
----
-
-### 根目录
-
-| 文件 | 主题 | 标签 |
-|------|------|------|
-| [[experience-archive]] | 专项经验：日志归档 | #experience #knowledge #shared #日志归档 |
-| [[experience-graph]] | 图谱关联经验总结 | — |
+- [[shared-index]] - Shared 共享经验索引
 
 ---
 

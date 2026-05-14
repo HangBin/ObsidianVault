@@ -66,20 +66,7 @@ aliases: [Proj Index, 图谱入口]
 
 ## 三、Shared 共享经验
 
-### browser
-
-| 文件 | 主题 | 标签 |
-|------|------|------|
-| [[browser/experience-browser]] | 🌐 Chromium CDP 有头浏览器自动化专项经验（2026-04-23最终版） | #experience #knowledge #shared #浏览器 #cdp |
-
----
-
-### 根目录
-
-| 文件                     | 主题        | 标签                                   |
-| ---------------------- | --------- | ------------------------------------ |
-| [[experience-archive]] | 专项经验：日志归档 | #experience #knowledge #shared #日志归档 |
-| [[experience-graph]]   | 图谱关联经验总结  | —                                    |
+- [[shared-index]] - Shared 共享经验索引
 
 ---
 
