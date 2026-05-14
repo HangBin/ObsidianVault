@@ -13,3 +13,4 @@ tags: [knowledge, experience]
 - **2026-05-14** - ✅ 删除 /root/.openclaw/workspace-final/skills/tushare-stock-skill/
 - **2026-05-14** - ✅ 删除 /root/.openclaw/workspace-final/skills/tushare-stock-skill/
 - **2026-05-14** - ✅ 删除 /root/.openclaw/workspace-final/skills/tushare-stock-skill/
+- **2026-05-14** - ✅ 删除 /root/.openclaw/workspace-final/skills/tushare-stock-skill/
