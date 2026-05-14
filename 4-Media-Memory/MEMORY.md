@@ -243,3 +243,8 @@ netstat -tlnp | grep 9222
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:28:28 -->
 - **结果**: 所有索引更新完成 ✅ [score=0.893 recalls=0 avg=0.620 source=memory/2026-05-03.md:28-28]
+
+## Promoted From Short-Term Memory (2026-05-14)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-07.md:26:27 -->
+- **触发**: 用户指令 — "将今天的对话写日每日记忆文件" **工具**: read → sessions_history → write [score=0.885 recalls=0 avg=0.620 source=memory/2026-05-07.md:26-27]

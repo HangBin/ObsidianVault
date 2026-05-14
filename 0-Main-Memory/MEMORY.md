@@ -146,3 +146,10 @@ cat /root/.openclaw/share/browser/experience-browser.md
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-04.md:1:1 -->
 - 🌙 Dream Diary - 2026-05-04 [score=0.845 recalls=0 avg=0.620 source=memory/2026-05-04.md:1-1]
+
+## Promoted From Short-Term Memory (2026-05-14)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-07.md:14:14 -->
+- **待验证**: [score=0.875 recalls=0 avg=0.620 source=memory/2026-05-07.md:14-14]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-07.md:1:1 -->
+- 🌙 Dream Diary - 2026-05-07 [score=0.845 recalls=0 avg=0.620 source=memory/2026-05-07.md:1-1]
