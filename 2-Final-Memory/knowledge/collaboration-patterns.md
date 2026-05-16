@@ -17,3 +17,4 @@ tags: [knowledge, experience]
 - **2026-05-14** - ✅ 删除 /root/.openclaw/workspace-final/skills/tushare-stock-skill/
 - **2026-05-14** - ✅ 删除 /root/.openclaw/workspace-final/skills/tushare-stock-skill/
 - **2026-05-14** - ✅ 删除 /root/.openclaw/workspace-final/skills/tushare-stock-skill/
+- **2026-05-16** **决策**: 三层防护——AGENTS.md详细步骤 + SOUL.md醒目检查清单 + MEMORY.md经验教训，确保下次不再跳过
