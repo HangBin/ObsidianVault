@@ -23,3 +23,4 @@ tags: [knowledge, experience]
 - **2026-05-16** - 全链路：用户 → webchat → hook → 队列 → agent → memory + Obsidian ✅
 - **2026-05-16** - 全链路：用户 → webchat → hook → 队列 → agent → memory + Obsidian ✅
 - **2026-05-16** - 全链路：用户 → webchat → hook → 队列 → agent → memory + Obsidian ✅
+- **2026-05-16** - 全链路：用户 → webchat → hook → 队列 → agent → memory + Obsidian ✅
