@@ -1,0 +1,11 @@
+{
+  "sessionKey": "agent:final:test:123",
+  "channelId": "webchat",
+  "from": "test-user",
+  "timestamp": "2026-05-16T06:59:53.856Z",
+  "note": "测试消息",
+  "content": "/save 测试消息",
+  "bodyForAgent": "/save 测试消息",
+  "body": "/save 测试消息"
+}
+---
