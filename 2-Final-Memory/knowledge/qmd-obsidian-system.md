@@ -31,3 +31,6 @@ tags: [knowledge, experience]
 - **2026-05-16** - `MEMORY.md`（Obsidian）— 写入 5/15 经验教训：倒N字形走势规律、机器人产业链中期最强主线、止盈条件不能僵化、氟化工持续性、今日操作失误总结
 - **2026-05-16** - Obsidian md5 同步确认 ✅
 - **2026-05-16** - 全链路：用户 → webchat → hook → 队列 → agent → memory + Obsidian ✅
+- **2026-05-16** - `MEMORY.md`（Obsidian）— 写入 5/15 经验教训：倒N字形走势规律、机器人产业链中期最强主线、止盈条件不能僵化、氟化工持续性、今日操作失误总结
+- **2026-05-16** - Obsidian md5 同步确认 ✅
+- **2026-05-16** - 全链路：用户 → webchat → hook → 队列 → agent → memory + Obsidian ✅
