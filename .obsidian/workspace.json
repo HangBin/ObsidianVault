@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Personal/技术资料/Claude/安装配置claude.md",
+                "file": "0-Main-Memory/main-index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "安装配置claude"
+              "title": "main-index"
             }
           }
         ]
@@ -94,13 +94,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Personal/技术资料/Claude/安装配置claude.md",
+                "file": "0-Main-Memory/main-index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "安装配置claude 的大纲"
+              "title": "main-index 的大纲"
             }
           },
           {
@@ -207,32 +207,33 @@
   },
   "active": "0d3c3e5e728fba6d",
   "lastOpenFiles": [
-    "2-Final-Memory/report/portfolio-analysis-2026-05-15.md",
-    "2-Final-Memory/report/midday-analysis-2026-05-15.md",
-    "2-Final-Memory/report/daily-review-2026-05-15.md",
-    "2-Final-Memory/knowledge/fund-flow-api-test-2026-05-15.md",
-    "Personal/技术资料/Claude/安装配置.md",
+    "0-Main-Memory/daily/daily-index.md",
+    "0-Main-Memory/main-index.md",
+    "0-Main-Memory/daily/2026-05-02.md",
+    "0-Main-Memory/daily/2026-04-08.md",
+    "0-Main-Memory/daily/2026-04-29.md",
+    "0-Main-Memory/archive/2026-03.md",
+    "0-Main-Memory/daily/2026-03-26.md",
+    "0-Main-Memory/archive/history-2026-03/2026-03-31.md",
+    "0-Main-Memory/daily/2026-03-31.md",
+    "0-Main-Memory/daily/2026-03-30.md",
+    "0-Main-Memory/archive/history-2026-03/2026-03-30.md",
+    "0-Main-Memory/archive/history-2026-03/2026-03-29.md",
+    "0-Main-Memory/archive/history-2026-03/2026-03-28.md",
+    "0-Main-Memory/daily/2026-03-29.md",
+    "0-Main-Memory/daily/2026-03-28.md",
+    "0-Main-Memory/archive/history-2026-03/2026-03-27.md",
+    "0-Main-Memory/daily/2026-03-27.md",
+    "0-Main-Memory/archive/history-2026-03/2026-03-26.md",
+    "1-Tech-Memory/tech-index.md",
+    "1-Tech-Memory/daily/daily-index.md",
+    "Personal/技术资料/Hermes/命令.md",
+    "Personal/技术资料/Hermes/会话.md",
+    "Personal/技术资料/Hermes/添加新模型操作指南.md",
+    "2-Final-Memory/daily/daily-index.md",
     "Personal/技术资料/Claude/安装配置claude.md",
-    "Personal/技术资料/Claude/命令.md",
-    "Personal/技术资料/OpenClaw/openclaw命令.md",
-    "Personal/技术资料/OpenClaw/OpenClaw-index.md",
-    "Personal/技术资料/OpenClaw/OpenClaw 备份内容.md",
-    "Personal/技术资料/OpenClaw/窗口命令.md",
-    "Personal/技术资料/OpenClaw/常用对话指令.md",
-    "Personal/技术资料/OpenClaw/部署安装--docker方式.md",
-    "Personal/技术资料/OpenClaw/部署安装--一键安装.md",
-    "Personal/技术资料/OpenClaw/安装QMD CLI和SQLite.md",
-    "Personal/技术资料/Claude/网上资料--skill.md",
-    "Personal/技术资料/Claude/未命名.md",
-    "Personal/技术资料/Claude/Claude-index.md",
-    "2-Final-Memory/midday-analysis-2026-05-15.md",
-    "Personal/技术资料/CIG容器监控系统/Prometheus数据库.md",
-    "Personal/技术资料/CIG容器监控系统/InfluxQL语法.md",
-    "Personal/技术资料/CIG容器监控系统/InfluxDB常用的操作.md",
-    "Personal/技术资料/CIG容器监控系统/Grafana简介及使用.md",
-    "Personal/技术资料/CIG容器监控系统/Grafana监控sql.md",
-    "Personal/技术资料/CIG容器监控系统/cig-index.md",
-    "Personal/技术资料/CIG容器监控系统/Cadvisor+InfluxDB+Grafan概述.md",
+    "Personal/技术资料/Hermes",
+    "2-Final-Memory/report/portfolio-analysis-2026-05-15.md",
     "Personal/技术资料/CIG容器监控系统",
     "portfolio-analysis-2026-05-14.pdf",
     "daily-review-2026-05-14.pdf",
@@ -246,7 +247,6 @@
     "Personal/技术资料/AI大模型/Codex",
     "C58F8D09701F6FDA228E109372DA20D8.png",
     "Personal/技术资料/AI大模型/账号申请",
-    "Personal/技术资料/AI大模型",
     "未命名.canvas"
   ]
 }
