@@ -85,13 +85,51 @@ https://github.com/ComposioHQ/awesome-claude-skills
 ```
 
 ### 内置命令
-- `@` 可以选择一个工作目录下的文件，比如之前生成的Markdown文件
-- `/resume` 可以找到之前所有的历史对话
-- `/context` 查看当前上下文占用情况
-- `/compact` 总结前面所有的对话，释放掉大部分上下文
+#### 1.会话控制
 - `/clear` 清空上下文
-- `/mcp` 可以查看所有我们安装的MCP
+- `/resume` 可以找到之前所有的历史对话
+- `/rewind` 回到对话中的之前某个点
+- `/export` 一导出对话数据
+- `/context` 查看当前上下文占用情况
+#### 2.模型和使用情况
+- `/model` 显示或切换当前Claude模型
+- `/cost` 查看当前会话的费用估算
+- `/usage` 查看模型和费用使用概览
+- `/extra-usage` 查看详细的使用数据明细
+#### 3.项目设置
+- `/init` 在目录中初始化Claude code
+- `/memory` 配置或查看项目记忆
+- `/add-dir` 索引额外的项目自录
+- `/config` 查看或更新配置设置
+#### 4.代码操作
+- `/diff` 显示相对于代码库的当前更改
+- `/security-review` 对代码进行安全分析
+- `/plan` 生成项目或任务计划
+- `/permissions` 管理文件读/写权限
+- `/compact` 压缩项目数据以提供上下文
+#### 5.智能体层
+- `/agents` 列出可用的专用智能体
 - `/skills` 查看所有安装的Skills
+- `/plugin` 管理系统插件
+- `/mcp` 可以查看所有我们安装的MCP
+- `/reload-plugin` 重新加载已安装插件
+#### 6.其他命令
+- `@` 可以选择一个工作目录下的文件，比如之前生成的Markdown文件
+- 双击esc 后悔药，直接回到上一个检查点
+- Ctrl+R 翻旧旧账。昨天的提示词忘了?按Ctrl+R秒速搜索历史对话，比翻记事本快
+- !直接运行命令 输入 !git status 或 Inpm test结果直接进上下文，不用来回切终端
+
+Memory Updates 智能记忆
+告诉Claude:"记住我用bun不用npm"它会自动记在CLAUDE.md里下次自动用对命令，不打断心流
+
+Remote 随时随地接力。网页版开始写代码，回家接着写
+用 claude --teleport 把云端会话"拉"到本地，无缝切换设备
+
+Ctrl+s 暂存想法
+打字打到一半想看别的?按Ctrl+S暂存当前提示词准备好了自动恢复，不用复制到记事本
+
+会话随时恢复
+电脑没电了?终端意外关闭?输 claude --continue 瞬间恢复上下文完美保留，工作流永不丢失
 
 ### 提示词
 - 用playwright mcp 打开百度，搜索“什么是mcp”，并且选两篇优质搜索结果，打开并阅读，把结果保存到本地的一个 markdown 文件
