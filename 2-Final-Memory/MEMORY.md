@@ -467,3 +467,29 @@ tags:
 
 - 2026-05-16 已将改进方案写入：TOOLS.md、AGENTS.md、三个cron脚本
 - 下次复盘需追踪：改进方案是否落地 → 效果评估 → 进一步优化
+
+## 💾 save-interceptor Hook（2026-05-16 部署）
+
+### 概述
+自定义 Internal Hook，监听 `message:received` 事件，检测 `/save` 命令并写入保存队列。
+
+### 文件位置
+- Hook 目录：`~/.openclaw/hooks/save-interceptor/`
+- Handler：`handler.ts`（源码） + `handler.js`（bun 编译输出，gateway 实际加载）
+- 队列目录：`/home/obsidian_vault/shared/save-commands/`
+
+### 工作原理
+1. 用户发送 `/save`（或 `/save 备注`）
+2. Gateway dispatch 触发 `message:received` 事件
+3. Hook handler 检测 `/save` 前缀，将 sessionKey、channelId、from、timestamp、note 写入队列 JSON 文件
+4. 消息继续进入 agent，agent 识别 `/save` 后执行实际保存（memory + Obsidian 双写）
+
+### 关键注意事项
+- Gateway 加载的是 `handler.js`（不是 `.ts`），修改 `.ts` 后必须用 `bun build handler.ts --outfile handler.js --target node` 重新编译
+- `event.messages.push()` 在 internal hook 中**不会**自动发送消息给用户
+- 编译命令：`cd ~/.openclaw/hooks/save-interceptor && bun build handler.ts --outfile handler.js --target node`
+- 修改 handler 后需要重启 gateway：`gateway restart`
+
+### 调试
+- 调试日志：`/tmp/save-interceptor-debug.log`
+- 队列文件：`/home/obsidian_vault/shared/save-commands/YYYY-MM-DD-HHMM-<sessionKey>.json`

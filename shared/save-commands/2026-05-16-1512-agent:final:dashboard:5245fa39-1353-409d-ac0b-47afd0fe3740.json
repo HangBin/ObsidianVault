@@ -1,0 +1,11 @@
+{
+  "sessionKey": "agent:final:dashboard:5245fa39-1353-409d-ac0b-47afd0fe3740",
+  "channelId": "webchat",
+  "from": "user",
+  "timestamp": "2026-05-16T07:12:16.323Z",
+  "note": "手动保存测试",
+  "content": "/save 手动保存测试",
+  "bodyForAgent": "/save 手动保存测试",
+  "body": "/save 手动保存测试"
+}
+---
