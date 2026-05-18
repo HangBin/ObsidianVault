@@ -913,3 +913,45 @@ curl -s "页面URL" | grep -o "magnet:?xt=[^\"<>]*" | sed "s/&amp;/\&/g" | grep 
 
 ---
 *图谱关联最后更新: 2026-05-07*
+
+---
+
+## 📅 2026-05-18 学习：记忆自动写入优化方案 v1.5
+
+### 📖 来源
+`/root/.openclaw/share/memory-auto-write-optimization.md`（Final 财务总监整理）
+
+### 🆕 新知识/更新点
+
+#### 1. daily-index.md 同步（新增）
+- **规则**：如果本次操作涉及 daily/ 目录的文件变动（新增/修改/删除日志文件），必须同步更新 `/home/obsidian_vault/1-Tech-Memory/daily/daily-index.md`
+- **位置**：AGENTS.md 双写步骤第5步
+- **之前状态**：无此要求
+
+#### 2. 标准 frontmatter 格式（新增）
+- **规则**：创建 memory/YYYY-MM-DD.md 时应包含标准 frontmatter：
+  ```yaml
+  created: YYYY-MM-DD
+  modified: YYYY-MM-DD
+  tags: daily-log tech-agent
+  ```
+- **位置**：SOUL.md 检查清单第①项
+
+#### 3. 记忆写入量化指标（参考）
+- 优化前覆盖率：~30%，优化后：~95%+
+- 写入延迟：< 1分钟（对话结束即写）
+
+#### 4. 常见陷阱：昨天文件豁免检查（教训强化）
+- 扫描范围是"除当天之外的所有文件"，昨天也在清理范围内
+- 昨天文件只要 Obsidian 已同步完整，一律删除工作区副本
+- 教训来源：2026-05-16 因排除昨天不检查，导致冗余副本保留一天
+
+#### 5. 防跳过铁律心理机制（强化）
+- 多轮工具调用后模型容易产生"已做了"错觉
+- 绝对不允许"我刚才已经做了"的心理跳过
+- 每一步都必须有明确的工具调用证据
+
+### 🔄 已更新文件
+- ✅ AGENTS.md：核心配置规则第5条 + 双写步骤增加 daily-index.md 同步
+- ✅ SOUL.md：检查清单第①项增加标准 frontmatter 格式
+
