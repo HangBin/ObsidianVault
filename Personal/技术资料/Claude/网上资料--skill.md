@@ -1,4 +1,34 @@
 
+### 1. superpowers
+Superpowers-Agent技能框架
+`https://github.com/obra/superpowers`
+
+在 Claude Code 中直接运行：
+`/plugin install superpowers@claude-plugins-official`
+
+
+2. Everything Claude Code -Anthropic黑客松冠军
+Anthropic官方黑客松的冠军作品，一键装满Claude Code能力集。
+集成了技能系统、AI记忆系统、安全钩子、研究驱动开发模式。
+https://github.com/affaanm/everything-claude-code
+
+4、Claude Mem-让Claude记住你
+Claude Mem自动记录Claude的编码过程(技术决策、文件结构、踩过的坑)，用AI压缩关键信息，注入到未来的会话中。
+https://github.com/thedotmack/claude-mem
+
+5、GSD(Get Shit Done)一轻量级规范驱动开
+名字就很直接:把事情做完。
+GSD提供元提示模板、规范检查清单、任务拆解方法。不追求大而全，专注快速交付高质量代码。
+定位:给讨厌企业级复杂框架的开发者准备的轻量级工具,
+https://github.com/gsd-build/getshit-done
+
+6、Awesome Claude Code -生态导航地图
+这个资源库索引了所有可用技能、钩子列表、斜杠命令、MCP服务器。
+价值:避免"技能冲突"--有些技能功能重叠，装多了反而混乱
+https://github.com/hesreallyhim/awesome-claude-code
+
+![[Pasted image 20260518154636.png]]
+
 
 ![[Pasted image 20260514150647.png]]# 20个Claude Code神级技能，按场景分类
 
