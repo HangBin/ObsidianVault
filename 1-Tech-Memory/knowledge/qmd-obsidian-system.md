@@ -154,3 +154,5 @@ qmd collection add final-experience --path /root/.openclaw/workspace-final/memor
 - **2026-04-29** 4. 更新经验索引
 - **2026-05-07** - **结果**: ✅ 今日记忆已更新，准备同步到 Obsidian
 - **2026-05-07** - **结果**: ✅ 今日记忆已更新，准备同步到 Obsidian
+- **2026-05-18** **结果**: ✅ 确认 AGENTS.md 中 daily-index.md 路径只指向 Obsidian vault
+- **2026-05-18** - ✅ 创建 archive/2026-04.md 月度索引（10423行，540K）
