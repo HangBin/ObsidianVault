@@ -93,6 +93,7 @@ experience*.md       ← 专项经验详细教程
 2. 子文件合并 → 去重后融入主文件，立即删除子文件
 3. 历史清理 → 已同步到 Obsidian 的工作区副本自动删除
 4. 归纳同步 → 每 10 条或 10 分钟触发
+5. **月度归档**：每月将 daily/ 中的日志移至 `archive/history-YYYY-MM/`，并创建 `archive/YYYY-MM.md` 月度索引
 
 **记忆自动写入优化（v1.5）**:
 - 来源：`/root/.openclaw/share/memory-auto-write-optimization.md`
@@ -122,6 +123,8 @@ experience*.md       ← 专项经验详细教程
 - ✅ 每日记录已更新
 - ✅ QMD share 集合已索引 `/home/obsidian_vault/shared/`
 - ✅ 共享文档：`experience-archive.md`（归档规范）、`browser/experience-browser.md`（浏览器经验）
+- ✅ 2026-03 月度归档完成（`archive/2026-03.md` + `archive/history-2026-03/`）
+- ✅ 2026-04 月度归档完成（`archive/2026-04.md` + `archive/history-2026-04/`）
 
 ---
 
