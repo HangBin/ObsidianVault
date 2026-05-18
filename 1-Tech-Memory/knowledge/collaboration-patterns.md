@@ -137,3 +137,4 @@ else:
 - **2026-05-18** **结果**: ✅ 向 AGENTS.md 对话结束协议插入了"🔴 常见陷阱：昨天文件豁免检查"段落
 - **2026-05-18** - ✅ AGENTS.md 双写步骤增加了 daily-index.md 的具体更新操作说明
 - **2026-05-18** **结果**: ✅ 确认 AGENTS.md 中 daily-index.md 路径只指向 Obsidian vault
+- **2026-05-18** - ✅ AGENTS.md 双写步骤增加了 daily-index.md 的具体更新操作说明
