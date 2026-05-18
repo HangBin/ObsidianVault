@@ -110,46 +110,14 @@ cat /root/.openclaw/share/browser/experience-browser.md
 
 ---
 
-*最后更新: 2026-04-21 10:02*
+*最后更新: 2026-05-18 10:31*
 *精简参考: tech/EXPERIENCE-MEMORY-OPTIMIZE.md*
 
-## Promoted From Short-Term Memory (2026-05-08)
+## 📝 历史经验索引（已归档到知识库）
 
-<!-- openclaw-memory-promotion:memory:memory/2026-05-01.md:22:22 -->
-- OpenClaw心跳轮询 [score=0.821 recalls=0 avg=0.620 source=memory/2026-05-01.md:22-22]
+| 主题 | 归档位置 | 日期 |
+|------|---------|------|
+| 3月份记忆归档 + 标题层级修复 | `knowledge/memory-archive-2026-03.md` | 2026-05-03 |
+| OpenClaw心跳轮询机制 | 系统内置，无需单独记录 | 2026-05-01 |
 
-## Promoted From Short-Term Memory (2026-05-08)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-01.md:39:39 -->
-- OpenClaw心跳轮询 [score=0.821 recalls=0 avg=0.620 source=memory/2026-05-01.md:39-39]
-
-## Promoted From Short-Term Memory (2026-05-09)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:28:29 -->
-- **触发**: 用户指令"学习shared/experience-archive.md，将3月份记忆归档" **工具**: read, exec, write (Python脚本) [score=0.861 recalls=0 avg=0.620 source=memory/2026-05-03.md:28-29]
-<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:37:37 -->
-- **结果**: ✅ 归档完成 [score=0.861 recalls=0 avg=0.620 source=memory/2026-05-03.md:37-37]
-<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:40:43 -->
-- **触发**: 用户反馈"日期标题要写在当天日记之前，不要写在结尾处" **问题**: 归档脚本把原始文件末尾的 `## [date] 补充记录` 保留在了内容块末尾 **解决方案**: Python 脚本将每个内容块末尾的日期标记剥离并移到开头 **结果**: ✅ 6个日期标题全部移到开头 [score=0.861 recalls=0 avg=0.620 source=memory/2026-05-03.md:40-43]
-
-## Promoted From Short-Term Memory (2026-05-09)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:46:49 -->
-- **触发**: 用户反馈"时间条目应该是三级标题" **问题**: 时间条目是二级标题，应改为三级 **操作**: 两次修复脚本（第一次多加#，第二次修正）+ 修复3月31日残留一级标题 **结果**: ✅ 标题层级统一：一级=月度、二级=日期、三级=时间条目 [score=0.861 recalls=0 avg=0.620 source=memory/2026-05-03.md:46-49]
-
-## Promoted From Short-Term Memory (2026-05-09)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:1:1 -->
-- 🌙 Dream Diary - 2026-05-03 [score=0.839 recalls=0 avg=0.620 source=memory/2026-05-03.md:1-1]
-
-## Promoted From Short-Term Memory (2026-05-11)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-04.md:1:1 -->
-- 🌙 Dream Diary - 2026-05-04 [score=0.845 recalls=0 avg=0.620 source=memory/2026-05-04.md:1-1]
-
-## Promoted From Short-Term Memory (2026-05-14)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-07.md:14:14 -->
-- **待验证**: [score=0.875 recalls=0 avg=0.620 source=memory/2026-05-07.md:14-14]
-<!-- openclaw-memory-promotion:memory:memory/2026-05-07.md:1:1 -->
-- 🌙 Dream Diary - 2026-05-07 [score=0.845 recalls=0 avg=0.620 source=memory/2026-05-07.md:1-1]
+> ⚠️ 2026-05-18 清理：删除底部低质量自动 promotion 条目（均为 recalls=0 的无价值条目），改为索引式引用。
