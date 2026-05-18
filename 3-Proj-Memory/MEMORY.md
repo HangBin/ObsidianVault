@@ -31,8 +31,16 @@
 ## ⚠️ 核心铁律
 
 ### 🛡️ 实时记录（最高优先级）
-- 每次交互后**立即**写入 `memory/YYYY-MM-DD.md`
-- 禁止延迟/事后补记/遗漏
+- 每次对话结束前执行「🔚 对话结束协议」（AGENTS.md），7步强制写入
+- 禁止延迟/事后补记/遗漏/心理跳过
+- ⚠️ 创建 daily log 时必须包含标准 frontmatter：
+  ```yaml
+  ---
+  created: YYYY-MM-DD HH:MM GMT+8
+  modified: YYYY-MM-DD HH:MM GMT+8
+  tags: [proj-agent, daily-log, YYYY-MM-DD]
+  ---
+  ```
 
 ### 🔒 工作区权限
 - 仅允许读写 `~/.openclaw/workspace-proj/`
@@ -81,9 +89,16 @@ experience*.md       ← 专项经验详细教程
 ```
 
 **归档规范**:
-1. 实时记录 → `memory/YYYY-MM-DD.md`
-2. 自动提取 → tech 定时任务每日 22:00
-3. 归纳同步 → 每 10 条或 10 分钟触发
+1. 对话结束前 → 执行7步协议，双写本地 + Obsidian
+2. 子文件合并 → 去重后融入主文件，立即删除子文件
+3. 历史清理 → 已同步到 Obsidian 的工作区副本自动删除
+4. 归纳同步 → 每 10 条或 10 分钟触发
+5. **月度归档**：每月将 daily/ 中的日志移至 `archive/history-YYYY-MM/`，并创建 `archive/YYYY-MM.md` 月度索引
+
+**记忆自动写入优化（v1.5）**:
+- 来源：`/root/.openclaw/share/memory-auto-write-optimization.md`
+- 四重机制：A(对话结束协议) + B(双写) + C(心跳兜底) + D(SOUL.md视觉清单)
+- 核心改进：从"被动提醒写入"→"对话结束前强制7步协议"
 
 ---
 
@@ -108,6 +123,8 @@ experience*.md       ← 专项经验详细教程
 - ✅ 每日记录已更新
 - ✅ QMD share 集合已索引 `/home/obsidian_vault/shared/`
 - ✅ 共享文档：`experience-archive.md`（归档规范）、`browser/experience-browser.md`（浏览器经验）
+- ✅ 2026-03 月度归档完成（`archive/2026-03.md` + `archive/history-2026-03/`）
+- ✅ 2026-04 月度归档完成（`archive/2026-04.md` + `archive/history-2026-04/`）
 
 ---
 
@@ -122,45 +139,3 @@ experience*.md       ← 专项经验详细教程
 
 > 📌 **更多经验细节** → 检索 `.learnings/` 或使用 `qmd search` 搜索共享文档
 
-## Promoted From Short-Term Memory (2026-04-23)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-16.md:5:6 -->
-- **记录时间**: 2026-04-16 12:39:28 **状态**: 占位文件（由每日记忆管理系统自动创建） [score=0.845 recalls=0 avg=0.620 source=memory/2026-04-16.md:5-6]
-
-## Promoted From Short-Term Memory (2026-04-28)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-21.md:216:218 -->
-- - Candidate: Possible Lasting Truths: 00:00 - 初始化: **记录时间**: 2026-04-11 08:56:45 **状态**: 占位文件（由每日记忆管理系统自动创建） [confidence=0.58 evidence=memory/2026-04-11.md:5-6]; 00:00 - 初始化: **记录时间**: 2026-04-12 13:13:51 **状态**: 占位文件（由每日记忆管理系统自动创建） [confidence=0.58 evidence=memory/2026-04-12.md:5-6]; 00:00 - - confidence: 0.62 - evidence: memory/2026-04-19.md:108-110 [score=0.894 recalls=0 avg=0.620 source=memory/2026-04-21.md:183-185]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-21.md:223:223 -->
-- **来源**: tech 的三个文件 [score=0.894 recalls=0 avg=0.620 source=memory/2026-04-21.md:223-223]
-
-## Promoted From Short-Term Memory (2026-04-29)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-21.md:230:230 -->
-- **核心原则**：核心规则保留，具体操作外移 [score=0.887 recalls=0 avg=0.620 source=memory/2026-04-21.md:230-230]
-
-## Promoted From Short-Term Memory (2026-04-30)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-21.md:263:266 -->
-- | 场景 | 教训 | |------|------| | MEMORY.md 过大 | 精简+外移到专项文档+QMD 检索历史 | | 共享文档 QMD 索引 | 用 share 集合直接索引源路径，不依赖软链接 | [score=0.883 recalls=0 avg=0.620 source=memory/2026-04-21.md:263-266]
-
-## Promoted From Short-Term Memory (2026-05-08)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:13:13 -->
-- **触发**: 大梦要求学习归档经验文档并归档3月份记忆 [score=0.829 recalls=0 avg=0.620 source=memory/2026-05-03.md:13-13]
-
-## Promoted From Short-Term Memory (2026-05-09)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:24:24 -->
-- **归档经验要点（已学习）**: [score=0.848 recalls=0 avg=0.620 source=memory/2026-05-03.md:24-24]
-<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:2:5 -->
-- author: proj agent created: 2026-05-03 17:25:00 GMT+8 modified: 2026-05-03 17:30:00 GMT+8 version: v1.0.0 [score=0.823 recalls=0 avg=0.620 source=memory/2026-05-03.md:2-5]
-<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:36:36 -->
-- **触发**: 大梦要求更新 MEMORY.md 和 TOOLS.md 中针对 shared 相关索引位置 [score=0.823 recalls=0 avg=0.620 source=memory/2026-05-03.md:36-36]
-<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:6:6 -->
-- tags: [proj-agent, daily-log] [score=0.813 recalls=0 avg=0.620 source=memory/2026-05-03.md:6-6]
-
-## Promoted From Short-Term Memory (2026-05-09)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:38:38 -->
-- **更新内容**: [score=0.813 recalls=0 avg=0.620 source=memory/2026-05-03.md:38-38]
