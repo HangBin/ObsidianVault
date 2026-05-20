@@ -121,3 +121,12 @@ cat /root/.openclaw/share/browser/experience-browser.md
 | OpenClaw心跳轮询机制 | 系统内置，无需单独记录 | 2026-05-01 |
 
 > ⚠️ 2026-05-18 清理：删除底部低质量自动 promotion 条目（均为 recalls=0 的无价值条目），改为索引式引用。
+
+## Promoted From Short-Term Memory (2026-05-20)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:15:18 -->
+- **触发**: 用户要求学习 `/root/.openclaw/share/memory-auto-write-optimization.md` 并更新核心文件 **工具**: read, edit, exec, write **结果**: ✅ 成功更新 3 个核心文件 **决策**: 对比共享文档与现有核心文件，发现 3 处需要更新的点 [score=0.807 recalls=0 avg=0.620 source=memory/2026-05-18.md:15-18]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:31:34 -->
+- **触发**: 用户指出 2026-05-18.md 缺少 YAML frontmatter **工具**: read, write **结果**: ✅ 已补充标准 frontmatter 并修正标题格式 **决策**: 创建 daily log 时必须包含 frontmatter，这是自己定的规则，不可跳过 [score=0.807 recalls=0 avg=0.620 source=memory/2026-05-18.md:31-34]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:42:45 -->
+- **触发**: 用户询问是否需要将教训固化到核心文件 **工具**: read, edit, exec, cp **结果**: ✅ 更新 AGENTS.md 步骤1 + SOUL.md 检查清单① **决策**: 把 frontmatter 完整 YAML 模板直接嵌入执行步骤，减少跳过概率 [score=0.807 recalls=0 avg=0.620 source=memory/2026-05-18.md:42-45]

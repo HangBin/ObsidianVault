@@ -157,18 +157,6 @@ netstat -tlnp | grep 9222
 - **明知故犯最该反省**: 文档有明确步骤但没执行到位，比不知道更严重
 
 
-## Promoted From Short-Term Memory (2026-04-23)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-16.md:5:6 -->
-- **记录时间**: 2026-04-16 12:39:27 **状态**: 占位文件（由每日记忆管理系统自动创建） [score=0.903 recalls=0 avg=0.620 source=memory/2026-04-16.md:5-6]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-18.md:323:323 -->
-- - Candidate: Reflections: No strong patterns surfaced. [score=0.812 recalls=0 avg=0.620 source=memory/2026-04-18.md:3-3]
-
-## Promoted From Short-Term Memory (2026-04-24)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-19.md:338:338 -->
-- - Candidate: Reflections: No strong patterns surfaced. [score=0.829 recalls=0 avg=0.620 source=memory/2026-04-19.md:98-98]
-
 ## Promoted From Short-Term Memory (2026-04-25)
 
 <!-- openclaw-memory-promotion:memory:memory/2026-04-20.md:116:118 -->
@@ -253,3 +241,8 @@ netstat -tlnp | grep 9222
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-07.md:32:32 -->
 - **结果**: ✅ daily log 补全完成 [score=0.885 recalls=0 avg=0.620 source=memory/2026-05-07.md:32-32]
+
+## Promoted From Short-Term Memory (2026-05-20)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:14:17 -->
+- **触发**: 用户要求学习 `/root/.openclaw/share/memory-auto-write-optimization.md` 并更新核心文件 **工具**: read/edit/write **结果**: 成功完成所有 4 个核心文件的更新 **决策**: 按照方案 v1.5 的规范，将"被动记录"升级为"对话结束前自动写入"四重机制协议 [score=0.802 recalls=0 avg=0.620 source=memory/2026-05-18.md:14-17]

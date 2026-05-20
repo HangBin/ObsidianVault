@@ -139,3 +139,12 @@ experience*.md       ← 专项经验详细教程
 
 > 📌 **更多经验细节** → 检索 `.learnings/` 或使用 `qmd search` 搜索共享文档
 
+
+## Promoted From Short-Term Memory (2026-05-20)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:10:13 -->
+- **触发**: 大梦要求学习 `/root/.openclaw/share/memory-auto-write-optimization.md` 并更新 proj 核心文件 **工具**: read, edit, write **结果**: 成功更新 4 个核心文件 **决策**: 按共享文档 v1.5 的四重机制方案全面升级记忆体系 [score=0.802 recalls=0 avg=0.620 source=memory/2026-05-18.md:10-13]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:26:29 -->
+- **触发**: 大梦指出 2026-05-18.md 缺少 frontmatter **工具**: edit, exec **结果**: 已补全 frontmatter（created/modified/tags），同步到 Obsidian **决策**: 创建 daily log 时必须包含标准 frontmatter，这是对话结束协议第1步的要求 [score=0.802 recalls=0 avg=0.620 source=memory/2026-05-18.md:26-29]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:32:35 -->
+- **触发**: 大梦要求将 frontmatter 规范固化到核心文件，避免再犯 **工具**: read, edit **结果**: 已更新 AGENTS.md（对话结束协议第1步扩展 frontmatter 模板）和 SOUL.md（检查清单第①项扩展完整格式） **决策**: 教训必须固化到规则文件，不能只靠"记住" [score=0.802 recalls=0 avg=0.620 source=memory/2026-05-18.md:32-35]
