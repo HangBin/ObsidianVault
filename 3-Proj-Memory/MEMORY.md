@@ -148,3 +148,12 @@ experience*.md       ← 专项经验详细教程
 - **触发**: 大梦指出 2026-05-18.md 缺少 frontmatter **工具**: edit, exec **结果**: 已补全 frontmatter（created/modified/tags），同步到 Obsidian **决策**: 创建 daily log 时必须包含标准 frontmatter，这是对话结束协议第1步的要求 [score=0.802 recalls=0 avg=0.620 source=memory/2026-05-18.md:26-29]
 <!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:32:35 -->
 - **触发**: 大梦要求将 frontmatter 规范固化到核心文件，避免再犯 **工具**: read, edit **结果**: 已更新 AGENTS.md（对话结束协议第1步扩展 frontmatter 模板）和 SOUL.md（检查清单第①项扩展完整格式） **决策**: 教训必须固化到规则文件，不能只靠"记住" [score=0.802 recalls=0 avg=0.620 source=memory/2026-05-18.md:32-35]
+
+## Promoted From Short-Term Memory (2026-05-21)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:38:40 -->
+- **触发**: 大梦指出 MEMORY.md 不应追加到末尾，应直接修改对应章节 **工具**: read, edit **结果**: 完成 MEMORY.md 结构重组 [score=0.836 recalls=0 avg=0.620 source=memory/2026-05-18.md:38-40]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:2:4 -->
+- created: 2026-05-18 12:09 GMT+8 modified: 2026-05-18 12:36 GMT+8 tags: [proj-agent, daily-log, 2026-05-18] [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-18.md:2-4]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:49:51 -->
+- **触发**: 大梦要求归档4月日志 **工具**: read, write, exec, edit **结果**: 完成2026-04月度归档 [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-18.md:49-51]

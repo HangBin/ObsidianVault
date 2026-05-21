@@ -157,19 +157,6 @@ netstat -tlnp | grep 9222
 - **明知故犯最该反省**: 文档有明确步骤但没执行到位，比不知道更严重
 
 
-## Promoted From Short-Term Memory (2026-04-25)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-20.md:116:118 -->
-- - Candidate: Possible Lasting Truths: 00:00 - 初始化: **记录时间**: 2026-04-11 08:56:44 **状态**: 占位文件（由每日记忆管理系统自动创建） [confidence=0.58 evidence=memory/2026-04-11.md:5-6]; 00:00 - 初始化: **记录时间**: 2026-04-12 13:13:50 **状态**: 占位文件（由每日记忆管理系统自动创建） [confidence=0.58 evidence=memory/2026-04-12.md:5-6]; 00:00 - - confidence: 0.62 - evidence: memory/2026-04-19.md:341-343 [score=0.854 recalls=0 avg=0.620 source=memory/2026-04-20.md:8-10]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-20.md:122:122 -->
-- **触发**: 用户要求合并归档文件 [score=0.854 recalls=0 avg=0.620 source=memory/2026-04-20.md:122-122]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-20.md:135:137 -->
-- **触发**: 用户指令"把今天tech传授的三个核心内容学习一下" **文件**: EXPERIENCE-MEMORY-OPTIMIZE.md、QMD_TIPS.md、TEACHING-MEMORY-BROWSER-QMD.md **结果**: ✅ 全部读取 [score=0.854 recalls=0 avg=0.620 source=memory/2026-04-20.md:135-137]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-20.md:113:113 -->
-- - Candidate: Reflections: No strong patterns surfaced. [score=0.834 recalls=0 avg=0.620 source=memory/2026-04-20.md:98-98]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-20.md:132:132 -->
-- **结果**: ✅ 已确认 [score=0.834 recalls=0 avg=0.620 source=memory/2026-04-20.md:132-132]
-
 ## Promoted From Short-Term Memory (2026-04-26)
 
 <!-- openclaw-memory-promotion:memory:memory/2026-04-21.md:1:1 -->
@@ -246,3 +233,10 @@ netstat -tlnp | grep 9222
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:14:17 -->
 - **触发**: 用户要求学习 `/root/.openclaw/share/memory-auto-write-optimization.md` 并更新核心文件 **工具**: read/edit/write **结果**: 成功完成所有 4 个核心文件的更新 **决策**: 按照方案 v1.5 的规范，将"被动记录"升级为"对话结束前自动写入"四重机制协议 [score=0.802 recalls=0 avg=0.620 source=memory/2026-05-18.md:14-17]
+
+## Promoted From Short-Term Memory (2026-05-21)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:31:34 -->
+- **触发**: 用户指出 2026-05-18.md 缺少 frontmatter **工具**: read/edit/write/exec **结果**: 成功 **决策**: 按方案 v1.5 规范，所有 daily-log 文件需带标准 frontmatter [score=0.887 recalls=0 avg=0.620 source=memory/2026-05-18.md:31-34]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:44:47 -->
+- **触发**: 用户要求归档 4 月日志 **工具**: exec/read/write **结果**: 成功完成 **决策**: 参照 3 月归档模式（history-2026-03/ + 2026-03.md 索引） [score=0.887 recalls=0 avg=0.620 source=memory/2026-05-18.md:44-47]
