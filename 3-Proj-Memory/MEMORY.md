@@ -157,3 +157,8 @@ experience*.md       ← 专项经验详细教程
 - created: 2026-05-18 12:09 GMT+8 modified: 2026-05-18 12:36 GMT+8 tags: [proj-agent, daily-log, 2026-05-18] [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-18.md:2-4]
 <!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:49:51 -->
 - **触发**: 大梦要求归档4月日志 **工具**: read, write, exec, edit **结果**: 完成2026-04月度归档 [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-18.md:49-51]
+
+## Promoted From Short-Term Memory (2026-05-21)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:59:62 -->
+- **触发**: 大梦要求执行对话写入 **工具**: exec, read, edit **结果**: 完成记忆写入，修复重复记录 **决策**: 发现12:21记录重复，已清理 [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-18.md:59-62]

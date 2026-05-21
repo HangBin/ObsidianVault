@@ -130,3 +130,8 @@ cat /root/.openclaw/share/browser/experience-browser.md
 - **触发**: 用户指出 2026-05-18.md 缺少 YAML frontmatter **工具**: read, write **结果**: ✅ 已补充标准 frontmatter 并修正标题格式 **决策**: 创建 daily log 时必须包含 frontmatter，这是自己定的规则，不可跳过 [score=0.807 recalls=0 avg=0.620 source=memory/2026-05-18.md:31-34]
 <!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:42:45 -->
 - **触发**: 用户询问是否需要将教训固化到核心文件 **工具**: read, edit, exec, cp **结果**: ✅ 更新 AGENTS.md 步骤1 + SOUL.md 检查清单① **决策**: 把 frontmatter 完整 YAML 模板直接嵌入执行步骤，减少跳过概率 [score=0.807 recalls=0 avg=0.620 source=memory/2026-05-18.md:42-45]
+
+## Promoted From Short-Term Memory (2026-05-21)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:2:5 -->
+- author: main created: 2026-05-18 10:31:00 GMT+8 modified: 2026-05-18 10:44:00 GMT+8 version: v1.0.0 [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-18.md:2-5]
