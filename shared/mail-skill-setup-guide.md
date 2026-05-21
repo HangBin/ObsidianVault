@@ -264,6 +264,29 @@ python3 send_email.py --to user1@a.com user2@b.com user3@c.com --subject "标题
 python3 send_email_multi.py --group daily-report --extra-to boss@company.com --subject "报告" --body "正文"
 ```
 
+### 4.4 收件人角色分离
+
+邮件协议支持三种收件人角色：
+- **To（主送）**：主要收件人，邮件的直接目标
+- **Cc（抄送）**：抄送收件人，知悉即可，不需要回复
+- **Bcc（密送）**：密送收件人，其他收件人看不到
+
+**配置方式**（`recipients.yaml`）：
+
+```yaml
+groups:
+  all:
+    description: "全部联系人"
+    to:
+      - panbin521@sina.com      # 主送
+    cc:
+      - 29464262@qq.com          # 抄送
+```
+
+**脚本支持**：`send_email_multi.py` 支持从配置文件读取 to/cc/bcc 分离的收件人组。
+
+⚠️ **注意**：发件箱地址（如 `panbin5218@163.com`）仅用于 SMTP 发信，**不能作为收件人**。
+
 ---
 
 ## 五、目录结构
@@ -326,6 +349,36 @@ python3 send_email_multi.py --group daily-report --extra-to boss@company.com --s
 
 **正解**：发信只需要**发件人邮箱**的 SMTP 配置（host + port + 授权码），收件人地址直接 `--to` 指定即可，不需要任何密码
 
+### 坑 6：Emoji 在邮件客户端显示为 ???
+
+**现象**：邮件标题或正文中的 emoji（如 📊、🔴、✅）在某些邮件客户端显示为 `???`
+
+**原因**：邮件客户端的字体不支持 Unicode emoji，或邮件编码问题
+
+**解决**：在 `md_to_html.py` 中将所有 emoji 替换为文字标签：`📊`→`[图表]`、`🔴`→`[紧急]`、`✅`→`[OK]`、`⚠️`→`[警告]`
+
+### 坑 7：PDF 无法直接嵌入邮件正文
+
+**误区**：以为可以把 PDF 内容直接显示在邮件正文里
+
+**正解**：PDF 是二进制格式，邮件正文只能是文本/HTML
+- **方案 A**：HTML 正文（MD 转 HTML）+ PDF 附件（推荐）
+- **方案 B**：只发 PDF 附件，正文写"请查看附件"
+
+### 坑 8：npm 网络不可用
+
+**现象**：`npm install` 报错 `ENOTFOUND`
+
+**解决**：优先使用 Python 标准库：`smtplib`（发信）、`imaplib`（收信）、`markdown`（MD转HTML）、`reportlab`（MD转PDF）
+
+### 坑 9：Cron 脚本中命令是给 AI 执行的
+
+**注意**：
+- `/root/.openclaw/share/final-analysis/*.cron` 脚本通过 heredoc 把 prompt 发给 AI，AI 再执行其中的命令
+- 命令格式要清晰，AI 需要理解并执行
+- 不要在 prompt 中写 shell 管道等复杂语法，AI 可能解析错误
+- 每个步骤分开写
+
 ---
 
 ## 七、快速命令参考
@@ -355,93 +408,7 @@ python3 /root/.openclaw/share/send-email/send_email_multi.py \
 python3 /root/.openclaw/share/send-email/send_email_multi.py --list-groups
 ```
 
----
-
-## 八、安全注意事项
-
-1. **授权码不要泄露**：config.yaml 中的授权码相当于密码，不要上传到公开仓库
-2. **使用授权码而非密码**：163/QQ/Gmail 等邮箱都支持生成应用专用授权码
-3. **发送频率限制**：建议每分钟不超过 5 封，避免被识别为垃圾邮件
-4. **附件大小限制**：163 邮箱单附件上限约 50MB
-5. **不要在日志中输出邮件正文**：只记录发送结果和收件人地址
-
----
-
-## 九、补充经验（2026-05-20 晚）
-
-### 9.1 收件人角色分离
-
-**误区**：把所有收件人都放在 `--to` 里，不区分主送/抄送。
-
-**正解**：邮件协议支持三种收件人角色：
-- **To（主送）**：主要收件人，邮件的直接目标
-- **Cc（抄送）**：抄送收件人，知悉即可，不需要回复
-- **Bcc（密送）**：密送收件人，其他收件人看不到
-
-**配置方式**（`recipients.yaml`）：
-
-```yaml
-groups:
-  all:
-    description: "全部联系人"
-    to:
-      - panbin521@sina.com      # 主送
-    cc:
-      - 29464262@qq.com          # 抄送
-```
-
-**脚本支持**：`send_email_multi.py` 支持从配置文件读取 to/cc/bcc 分离的收件人组。
-
-### 9.2 Emoji 在邮件客户端显示为 ???
-
-**现象**：邮件标题或正文中的 emoji（如 📊、🔴、✅）在某些邮件客户端显示为 `???`。
-
-**原因**：邮件客户端的字体不支持 Unicode emoji，或邮件编码问题。
-
-**解决**：在 `md_to_html.py` 中将所有 emoji 替换为文字标签：
-- `📊` → `[图表]`
-- `🔴` → `[紧急]`
-- `✅` → `[OK]`
-- `❌` → `[NO]`
-- `⚠️` → `[警告]`
-
-### 9.3 PDF 无法直接嵌入邮件正文
-
-**误区**：以为可以把 PDF 内容直接显示在邮件正文里。
-
-**正解**：
-- PDF 是二进制格式，邮件正文只能是文本/HTML
-- **方案 A**：HTML 正文（把 MD 转成 HTML）+ PDF 附件（推荐）
-- **方案 B**：只发 PDF 附件，正文写"请查看附件"
-
-当前采用方案 A：`md_to_html.py` 生成 HTML 正文，`md_to_pdf.py` 生成 PDF 附件。
-
-### 9.4 Cron 脚本中命令是给 AI 执行的
-
-**场景**：`/root/.openclaw/share/final-analysis/*.cron` 脚本通过 heredoc 把 prompt 发给 AI，AI 再执行其中的命令。
-
-**注意**：
-- 命令格式要清晰，AI 需要理解并执行
-- 不要在 prompt 中写 shell 管道等复杂语法，AI 可能解析错误
-- 每个步骤分开写，如：
-  ```
-  4. 发送邮件到收件人组（all）：
-     a. 将报告 MD 转为 PDF：python3 /path/to/md_to_pdf.py input.md output.pdf
-     b. 生成 HTML 邮件：python3 /path/to/md_to_html.py input.md output.html
-     c. 发送：python3 /path/to/send_email_multi.py --group all --subject "标题" --html-file output.html --attach output.pdf
-  ```
-
-### 9.5 npm 网络可能不可用
-
-**现象**：`npm install` 报错 `ENOTFOUND`。
-
-**解决**：优先使用 Python 标准库：
-- 发信：`smtplib`（标准库）替代 `nodemailer`
-- 收信：`imaplib`（标准库）替代 `imapflow`
-- MD 转 HTML：`markdown`（pip install markdown）
-- MD 转 PDF：`reportlab`（pip install reportlab）
-
-### 9.6 完整邮件发送流程（Cron 集成）
+### 7.1 完整邮件发送流程（Cron 集成）
 
 每份报告生成后的标准流程：
 
@@ -455,7 +422,17 @@ groups:
 
 ---
 
+## 八、安全注意事项
+
+1. **授权码不要泄露**：config.yaml 中的授权码相当于密码，不要上传到公开仓库
+2. **使用授权码而非密码**：163/QQ/Gmail 等邮箱都支持生成应用专用授权码
+3. **发送频率限制**：建议每分钟不超过 5 封，避免被识别为垃圾邮件
+4. **附件大小限制**：163 邮箱单附件上限约 50MB
+5. **不要在日志中输出邮件正文**：只记录发送结果和收件人地址
 
 ---
 
-*最后更新：2026-05-20 23:31*
+
+---
+
+*最后更新：2026-05-21 21:20*
