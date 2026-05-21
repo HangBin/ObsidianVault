@@ -455,4 +455,175 @@ groups:
 
 ---
 
-*最后更新：2026-05-20 23:31*
+## 十、邮件 HTML 格式美化经验（2026-05-21）
+
+> 场景：优化报告邮件的 HTML 排版，参考招商银行、新浪邮箱等正规金融机构邮件样式
+
+### 10.1 设计原则
+
+参考了 5 个真实邮件样本：
+
+| 邮件 | 来源 | 可借鉴点 |
+|------|------|---------|
+| 每日信用管家 | 招商银行 | 清爽专业、信息密度高 |
+| 信用卡电子账单 | 招商银行 | 简洁排版、固定宽度表格 |
+| 防范钓鱼邮件 | 新浪邮箱 | 圆角卡片、渐变色标题、清晰视觉层次 |
+| 沟通记录 | 猎聘 | 紧凑布局、信息分组清晰 |
+| 自己发的尾盘报告 | — | 发现了标题英文堆砌、表格简陋等问题 |
+
+**核心原则**：
+1. 清爽专业，不过度设计
+2. 信息层次清晰，视觉分组明确
+3. 表格自适应，手机上可横向滚动
+4. 涨跌颜色遵循 A 股惯例（红涨绿跌）
+5. 适配主流邮件客户端（内联样式优先）
+
+### 10.2 邮件 HTML 模板结构
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* 外层容器：圆角卡片 + 阴影 */
+    .email-wrapper { max-width: 780px; margin: 20px auto; border-radius: 12px;
+                     overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+
+    /* 顶部标题栏：渐变色 + 报告类型 badge */
+    .email-header { background: linear-gradient(135deg, #1a3a5c, #2d6a9f); padding: 28px 36px; }
+    .report-type { display: inline-block; background: rgba(255,255,255,0.15);
+                   border-radius: 20px; padding: 4px 16px; font-size: 12px; }
+    .divider { width: 40px; height: 3px; background: rgba(255,255,255,0.4);
+               margin: 14px auto 0; border-radius: 2px; }
+
+    /* 表格：外层 wrapper 支持横向滚动 */
+    .table-wrapper { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { table-layout: fixed; word-break: break-all; min-width: 520px; }
+
+    /* 状态标签 */
+    .tag-red { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+    .tag-orange { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+    .tag-green { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+
+    /* 信息卡片 */
+    .info-card { background: #f8fafb; border-radius: 8px; padding: 16px 20px; }
+    .info-card.warning { background: linear-gradient(135deg, #fff8f0, #fff3e0); }
+    .info-card.danger { background: linear-gradient(135deg, #fff5f5, #fce4ec); }
+
+    /* 响应式 */
+    @media (max-width: 600px) {
+      .email-wrapper { margin: 0; border-radius: 0; }
+      .email-body { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-wrapper">
+    <div class="email-header">
+      <div class="report-type">Final 财务总监 · 尾盘分析</div>
+      <h1>2026-05-21 尾盘分析报告</h1>
+      <div class="divider"></div>
+    </div>
+    <div class="email-body">
+      <!-- MD → HTML 内容 -->
+    </div>
+    <div class="email-footer">
+      <p>Final 财务总监 · 仅供参考，投资需谨慎</p>
+    </div>
+  </div>
+</body>
+</html>
+```
+
+### 10.3 md_to_html.py 关键处理逻辑
+
+路径：`/root/.openclaw/share/send-email/md_to_html.py`
+
+**预处理（MD → HTML 之前）：**
+
+1. **修复加粗标题直接跟列表**：
+   ```python
+   # 模式：**xxx**：\n- xxx → 插入空行让 md 正确解析为列表
+   md_text = re.sub(r'(\*\*[^*]+\*\*[：:])\n(- )', r'\1\n\n- ', md_text)
+   md_text = re.sub(r'(\d+\.\s+\*\*[^*]+\*\*[：:])\n(- )', r'\1\n\n- ', md_text)
+   ```
+   - 问题：`**盘中走势特征**：\n- xxx` 会被 md 合并成 `<p>` 而非 `<ul>`
+   - 解决：在 `**xxx**：` 和 `- ` 之间插入空行
+
+2. **去掉 emoji**：所有 emoji 替换为文字标签（`📊` → `[图表]`），避免邮件客户端显示 `???`
+
+**后处理（HTML 生成之后）：**
+
+3. **表格加 wrapper**：
+   ```python
+   html = html.replace('<table>', '<div class="table-wrapper"><table>')
+               .replace('</table>', '</table></div>')
+   ```
+
+4. **blockquote 内信息换行**：
+   ```python
+   # 在 <strong> 标签前插入 <br>（排除第一个）
+   def _fix_bq(m):
+       inner = m.group(1)
+       inner = re.sub(r'\s*<strong>', '\n<br><strong>', inner)
+       inner = re.sub(r'(<p>)\n<br>', r'\1', inner, count=1)
+       return '<blockquote>' + inner + '</blockquote>'
+   html = re.sub(r'<blockquote>(.*?)</blockquote>', _fix_bq, html, flags=re.DOTALL)
+   ```
+
+### 10.4 常见格式问题及解决方案
+
+| 问题 | 原因 | 解决方案 |
+|------|------|----------|
+| 加粗标题后的 `- ` 列表显示为段落 | MD 解析器不识别无空行的列表 | 预处理插入空行 |
+| 表格在手机上挤在一起 | 无自适应布局 | `table-wrapper` + `overflow-x: auto` + `table-layout: fixed` |
+| 文件头多行信息挤在一段 | blockquote 内多个 `<strong>` 无换行 | 在 `<strong>` 前插入 `<br>` |
+| emoji 显示为 `???` | 邮件客户端不支持 Unicode emoji | 替换为文字标签 `[图表]` 等 |
+| 嵌套列表缩进丢失 | MD 嵌套列表需要 4 空格缩进 | 确保源文件格式正确 |
+
+### 10.5 表格列宽最佳实践
+
+- 列数 ≤ 5：直接用 `width: 100%`，手机可正常显示
+- 列数 > 5：必须加 `table-wrapper`（`overflow-x: auto`），允许横向滚动
+- 含长文本的列：加 `word-break: break-all` 防止撑破布局
+- 固定列宽：`table-layout: fixed` 让列宽均匀分配
+
+### 10.6 字体选择
+
+邮件客户端兼容的字体栈：
+```css
+font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+```
+
+避免使用：
+- 衬线字体（邮件中可读性差）
+- 非系统字体（邮件客户端不支持加载外部字体）
+- 字号小于 12px（手机上难以阅读）
+
+### 10.7 颜色规范
+
+```css
+/* 主色调 */
+--primary-dark: #1a3a5c;    /* 深蓝 - 标题栏、表头 */
+--primary: #2d6a9f;         /* 中蓝 - 章节标题左边框 */
+--bg-light: #f0f2f5;        /* 背景灰 */
+--bg-card: #f8fafb;         /* 卡片背景 */
+--text-main: #444;          /* 正文 */
+--text-strong: #222;        /* 加粗文字 */
+
+/* A 股涨跌色 */
+--up: #e53935;              /* 红 - 涨 */
+--down: #43a047;            /* 绿 - 跌 */
+
+/* 状态标签色 */
+--tag-red: #fce4ec;         /* 紧急/危险 */
+--tag-orange: #fff3e0;      /* 警告/关注 */
+--tag-green: #e8f5e9;       /* 安全/正常 */
+--tag-blue: #e3f2fd;        /* 信息/提示 */
+```
+
+---
+
+*最后更新：2026-05-21 19:18*

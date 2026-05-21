@@ -1,6 +1,6 @@
 ---
 created: 2026-05-08
-modified: 2026-05-08 18:07 GMT+8
+modified: 2026-05-21 19:18 GMT+8
 tags: [shared, index, graph]
 aliases: [Shared Index, 共享目录图谱]
 ---
@@ -25,20 +25,25 @@ aliases: [Shared Index, 共享目录图谱]
 |------|------|------|
 | [[experience-archive]] | 专项经验：日志归档 | #experience #knowledge #shared #日志归档 |
 | [[experience-graph]] | 图谱关联经验总结 | — |
+| [[mail-skill-setup-guide]] | 📧 邮件 Skill 安装配置 + HTML 格式美化完整经验 | #experience #mail #smtp #html #邮件格式 |
 
 ---
 
 ## 标签索引
 
 ### 🏷️ 按标签分类
-- **#9222**: [[browser/experience-browser]]
+- **#browser**: [[browser/experience-browser]]
 - **#cdp**: [[browser/experience-browser]]
-- **#experience**: [[experience-archive]] · [[browser/experience-browser]]
-- **#knowledge**: [[experience-archive]] · [[browser/experience-browser]]
-- **#shared**: [[experience-archive]] · [[browser/experience-browser]]
+- **#experience**: [[experience-archive]] · [[browser/experience-browser]] · [[mail-skill-setup-guide]]
+- **#knowledge**: [[experience-archive]] · [[browser/experience-browser]] · [[mail-skill-setup-guide]]
+- **#mail**: [[mail-skill-setup-guide]]
+- **#smtp**: [[mail-skill-setup-guide]]
+- **#html**: [[mail-skill-setup-guide]]
+- **#邮件格式**: [[mail-skill-setup-guide]]
+- **#shared**: [[experience-archive]] · [[browser/experience-browser]] · [[mail-skill-setup-guide]]
 - **#日志归档**: [[experience-archive]]
 - **#浏览器**: [[browser/experience-browser]]
 
 ---
 
-*最后更新: 2026-05-08 18:07 GMT+8 | 共 3 个文件，2 个目录*
+*最后更新: 2026-05-21 19:18 GMT+8 | 共 4 个文件，2 个目录*

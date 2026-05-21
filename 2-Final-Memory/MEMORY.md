@@ -535,3 +535,51 @@ tags:
 **生效时间**：2026-05-21 13:38
 **违规记录**：
 - 2026-05-21：建仓推荐给了场内ETF代码（515010/159530/515250/159786），被老板纠正。原因：未明确区分场内和场外代码，默认给了场内ETF。已更新AGENTS.md、SOUL.md、MEMORY.md，确保后续只给场外基金代码。
+
+---
+
+## 📧 邮件发送与 HTML 格式美化经验（2026-05-21）
+
+### 核心文件
+- 发送脚本：`/root/.openclaw/share/send-email/send_email_multi.py`
+- HTML 模板：`/root/.openclaw/share/send-email/md_to_html.py`（v2 专业商务版）
+- 收件人配置：`/root/.openclaw/share/send-email/recipients.yaml`
+- 完整经验文档：`/home/obsidian_vault/shared/mail-skill-setup-guide.md`
+
+### 关键经验
+
+#### 1. Emoji 处理
+- 邮件客户端不支持 Unicode emoji → 显示为 `???`
+- 解决：`md_to_html.py` 中统一替换为文字标签（`📊`→`[图表]`、`🔴`→`[紧急]`、`⚠️`→`[警告]`）
+
+#### 2. 表格自适应（手机查看必须）
+- 问题：列数多的表格在手机上挤在一起
+- 解决：
+  - 外层包 `<div class="table-wrapper">`（`overflow-x: auto`）
+  - `table-layout: fixed` + `word-break: break-all`
+  - `min-width: 520px` 防止压扁
+
+#### 3. 加粗标题直接跟列表
+- 问题：`**xxx**：\n- item` 被 MD 合并成 `<p>` 而非 `<ul>`
+- 解决：预处理插入空行 `md_text = re.sub(r'(\*\*[^*]+\*\*[：:])\n(- )', r'\1\n\n- ', md_text)`
+
+#### 4. Blockquote 内信息换行
+- 问题：多个 `<strong>xxx</strong>` 挤在一个 `<p>` 里
+- 解决：在 `<strong>` 前插入 `<br>`（排除第一个）
+
+#### 5. 收件人角色分离
+- 发件箱地址（`panbin5218@163.com`）仅用于 SMTP 发信，**不能作为收件人**
+- 收件人配置到 `recipients.yaml`，区分 to/cc/bcc
+- 违规记录：2026-05-21 把发件箱地址当收件人发送
+
+#### 6. 报告生成后标准流程
+```
+1. 保存报告 → report/YYYY-MM-DD.md
+2. md_to_html.py → /tmp/report.html（去 emoji + 格式美化）
+3. send_email_multi.py --group all → 发送 HTML 邮件
+```
+
+#### 7. 颜色规范（A股惯例）
+- 红涨绿跌：`--up: #e53935`、`--down: #43a047`
+- 主色调：深蓝 `#1a3a5c`、中蓝 `#2d6a9f`
+- 字体：`"Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif`
