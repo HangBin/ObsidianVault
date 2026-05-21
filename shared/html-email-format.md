@@ -220,7 +220,32 @@ font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-ser
 
 ---
 
-## 九、迭代记录
+## 九、关键经验速查
+
+| # | 问题 | 解决方案 |
+|---|------|----------|
+| 1 | Emoji 显示为 `???` | 替换为文字标签（`📊`→`[图表]`、`🔴`→`[紧急]`、`⚠️`→`[警告]`） |
+| 2 | 表格在手机上挤在一起 | 外层包 `<div class="table-wrapper">`（`overflow-x: auto`） <br/>`table-layout: fixed` + `word-break: break-all` <br/>`min-width: 520px` 防止压扁 |
+| 3 | 加粗标题直接跟 `- ` 列表被合并成段落 | 预处理插入空行：`re.sub(r'(\*\*[^*]+\*\*[：:])\n(- )', r'\1\n\n- ', md_text)` |
+| 4 | Blockquote 内多个 `<strong>` 挤在一段 | 在 `<strong>` 前插入 `<br>`（排除第一个） |
+| 5 | 发件箱地址当收件人 | 发件箱仅用于 SMTP 发信，收件人配置到 `recipients.yaml`，区分 to/cc/bcc |
+
+### 标准发送流程
+```
+1. 保存报告 → report/YYYY-MM-DD.md
+2. md_to_html.py → /tmp/report.html（去 emoji + 格式美化）
+3. send_email_multi.py --group all → 发送 HTML 邮件
+```
+
+### 核心文件路径
+- 发送脚本：`/root/.openclaw/share/send-email/send_email_multi.py`
+- HTML 模板：`/root/.openclaw/share/send-email/md_to_html.py`（v2 专业商务版）
+- 收件人配置：`/root/.openclaw/share/send-email/recipients.yaml`
+- Skill 配置经验：[[mail-skill-setup-guide]]
+
+---
+
+## 十、迭代记录
 
 ### v1 → v2（2026-05-21 18:34）
 - 初始版本：深色 header + 基础表格
@@ -242,4 +267,4 @@ font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-ser
 
 ---
 
-*最后更新：2026-05-21 21:11*
+*最后更新：2026-05-21 22:12*
