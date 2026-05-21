@@ -25,7 +25,8 @@ aliases: [Shared Index, 共享目录图谱]
 |------|------|------|
 | [[experience-archive]] | 专项经验：日志归档 | #experience #knowledge #shared #日志归档 |
 | [[experience-graph]] | 图谱关联经验总结 | — |
-| [[mail-skill-setup-guide]] | 📧 邮件 Skill 安装配置 + HTML 格式美化完整经验 | #experience #mail #smtp #html #邮件格式 |
+| [[mail-skill-setup-guide]] | 📧 邮件 Skill 安装配置完整经验 | #experience #mail #smtp #邮件发送 |
+| [[html-email-format]] | 📧 HTML 邮件格式美化经验 | #experience #html #email #邮件格式 |
 
 ---
 
@@ -34,16 +35,18 @@ aliases: [Shared Index, 共享目录图谱]
 ### 🏷️ 按标签分类
 - **#browser**: [[browser/experience-browser]]
 - **#cdp**: [[browser/experience-browser]]
-- **#experience**: [[experience-archive]] · [[browser/experience-browser]] · [[mail-skill-setup-guide]]
-- **#knowledge**: [[experience-archive]] · [[browser/experience-browser]] · [[mail-skill-setup-guide]]
+- **#experience**: [[experience-archive]] · [[browser/experience-browser]] · [[mail-skill-setup-guide]] · [[html-email-format]]
+- **#knowledge**: [[experience-archive]] · [[browser/experience-browser]] · [[mail-skill-setup-guide]] · [[html-email-format]]
 - **#mail**: [[mail-skill-setup-guide]]
 - **#smtp**: [[mail-skill-setup-guide]]
-- **#html**: [[mail-skill-setup-guide]]
-- **#邮件格式**: [[mail-skill-setup-guide]]
-- **#shared**: [[experience-archive]] · [[browser/experience-browser]] · [[mail-skill-setup-guide]]
+- **#html**: [[mail-skill-setup-guide]] · [[html-email-format]]
+- **#email**: [[html-email-format]]
+- **#邮件格式**: [[html-email-format]]
+- **#邮件发送**: [[mail-skill-setup-guide]]
+- **#shared**: [[experience-archive]] · [[browser/experience-browser]] · [[mail-skill-setup-guide]] · [[html-email-format]]
 - **#日志归档**: [[experience-archive]]
 - **#浏览器**: [[browser/experience-browser]]
 
 ---
 
-*最后更新: 2026-05-21 19:18 GMT+8 | 共 4 个文件，2 个目录*
+*最后更新: 2026-05-21 21:11 GMT+8 | 共 5 个文件，2 个目录*

@@ -544,7 +544,8 @@ tags:
 - 发送脚本：`/root/.openclaw/share/send-email/send_email_multi.py`
 - HTML 模板：`/root/.openclaw/share/send-email/md_to_html.py`（v2 专业商务版）
 - 收件人配置：`/root/.openclaw/share/send-email/recipients.yaml`
-- 完整经验文档：`/home/obsidian_vault/shared/mail-skill-setup-guide.md`
+- Skill 配置经验：`/home/obsidian_vault/shared/mail-skill-setup-guide.md`
+- HTML 格式经验：`/home/obsidian_vault/shared/html-email-format.md`
 
 ### 关键经验
 
