@@ -538,47 +538,10 @@ tags:
 
 ---
 
-## 📧 邮件发送与 HTML 格式美化经验（2026-05-21）
+## 📂 可用参考文档（Resources）
 
-> 详细内容见共享经验文档：[[html-email-format]]
-
-### 核心文件
-- 发送脚本：`/root/.openclaw/share/send-email/send_email_multi.py`
-- HTML 模板：`/root/.openclaw/share/send-email/md_to_html.py`（v2 专业商务版）
-- 收件人配置：`/root/.openclaw/share/send-email/recipients.yaml`
-- Skill 配置经验：[[mail-skill-setup-guide]]
-- HTML 格式经验：[[html-email-format]]
-
-### 关键要点速查
-- **Emoji** → 替换为文字标签（邮件客户端不支持）
-- **表格** → `table-wrapper` + `overflow-x: auto` + `table-layout: fixed`
-- **加粗标题接列表** → 预处理插入空行
-- **Blockquote 换行** → `<strong>` 前插 `<br>`
-- **收件人** → 发件箱地址不能当收件人，区分 to/cc/bcc
-- **标准流程** → md → html → send_email_multi.py --group all
-- **颜色** → A股红涨绿跌，主色调深蓝 `#1a3a5c`
-
----
-
-## 📊 资金流向接口可用性经验（2026-05-15 实测）
-
-### 核心结论
-- **东方财富 push2 接口只能通过 web_fetch 调用**，curl/urllib 全部被远端关闭连接
-- 使用时必须加大 `maxChars`（建议 5000+），默认值会被截断
-
-### 接口状态速查
-
-| 接口 | curl | Python urllib | web_fetch |
-|------|------|:---:|:---:|
-| push2 板块资金流向 | ❌ | ❌ | ✅ |
-| push2 指数行情 | ❌ | ❌ | ✅ |
-| 腾讯财经 API | ✅ | ✅ | ✅ |
-| akshare 个股资金流向 | — | ✅ | — |
-| akshare 指数历史 | — | ✅ | — |
-| akshare 行业/概念板块 | — | ❌ | — |
-| mootdx（TCP 7709）| — | ✅ | — |
-
-### 降级策略
-1. **首选**：web_fetch 调用东方财富 push2
-2. **备选**：akshare 个股资金流向 + 指数历史
-3. **兜底**：腾讯财经 API（行情）+ mootdx（K线/财务）
+| 文档 | 用途 |
+|------|------|
+| `/home/obsidian_vault/shared/html-email-format.md` | HTML 邮件格式美化经验 |
+| `/home/obsidian_vault/shared/mail-skill-setup-guide.md` | 邮件 Skill 安装配置 + 发信脚本经验 |
+| `/root/.openclaw/workspace-final/TOOLS.md` | 资金流向接口可用性实测结论（push2/web_fetch/akshare/mootdx）|
