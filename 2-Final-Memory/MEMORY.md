@@ -172,6 +172,8 @@ tags:
 
 ## 📅 每日定时报告（2个任务）
 
+> 📧 **邮件发送规则**：所有报告（早盘/午盘/尾盘/复盘）发送邮件时，必须使用 `md_to_html.py` 转换为 HTML 格式，经验文档见 `/home/obsidian_vault/shared/html-email-format.md`。
+
 #### 🌅 早盘分析
 - **任务ID**: c01cd541-734c-43f7-8960-180f1c857539
 - **执行时间**: 每天 09:10（周一到周五，Asia/Shanghai）
@@ -538,46 +540,10 @@ tags:
 
 ---
 
-## 📧 邮件排版发送规则（2026-05-22 强制固化）
-
-### ⚠️ 核心规则：所有报告邮件必须用 md_to_html.py 生成 HTML
-
-**适用范围**：早盘、午盘、尾盘、复盘四份报告，无一例外。
-
-**强制流程**：
-1. 生成报告 MD 文件 → 保存到 `/home/obsidian_vault/2-Final-Memory/report/`
-2. 用 `md_to_html.py` 转换为 HTML：
-   ```bash
-   cd /root/.openclaw/share/send-email
-   python3 md_to_html.py <input.md> <output.html> "标题" "报告类型"
-   ```
-3. 排版验证：检查 `<ol>`、`<ul>`、`<table>`、`<pre>` 数量，`<pre>` 必须为 0
-4. 发送 HTML 邮件：
-   ```bash
-   python3 send_email_multi.py --group all --subject "标题" --html-file <output.html>
-   ```
-5. 清理 `/tmp/` 下的临时文件
-
-**禁止行为**：
-- ❌ 直接发送纯文本邮件（不经过 HTML 排版）
-- ❌ 复制上一份报告的 HTML 而不重新生成
-- ❌ 跳过排版验证直接发送
-- ❌ 使用场内 ETF 代码作为建仓推荐（必须给场外基金代码）
-
-**脚本位置**：
-- MD→HTML：`/root/.openclaw/share/send-email/md_to_html.py`（v15+）
-- 发送邮件：`/root/.openclaw/share/send-email/send_email_multi.py`
-- 收件人配置：`/root/.openclaw/share/send-email/recipients.yaml`
-- 排版经验文档：`/home/obsidian_vault/shared/html-email-format.md`
-
-**生效时间**：2026-05-22 13:23
-
----
-
 ## 📂 可用参考文档（Resources）
 
 | 文档 | 用途 |
 |------|------|
-| `/home/obsidian_vault/shared/html-email-format.md` | HTML 邮件格式美化经验 |
+| `/home/obsidian_vault/shared/html-email-format.md` | HTML 邮件格式美化经验 + 排版规则 |
 | `/home/obsidian_vault/shared/mail-skill-setup-guide.md` | 邮件 Skill 安装配置 + 发信脚本经验 |
 | `/root/.openclaw/workspace-final/TOOLS.md` | 资金流向接口可用性实测结论（push2/web_fetch/akshare/mootdx）|
