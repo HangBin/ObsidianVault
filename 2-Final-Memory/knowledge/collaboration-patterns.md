@@ -25,3 +25,4 @@ tags: [knowledge, experience]
 - **2026-05-22** - 核心规则写在 MEMORY.md/AGENTS.md，引用经验文档
 - **2026-05-22** - 核心规则写在 MEMORY.md/AGENTS.md，引用经验文档
 - **2026-05-22** - 核心规则写在 MEMORY.md/AGENTS.md，引用经验文档
+- **2026-05-22** - 核心规则写在 MEMORY.md/AGENTS.md，引用经验文档
