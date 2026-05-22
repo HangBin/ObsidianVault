@@ -538,6 +538,42 @@ tags:
 
 ---
 
+## 📧 邮件排版发送规则（2026-05-22 强制固化）
+
+### ⚠️ 核心规则：所有报告邮件必须用 md_to_html.py 生成 HTML
+
+**适用范围**：早盘、午盘、尾盘、复盘四份报告，无一例外。
+
+**强制流程**：
+1. 生成报告 MD 文件 → 保存到 `/home/obsidian_vault/2-Final-Memory/report/`
+2. 用 `md_to_html.py` 转换为 HTML：
+   ```bash
+   cd /root/.openclaw/share/send-email
+   python3 md_to_html.py <input.md> <output.html> "标题" "报告类型"
+   ```
+3. 排版验证：检查 `<ol>`、`<ul>`、`<table>`、`<pre>` 数量，`<pre>` 必须为 0
+4. 发送 HTML 邮件：
+   ```bash
+   python3 send_email_multi.py --group all --subject "标题" --html-file <output.html>
+   ```
+5. 清理 `/tmp/` 下的临时文件
+
+**禁止行为**：
+- ❌ 直接发送纯文本邮件（不经过 HTML 排版）
+- ❌ 复制上一份报告的 HTML 而不重新生成
+- ❌ 跳过排版验证直接发送
+- ❌ 使用场内 ETF 代码作为建仓推荐（必须给场外基金代码）
+
+**脚本位置**：
+- MD→HTML：`/root/.openclaw/share/send-email/md_to_html.py`（v15+）
+- 发送邮件：`/root/.openclaw/share/send-email/send_email_multi.py`
+- 收件人配置：`/root/.openclaw/share/send-email/recipients.yaml`
+- 排版经验文档：`/home/obsidian_vault/shared/html-email-format.md`
+
+**生效时间**：2026-05-22 13:23
+
+---
+
 ## 📂 可用参考文档（Resources）
 
 | 文档 | 用途 |
