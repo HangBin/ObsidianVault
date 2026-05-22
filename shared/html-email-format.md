@@ -1,270 +1,216 @@
----
-created: 2026-05-21T19:18:00
-modified: 2026-05-21 21:11 GMT+8
-tags: [experience, knowledge, shared, html, email, 邮件格式]
-aliases: [HTML邮件格式美化经验, 邮件模板经验, html-email-format]
----
+# HTML 邮件美化经验总结
 
-# 📧 HTML 邮件格式美化经验
-> 独立经验文档，记录邮件 HTML 模板设计与格式优化的完整经验
-
-> 场景：优化 A 股分析报告邮件的 HTML 排版，参考招商银行、新浪邮箱等正规金融机构邮件样式
-> 日期：2026-05-21
-> 相关文件：[[mail-skill-setup-guide]]（邮件发送配置经验）
+> 创建时间：2026-05-22
+> 来源：md_to_html.py 脚本迭代经验（v1-v21）
 
 ---
 
-## 一、参考样本分析
+## 一、核心工具
 
-分析了 5 个真实邮件样本，提取可借鉴的排版经验：
+**脚本位置**：`/root/.openclaw/share/send-email/md_to_html.py`
 
-| 邮件 | 来源 | 可借鉴点 |
-|------|------|---------|
-| 每日信用管家 | 招商银行 | 清爽专业、信息密度高 |
-| 信用卡电子账单 | 招商银行 | 简洁排版、固定宽度表格 |
-| 防范钓鱼邮件 | 新浪邮箱 | 圆角卡片、渐变色标题、清晰视觉层次 |
-| 沟通记录 | 猎聘 | 紧凑布局、信息分组清晰 |
-| 自己发的尾盘报告（原版） | — | 发现标题英文堆砌、表格简陋、状态标记纯文本等问题 |
-
----
-
-## 二、设计原则
-
-1. **清爽专业** — 不过度设计，参考金融机构邮件风格
-2. **信息层次清晰** — 视觉分组明确，标题/正文/数据一目了然
-3. **表格自适应** — 手机上可横向滚动，不挤在一起
-4. **A 股惯例** — 红涨绿跌
-5. **邮件客户端兼容** — 内联样式优先，不依赖外部 CSS
-
----
-
-## 三、HTML 模板结构
-
-### 3.1 整体布局
-
-```
-email-wrapper（圆角卡片 + 阴影）
-├── email-header（渐变色标题栏）
-│   ├── report-type（报告类型 badge）
-│   ├── h1（报告标题）
-│   └── divider（装饰分隔线）
-├── email-body（内容区域）
-│   └── MD → HTML 内容
-└── email-footer（底部声明）
+**用法**：
+```bash
+python3 md_to_html.py input.md output.html "邮件标题" "报告类型"
 ```
 
-### 3.2 顶部标题栏
+**发送邮件**：
+```bash
+cd /root/.openclaw/share/send-email
+python3 send_email_multi.py --group all --subject "标题" --html-file output.html
+```
+
+---
+
+## 二、Python markdown 库的关键规则
+
+### 规则1：段落后的列表必须有空行
+
+```markdown
+# ❌ 错误：列表被当作段落内联文本
+**加粗标题**：
+- 列表项1
+- 列表项2
+
+# ✅ 正确：有空行分隔
+**加粗标题**：
+
+- 列表项1
+- 列表项2
+```
+
+**HTML结果**：
+- 错误：`<p><strong>加粗标题</strong>：\n- 列表项1\n- 列表项2</p>`
+- 正确：`<p><strong>加粗标题</strong>：</p>\n<ul><li>列表项1</li><li>列表项2</li></ul>`
+
+### 规则2：嵌套列表需要4空格缩进
+
+```markdown
+# ❌ 错误：2空格缩进，子列表被识别为同级
+- 父项：
+  - 子项1
+  - 子项2
+
+# ✅ 正确：4空格缩进
+- 父项：
+    - 子项1
+    - 子项2
+```
+
+**注意**：缩进是相对于**列表标记**（`- ` 或 `1. `）的起始位置，不是相对于行首。
+
+### 规则3：加粗行后的列表需要特殊处理
+
+当加粗行以冒号结尾时，即使加粗标记不在行首，也需要在加粗行后插入空行：
+
+```markdown
+# ❌ 错误
+**昨日（5月21日）主力资金流向**（来源：东方财富）：
+- 全天主力净流出：**1251.41亿元**
+
+# ✅ 正确
+**昨日（5月21日）主力资金流向**（来源：东方财富）：
+
+- 全天主力净流出：**1251.41亿元**
+```
+
+**检测方法**：行中包含 `**xxx**` 且以 `：` 或 `:` 结尾。
+
+### 规则4：blockquote 内不支持列表
+
+Python markdown **不支持** blockquote 内的有序/无序列表：
+
+```markdown
+# ❌ 列表被渲染为段落文本
+> 操作原则：
+> 1. 上午冲高不追涨
+> 2. 午后若开始回落→提前设好止损
+
+# ✅ 后处理方案：在HTML中转换
+# 将 <p>操作原则：\n1. xxx\n2. xxx</p> 转换为
+# <p>操作原则：</p><ol><li>xxx</li><li>xxx</li></ol>
+```
+
+**解决方案**：后处理HTML，用正则匹配 `<p>...1. xxx\n2. xxx</p>` 模式并转换为 `<ol><li>`。
+
+### 规则5：斜体行的 `*` 不能跟空格
+
+```markdown
+# ❌ 错误：* 后跟空格，被识别为无序列表项
+* 本报告基于盘前数据，仅供参考 *
+
+# ✅ 正确：使用下划线斜体
+_本报告基于盘前数据，仅供参考_
+
+# ✅ 或者：* 后直接跟文字（无空格）
+*本报告基于盘前数据，仅供参考*
+```
+
+### 规则6：连续斜体行需要空行分隔
+
+```markdown
+# ❌ 错误：被合并到一个 <p> 里
+*第一行*
+*第二行*
+*第三行*
+
+# ✅ 正确：每行之间有空行
+*第一行*
+
+*第二行*
+
+*第三行*
+```
+
+---
+
+## 三、预处理策略
+
+### 预处理流程
+
+```
+原始MD → 删除emoji → 修复基础格式 → 逐行处理（列表缩进/空行插入） → 全局修复 → Python markdown → 后处理HTML
+```
+
+### 关键预处理操作
+
+1. **删除emoji**：emoji会破坏加粗标记（如 `1. **` 代替 `1. **`)
+2. **修复加粗**：`re.sub(r'(\*\*) +([^\n])', r'\1\2', md)` 去除 `**` 后的空格
+3. **修复有序列表**：`re.sub(r'^(\d+)\.\*\*', r'\1. **', md)` 修复 `1.**` → `1. **`
+4. **列表缩进**：逐行扫描，将子列表项缩进到正确位置
+5. **空行插入**：在加粗行/冒号段落后的列表前插入空行
+
+### 后处理操作
+
+1. **表格wrapper**：`<table>` → `<div class="table-wrapper"><table>`
+2. **列表项清理**：移除 `<li>` 内的 `<p>` 标签
+3. **blockquote修复**：确保 `<strong>` 前有 `<br>`
+4. **blockquote内列表**：将 `<p>...1. xxx\n2. xxx</p>` 转换为 `<ol><li>`
+5. **临时文件清理**：任务完成后删除 `/tmp/` 下的中间迭代文件
+
+---
+
+## 四、CSS 邮件样式要点
+
+### 兼容性
+
+- **不使用** CSS Grid/Flexbox（邮件客户端支持差）
+- **使用** `table-layout: fixed` + `word-break: break-all` 防止表格溢出
+- **使用** `max-width: 780px` + `margin: 0 auto` 居中
+- **媒体查询**：`@media (max-width: 600px)` 适配移动端
+
+### 关键样式
 
 ```css
-.email-header {
-  background: linear-gradient(135deg, #1a3a5c 0%, #2d6a9f 60%, #1a3a5c 100%);
-  padding: 28px 36px 24px;
-  text-align: center;
+/* 表格防溢出 */
+table {
+  table-layout: fixed;
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
-.report-type {
-  display: inline-block;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 20px;
-  padding: 4px 16px;
-  font-size: 12px;
+
+/* 列表嵌套 */
+ul ul { list-style-type: circle; }
+ol ol { list-style-type: lower-alpha; }
+
+/* 引用块 */
+blockquote {
+  border-left: 4px solid #2d6a9f;
+  background: #f0f7fb;
 }
-.divider {
-  width: 40px; height: 3px;
-  background: rgba(255,255,255,0.4);
-  margin: 14px auto 0;
-  border-radius: 2px;
-}
-```
-
-### 3.3 章节标题
-
-```css
-h2 {
-  color: #2d6a9f;
-  padding-left: 12px;
-  border-left: 4px solid #2d6a9f;  /* 左边框强调 */
-}
-```
-
-### 3.4 状态标签
-
-用彩色标签替代纯文本标记（`[红]`、`[OK]`、`[警告]`）：
-
-```css
-.tag-red    { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
-.tag-orange { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
-.tag-green  { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
-.tag-blue   { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
-.tag-gray   { background: #f5f5f5; color: #616161; border: 1px solid #e0e0e0; }
-```
-
-### 3.5 信息卡片
-
-```css
-.info-card { background: #f8fafb; border-radius: 8px; padding: 16px 20px; }
-.info-card.highlight { background: linear-gradient(135deg, #f0f7ff, #e8f4fd); }  /* 蓝色-提示 */
-.info-card.warning   { background: linear-gradient(135deg, #fff8f0, #fff3e0); }  /* 橙色-警告 */
-.info-card.danger    { background: linear-gradient(135deg, #fff5f5, #fce4ec); }  /* 红色-危险 */
 ```
 
 ---
 
-## 四、md_to_html.py 关键处理逻辑
-
-路径：`/root/.openclaw/share/send-email/md_to_html.py`
-
-### 4.1 预处理（MD → HTML 之前）
-
-#### 修复加粗标题直接跟列表
-
-```python
-# 模式：**xxx**：\n- xxx → 插入空行让 md 正确解析为列表
-md_text = re.sub(r'(\*\*[^*]+\*\*[：:])\n(- )', r'\1\n\n- ', md_text)
-md_text = re.sub(r'(\d+\.\s+\*\*[^*]+\*\*[：:])\n(- )', r'\1\n\n- ', md_text)
-```
-
-**问题**：`**盘中走势特征**：\n- xxx` 会被 markdown 合并成 `<p>` 而非 `<ul>`
-**解决**：在 `**xxx**：` 和 `- ` 之间插入空行
-
-#### 去掉 emoji
-
-```python
-# 所有 emoji 替换为文字标签，避免邮件客户端显示 ???
-emoji_map = {'📊': '[图表]', '🔴': '[紧急]', '✅': '[OK]', '⚠️': '[警告]', ...}
-```
-
-### 4.2 后处理（HTML 生成之后）
-
-#### 表格加 wrapper
-
-```python
-html = html.replace('<table>', '<div class="table-wrapper"><table>') \
-           .replace('</table>', '</table></div>')
-```
-
-#### Blockquote 内信息换行
-
-```python
-def _fix_bq(m):
-    inner = m.group(1)
-    # 在每个 <strong> 前插入 <br>（排除 <p> 后的第一个）
-    inner = re.sub(r'\s*<strong>', '\n<br><strong>', inner)
-    inner = re.sub(r'(<p>)\n<br>', r'\1', inner, count=1)
-    return '<blockquote>' + inner + '</blockquote>'
-html = re.sub(r'<blockquote>(.*?)</blockquote>', _fix_bq, html, flags=re.DOTALL)
-```
-
----
-
-## 五、常见格式问题及解决方案
+## 五、常见排版问题速查
 
 | 问题 | 原因 | 解决方案 |
-|------|------|----------|
-| 加粗标题后的 `- ` 列表显示为段落 | MD 解析器不识别无空行的列表 | 预处理插入空行 |
-| 表格在手机上挤在一起 | 无自适应布局 | `table-wrapper` + `overflow-x: auto` + `table-layout: fixed` |
-| 文件头多行信息挤在一段 | blockquote 内多个 `<strong>` 无换行 | 在 `<strong>` 前插入 `<br>` |
-| emoji 显示为 `???` | 邮件客户端不支持 Unicode emoji | 替换为文字标签 `[图表]` 等 |
-| 嵌套列表缩进丢失 | MD 嵌套列表需要 4 空格缩进 | 确保源文件格式正确 |
+|------|------|---------|
+| 列表被渲染为 `<p>` | 段落和列表之间没有空行 | 预处理插入空行 |
+| 嵌套列表变成同级 | 子列表缩进不足4空格 | 预处理缩进4空格 |
+| 加粗行后列表失效 | `**` 和 `：` 之间有其他字符 | 用 `re.search` 代替 `re.match` |
+| blockquote内列表失效 | Python markdown不支持 | 后处理HTML转换 |
+| 斜体行被识别为列表 | `*` 后跟空格 | 改用 `_` 斜体或去掉空格 |
+| 连续斜体行被合并 | 行间没有空行 | 预处理插入空行 |
+| 有序列表项格式错误 | emoji删除后 `1.**` 无空格 | 预处理修复 `1.**` → `1. **` |
+| 列表项加粗格式错误 | `-**xxx**` 无空格 | 预处理修复 `-**` → `- **` |
 
 ---
 
-## 六、表格列宽最佳实践
+## 六、调试技巧
 
-| 列数 | 方案 |
+1. **保存预处理MD**：`debug_path = output_path.replace('.html', '-debug.md')`
+2. **分段测试**：提取问题section单独测试Python markdown渲染
+3. **统计标签**：检查 `<ol>`、`<ul>`、`<table>`、`<pre>` 数量是否符合预期
+4. **检查 `<pre>` 标签**：出现 `<pre>` 说明有过度缩进（≥4空格被当代码块）
+
+---
+
+## 七、文件清单
+
+| 文件 | 用途 |
 |------|------|
-| ≤ 5 列 | 直接用 `width: 100%`，手机可正常显示 |
-| > 5 列 | 必须加 `table-wrapper`（`overflow-x: auto`），允许横向滚动 |
-| 含长文本的列 | 加 `word-break: break-all` 防止撑破布局 |
-| 均匀列宽 | `table-layout: fixed` 让列宽均匀分配 |
-| 最小宽度 | `min-width: 520px` 防止压扁 |
-
----
-
-## 七、字体选择
-
-邮件客户端兼容的字体栈：
-
-```css
-font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
-```
-
-**避免使用**：
-- 衬线字体（邮件中可读性差）
-- 非系统字体（邮件客户端不支持加载外部字体）
-- 字号小于 12px（手机上难以阅读）
-
----
-
-## 八、颜色规范
-
-```css
-/* 主色调 */
---primary-dark: #1a3a5c;    /* 深蓝 - 标题栏、表头 */
---primary: #2d6a9f;         /* 中蓝 - 章节标题左边框 */
---bg-light: #f0f2f5;        /* 背景灰 */
---bg-card: #f8fafb;         /* 卡片背景 */
---text-main: #444;          /* 正文 */
---text-strong: #222;        /* 加粗文字 */
-
-/* A 股涨跌色 */
---up: #e53935;              /* 红 - 涨 */
---down: #43a047;            /* 绿 - 跌 */
-
-/* 状态标签色 */
---tag-red: #fce4ec;         /* 紧急/危险 */
---tag-orange: #fff3e0;      /* 警告/关注 */
---tag-green: #e8f5e9;       /* 安全/正常 */
---tag-blue: #e3f2fd;        /* 信息/提示 */
-```
-
----
-
-## 九、关键经验速查
-
-| # | 问题 | 解决方案 |
-|---|------|----------|
-| 1 | Emoji 显示为 `???` | 替换为文字标签（`📊`→`[图表]`、`🔴`→`[紧急]`、`⚠️`→`[警告]`） |
-| 2 | 表格在手机上挤在一起 | 外层包 `<div class="table-wrapper">`（`overflow-x: auto`） <br/>`table-layout: fixed` + `word-break: break-all` <br/>`min-width: 520px` 防止压扁 |
-| 3 | 加粗标题直接跟 `- ` 列表被合并成段落 | 预处理插入空行：`re.sub(r'(\*\*[^*]+\*\*[：:])\n(- )', r'\1\n\n- ', md_text)` |
-| 4 | Blockquote 内多个 `<strong>` 挤在一段 | 在 `<strong>` 前插入 `<br>`（排除第一个） |
-| 5 | 发件箱地址当收件人 | 发件箱仅用于 SMTP 发信，收件人配置到 `recipients.yaml`，区分 to/cc/bcc |
-
-### 标准发送流程
-```
-1. 保存报告 → report/YYYY-MM-DD.md
-2. md_to_html.py → /tmp/report.html（去 emoji + 格式美化）
-3. send_email_multi.py --group all → 发送 HTML 邮件
-```
-
-### 核心文件路径
-- 发送脚本：`/root/.openclaw/share/send-email/send_email_multi.py`
-- HTML 模板：`/root/.openclaw/share/send-email/md_to_html.py`（v2 专业商务版）
-- 收件人配置：`/root/.openclaw/share/send-email/recipients.yaml`
-- Skill 配置经验：[[mail-skill-setup-guide]]
-
----
-
-## 十、迭代记录
-
-### v1 → v2（2026-05-21 18:34）
-- 初始版本：深色 header + 基础表格
-- 参考招商银行/新浪邮箱邮件后全面重构
-- 改为渐变色 header + 圆角卡片 + 状态标签 + 信息卡片
-
-### v2 → v3（2026-05-21 18:57）
-- 修复表格在手机上挤在一起的问题
-- 加 `table-wrapper` + `overflow-x: auto` + `table-layout: fixed`
-
-### v3 → v4（2026-05-21 19:01）
-- 修复文件头信息挤在一行的问题
-- blockquote 内 `<strong>` 间插入 `<br>`
-
-### v4 → v5（2026-05-21 19:18）
-- 修复加粗标题直接跟 `- ` 列表被合并成段落的问题
-- 预处理插入空行，正确渲染为 `<ul>/<ol>`
-- 共修复 7 处列表格式问题
-
----
-
-*最后更新：2026-05-21 22:12*
+| `/root/.openclaw/share/send-email/md_to_html.py` | MD→HTML转换脚本 |
+| `/root/.openclaw/share/send-email/send_email_multi.py` | 邮件发送脚本 |
+| `/root/.openclaw/share/send-email/recipients.yaml` | 收件人配置 |
+| `/home/obsidian_vault/shared/html-email-format.md` | 本文档 |
