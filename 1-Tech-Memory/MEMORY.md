@@ -551,28 +551,6 @@ qmd get <file>[:line] -l 50
 - 经验：`experience-*.md` → `1-Tech-Memory/knowledge/`
 - dreaming：`memory/dreaming/` → `share/dreams/`
 
-## Promoted From Short-Term Memory (2026-04-23)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-16.md:12:15 -->
-- 1. 梦境 (Dreaming) [score=0.909 recalls=0 avg=0.620 source=memory/2026-04-16.md:5-5]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-16.md:18:21 -->
-- 2. Memory Search [score=0.880 recalls=0 avg=0.620 source=memory/2026-04-16.md:6-6]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-16.md:24:27 -->
-- 3. 向量搜索 [score=0.880 recalls=0 avg=0.620 source=memory/2026-04-16.md:7-8]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-16.md:4:4 -->
-- 用户要求检查新版本系统以下功能是否开启并能正常使用： [score=0.834 recalls=0 avg=0.620 source=memory/2026-04-16.md:4-4]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-16.md:30:33 -->
-- | 功能 | 状态 | 说明 | |------|------|------| | 梦境 | ✅ 开启 | 配置为 enabled: true | | Memory Search | ✅ 开启 | 配置为 enabled: true | [score=0.834 recalls=0 avg=0.620 source=memory/2026-04-16.md:30-33]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-17.md:256:259 -->
-- assistant: 已添加 `dream` 到白名单。测试： assistant: 等等，错误提示说 **"plugin not found: dream"** — 这个版本没有内置 `dream` 插件。需要确认一下： assistant: 列表里没有 `dream` 插件。让我检查完整扩展目录： assistant: 抱歉，确认结果：**当前 2026.4.14 版本的插件列表中没有 `dream` 插件**。 [score=0.812 recalls=0 avg=0.620 source=memory/2026-04-17.md:256-259]
-
-## Promoted From Short-Term Memory (2026-04-23)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-17.md:263:263 -->
-- assistant: 已清除错误的 `dream` 配置。 [score=0.821 recalls=0 avg=0.620 source=memory/2026-04-17.md:263-263]
-
----
-
 ## 📅 2026-04-22 归档要点
 
 ### 归档任务执行问题 ⚠️
@@ -618,16 +596,6 @@ qmd get <file>[:line] -l 50
 - **deb版本**：/usr/bin/google-chrome
 - **选择原则**：保持用户现有会话状态，不随意切换浏览器版本
 
-## Promoted From Short-Term Memory (2026-04-24)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-19.md:246:248 -->
-- - Candidate: Possible Lasting Truths: 00:00 - 初始化: **记录时间**: 2026-04-15 08:49:19 **状态**: 占位文件（由每日记忆管理系统自动创建） [confidence=0.58 evidence=memory/2026-04-15.md:5-6]; 10:35 用户询问 `openclaw models probe` 命令是否能测试模型连接和延迟。; 10:36 执行 `openclaw models probe --help` 发现该命令不存在于 `openclaw models` 的子命令列表中。; 1 - confidence: 0.62 - evidence: memory/2026-04-19.md:406-408 [score=0.835 recalls=0 avg=0.620 source=memory/2026-04-19.md:8-10]
-
-## Promoted From Short-Term Memory (2026-04-24)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-19.md:253:253 -->
-- 用户要求继续昨天的工作，解决 qmd embed 卡在 "Gathering information" 的问题。 [score=0.835 recalls=0 avg=0.620 source=memory/2026-04-19.md:253-253]
-
 ## 📅 2026-04-23 记忆精华
 
 ### 🎯 核心成就（今日重点）
@@ -665,27 +633,6 @@ qmd get <file>[:line] -l 50
 **归档时间**: 2026-04-23 09:30 GMT+8  
 **归档者**: tech agent  
 **状态**: ✅ 已完成当日归档和精华提炼  
-
-## Promoted From Short-Term Memory (2026-04-25)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-19.md:256:256 -->
-- 测试确认：`resolveModelFile` 函数触发下载流程，即使模型文件已存在 [score=0.858 recalls=0 avg=0.620 source=memory/2026-04-19.md:256-256]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-19.md:258:258 -->
-- **关键代码路径**: [score=0.858 recalls=0 avg=0.620 source=memory/2026-04-19.md:258-258]
-
-## Promoted From Short-Term Memory (2026-04-26)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-19.md:243:243 -->
-- - Candidate: Reflections: No strong patterns surfaced. [score=0.870 recalls=0 avg=0.620 source=memory/2026-04-19.md:3-3]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-20.md:319:319 -->
-- 用户 VMware Ubuntu 虚拟机 GUI 启用3D加速后出现黑屏，光标闪烁无法进入桌面 [score=0.862 recalls=0 avg=0.620 source=memory/2026-04-20.md:319-319]
-
-## Promoted From Short-Term Memory (2026-04-27)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-20.md:308:308 -->
-- - Candidate: Reflections: No strong patterns surfaced. [score=0.876 recalls=0 avg=0.620 source=memory/2026-04-20.md:3-3]
-
----
 
 ## 📅 2026-04-27 记忆精华
 
@@ -826,13 +773,6 @@ curl -s "页面URL" | grep -o "magnet:?xt=[^\"<>]*" | sed "s/&amp;/\&/g" | grep 
 **归档者**: tech agent  
 **状态**: ✅ 已补全24-26号记忆文件
 
-## Promoted From Short-Term Memory (2026-04-28)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-21.md:21:22 -->
-- rm -f /root/.cache/qmd/index.sqlite ln -sf /home/memory-collection/index.sqlite /root/.cache/qmd/index.sqlite [score=0.894 recalls=0 avg=0.620 source=memory/2026-04-21.md:21-22]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-21.md:27:30 -->
-- /root/.cache/qmd/models/ ├── embeddinggemma-300M-Q8_0.gguf (314MB) ✅ ├── qmd-query-expansion-1.7B-q4_k_m.gguf (1.2GB) ✅ └── qwen3-reranker-0.6b-q8_0.gguf (610MB) ✅ [score=0.894 recalls=0 avg=0.620 source=memory/2026-04-21.md:27-30]
-
 ## 📅 2026-04-28 记忆精华
 
 ### 🎯 核心问题排查
@@ -955,3 +895,10 @@ curl -s "页面URL" | grep -o "magnet:?xt=[^\"<>]*" | sed "s/&amp;/\&/g" | grep 
 - ✅ AGENTS.md：核心配置规则第5条 + 双写步骤增加 daily-index.md 同步
 - ✅ SOUL.md：检查清单第①项增加标准 frontmatter 格式
 
+
+## Promoted From Short-Term Memory (2026-05-22)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-19.md:16:17 -->
+- **触发**: 用户发现梦境和心跳仍在运行，要求关闭 **工具**: exec (openclaw cron list/show/disable), write (HEARTBEAT.md) [score=0.810 recalls=0 avg=0.620 source=memory/2026-05-19.md:16-17]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-19.md:21:21 -->
+- **决策**: 未动 gateway 全局 heartbeat 配置，避免影响其他 agent [score=0.810 recalls=0 avg=0.620 source=memory/2026-05-19.md:21-21]
