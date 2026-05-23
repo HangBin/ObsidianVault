@@ -896,9 +896,7 @@ curl -s "页面URL" | grep -o "magnet:?xt=[^\"<>]*" | sed "s/&amp;/\&/g" | grep 
 - ✅ SOUL.md：检查清单第①项增加标准 frontmatter 格式
 
 
-## Promoted From Short-Term Memory (2026-05-22)
+## Promoted From Short-Term Memory (2026-05-23)
 
-<!-- openclaw-memory-promotion:memory:memory/2026-05-19.md:16:17 -->
-- **触发**: 用户发现梦境和心跳仍在运行，要求关闭 **工具**: exec (openclaw cron list/show/disable), write (HEARTBEAT.md) [score=0.810 recalls=0 avg=0.620 source=memory/2026-05-19.md:16-17]
-<!-- openclaw-memory-promotion:memory:memory/2026-05-19.md:21:21 -->
-- **决策**: 未动 gateway 全局 heartbeat 配置，避免影响其他 agent [score=0.810 recalls=0 avg=0.620 source=memory/2026-05-19.md:21-21]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-19.md:2:4 -->
+- created: 2026-05-19 modified: 2026-05-19 tags: daily-log tech-agent [score=0.855 recalls=0 avg=0.620 source=memory/2026-05-19.md:2-4]
