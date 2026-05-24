@@ -240,3 +240,10 @@ netstat -tlnp | grep 9222
 - **触发**: 用户指出 2026-05-18.md 缺少 frontmatter **工具**: read/edit/write/exec **结果**: 成功 **决策**: 按方案 v1.5 规范，所有 daily-log 文件需带标准 frontmatter [score=0.887 recalls=0 avg=0.620 source=memory/2026-05-18.md:31-34]
 <!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:44:47 -->
 - **触发**: 用户要求归档 4 月日志 **工具**: exec/read/write **结果**: 成功完成 **决策**: 参照 3 月归档模式（history-2026-03/ + 2026-03.md 索引） [score=0.887 recalls=0 avg=0.620 source=memory/2026-05-18.md:44-47]
+
+## Promoted From Short-Term Memory (2026-05-24)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:7:8 -->
+- created: 2026-05-18T13:19:00+08:00 modified: 2026-05-18T13:34:00+08:00 [score=0.888 recalls=0 avg=0.620 source=memory/2026-05-18.md:7-8]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:2:3 -->
+- date: 2026-05-18 weekday: Monday [score=0.878 recalls=0 avg=0.620 source=memory/2026-05-18.md:2-3]
