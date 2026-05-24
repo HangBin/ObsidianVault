@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "shared/shared-index.md",
+                "file": "Personal/技术资料/Claude/Claude Desktop安装配置.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "shared-index"
+              "title": "Claude Desktop安装配置"
             }
           }
         ]
@@ -94,13 +94,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "shared/shared-index.md",
+                "file": "Personal/技术资料/Claude/Claude Desktop安装配置.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "shared-index 的大纲"
+              "title": "Claude Desktop安装配置 的大纲"
             }
           },
           {
@@ -207,23 +207,28 @@
   },
   "active": "6268d95cf372e2c3",
   "lastOpenFiles": [
+    "2-Final-Memory/daily/2026-05-24.md",
+    "2-Final-Memory/daily/2026-05-23.md",
+    "Personal/技术资料/Claude/Claude-index.md",
+    "Personal/技术资料/Claude/Claude Desktop安装配置.md",
+    "Personal/技术资料/AI大模型/账号申请/DeepSeek 模型.md",
+    "Personal/技术资料/Claude/安装配置claude.md",
+    "Personal/技术资料/Claude/未命名.md",
+    "Personal/技术资料/Claude/网上资料--skill.md",
+    "Personal/技术资料/Claude/手动记忆系统.md",
+    "Personal/技术资料/Claude/权限配置.md",
+    "Personal/技术资料/Claude/命令.md",
+    "shared/shared-index.md",
     "2-Final-Memory/report/portfolio-analysis-2026-05-22.md",
     "2-Final-Memory/report/midday-analysis-2026-05-22.md",
     "2-Final-Memory/report/daily-review-2026-05-22.md",
     "2-Final-Memory/report/daily-review-2026-05-22-manual.md",
     "2-Final-Memory/knowledge/collaboration-patterns.md",
     "2-Final-Memory/knowledge/bash-deploy.md",
-    "Personal/技术资料/Claude/网上资料--skill.md",
     "shared/html-email-format.md",
     "2-Final-Memory/report/morning-analysis-2026-05-22.md",
     "2-Final-Memory/report/daily-review-2026-05-21.md",
     "2-Final-Memory/daily/2026-05-22.md",
-    "Personal/技术资料/Claude/手动记忆系统.md",
-    "Personal/技术资料/Claude/权限配置.md",
-    "Personal/技术资料/Claude/命令.md",
-    "Personal/技术资料/Claude/安装配置claude.md",
-    "Personal/技术资料/Claude/Claude-index.md",
-    "Personal/技术资料/Claude/未命名.md",
     "Personal/技术资料/Claude/安装配置.md",
     "Pasted image 20260518182940.png",
     "Pasted image 20260518182855.png",
@@ -235,11 +240,6 @@
     "2-Final-Memory/report/portfolio-analysis-2026-05-18.md",
     "images/Pasted image 20260518154636.png",
     "4-Media-Memory/MEMORY.md",
-    "2-Final-Memory/daily/daily-index.md",
-    "4-Media-Memory/media-index.md",
-    "4-Media-Memory/daily/daily-index.md",
-    "4-Media-Memory/daily/2026-05-18.md",
-    "4-Media-Memory/daily/2026-05-07.md",
     "4-Media-Memory/archive/history-2026-04",
     "3-Proj-Memory/archive/history-2026-04",
     "1-Tech-Memory/archive/history-2026-04",
