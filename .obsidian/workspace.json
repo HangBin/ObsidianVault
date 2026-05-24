@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Personal/技术资料/Claude/网上资料--skill.md",
+                "file": "shared/shared-index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "网上资料--skill"
+              "title": "shared-index"
             }
           }
         ]
@@ -94,13 +94,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Personal/技术资料/Claude/网上资料--skill.md",
+                "file": "shared/shared-index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "网上资料--skill 的大纲"
+              "title": "shared-index 的大纲"
             }
           },
           {
@@ -207,32 +207,39 @@
   },
   "active": "6268d95cf372e2c3",
   "lastOpenFiles": [
-    "images/Pasted image 20260518154636.png",
-    "Personal/技术资料/Claude/Claude-index.md",
-    "Personal/技术资料/Claude/未命名.md",
+    "2-Final-Memory/report/portfolio-analysis-2026-05-22.md",
+    "2-Final-Memory/report/midday-analysis-2026-05-22.md",
+    "2-Final-Memory/report/daily-review-2026-05-22.md",
+    "2-Final-Memory/report/daily-review-2026-05-22-manual.md",
+    "2-Final-Memory/knowledge/collaboration-patterns.md",
+    "2-Final-Memory/knowledge/bash-deploy.md",
     "Personal/技术资料/Claude/网上资料--skill.md",
+    "shared/html-email-format.md",
+    "2-Final-Memory/report/morning-analysis-2026-05-22.md",
+    "2-Final-Memory/report/daily-review-2026-05-21.md",
+    "2-Final-Memory/daily/2026-05-22.md",
+    "Personal/技术资料/Claude/手动记忆系统.md",
     "Personal/技术资料/Claude/权限配置.md",
     "Personal/技术资料/Claude/命令.md",
     "Personal/技术资料/Claude/安装配置claude.md",
+    "Personal/技术资料/Claude/Claude-index.md",
+    "Personal/技术资料/Claude/未命名.md",
     "Personal/技术资料/Claude/安装配置.md",
+    "Pasted image 20260518182940.png",
+    "Pasted image 20260518182855.png",
+    "Pasted image 20260518182738.png",
+    "Pasted image 20260518182818.png",
+    "images/Pasted image 20260518183011.png",
+    "images/Pasted image 20260518182956.png",
+    "4-Media-Memory/knowledge/qmd-obsidian-system.md",
+    "2-Final-Memory/report/portfolio-analysis-2026-05-18.md",
+    "images/Pasted image 20260518154636.png",
     "4-Media-Memory/MEMORY.md",
     "2-Final-Memory/daily/daily-index.md",
     "4-Media-Memory/media-index.md",
     "4-Media-Memory/daily/daily-index.md",
     "4-Media-Memory/daily/2026-05-18.md",
     "4-Media-Memory/daily/2026-05-07.md",
-    "4-Media-Memory/daily/2026-05-03.md",
-    "4-Media-Memory/daily/2026-05-01.md",
-    "4-Media-Memory/archive/2026-04.md",
-    "3-Proj-Memory/proj-index.md",
-    "3-Proj-Memory/daily/daily-index.md",
-    "3-Proj-Memory/daily/2026-05-18.md",
-    "3-Proj-Memory/daily/2026-05-07.md",
-    "3-Proj-Memory/daily/2026-05-03.md",
-    "3-Proj-Memory/archive/2026-04.md",
-    "3-Proj-Memory/archive/2026-03.md",
-    "0-Main-Memory/archive/2026-03.md",
-    "3-Proj-Memory/archive/history-2026-04/2026-04-11.md",
     "4-Media-Memory/archive/history-2026-04",
     "3-Proj-Memory/archive/history-2026-04",
     "1-Tech-Memory/archive/history-2026-04",
@@ -246,7 +253,6 @@
     "images/Pasted image 20260514150647.png",
     "images/Pasted image 20260514142157.png",
     "images/Pasted image 20260512213634.png",
-    "C58F8D09701F6FDA228E109372DA20D8.png",
     "未命名.canvas"
   ]
 }

@@ -1,10 +1,25 @@
 
-### 1. superpowers
+### 1. SuperPowers
 Superpowers-Agent技能框架
 `https://github.com/obra/superpowers`
 
 在 Claude Code 中直接运行：
-`/plugin install superpowers@claude-plugins-official`
+```shell
+/plugin install superpowers@claude-plugins-official
+```
+
+### 2. Claude Mem-让Claude记住你
+Claude Mem自动记录Claude的编码过程(技术决策、文件结构、踩过的坑)，用AI压缩关键信息，注入到未来的会话中。
+https://github.com/thedotmack/claude-mem
+````shell
+/plugin install claude-mem
+/plugin marketplace add thedotmack/claude-mem
+````
+
+
+
+--- 
+
 
 
 2. Everything Claude Code -Anthropic黑客松冠军
@@ -12,9 +27,6 @@ Anthropic官方黑客松的冠军作品，一键装满Claude Code能力集。
 集成了技能系统、AI记忆系统、安全钩子、研究驱动开发模式。
 https://github.com/affaanm/everything-claude-code
 
-4、Claude Mem-让Claude记住你
-Claude Mem自动记录Claude的编码过程(技术决策、文件结构、踩过的坑)，用AI压缩关键信息，注入到未来的会话中。
-https://github.com/thedotmack/claude-mem
 
 5、GSD(Get Shit Done)一轻量级规范驱动开
 名字就很直接:把事情做完。
@@ -28,6 +40,19 @@ https://github.com/gsd-build/getshit-done
 https://github.com/hesreallyhim/awesome-claude-code
 
 ![[Pasted image 20260518154636.png]]
+
+
+
+
+![[Pasted image 20260518182956.png]]
+![[Pasted image 20260518183011.png]]
+
+
+xlsx 脏表格，一句话整齐
+pdf 是编辑。合并、拆分、加水印、填表单、ORC功能
+doc-coauthoring 写作前先被 AI 拷问
+last30days 11个平台·一条命令聚合，让你去搜集竞品的营销信息
+dev-browser 让 AI 操控浏览器
 
 
 ![[Pasted image 20260514150647.png]]# 20个Claude Code神级技能，按场景分类

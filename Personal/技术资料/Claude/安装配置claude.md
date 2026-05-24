@@ -4,8 +4,9 @@ tags:
   - Claude
   - mcp
   - Skill
+  - 安装配置
 ---
-### 安装
+### 一、安装
 
 #### 1. PowerShell 原生安装(官方推荐)
 
@@ -37,7 +38,7 @@ winget install Anthropic.ClaudeCode
 不同的源下载和安装，大部分在国肉网络，环境运行是会失败的
 可以在国内环境下载安装claude code的命令，WinGet安装方式
 
-### 配置国产模型
+### 二、配置国产模型
 运行命令`notepad.exe .\.claude.json`，打开Claude Code的配置文件
 添加`"hasCompletedOnboarding": true`，保存并且关闭，绕过软件对地区的检测
 按两次`ctrl+C`可以关闭claude，回到正常的命令界面
@@ -58,7 +59,7 @@ winget install Anthropic.ClaudeCode
 使用 Claude（通过 OpenRouter）
 claude --api-url https://openrouter.ai/api/v1 "你是什么模型？"
 
-### MCP
+### 三、MCP(Model Context Protocol)
 Claude Code去连接外部工具的一个接口
 
 MCP market资源网站：`https://mcpmarket.com/zh`
@@ -66,7 +67,7 @@ MCP market资源网站：`https://mcpmarket.com/zh`
 1. `Playwright` 控制浏览器
 	通过命令安装: `claude mcp add playwright npx @playwright/mcp@latest`
 
-### Skill
+### 四、Skill
 给Claude Code装的一个现成的能力包。让AI能够连接外部服务，同时预设了大量的提示词，用来知道AI如何完成某一特定工作
 skill资源网站：`https://skillhub.cn/`
 
@@ -84,13 +85,17 @@ https://github.com/anthropics/skills
 https://github.com/ComposioHQ/awesome-claude-skills
 ```
 
-### 内置命令
+### 五、内置命令
 #### 1.会话控制
 - `/clear` 清空上下文
 - `/resume` 可以找到之前所有的历史对话
 - `/rewind` 回到对话中的之前某个点
 - `/export` 一导出对话数据
 - `/context` 查看当前上下文占用情况
+- `/goal` 设定一个目标，让 AI 自己一轮接一轮地干，直到干完为止，不用你每轮都点确认。
+	使用方式：`/goal` 修复登录页的接口对接，要求测试通过、构建成功，🎯 设置目标，立即开始
+	适合场景：修复 bug（有明确报错）、跑测试直到全部通过、迁移 API（有构建验证）
+
 #### 2.模型和使用情况
 - `/model` 显示或切换当前Claude模型
 - `/cost` 查看当前会话的费用估算
@@ -104,7 +109,7 @@ https://github.com/ComposioHQ/awesome-claude-skills
 #### 4.代码操作
 - `/diff` 显示相对于代码库的当前更改
 - `/security-review` 对代码进行安全分析
-- `/plan` 生成项目或任务计划
+- `/plan` 先规划，生成项目或任务计划
 - `/permissions` 管理文件读/写权限
 - `/compact` 压缩项目数据以提供上下文
 #### 5.智能体层
@@ -118,6 +123,9 @@ https://github.com/ComposioHQ/awesome-claude-skills
 - 双击esc 后悔药，直接回到上一个检查点
 - Ctrl+R 翻旧旧账。昨天的提示词忘了?按Ctrl+R秒速搜索历史对话，比翻记事本快
 - !直接运行命令 输入 !git status 或 Inpm test结果直接进上下文，不用来回切终端
+- Ctrl+G 打开你的默认编辑器，像vim、vscode都行，保存退出内容自动提交给claude。一般用来粘贴大段报错信息
+- `/btw` 长对话里，有时候你想问个一次性的问题。
+- `/copy` 输入/copy会复制最后一条回复
 
 Memory Updates 智能记忆
 告诉Claude:"记住我用bun不用npm"它会自动记在CLAUDE.md里下次自动用对命令，不打断心流
@@ -135,6 +143,42 @@ Ctrl+s 暂存想法
 - 用playwright mcp 打开百度，搜索“什么是mcp”，并且选两篇优质搜索结果，打开并阅读，把结果保存到本地的一个 markdown 文件
 - 根据 @什么是MCP_搜索结果汇总.md ，使用 hyperframes skills，制作 10s 的科普视频，dark mode，网格背景，有动画演示其原理
 
+
+
+### 
+#### 核心功能实战指南
+
+拖拽文件直接分析，支持 PDF、Excel、Markdown、纯文本、代码文件等本地文件 —— 拖进对话框就能开始互动。
+
+> 请总结这份 PDF 的第三章，并提取所有专业术语作为术语表
+
+Claude 会结构化输出重点内容 + 专业提取，适合做读书笔记、学术资料整理等。如图所示：
+
+![59f74c1b708eb59ab735bb4a231f35ca.png](https://p9-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/6db9e70ef8fc49bfa21dc07d6d8467e9~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Yqq5Yqb55qE5bCP6Zuo:q75.awebp?rk3s=f64ab15b&x-expires=1776068774&x-signature=G8d4LrSw0IVuiJDOENp7WHG0q8M%3D)
+
+> 写一个 Python 爬虫，抓取豆瓣电影 Top250 的标题和评分，保存成 CSV 文件
+
+Claude 会返回完整代码 + 所需依赖库，连安装命令都一并生成。如图所示：
+
+![f0452f070133aa15a23fe221f8d601a9.png](https://p9-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/263d938d5a8943aca9800413058a1945~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Yqq5Yqb55qE5bCP6Zuo:q75.awebp?rk3s=f64ab15b&x-expires=1776068774&x-signature=tPfinfAnJ%2FaFFzM875F9HQN5xYc%3D)
+
+
+## 总结
+
+Claude Desktop 本质上是把 Claude 从网页端“请回”到你的桌面，让它离你的文件、任务、习惯更近了一步。不论是代码生成、文档提炼、对话总结，还是通过 MCP 动手操作本地文件，它都能成为你真正的「全能助手」。
+
+一句话总结：
+
+> 下载、配置、熟练用三招，Claude Desktop 就能从聊天工具变成你的高效工作台。
+
+下一步建议：
+
+- 把常用文件拖进去试试 Claude 的理解能力
+- 创建一个 Prompt 收藏夹，从模板到自动化场景一步步走起来
+- 定期整理 MCP 指令，形成你自己的“AI 工具流”
+
+
+
 ### CLAUDE.md
 是Agent每次开工前,都会读一遍的规则文件
 ![[Pasted image 20260512213634.png]]
@@ -150,15 +194,3 @@ Ctrl+s 暂存想法
 2. 修改Claude code默认的权限模式
 	AI每运行一条命令，都需要我批准它才能继续执行，这是Claude code默认的权限模式
 
-
-权限模式
-- default 默认模式;基本是只读操作直接执行，其他操作会询问
-- acceptEdits 自动接受文件编辑和常见文件系统命令
- - plan 只分析、读文件、写计划，不改代码
-- auto 自动执行大多数操作，但带后台安全检查
-- dontAsk 不会弹确认框;只有预先批准的工具才能用
-- bypassPermissions 跳过几乎所有权限检查，最激进
-
-`claude -permission-mode bypassPermissions`
-或: `claude --dangerously-skip-permissions`
-或设: `"defaultMode":"bypassPermissions"`
