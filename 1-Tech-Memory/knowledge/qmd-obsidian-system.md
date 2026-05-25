@@ -215,3 +215,6 @@ qmd collection add final-experience --path /root/.openclaw/workspace-final/memor
 - **2026-05-25** - ✅ 2026-05-19：工作区与 Obsidian md5 一致（1b4b60a5），无子文件，内容完整
 - **2026-05-25** - ✅ 2026-05-19 工作区冗余副本已删除（Obsidian 已有完整副本）
 - **2026-05-25** - ✅ 2026-05-25 今日对话已追加到 Obsidian daily 文件
+- **2026-05-25** - ✅ 2026-05-19：工作区与 Obsidian md5 一致（1b4b60a5），无子文件，内容完整
+- **2026-05-25** - ✅ 2026-05-19 工作区冗余副本已删除（Obsidian 已有完整副本）
+- **2026-05-25** - ✅ 2026-05-25 今日对话已追加到 Obsidian daily 文件
