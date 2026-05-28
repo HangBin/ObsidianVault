@@ -157,15 +157,6 @@ netstat -tlnp | grep 9222
 - **明知故犯最该反省**: 文档有明确步骤但没执行到位，比不知道更严重
 
 
-## Promoted From Short-Term Memory (2026-04-26)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-21.md:1:1 -->
-- [Tue 2026-04-21 09:49 GMT+8] \n\n向量语义搜索需embed,你先不管，我来操作qmd embed生成向量，你只管在需要的时候使用就行了\n\n确认! 我会等您完成 qmd embed 生成向量后，随时协助您使用向量搜索。不需要我主动触发 embed 过程 \u2013 您掌握这个步骤，我只需要在需要时帮您进行语义查询即可。\n\n比如您之后完成 embed 后，可以这样联系我:\n1. 示例查询:\u201c如何优化无头浏览器性能\u201d\n2. 示例领域:\u201c浏览器自动化经验\u201d\n3. 或直接使用您实际需要的搜索关键词\n\n我会处理语义搜索过程。有什么具体搜索需求时再发通知即可。 [score=0.861 recalls=0 avg=0.620 source=memory/2026-04-21.md:1-1]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-20.md:141:141 -->
-- **1. MEMORY.md 精简经验** [score=0.861 recalls=0 avg=0.620 source=memory/2026-04-20.md:141-141]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-20.md:129:129 -->
-- **结果**: ✅ 完成 [score=0.840 recalls=0 avg=0.620 source=memory/2026-04-20.md:129-129]
-
 ## Promoted From Short-Term Memory (2026-04-27)
 
 <!-- openclaw-memory-promotion:memory:memory/2026-04-20.md:147:147 -->
@@ -247,3 +238,12 @@ netstat -tlnp | grep 9222
 - created: 2026-05-18T13:19:00+08:00 modified: 2026-05-18T13:34:00+08:00 [score=0.888 recalls=0 avg=0.620 source=memory/2026-05-18.md:7-8]
 <!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:2:3 -->
 - date: 2026-05-18 weekday: Monday [score=0.878 recalls=0 avg=0.620 source=memory/2026-05-18.md:2-3]
+
+## Promoted From Short-Term Memory (2026-05-28)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:14:17 -->
+- **触发**: 用户要求将「复述确认规则」写入核心文件 SOUL.md **工具**: read(SOUL.md), edit(SOUL.md), write(memory/2026-05-25.md) **结果**: 成功 — 在 SOUL.md 的「🔍 运行时状态检查」和「💪 你的专长与能力」之间新增「📣 复述确认规则」章节 **决策**: 规则放在靠前的位置，确保每次收到任务都能第一时间触发复述流程 [score=0.894 recalls=0 avg=0.620 source=memory/2026-05-25.md:14-17]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:20:23 -->
+- **触发**: 用户要求检查 2026-05-18 的记忆完整性，合并到主文件 **工具**: exec(ls/md5sum/rm), read(主文件+子文件+Obsidian), edit(2026-05-25.md) **结果**: 成功 — 子文件 2026-05-18-1359.md 内容已完全包含在主文件中，去重删除；Obsidian md5 一致无需重同步 **决策**: 子文件为 session 摘要，与主文件记录重复，直接删除不追加 [score=0.894 recalls=0 avg=0.620 source=memory/2026-05-25.md:20-23]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:7:8 -->
+- created: 2026-05-25T15:46:00+08:00 modified: 2026-05-25T15:46:00+08:00 [score=0.874 recalls=0 avg=0.620 source=memory/2026-05-25.md:7-8]

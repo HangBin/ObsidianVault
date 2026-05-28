@@ -896,11 +896,9 @@ curl -s "页面URL" | grep -o "magnet:?xt=[^\"<>]*" | sed "s/&amp;/\&/g" | grep 
 - ✅ SOUL.md：检查清单第①项增加标准 frontmatter 格式
 
 
-## Promoted From Short-Term Memory (2026-05-27)
+## Promoted From Short-Term Memory (2026-05-28)
 
-<!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:10:13 -->
-- **触发**: 大梦要求新增复述确认规则 **工具**: exec (sed 修改 SOUL.md) **结果**: 成功 **决策**: 在 SOUL.md 的"工作原则"第1条前插入第0条规则，标注为最高优先级 [score=0.805 recalls=0 avg=0.620 source=memory/2026-05-25.md:10-13]
-<!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:14:14 -->
-- **内容**: 收到任何任务后，先用你自己的语言复述一遍对任务要求的理解，等用户确认无误后再开始执行。不得跳过此步骤。 [score=0.805 recalls=0 avg=0.620 source=memory/2026-05-25.md:14-14]
-<!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:17:18 -->
-- **触发**: 大梦要求检查 2026-05-19 记忆完整性并合并子文件，然后将今日对话写入记忆 **工具**: exec (ls/cat/md5sum) [score=0.805 recalls=0 avg=0.620 source=memory/2026-05-25.md:17-18]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:2:4 -->
+- created: 2026-05-25T15:44:00+08:00 modified: 2026-05-25T15:54:00+08:00 tags: daily-log tech-agent [score=0.868 recalls=0 avg=0.620 source=memory/2026-05-25.md:2-4]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:24:24 -->
+- **决策**: 按对话结束协议执行记忆归档 [score=0.868 recalls=0 avg=0.620 source=memory/2026-05-25.md:24-24]

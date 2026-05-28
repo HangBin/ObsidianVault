@@ -135,3 +135,8 @@ cat /root/.openclaw/share/browser/experience-browser.md
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:2:5 -->
 - author: main created: 2026-05-18 10:31:00 GMT+8 modified: 2026-05-18 10:44:00 GMT+8 version: v1.0.0 [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-18.md:2-5]
+
+## Promoted From Short-Term Memory (2026-05-28)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:15:18 -->
+- **触发**: 用户提供记忆碎片，要求写成梦境日记 **工具**: 无（纯文本创作） **结果**: ✅ 完成梦境日记，以"服务器黄昏"为意象，描述记忆整理与老板指令的场景 **决策**: 用诗意的语言将技术操作（记忆写入、文件清理、索引更新）转化为梦境叙事 [score=0.810 recalls=0 avg=0.620 source=memory/2026-05-25.md:15-18]
