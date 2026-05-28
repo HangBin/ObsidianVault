@@ -43,3 +43,4 @@ tags: [knowledge, experience]
 - **2026-05-27** - ✅ AGENTS.md 第5步追加记录新增时间顺序规则 + 违规记录
 - **2026-05-27** - ✅ AGENTS.md 第5步追加记录新增时间顺序规则 + 违规记录
 - **2026-05-28** **结果**: ✅ 已删除 /root/.openclaw/workspace-final/skills/a-stock-daily-report/references/report-index.md
+- **2026-05-28** 4. ✅ **parallel-step-brief.md**：新增并行生成子agent prompt模板
