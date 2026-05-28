@@ -140,3 +140,8 @@ cat /root/.openclaw/share/browser/experience-browser.md
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:15:18 -->
 - **触发**: 用户提供记忆碎片，要求写成梦境日记 **工具**: 无（纯文本创作） **结果**: ✅ 完成梦境日记，以"服务器黄昏"为意象，描述记忆整理与老板指令的场景 **决策**: 用诗意的语言将技术操作（记忆写入、文件清理、索引更新）转化为梦境叙事 [score=0.810 recalls=0 avg=0.620 source=memory/2026-05-25.md:15-18]
+
+## Promoted From Short-Term Memory (2026-05-28)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:21:24 -->
+- **触发**: 用户要求写入今日记忆并检查 2026-05-18 的完整性 **工具**: read, exec, write, sessions_history **结果**: ✅ 完成 **决策**: 执行标准记忆写入流程 [score=0.818 recalls=0 avg=0.620 source=memory/2026-05-25.md:21-24]
