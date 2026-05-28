@@ -5,7 +5,7 @@ tags:
   - report
   - analysis
   - 2026-05-26
-  - midday
+  - afternoon
 ---
 
 # 🕛 2026年5月26日 午盘分析报告

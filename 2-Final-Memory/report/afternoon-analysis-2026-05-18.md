@@ -328,6 +328,6 @@ tags:
 
 ---
 
-> 📁 报告保存路径：`/home/obsidian_vault/2-Final-Memory/report/midday-analysis-2026-05-18.md`
+> 📁 报告保存路径：`/home/obsidian_vault/2-Final-Memory/report/afternoon-analysis-2026-05-18.md`
 > ⏰ 生成时间：2026-05-18 12:00
 > 📊 数据标注：实时行情（来源：腾讯财经API）/ 板块涨跌（来源：东方财富push2）/ 概念资金（来源：东方财富push2）/ 资讯综合（来源：搜索聚合）

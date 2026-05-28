@@ -3,7 +3,7 @@ tags:
  - report
  - analysis
  - 2026-05-15
- - midday
+ - afternoon
 ---
 
 # 🌞 2026年5月15日 午间持仓分析报告
@@ -408,4 +408,4 @@ tags:
 > 3. 机器人产业链午后是否持续或分化
 > 4. 大盘收盘位置和量能变化
 >
-> 📎 **报告文件**：`midday-analysis-2026-05-15.md`
+> 📎 **报告文件**：`afternoon-analysis-2026-05-15.md`

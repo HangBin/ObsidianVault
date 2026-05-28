@@ -3,7 +3,7 @@ tags:
  - report
  - analysis
  - 2026-05-14
- - midday
+ - afternoon
 ---
 
 # 🕐 2026年5月14日 周四 午间持仓分析报告
@@ -252,7 +252,7 @@ tags:
 
 > 📅 报告生成时间：2026-05-14 12:15（cron超时后手动补发）
 > 🔄 下次更新：尾盘分析 14:35
-> 📂 报告存储：`/home/obsidian_vault/2-Final-Memory/report/midday-analysis-2026-05-14.md`
+> 📂 报告存储：`/home/obsidian_vault/2-Final-Memory/report/afternoon-analysis-2026-05-14.md`
 
 ---
 
