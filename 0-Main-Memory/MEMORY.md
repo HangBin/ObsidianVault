@@ -145,3 +145,8 @@ cat /root/.openclaw/share/browser/experience-browser.md
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:21:24 -->
 - **触发**: 用户要求写入今日记忆并检查 2026-05-18 的完整性 **工具**: read, exec, write, sessions_history **结果**: ✅ 完成 **决策**: 执行标准记忆写入流程 [score=0.818 recalls=0 avg=0.620 source=memory/2026-05-25.md:21-24]
+
+## Promoted From Short-Term Memory (2026-05-29)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:2:5 -->
+- author: main created: 2026-05-25 18:39:00 GMT+8 modified: 2026-05-25 18:39:00 GMT+8 version: v1.0.0 [score=0.855 recalls=0 avg=0.620 source=memory/2026-05-25.md:2-5]

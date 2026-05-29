@@ -247,3 +247,8 @@ netstat -tlnp | grep 9222
 - **触发**: 用户要求检查 2026-05-18 的记忆完整性，合并到主文件 **工具**: exec(ls/md5sum/rm), read(主文件+子文件+Obsidian), edit(2026-05-25.md) **结果**: 成功 — 子文件 2026-05-18-1359.md 内容已完全包含在主文件中，去重删除；Obsidian md5 一致无需重同步 **决策**: 子文件为 session 摘要，与主文件记录重复，直接删除不追加 [score=0.894 recalls=0 avg=0.620 source=memory/2026-05-25.md:20-23]
 <!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:7:8 -->
 - created: 2026-05-25T15:46:00+08:00 modified: 2026-05-25T15:46:00+08:00 [score=0.874 recalls=0 avg=0.620 source=memory/2026-05-25.md:7-8]
+
+## Promoted From Short-Term Memory (2026-05-29)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:2:3 -->
+- date: 2026-05-25 weekday: Monday [score=0.900 recalls=0 avg=0.620 source=memory/2026-05-25.md:2-3]
