@@ -471,3 +471,16 @@ tags:
 - 半导体全产业链爆发：半导体概念+247亿、国产芯片+164亿、存储芯片+160亿
 - 5个减仓/止损条件全部触发
 - 综合评分7.5/10
+
+## Promoted From Short-Term Memory (2026-06-01)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-29.md:12:15 -->
+- **触发**: cron任务 6876eec3 自动生成早盘报告 **工具**: exec(collect_report_data.py), web_fetch(腾讯财经/东方财富push2/外围市场), tavily_search(A股资讯), read(portfolio.md/复盘报告/fund-code-registry.json) **结果**: ✅ 成功生成 morning-analysis-2026-05-29.md **关键数据**: [score=0.868 recalls=0 avg=0.620 source=memory/2026-05-29.md:12-15]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-29.md:24:24 -->
+- **决策**: 按SKILL.md流程执行，数据API获取，资金流向标注"盘前暂无数据"，通信产业链持续性为核心关注点 [score=0.868 recalls=0 avg=0.620 source=memory/2026-05-29.md:24-24]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-29.md:27:30 -->
+- **触发**: 老板要求手动跑早盘报告并分析cron慢的原因 **工具**: exec(collect_report_data.py), web_fetch(腾讯财经/东方财富push2), tavily_search(外围市场/A股资讯), read(portfolio.md/复盘报告/fund-code-registry.json/template-morning.md), write(报告文件) [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-29.md:27-28]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-29.md:42:42 -->
+- **决策**: 手动重跑确保报告质量，cron超时调整到20分钟避免再次超时 [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-29.md:42-42]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-29.md:45:48 -->
+- **触发**: 老板指出早盘报告中核心事件（第二章）与行业政策（第四章）都有长鑫科技，内容重复 **工具**: exec(python3脚本修改SKILL.md/template-morning.md/quality_check.md) **结果**: ✅ 三处文件已更新 **改动内容**: [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-29.md:45-48]

@@ -150,3 +150,8 @@ cat /root/.openclaw/share/browser/experience-browser.md
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:2:5 -->
 - author: main created: 2026-05-25 18:39:00 GMT+8 modified: 2026-05-25 18:39:00 GMT+8 version: v1.0.0 [score=0.855 recalls=0 avg=0.620 source=memory/2026-05-25.md:2-5]
+
+## Promoted From Short-Term Memory (2026-06-01)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-29.md:15:18 -->
+- **触发**: final cron 任务自动完成，通过 sessions_send 回传复盘结果 **工具**: 无（被动接收） **结果**: 成功接收 final 复盘报告 **决策**: final 的每日复盘 cron 正常执行 [score=0.868 recalls=0 avg=0.620 source=memory/2026-05-29.md:15-18]
