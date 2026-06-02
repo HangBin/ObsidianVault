@@ -72,6 +72,15 @@
 - **形成肌肉反射**：任何投资相关对话，第一反应就是读取portfolio.md
 - **检查清单**：读取后必须确认每只基金状态，避免凭印象操作
 
+## 🚨 持仓数据不可覆盖铁律（2026-06-02 新增，最高优先级）
+
+- **portfolio.md 以 Obsidian 版本为唯一权威源**，路径：`/home/obsidian_vault/2-Final-Memory/portfolio.md`
+- **工作区不保留 portfolio.md 副本**，需要时直接读 Obsidian 路径
+- **禁止覆盖老板手动更新的关键数值**：当前市值、持有收益、操作记录
+- **可以在老板数据基础上优化**：格式整理、触发条件更新、仓位汇总计算
+- **优化前必须先确认**：告知老板要改什么，等确认后再动
+- **根因**：2026-06-02 早盘cron生成报告时把旧持仓数据写入工作区，与老板手动更新的Obsidian版本产生冲突
+
 ## 📊 报告文件Obsidian tags属性规范（强制标准）
 
 ### **用户定义的报告tags格式**
@@ -306,6 +315,26 @@ tags:
 
 ---
 
+## 📅 2026-06-02 经验教训
+
+### 🎯 持仓数据覆盖事故
+- **现象**：早盘cron生成报告时把旧持仓数据写入工作区portfolio.md，与老板手动更新的Obsidian版本冲突
+- **根因**：cron任务生成报告时读取并写入了持仓数据，工作区保留了旧副本
+- **教训**：portfolio.md 以 Obsidian 为唯一权威源，工作区不保留副本
+- **规则**：禁止覆盖老板手动更新的关键数值（市值/收益/操作记录）
+
+### 🎯 伊朗局势对市场的冲击
+- 伊朗叫停核谈判+霍尔木兹封锁威胁，油价单日+4.68%
+- 地缘风险成为当日最大变量，直接影响能源板块和贵金属
+- 科创50连续两日-5%，累计-9.8%，市场温度偏冷
+- 防御板块（红利+3.39%/电力+1.36%）持续强势，验证了"冷市场配防御"策略
+
+### 🎯 AI应用与半导体硬件的剪刀差
+- AI应用资金+85.7亿，但半导体硬件被抛弃
+- 资金从硬件向应用端转移，这个趋势需要持续跟踪
+
+---
+
 ## 📋 持仓档案检查清单（每次读取后必须确认）
 
 - [ ] 确认每只基金的当前状态（持有/已减仓/已清仓/关注中）
@@ -399,6 +428,13 @@ tags:
   - **规则**：推荐任何基金前，必须通过 `curl -s "https://fundgz.1234567.com.cn/js/{code}.js"` 验证代码与名称一致
   - **正确代码**：国泰半导体设备ETF联接C(019633)、华宝中证智能电动汽车ETF联接A(013475)、景顺长城机器人ETF联接C(020894)
   - 更新文件：AGENTS.md（早/午/尾盘checklist各加一条验证规则）、SOUL.md、MEMORY.md
+- 2026-05-28 v3.4 新基金推荐7天持有期规则（老板要求）：
+  - **问题**：之前新基金推荐只考虑当天行情，未考虑持有7天后的走势
+  - **规则**：推荐新基金必须包含"7天持有期预判"，分三个时间窗口分析（本周/下周初/下周中）
+  - **方法**：①分析未来7天关键事件（IPO上会/政策窗口/资金面变化）；②预判7天内板块走势；③给出7天持有期胜率评估
+  - **原则**：如果7天内板块有明确下行风险（如科技股短期承压），即使当天资金流入也不推荐同类型基金
+  - **正确做法**：市场偏冷时推荐防御板块（电力/红利），7天持有期胜率更高
+  - 更新文件：SKILL.md（报告模板新增7天预判表格）、MEMORY.md
 
 ## 💾 save-interceptor Hook（2026-05-16 部署）
 
@@ -464,3 +500,16 @@ tags:
 - 半导体全产业链爆发：半导体概念+247亿、国产芯片+164亿、存储芯片+160亿
 - 5个减仓/止损条件全部触发
 - 综合评分7.5/10
+
+## Promoted From Short-Term Memory (2026-06-01)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-05-29.md:12:15 -->
+- **触发**: cron任务 6876eec3 自动生成早盘报告 **工具**: exec(collect_report_data.py), web_fetch(腾讯财经/东方财富push2/外围市场), tavily_search(A股资讯), read(portfolio.md/复盘报告/fund-code-registry.json) **结果**: ✅ 成功生成 morning-analysis-2026-05-29.md **关键数据**: [score=0.868 recalls=0 avg=0.620 source=memory/2026-05-29.md:12-15]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-29.md:24:24 -->
+- **决策**: 按SKILL.md流程执行，数据API获取，资金流向标注"盘前暂无数据"，通信产业链持续性为核心关注点 [score=0.868 recalls=0 avg=0.620 source=memory/2026-05-29.md:24-24]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-29.md:27:30 -->
+- **触发**: 老板要求手动跑早盘报告并分析cron慢的原因 **工具**: exec(collect_report_data.py), web_fetch(腾讯财经/东方财富push2), tavily_search(外围市场/A股资讯), read(portfolio.md/复盘报告/fund-code-registry.json/template-morning.md), write(报告文件) [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-29.md:27-28]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-29.md:42:42 -->
+- **决策**: 手动重跑确保报告质量，cron超时调整到20分钟避免再次超时 [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-29.md:42-42]
+<!-- openclaw-memory-promotion:memory:memory/2026-05-29.md:45:48 -->
+- **触发**: 老板指出早盘报告中核心事件（第二章）与行业政策（第四章）都有长鑫科技，内容重复 **工具**: exec(python3脚本修改SKILL.md/template-morning.md/quality_check.md) **结果**: ✅ 三处文件已更新 **改动内容**: [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-29.md:45-48]
