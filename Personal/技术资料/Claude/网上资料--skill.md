@@ -27,6 +27,10 @@ Anthropic官方黑客松的冠军作品，一键装满Claude Code能力集。
 集成了技能系统、AI记忆系统、安全钩子、研究驱动开发模式。
 https://github.com/affaanm/everything-claude-code
 
+/plugin marketplace add https://github.com/affaaan-m/everything-claude-code
+`https://github.com/affaan-m/everything-claude-code`
+
+
 
 5、GSD(Get Shit Done)一轻量级规范驱动开
 名字就很直接:把事情做完。
