@@ -157,20 +157,6 @@ netstat -tlnp | grep 9222
 - **明知故犯最该反省**: 文档有明确步骤但没执行到位，比不知道更严重
 
 
-## Promoted From Short-Term Memory (2026-04-27)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-20.md:147:147 -->
-- **2. 浏览器经验 QMD 索引（软链接不穿透）** [score=0.807 recalls=0 avg=0.620 source=memory/2026-04-20.md:147-147]
-
-## Promoted From Short-Term Memory (2026-04-29)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-24.md:3:3 -->
-- **触发**: 用户要求学习共享文档浏览器经验，并查询小红书热点 [score=0.810 recalls=0 avg=0.620 source=memory/2026-04-24.md:3-3]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-24.md:17:17 -->
-- **第一次尝试（错误路径）**: [score=0.810 recalls=0 avg=0.620 source=memory/2026-04-24.md:17-17]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-24.md:22:22 -->
-- **第二次尝试（正确路径）**: [score=0.810 recalls=0 avg=0.620 source=memory/2026-04-24.md:22-22]
-
 ## Promoted From Short-Term Memory (2026-04-30)
 
 <!-- openclaw-memory-promotion:memory:memory/2026-04-24.md:27:27 -->
@@ -252,3 +238,10 @@ netstat -tlnp | grep 9222
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:2:3 -->
 - date: 2026-05-25 weekday: Monday [score=0.900 recalls=0 avg=0.620 source=memory/2026-05-25.md:2-3]
+
+## Promoted From Short-Term Memory (2026-06-03)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-01.md:14:17 -->
+- **触发**: 用户要求安装 Agent Reach (https://github.com/Panniantong/Agent-Reach) **工具**: exec(pip install, git clone, curl), write **结果**: 成功安装，8个核心工具就绪 **决策**: 由于 GitHub 直连不稳定，使用 GitHub API + 清华镜像源加速安装 [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-01.md:14-17]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-01.md:44:47 -->
+- **触发**: 用户要求配置小红书登录 **工具**: exec(xhs status/search), write(cookies.json) **结果**: ✅ 小红书登录成功，搜索/阅读/评论/发帖全功能可用 **决策**: xhs-cli 需要 a1 Cookie（httpOnly），从 Chrome DevTools Application 面板获取 [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-01.md:44-47]
