@@ -159,13 +159,6 @@ netstat -tlnp | grep 9222
 
 ## Promoted From Short-Term Memory (2026-04-30)
 
-<!-- openclaw-memory-promotion:memory:memory/2026-04-24.md:27:27 -->
-- **热榜数据获取**: [score=0.872 recalls=0 avg=0.620 source=memory/2026-04-24.md:27-27]
-<!-- openclaw-memory-promotion:memory:memory/2026-04-24.md:34:34 -->
-- **小红书今日热点TOP3**: [score=0.872 recalls=0 avg=0.620 source=memory/2026-04-24.md:34-34]
-
-## Promoted From Short-Term Memory (2026-04-30)
-
 <!-- openclaw-memory-promotion:memory:memory/2026-04-24.md:69:72 -->
 - | 错误类型 | 描述 | 严重程度 | |---------|------|---------| | 工具选择错误 | 查平台内容优先用浏览器而非搜索工具 | 高 | | 跳过验证步骤 | 分享链接前不验证可访问性 | 高 | [score=0.881 recalls=0 avg=0.620 source=memory/2026-04-24.md:69-72]
 
@@ -245,3 +238,8 @@ netstat -tlnp | grep 9222
 - **触发**: 用户要求安装 Agent Reach (https://github.com/Panniantong/Agent-Reach) **工具**: exec(pip install, git clone, curl), write **结果**: 成功安装，8个核心工具就绪 **决策**: 由于 GitHub 直连不稳定，使用 GitHub API + 清华镜像源加速安装 [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-01.md:14-17]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-01.md:44:47 -->
 - **触发**: 用户要求配置小红书登录 **工具**: exec(xhs status/search), write(cookies.json) **结果**: ✅ 小红书登录成功，搜索/阅读/评论/发帖全功能可用 **决策**: xhs-cli 需要 a1 Cookie（httpOnly），从 Chrome DevTools Application 面板获取 [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-01.md:44-47]
+
+## Promoted From Short-Term Memory (2026-06-03)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-01.md:69:72 -->
+- **触发**: 用户要求查看小红书当前热门/热点话题 **工具**: exec(xhs hot/search --json), python3(数据分析) **结果**: 成功获取 40 条热门笔记 + 3 个话题搜索数据 **决策**: 用 xhs hot 获取推荐流，用 xhs search 验证话题热度 [score=0.802 recalls=0 avg=0.620 source=memory/2026-06-01.md:69-72]
