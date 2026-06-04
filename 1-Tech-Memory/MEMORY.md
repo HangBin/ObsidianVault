@@ -902,3 +902,119 @@ curl -s "页面URL" | grep -o "magnet:?xt=[^\"<>]*" | sed "s/&amp;/\&/g" | grep 
 - created: 2026-05-25T15:44:00+08:00 modified: 2026-05-25T15:54:00+08:00 tags: daily-log tech-agent [score=0.868 recalls=0 avg=0.620 source=memory/2026-05-25.md:2-4]
 <!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:24:24 -->
 - **决策**: 按对话结束协议执行记忆归档 [score=0.868 recalls=0 avg=0.620 source=memory/2026-05-25.md:24-24]
+
+---
+
+## 🧬 Evolver 经验库（2026-06-04 深度扫描）
+
+> 此章节由 evolver-deep-scan.py 自动生成，从 Obsidian 记忆库中提炼
+> 来源：knowledge/、shared/、archive/、daily/（最近14天）
+
+### 🐳 Docker 编排经验（knowledge/docker-compose.md）
+
+#### 踩坑教训
+1. **.env 加载失败**: 子 shell `(set -a && . .env && set +a)` 导致变量不可见。修复：去掉括号，直接 `set -a && . .env && set +a`，或信任 `docker compose` 自动加载
+2. **Dockerfile 循环依赖**: `COPY --from=builder` 从自身复制 → 改为直接 `COPY /app/...`
+3. **HEALTHCHECK 语法**: 下划线应为连字符 `--start-period`（不是 `start_period`）
+4. **Compose 版本兼容**: 旧版不支持 `start-period`，移除该字段
+5. **version 字段过时**: 删除 `version: '3.8'`（compose 自动检测）
+
+#### 最佳实践
+- 多阶段构建分离 builder/production
+- 先复制依赖文件再复制源码（层缓存优化）
+- 环境变量使用 `${VAR:-default}` 语法
+- 数据目录 `:ro` 只读挂载，应用数据持久化到匿名卷
+- 脚本使用 `set -e` 快速失败
+
+### 📜 Bash 脚本开发经验（knowledge/bash-deploy.md）
+
+#### 核心经验
+1. **路径动态检测**: `SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"` + `WORKSPACE="$(dirname "$SCRIPT_DIR")"` — 脚本可跨 Agent 复用
+2. **八进制陷阱**: `next_id="008"; next_id=$((next_id + 1))` 报错 → 强制十进制 `next_id=$((10#$next_id + 1))`
+3. **段落分割**: awk 负责分段（`/^## [A-Z]/`），Bash `while read` 逐段处理
+4. **生成函数**: 用纯 `echo` 避免 heredoc 引号嵌套问题
+5. **共享分发**: 集中管理在 `/root/.openclaw/share/`，Agent 复制到 `scripts/` 子目录
+
+#### 脚本开发检查清单
+- 路径动态检测（SCRIPT_DIR + dirname）
+- 八进制数字使用 `10#` 前缀
+- 所有输出 `tr -d '\n\r'` 清理
+- 支持 `--dry-run` 和 `--verbose`
+- 错误信息包含路径信息
+
+### 🤝 协作模式经验（knowledge/collaboration-patterns.md）
+
+#### 关键教训
+1. **工作区隔离**: 向 `~/.openclaw/agents/` 写入脚本是违规 → 每次 `write/edit` 前自问"路径是否在工作区内？"
+2. **跨 Session 通信**: `sessions_send` 持续超时 → 双通道冗余（主通道 + message 到群聊 fallback）
+3. **沉默执行**: 未被 @提及或 main 调度，不主动在群聊发言
+4. **工作区迁移**: Mission Control 必须安装在 `workspace-tech/` 而非 `workspace/`
+
+#### 可复用工程模式
+- 双通道通信：主通道优先，超时自动 fallback
+- 路径安全检查：`path.startswith("/root/.openclaw/workspace-tech")`
+- 即时归档：工具调用后立即 write，每10条触发归纳
+
+### 📋 Mission Control 部署经验（knowledge/mission-control-dashboard.md）
+
+#### 核心经验
+1. **Next.js 编译时变量**: `NEXT_PUBLIC_*` 修改后必须 `pnpm build` 才能生效，运行时修改无效
+2. **systemd EnvironmentFile**: 不支持注释、空行、`export` 关键字 → 需要纯净版 `.env.minimal`
+3. **环境变量优先级**: `.env.local` > `.env.minimal` > systemd EnvironmentFile
+4. **构建验证**: `grep "Overview of agent activity" .next/static/chunks/*.js` 确认本地化嵌入
+
+#### 部署检查清单
+- Node.js v22+, pnpm 9.x+
+- `.env.local` 配置 ADMIN_PASSWORD, AUTH_SECRET
+- `.env.minimal` 纯净版（无注释）
+- `pnpm build` → `systemctl restart` → `curl /api/health`
+
+### 📚 记忆归档经验（knowledge/memory-system.md）
+
+#### 归档流程
+1. 同日期碎片合并（如 2026-04-02.md 合并 6 个碎片）
+2. 原始会话文件移动到 `archived_YYYYMMDD_HHMMSS/`
+3. 只保留正式 daily logs，会话元数据和测试输出可归档
+4. 合并后验证 `.learnings/` 完整性
+5. 生成 `LEARNINGS_EXTRACTION_REPORT_*.md`
+
+#### Self-Improvement 触发场景
+- 用户纠正 → LEARNINGS.md
+- 命令失败 → ERRORS.md
+- 功能缺失 → FEATURE_REQUESTS.md
+- 发现更好方案 → LEARNINGS.md
+
+### 🌐 浏览器自动化经验（shared/browser/experience-browser.md）
+
+#### 核心要点
+- Chromium CDP 端口：9222（主）、9223（备用）
+- 宿主机启动：`chrome --remote-debugging-port=9222 --no-first-run --no-default-browser-check`
+- 连接方式：`curl -s http://localhost:9222/json/version`
+- 截图规范：分步截图，每步标注清楚
+- 网站查询：完整流程（打开→等待→截图→OCR→记录）
+
+### 📧 HTML 邮件经验（shared/html-email-format.md）
+
+#### Python markdown 库关键规则
+1. 段落后的列表必须有空行
+2. 嵌套列表需要4空格缩进
+3. 加粗行后的列表需要特殊处理
+4. blockquote 内不支持列表
+5. 斜体行的 `*` 不能跟空格
+6. 连续斜体行需要空行分隔
+
+### 🗄️ 归档信号（archive/ 根目录）
+
+#### 2026-03 关键事件
+- 03-22: 工作区隔离原则强化
+- 03-23: 跨 Session 通信可靠性工程
+- 03-29: 沉默执行原则、工作区迁移违规纠正
+
+#### 2026-04 关键事件
+- 04-01: Tavily 扩展测试成功（API Key 配置正确，响应 1.66s）
+- 04-02: Docker 编排踩坑（5 个问题全部修复）
+- 04-04: 记忆归档流程固化、碎片文件合并
+- 04-07: 局域网服务暴露原则（禁止 localhost，使用真实 IP）
+- 04-09: 经验碎片清理（6 个碎片合并为 1 个）
+- 04-14: 记忆归档流程文档固化
+- 04-19: 控制界面协作模式标准化
