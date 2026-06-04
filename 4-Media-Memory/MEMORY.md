@@ -157,28 +157,6 @@ netstat -tlnp | grep 9222
 - **明知故犯最该反省**: 文档有明确步骤但没执行到位，比不知道更严重
 
 
-## Promoted From Short-Term Memory (2026-04-30)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-24.md:69:72 -->
-- | 错误类型 | 描述 | 严重程度 | |---------|------|---------| | 工具选择错误 | 查平台内容优先用浏览器而非搜索工具 | 高 | | 跳过验证步骤 | 分享链接前不验证可访问性 | 高 | [score=0.881 recalls=0 avg=0.620 source=memory/2026-04-24.md:69-72]
-
-## Promoted From Short-Term Memory (2026-05-01)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-24.md:73:73 -->
-- | 不执行已知规范 | 文档有明确步骤但没执行 | 极高 | [score=0.897 recalls=0 avg=0.620 source=memory/2026-04-24.md:73-73]
-
-## Promoted From Short-Term Memory (2026-05-01)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-04-24.md:44:44 -->
-- **错误根源**: [score=0.884 recalls=0 avg=0.620 source=memory/2026-04-24.md:44-44]
-
-## Promoted From Short-Term Memory (2026-05-08)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:4:5 -->
-- **触发**: 用户指令"学习归档经验，将3月份记忆归档" **工具**: read, exec, write (Python脚本) [score=0.884 recalls=0 avg=0.620 source=memory/2026-05-03.md:4-5]
-<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:14:14 -->
-- **结果**: 归档完成，目录结构规范 [score=0.884 recalls=0 avg=0.620 source=memory/2026-05-03.md:14-14]
-
 ## Promoted From Short-Term Memory (2026-05-08)
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:20:21 -->
@@ -243,3 +221,12 @@ netstat -tlnp | grep 9222
 
 <!-- openclaw-memory-promotion:memory:memory/2026-06-01.md:69:72 -->
 - **触发**: 用户要求查看小红书当前热门/热点话题 **工具**: exec(xhs hot/search --json), python3(数据分析) **结果**: 成功获取 40 条热门笔记 + 3 个话题搜索数据 **决策**: 用 xhs hot 获取推荐流，用 xhs search 验证话题热度 [score=0.802 recalls=0 avg=0.620 source=memory/2026-06-01.md:69-72]
+
+## Promoted From Short-Term Memory (2026-06-04)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-01.md:101:104 -->
+- **触发**: 用户指出小红书 cookies 等配置也应迁移到工作区 **工具**: exec(cp/mkdir/ln), edit(TOOLS.md/mcporter.json) **结果**: ✅ 所有配置已迁移到工作区统一管理 **决策**: venv 用软链接（449M 太大不复制），cookies 和 config 直接复制 [score=0.868 recalls=0 avg=0.620 source=memory/2026-06-01.md:101-104]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-01.md:95:98 -->
+- **触发**: 用户指出 Agent Reach 是自媒体专用 skill，应放在工作区 skills 目录 **工具**: exec(mv/mkdir/rmdir) **结果**: ✅ 从 ~/.openclaw/skills/agent-reach/ 迁移到 /root/.openclaw/workspace-media/skills/agent-reach/ **决策**: 自媒体专用 skill 放在工作区，全局目录只放通用 skill [score=0.855 recalls=0 avg=0.620 source=memory/2026-06-01.md:95-98]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-01.md:116:119 -->
+- **触发**: 用户指出 Python venv 只能在 root 目录，工作区不需要软链接 **工具**: exec(rm), edit(TOOLS.md/mcporter.json) **结果**: ✅ 删除工作区 .venv 软链接，mcporter 配置恢复指向 root 原始 venv **决策**: Python venv 固定在 `~/.agent-reach-venv/`（root 目录），工作区不复制不软链接，直接使用 root 路径 [score=0.836 recalls=0 avg=0.620 source=memory/2026-06-01.md:116-119]
