@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "bebbc4e3276ffe8c",
+        "id": "86c98de309f8633e",
         "type": "tabs",
         "children": [
           {
-            "id": "6268d95cf372e2c3",
+            "id": "75a0f4c9bb7af97a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "shared/shared-index.md",
+                "file": "Personal/技术资料/OpenClaw/MCP/未命名 1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "shared-index"
+              "title": "未命名 1"
             }
           }
         ]
@@ -94,13 +94,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "shared/shared-index.md",
+                "file": "Personal/技术资料/OpenClaw/MCP/未命名 1.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "shared-index 的大纲"
+              "title": "未命名 1 的大纲"
             }
           },
           {
@@ -205,41 +205,46 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "6268d95cf372e2c3",
+  "active": "75a0f4c9bb7af97a",
   "lastOpenFiles": [
-    "2-Final-Memory/report/portfolio-analysis-2026-05-22.md",
-    "2-Final-Memory/report/midday-analysis-2026-05-22.md",
-    "2-Final-Memory/report/daily-review-2026-05-22.md",
-    "2-Final-Memory/report/daily-review-2026-05-22-manual.md",
-    "2-Final-Memory/knowledge/collaboration-patterns.md",
-    "2-Final-Memory/knowledge/bash-deploy.md",
-    "Personal/技术资料/Claude/网上资料--skill.md",
-    "shared/html-email-format.md",
-    "2-Final-Memory/report/morning-analysis-2026-05-22.md",
-    "2-Final-Memory/report/daily-review-2026-05-21.md",
-    "2-Final-Memory/daily/2026-05-22.md",
-    "Personal/技术资料/Claude/手动记忆系统.md",
-    "Personal/技术资料/Claude/权限配置.md",
-    "Personal/技术资料/Claude/命令.md",
-    "Personal/技术资料/Claude/安装配置claude.md",
-    "Personal/技术资料/Claude/Claude-index.md",
-    "Personal/技术资料/Claude/未命名.md",
-    "Personal/技术资料/Claude/安装配置.md",
+    "Personal/技术资料/OpenClaw/MCP/mcp命令.md",
+    "Personal/技术资料/OpenClaw/MCP/未命名.md",
+    "Personal/技术资料/OpenClaw/MCP/未命名 1.md",
+    "Personal/技术资料/OpenClaw/openclaw命令.md",
+    "Personal/技术资料/OpenClaw/OpenClaw 备份内容.md",
+    "Personal/技术资料/OpenClaw/未命名.md",
+    "Personal/技术资料/OpenClaw/窗口命令.md",
+    "Personal/技术资料/OpenClaw/常用对话指令.md",
+    "Personal/技术资料/OpenClaw/部署安装--docker方式.md",
+    "Personal/技术资料/OpenClaw/部署安装--一键安装.md",
+    "Personal/技术资料/OpenClaw/人格文件相关/SOUL.md — 灵魂文件.md",
+    "Personal/技术资料/OpenClaw/MCP",
+    "Personal/技术资料/OpenClaw/人格文件相关/OpenClaw核心优化规则（可直接写入MEMORY.md）.md",
+    "Personal/技术资料/OpenClaw/人格文件相关/HEARTBEAT.md -- 心跳任务.md",
+    "Personal/技术资料/OpenClaw/人格文件相关/AGENTS.md — 工作手册.md",
+    "Personal/技术资料/OpenClaw/人格文件相关/新闻助手的设置.md",
+    "Personal/技术资料/OpenClaw/人格文件相关/安全.md",
+    "Personal/技术资料/OpenClaw/人格文件相关/1. AI助手灵魂三件套.md",
+    "Personal/技术资料/OpenClaw/人格文件相关/USER.md — 用户画像.md",
+    "Personal/技术资料/OpenClaw/OpenClaw-index.md",
+    "1-Tech-Memory/archive/2026-04.md",
+    "Personal/技术资料/OpenClaw/Skill技能/skill命令.md",
+    "Personal/技术资料/OpenClaw/Skill技能/知识库Obsidian.md",
+    "Personal/技术资料/OpenClaw/Skill技能/无标题Markdown.md",
+    "Personal/技术资料/OpenClaw/Skill技能/批量安装脚本.md",
+    "Personal/技术资料/OpenClaw/Skill技能/基础使用技能 self-improving-agent安装配置.md",
+    "Personal/技术资料/OpenClaw/Skill技能/基础使用技能 free-ride(白嫖神器).md",
+    "Personal/技术资料/OpenClaw/QMD",
+    "2-Final-Memory/report/morning-analysis-2026-05-27.md.bak",
+    "images/1779688823181.png",
+    "images/1779688787612.png",
     "Pasted image 20260518182940.png",
     "Pasted image 20260518182855.png",
     "Pasted image 20260518182738.png",
     "Pasted image 20260518182818.png",
     "images/Pasted image 20260518183011.png",
     "images/Pasted image 20260518182956.png",
-    "4-Media-Memory/knowledge/qmd-obsidian-system.md",
-    "2-Final-Memory/report/portfolio-analysis-2026-05-18.md",
     "images/Pasted image 20260518154636.png",
-    "4-Media-Memory/MEMORY.md",
-    "2-Final-Memory/daily/daily-index.md",
-    "4-Media-Memory/media-index.md",
-    "4-Media-Memory/daily/daily-index.md",
-    "4-Media-Memory/daily/2026-05-18.md",
-    "4-Media-Memory/daily/2026-05-07.md",
     "4-Media-Memory/archive/history-2026-04",
     "3-Proj-Memory/archive/history-2026-04",
     "1-Tech-Memory/archive/history-2026-04",
@@ -247,12 +252,7 @@
     "shared/save-commands/2026-05-16-1459-agent%3Afinal%3Atest%3A123.json",
     "shared/save-commands/2026-05-16-1536-agent%3Afinal%3Adashboard%3A5245fa39-1353-409d-ac0b-47afd0fe3740.json",
     "shared/save-commands",
-    "Personal/技术资料/Hermes",
-    "Personal/技术资料/CIG容器监控系统",
-    "portfolio-analysis-2026-05-14.pdf",
     "images/Pasted image 20260514150647.png",
-    "images/Pasted image 20260514142157.png",
-    "images/Pasted image 20260512213634.png",
     "未命名.canvas"
   ]
 }

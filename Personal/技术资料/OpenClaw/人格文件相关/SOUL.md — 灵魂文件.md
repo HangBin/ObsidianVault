@@ -5,7 +5,7 @@ tags:
 ---
 
 ## SOUL.md — 灵魂文件
-助手的性格说明书。它决定了助手是谁、怎么说话、什么该做什么不该做。
+定义说话风格、行为准则、做事原则。没配好龙虾就是没有灵魂的复读机。
 
 懒得从零搭也行，直接用 GitHub 模板仓库 xiaomo-starter-kit：[点这里](https://github.com/mengjian-github/xiaomo-starter-kit)
 
