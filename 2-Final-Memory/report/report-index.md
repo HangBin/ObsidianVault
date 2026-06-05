@@ -64,8 +64,11 @@
 ## 07
 - `portfolio-analysis-2026-05-07.md`
 
-## 05
+## 06
 - `morning-analysis-2026-06-05.md`
+
+## 05
+- `morning-analysis-2026-06-04.md`
 
 ## 04
 - `morning-analysis-2026-06-04.md`
