@@ -215,3 +215,5 @@ else:
 - **2026-06-05** - knowledge/shared/archive/daily: ✅ 全部 78 个文件（workspace-tech/memory/ 下的软链接）
 - **2026-06-05** - 文件末尾内容完整（以"控制界面协作模式标准化"结尾）✅
 - **2026-06-05** - knowledge/shared/archive/daily: ✅ 全部 78 个文件（workspace-tech/memory/ 下的软链接）
+- **2026-06-05** - 文件末尾内容完整（以"控制界面协作模式标准化"结尾）✅
+- **2026-06-05** - knowledge/shared/archive/daily: ✅ 全部 78 个文件（workspace-tech/memory/ 下的软链接）
