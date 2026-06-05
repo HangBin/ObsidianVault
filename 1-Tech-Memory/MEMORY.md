@@ -1018,3 +1018,53 @@ curl -s "页面URL" | grep -o "magnet:?xt=[^\"<>]*" | sed "s/&amp;/\&/g" | grep 
 - 04-09: 经验碎片清理（6 个碎片合并为 1 个）
 - 04-14: 记忆归档流程文档固化
 - 04-19: 控制界面协作模式标准化
+
+---
+
+## 🧬 Evolver 基因库（2026-06-05 重大扩充）
+
+### 基因库规模
+| 指标 | 扩充前 | 扩充后 | 增长 |
+|------|--------|--------|------|
+| 基因数量 | 8 | **53** | +45 (6.6倍) |
+| 信号数量 | 7 | **92** | +85 (13倍) |
+| 有策略步骤的基因 | 0 | **53** | 全部有 |
+| 信号全匹配的基因 | 0 | **2个** | ✅ |
+
+### 知识源覆盖
+| 来源 | 文件数 | 大小 |
+|------|--------|------|
+| MEMORY.md | 1 | 40KB |
+| knowledge/ | 11 | 69KB |
+| archive/ | 41 | 550KB |
+| daily/ | 20 | 53KB |
+| shared/ | 6 | 26KB |
+| **合计** | **79** | **738KB** |
+
+### 新增 45 个基因（按来源分三批）
+
+**第一批 knowledge/ (18个)**: gene_bash_script_standard, gene_docker_deploy_full, gene_service_deploy_standard, gene_workspace_collaboration, gene_memory_maintenance, gene_backup_strategy, gene_qmd_obsidian_integration, gene_obsidian_graph_maintenance, gene_control_center_deploy, gene_nextjs_systemd_deploy, gene_cross_session_reliability, gene_workspace_isolation, gene_memory_archive_consolidation, gene_service_deployment, gene_nextjs_build_optimize, gene_openclaw_control_center_deploy, gene_memory_system_maintenance, gene_obsidian_knowledge_graph
+
+**第二批 archive/ (8个)**: gene_monthly_archive_standard, git_operation_safety, gene_self_improvement_workflow, gene_session_end_protocol, gene_security_hardening, gene_browser_automation, gene_cron_management, gene_error_recovery
+
+**第三批 shared/ (6个)**: gene_log_archive_standard, gene_html_email_format, gene_email_send_config, gene_obsidian_graph_maintenance_v2, gene_shared_index_maintenance, gene_browser_automation_advanced
+
+**第四批 MEMORY.md (13个)**: gene_self_improvement_triggers, gene_systemd_env_file, gene_nextjs_build_time_var, gene_lan_service_exposure, gene_qmd_dotfile_fix, gene_screenshot_sharing, gene_sed_escape, gene_agent_browser_ref, gene_browser_path_management, gene_memory_write_metrics, gene_delete_approval, gene_ops_automation_workflow, gene_delivery_standardization
+
+### TOP 5 匹配基因
+1. gene_log_archive_standard (6/7 signals, 8 steps)
+2. gene_html_email_format (6/8 signals, 10 steps)
+3. gene_self_improvement_triggers (5/6 signals, 8 steps)
+4. gene_docker_compose_deploy (4/5 signals, 5 steps)
+5. gene_bash_script_best_practices (4/4 signals, 5 steps)
+
+### 关键改进
+- 选择器不再选默认基因 gene_gep_repair_from_errors ✅
+- 每个基因都有可执行的 strategy 步骤
+- 信号覆盖中英文双语匹配
+- 最佳匹配从 0/7 → 6/7
+
+### 文件位置
+- genes.jsonl: /root/.openclaw/skills/capability-evolver/assets/gep/scopes/tech/genes.jsonl
+- signals.js: /root/.openclaw/skills/capability-evolver/src/gep/signals.js
+- memoryGraph.js: /root/.openclaw/skills/capability-evolver/src/gep/memoryGraph.js
