@@ -23,3 +23,4 @@ tags: [knowledge, experience]
 - **2026-06-05** - shared: 6 files (含 browser/experience-browser.md), 15766 chars ✅
 - **2026-06-05** - shared: 6 files (含 browser/experience-browser.md), 15766 chars ✅
 - **2026-06-05** - shared: 6 files (含 browser/experience-browser.md), 15766 chars ✅
+- **2026-06-05** - shared: 6 files (含 browser/experience-browser.md), 15766 chars ✅
