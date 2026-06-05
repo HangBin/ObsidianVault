@@ -523,3 +523,4 @@ docker compose restart
 - v1.0 (2026-04-02): 初始版本，基于 OpenClaw Control Center 部署实战总结
 - **2026-06-05** - 选择器测试：选 `gene_docker_compose_deploy` ✅（之前选 `gene_gep_repair_from_errors`）
 - **2026-06-05** - 选择器测试：选 `gene_docker_compose_deploy` ✅（之前选 `gene_gep_repair_from_errors`）
+- **2026-06-05** - 选择器测试：选 `gene_docker_compose_deploy` ✅（之前选 `gene_gep_repair_from_errors`）
