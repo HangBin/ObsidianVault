@@ -239,3 +239,6 @@ qmd collection add final-experience --path /root/.openclaw/workspace-final/memor
 - **2026-06-05** - knowledge/ 10 个文件 ✅
 - **2026-06-05** - knowledge: 10 files, 23234 chars ✅
 - **2026-06-05** - knowledge: 10/10 files, 49KB ✅
+- **2026-06-05** - knowledge/ 10 个文件 ✅
+- **2026-06-05** - knowledge: 10 files, 23234 chars ✅
+- **2026-06-05** - knowledge: 10/10 files, 49KB ✅

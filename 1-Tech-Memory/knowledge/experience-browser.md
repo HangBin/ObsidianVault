@@ -9,3 +9,4 @@ tags: [knowledge, experience]
 ## 经验记录
 
 - **2026-06-05** - shared: 6 files (含 browser/experience-browser.md), 15766 chars ✅
+- **2026-06-05** - shared: 6 files (含 browser/experience-browser.md), 15766 chars ✅
