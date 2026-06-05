@@ -157,31 +157,6 @@ netstat -tlnp | grep 9222
 - **明知故犯最该反省**: 文档有明确步骤但没执行到位，比不知道更严重
 
 
-## Promoted From Short-Term Memory (2026-05-08)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:20:21 -->
-- **触发**: 用户指令"更新MEMORY.md等文件中针对共享经验文档shared相关的索引位置" **工具**: read, edit [score=0.845 recalls=0 avg=0.620 source=memory/2026-05-03.md:20-21]
-
-## Promoted From Short-Term Memory (2026-05-09)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-03.md:28:28 -->
-- **结果**: 所有索引更新完成 ✅ [score=0.893 recalls=0 avg=0.620 source=memory/2026-05-03.md:28-28]
-
-## Promoted From Short-Term Memory (2026-05-14)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-07.md:26:27 -->
-- **触发**: 用户指令 — "将今天的对话写日每日记忆文件" **工具**: read → sessions_history → write [score=0.885 recalls=0 avg=0.620 source=memory/2026-05-07.md:26-27]
-
-## Promoted From Short-Term Memory (2026-05-14)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-07.md:32:32 -->
-- **结果**: ✅ daily log 补全完成 [score=0.885 recalls=0 avg=0.620 source=memory/2026-05-07.md:32-32]
-
-## Promoted From Short-Term Memory (2026-05-20)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:14:17 -->
-- **触发**: 用户要求学习 `/root/.openclaw/share/memory-auto-write-optimization.md` 并更新核心文件 **工具**: read/edit/write **结果**: 成功完成所有 4 个核心文件的更新 **决策**: 按照方案 v1.5 的规范，将"被动记录"升级为"对话结束前自动写入"四重机制协议 [score=0.802 recalls=0 avg=0.620 source=memory/2026-05-18.md:14-17]
-
 ## Promoted From Short-Term Memory (2026-05-21)
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:31:34 -->
@@ -230,3 +205,12 @@ netstat -tlnp | grep 9222
 - **触发**: 用户指出 Agent Reach 是自媒体专用 skill，应放在工作区 skills 目录 **工具**: exec(mv/mkdir/rmdir) **结果**: ✅ 从 ~/.openclaw/skills/agent-reach/ 迁移到 /root/.openclaw/workspace-media/skills/agent-reach/ **决策**: 自媒体专用 skill 放在工作区，全局目录只放通用 skill [score=0.855 recalls=0 avg=0.620 source=memory/2026-06-01.md:95-98]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-01.md:116:119 -->
 - **触发**: 用户指出 Python venv 只能在 root 目录，工作区不需要软链接 **工具**: exec(rm), edit(TOOLS.md/mcporter.json) **结果**: ✅ 删除工作区 .venv 软链接，mcporter 配置恢复指向 root 原始 venv **决策**: Python venv 固定在 `~/.agent-reach-venv/`（root 目录），工作区不复制不软链接，直接使用 root 路径 [score=0.836 recalls=0 avg=0.620 source=memory/2026-06-01.md:116-119]
+
+## Promoted From Short-Term Memory (2026-06-05)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-01.md:122:125 -->
+- **触发**: 用户要求安装抖音 MCP，随后询问 mcporter 与 OpenClaw MCP 的关系 **工具**: web_search, web_fetch, exec(pipx/uvx/mcporter), edit(mcporter.json), gateway(config.schema.lookup/config.get) **结果**: ✅ 抖音 MCP 安装配置完成 + 讲清了两套 MCP 系统的关系 [score=0.868 recalls=0 avg=0.620 source=memory/2026-06-01.md:122-124]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-01.md:107:110 -->
+- | 文件 | 旧位置 | 新位置 | |------|--------|--------| | xiaohongshu cookies | `~/.xiaohongshu-cli/` | `~/.openclaw/workspace-media/.config/xiaohongshu-cli/` | | agent-reach xhs backup | `~/.agent-reach/xhs-cookies.json` | `~/.openclaw/workspace-media/.config/agent-reach/` | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-01.md:107-110]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-01.md:111:113 -->
+- | Python venv | `~/.agent-reach-venv/` | `~/.openclaw/workspace-media/.venv/` (软链接) | | mcporter config | 已在工作区 | 更新 xhs 路径为 `.venv/bin/xhs` | | agent-reach skill | `~/.openclaw/skills/agent-reach/` | `~/.openclaw/workspace-media/skills/agent-reach/` | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-01.md:111-113]
