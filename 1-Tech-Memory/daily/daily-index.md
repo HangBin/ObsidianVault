@@ -30,3 +30,5 @@ aliases:
 | [[2026-05-16]] | 12:04 更新核心文件对齐共享文档 v1.5      | #memory-system #core-files                |
 | [[2026-05-18]] | 学习记忆优化方案 + 精准更新核心文件          | #memory-system #core-files #optimization  |
 | [[2026-05-25]] | 新增复述确认规则 + 记忆完整性检查 | #soul #memory-system |
+| [[2026-06-04]] | capability-evolver 组件配置完成 | #evolver #node-register |
+| [[2026-06-05]] | 记忆归档与完整性检查 | #memory-archive #integrity-check |
