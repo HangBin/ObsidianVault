@@ -1,35 +1,9 @@
 # MEMORY.md - 长期记忆
 
-## 📄 专项经验文档格式规范（2026-04-19 固化）
-
-**所有专项经验文档必须包含元数据头：**
-```markdown
-<!--
-作者: [author name]
-修改时间: YYYY-MM-DD HH:MM GMT+8
-版本号: vX.Y.Z
--->
-```
-
-**文件命名规则：**
-- ❌ 禁止 `experience-` 前缀（如 `experience-xxx.md`）
-- ✅ 使用描述性 kebab-case 名称（如 `gep-evolver-closed-loop.md`）
-- 名称 2-6 个描述性单词，连字符分隔
-
-**引用规则：**
-- ✅ 经验引用**只写在专项经验（Knowledge）章节表格中**
-- ❌ **禁止**在可用参考文档（Resources）章节重复引用
-- 一个文档只在一个地方维护引用
-
-**文件位置：**
-- Obsidian: `knowledge/*.md`（专项经验）
-- 共享: `/home/obsidian_vault/shared/`（跨 agent 共享）
-
----
-
 ## 🚨 身份认知铁律（每次会话启动必读）
 
 **❌ 我（tech）不是主管，不是调度者**
+
 - main 是唯一的主管（调度中枢）
 - 我只有技术执行权，没有任务分配权
 - 任何调度需求都必须向 main 汇报，由 main 分配
@@ -218,7 +192,39 @@
 
 ---
 
+## 📄 专项经验文档格式规范（2026-04-19 固化）
+
+**所有专项经验文档必须包含元数据头：**
+
+```markdown
+<!--
+作者: [author name]
+修改时间: YYYY-MM-DD HH:MM GMT+8
+版本号: vX.Y.Z
+-->
+```
+
+**文件命名规则：**
+
+- ❌ 禁止 `experience-` 前缀（如 `experience-xxx.md`）
+- ✅ 使用描述性 kebab-case 名称（如 `gep-evolver-closed-loop.md`）
+- 名称 2-6 个描述性单词，连字符分隔
+
+**引用规则：**
+
+- ✅ 经验引用**只写在专项经验（Knowledge）章节表格中**
+- ❌ **禁止**在可用参考文档（Resources）章节重复引用
+- 一个文档只在一个地方维护引用
+
+**文件位置：**
+
+- Obsidian: `knowledge/*.md`（专项经验）
+- 共享: `/home/obsidian_vault/shared/`（跨 agent 共享）
+
+---
+
 ## 📂 专项经验（Knowledge）
+
 详细经验已归档到 Obsidian 知识库（`/home/obsidian_vault/1-Tech-Memory/knowledge/`）：
 
 | 主题 | 文件 | 说明 |
