@@ -725,10 +725,38 @@ cd ~/.openclaw/workspace-final && bash evolve.sh --strategy balanced  # 日常
 
 #### 汇总
 
-| 统计 | 第一轮 | 第二轮（补充） | 总计 |
-|------|--------|---------------|------|
-| 知识源文件 | 21 | 27 | 48 |
-| 产出基因 | 25 | **18（已写入）** | **46** |
-| 其中 optimize | 17 | **13** | **31** |
-| 其中 repair | 6 | **3** | **10** |
-| 其中 innovate | 2 | **2** | **5** |
+| 统计 | 第一轮 | 第二轮（补充） | 第三轮（补充） | 总计 |
+|------|--------|---------------|---------------|------|
+| 知识源文件 | 21 | 27 | ~30 | ~78 |
+| 产出基因 | 25 | **18（已写入）** | **18（已写入）** | **64** |
+| 其中 optimize | 17 | **13** | **10** | **41** |
+| 其中 repair | 6 | **3** | **5** | **15** |
+| 其中 innovate | 2 | **2** | **3** | **8** |
+
+
+#### 第三轮深度扫描（archive/daily/report/shared 全量文件 → ✅ 已完成，18 个基因已写入）
+
+| 知识源文件 | 产出基因 | 经验提取方式 | 优先级 |
+|-----------|---------|-------------|--------|
+| daily-review-2026-06-01.md | gene_report_hit_rate_tracking | 命中率评估方法+偏差分析 | 🔴 P0 |
+| daily-review-2026-06-02.md | gene_market_pattern_recognition | V字反弹→倒N字形模式识别 | 🔴 P0 |
+| daily-review-2026-06-03.md | gene_market_pattern_recognition | 倒N字形→分化回调模式识别 | 🔴 P0 |
+| daily-review-2026-06-04.md | gene_report_hit_rate_tracking | 100%命中率评估方法 | 🔴 P0 |
+| daily-review-2026-06-05.md | gene_report_hit_rate_tracking | 62.5%命中率+偏差根因 | 🔴 P0 |
+| daily/2026-05-14.md | gene_memory_write_4mechanism | 四重机制设计+共享方案 | 🟡 P1 |
+| daily/2026-05-15.md | gene_portfolio_update_before_report | 持仓更新检查+流水表规范 | 🟡 P1 |
+| daily/2026-05-19.md | gene_trigger_condition_not_in_flow_table | 触发条件≠已执行操作 | 🟡 P1 |
+| daily/2026-05-20.md | gene_report_logic_contradiction_check | 推荐与市场信号矛盾检查 | 🟡 P1 |
+| daily/2026-05-21.md | gene_recipient_never_use_sender | 发件箱≠收件人 | 🟡 P1 |
+| daily/2026-05-22.md | gene_email_html_format_fix | 21次排版迭代经验 | 🟡 P1 |
+| daily/2026-05-25.md | gene_report_logic_contradiction_check | 半导体减持潮但推荐半导体 | 🟡 P1 |
+| daily/2026-05-28.md | gene_cron_vs_skill_comparison | cron vs skill方案对比 | 🟡 P1 |
+| fund-analysis-159558-2026-05-21.md | gene_fund_analysis_template | 基金深度分析六章节模板 | 🟡 P1 |
+| report/morning-analysis-2026-06-05.md | gene_report_13section_template | 13章完整结构验证 | 🟢 P2 |
+| report/afternoon-analysis-2026-06-05.md | gene_data_source_push2_only_web_fetch | push2调用规则验证 | 🟢 P2 |
+| report/portfolio-analysis-2026-06-05.md | gene_portfolio_structure_standard | 四表结构验证 | 🟢 P2 |
+| report/report-index.md | gene_memory_daily_index_sync | 索引格式规范+合并冲突 | 🟢 P2 |
+| report/daily-review-* (全部) | gene_market_panic_sell_protocol | 恐慌性抛售预案触发条件 | 🟢 P2 |
+| shared/memory-auto-write-optimization.md | gene_multi_agent_memory_sharing | 多agent共享方案 | 🟢 P2 |
+| skills/a-stock-daily-report/reader.md | gene_cron_vs_skill_comparison | 方案对比文档 | 🟢 P2 |
+| skills/a-stock-daily-report/references/optimization-plan-v2.md | gene_report_quick_mode | quick/full模式设计 | 🟢 P2 |
