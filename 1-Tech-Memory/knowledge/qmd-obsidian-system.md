@@ -373,3 +373,8 @@ workspace-tech/memory/
 - **2026-06-05** - knowledge/shared/archive/daily: ✅ 全部 78 个文件（workspace-tech/memory/ 下的软链接）
 - **2026-06-05** - ✅ Obsidian 已同步（daily/2026-06-05.md）
 - **2026-06-05** - ✅ Obsidian MEMORY.md 已更新（新增 Evolver 基因库章节）
+- **2026-06-06** | Obsidian daily/ 同步 | ✅ md5 一致 |
+- **2026-06-06** | Obsidian MEMORY.md 同步 | ✅ 软链接自动同步（563行） |
+- **2026-06-06** - Obsidian daily/: ✅ 同步完整（md5一致）
+- **2026-06-06** - Obsidian MEMORY.md: ✅ 563行，软链接自动同步
+- **2026-06-06** - 知识库更新文档: ✅ 5个（memory-system/qmd-obsidian-system/collaboration-patterns/browser-automation×2）
