@@ -206,6 +206,7 @@
 | Control Center | `openclaw-control-center-dashboard.md` | OpenClaw Control Center |
 | QMD+Obsidian | `qmd-obsidian-system.md` | 向量检索与知识库集成 |
 | 经验索引 | `experience-index.md` | 经验文件总索引 |
+| GEP Evolver 闭环 | `/home/obsidian_vault/shared/gep-evolver-closed-loop.md` | 触发→执行→固化→基因更新完整闭环 |
 
 **访问方式**: `/home/obsidian_vault/1-Tech-Memory/knowledge/`
 
@@ -431,16 +432,27 @@ qmd get <file>[:line] -l 50
 -->
 ```
 
+**文件命名规则：**
+- **禁止**使用 `experience-` 前缀（如 `experience-gep-evolver-closed-loop.md` ❌）
+- **使用**描述性 kebab-case 名称（如 `gep-evolver-closed-loop.md` ✅）
+- 名称必须 2-6 个描述性单词，连字符分隔，传达文档内容
+- 示例：`gep-evolver-closed-loop.md`、`docker-compose-deploy.md`
+
+**引用规则：**
+- 经验引用**只写在专项经验（Knowledge）章节的表格中**
+- **禁止**在可用参考文档（Resources）章节重复引用同一文档
+- 一个文档只在一个地方维护引用，避免不同步
+
 **应用场景：**
 - `knowledge/*.md` 文件（Obsidian）
-- 任何独立归档的经验文档
+- 共享经验放在 `~/.openclaw/share/` 目录
 
 **文件位置：**
 - 优先放在 `Obsidian knowledge/*.md`
 - 共享经验放在 `~/.openclaw/share/` 目录
 
 **本条规则固化的原因：**
-用户明确要求，以后所有专项经验文档都必须带上作者、修改时间、版本号，便于追踪文档变更历史。
+用户明确要求：经验文档不加 experience- 前缀，引用只写一个地方（专项经验章节），规则融入原有章节不追加到末尾。
 
 ---
 
