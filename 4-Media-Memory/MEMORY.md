@@ -23,6 +23,7 @@
 ## 🛠️ 技术栈
 - 工具：web_search/web_fetch/browser/feishu_*/memory_*
 - 记忆：MEMORY.md（主记忆）+ memory/YYYY-MM-DD.md（每日日志）+ .learnings/（结构化知识库）
+- **GEP Evolver**：capability-evolver 技能，52+ 基因，自动进化闭环（2026-06-06 学习）
 
 ---
 
