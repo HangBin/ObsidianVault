@@ -47,3 +47,7 @@ tags: [knowledge, experience]
 - **2026-05-29** **结果**: ✅ 成功将4个 cron job 的 payload message 中 `sessions_send(label="final", ...)` 改为 `sessions_send(sessionKey="agent:final:main", ...)`
 - **2026-06-02** **结果**: ✅ 已删除工作区旧副本（09:17的旧版本），以Obsidian最新版本为准
 - **2026-06-03** **结果**: ✅ 早盘报告已生成并发送邮件；✅ 6/2工作区冗余副本已删除（Obsidian md5一致）；✅ 6/3记忆文件已创建
+- **2026-06-06** **触发**: 老板要求将 Final agent 经验固化到 GEP Evolver 基因库
+- **2026-06-06** **触发**: 老板要求把扫描经验、基因注入方案、规则更新到 shared/ 经验文档，方便其他 agent 学习
+- **2026-06-06** - 新增第 8 章 "Final Agent 基因注入经验"，包含：
+- **2026-06-06**   - 8.5 关键教训（5条 Final Agent 特有经验）
