@@ -119,6 +119,20 @@ qmd collection add final-experience --path /root/.openclaw/workspace-final/memor
 **原因**: 无 GPU 加速
 **解决**: 单文件 embed 需要 30+ 秒，批量重建建议在 GPU 环境
 
+### Q3: QMD 编译导致系统卡顿（2026-04-27 解决）
+**问题**: 运行 `qmd embed` 时，node-llama-cpp 自动尝试编译 Vulkan 组件，大量 cc1plus 进程占用 86%+ CPU
+**根因**: `get-cpu-code-name.js` 返回 `skylake`（CPU 特性名），但 NLC_VARIANT 匹配需要 variant 名（如 `haswell`），导致 Variant 匹配永远失败，触发从源码编译
+**解决方案**:
+1. 代码修改：`/usr/lib/node_modules/@tobilu/qmd/dist/llm.js` 第301行，设置 `build: "never"` 禁止本地编译
+2. 环境变量：`NODE_LLAMA_CPP_POSTINSTALL=skip` 加入 `/etc/environment`，跳过 postinstall 编译脚本
+**效果**: 系统负载从 4.81 降至 0.78，cc1plus 进程从 6 个降至 0 个
+
+### Q4: QMD 无 GPU 环境的正确行为
+- 使用预编译二进制文件
+- 回退到 CPU 模式运行
+- 显示警告：`[node-llama-cpp] A prebuilt binary was not found, falling back to using no GPU`
+- ⚠️ 第三方库的自动检测逻辑可能存在缺陷，调查问题要看源码，不是只看错误表象
+
 ## 每日对话归档
 
 ### 2026-04-19 对话要点
@@ -143,6 +157,28 @@ qmd collection add final-experience --path /root/.openclaw/workspace-final/memor
 - `/root/.openclaw/workspace-tech/qmd_commands.sh` - 集合配置脚本
 - `/root/.cache/qmd/index.sqlite` - QMD 索引文件
 - `/root/.cache/qmd/models/` - 模型缓存目录
+
+## Obsidian 软链接架构（2026-04-28 整合）
+
+### 目录结构
+```
+workspace-tech/memory/
+├── knowledge → /home/obsidian_vault/1-Tech-Memory/knowledge/
+├── shared → /home/obsidian_vault/shared/
+├── archive → /home/obsidian_vault/1-Tech-Memory/archive/
+└── daily → /home/obsidian_vault/1-Tech-Memory/daily/
+```
+
+### 设计原则
+- Obsidian 是最终版本（source of truth）
+- workspace-tech 是访问入口（通过软链接）
+- 迁移后删除旧文件，避免重复维护
+- QMD collection 路径需要与实际文件路径一致
+
+### 关键教训
+- Obsidian 整合后，workspace-tech 下的旧文件必须删除，否则会产生重复维护
+- 软链接解决了路径不一致的问题
+- MEMORY.md 也通过软链接指向 Obsidian 版本
 - **2026-04-29** - ✅ 兼容Obsidian等笔记工具
 - **2026-04-29** - ✅ 目标文件：`/home/obsidian_vault/1-Tech-Memory/daily/2026-04-29.md`
 - **2026-04-29** - ✅ 格式：Obsidian兼容Markdown（含frontmatter）

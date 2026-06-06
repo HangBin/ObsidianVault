@@ -1,11 +1,8 @@
----
+<!--
 author: tech agent
-created: 2026-04-14 09:34:12
-modified: 2026-04-29 11:01:00 GMT+8
-version: v1.0.0
-source: tech agent memory/experience-memory-system.md
-tags: [tech-agent, experience, knowledge, memory]
----
+修改时间: 2026-06-06 12:06 GMT+8
+版本号: v2.0.0
+-->
 
 
 # 记忆归档流程
@@ -18,6 +15,55 @@ tags: [tech-agent, experience, knowledge, memory]
 - ✅ **保留原则**: 只保留正式 daily logs，会话元数据和测试输出可归档
 - ✅ **同步检查**: 合并后验证 `.learnings/` 完整性（防止学习内容丢失）
 - ✅ **提取报告**: 生成 `LEARNINGS_EXTRACTION_REPORT_*.md` 记录提取统计和待审核项
+
+---
+
+## 碎片文件管理（2026-04-15 固化）
+
+### 问题
+- archive 目录下的经验碎片文件未合并
+- 未建立有效的碎片清理机制
+
+### 解决方案
+1. **经验碎片文件处理**
+   - 识别并合并重复经验碎片文件
+   - 创建 historical-experiences/ 目录存储历史碎片
+   - 更新主 experience.md 文件
+2. **脚本功能增强**
+   - 新增 `cleanup_experience_fragments()` 函数
+   - 自动检测和清理重复的经验碎片文件
+
+### 核心经验
+- 文件去重机制必须建立碎片文件自动清理机制
+- 重要经验必须同步到共享文档
+
+---
+
+## 知识调用流程（2026-04-28 固化）
+
+### 查询优先级
+```
+用户问题
+  │
+  ├── 1. 1-Tech-Memory/knowledge/  ← agent 自有（最高）
+  ├── 2. Personal/                  ← 用户知识（其次）
+  └── 3. 网络搜索                   ← 外部（最后）
+```
+
+### 按需加载原则
+- ❌ 不推荐：会话启动扫描所有 knowledge/ 文件（消耗 token）
+- ✅ 推荐：QMD 索引 + 按需查询
+
+### QMD 管理
+- 用 `qmd collection add` 管理索引
+- 不需要修改 openclaw.json
+
+### Obsidian 目录权限
+| 目录 | 用途 | 权限 |
+|------|------|------|
+| 1-Tech-Memory/ | tech agent 专属 | 读写 |
+| shared/ | 所有 agent 共享 | 读写 |
+| Personal/ | 用户个人知识库 | 只读（chmod 755） |
 
 ---
 
