@@ -15,3 +15,4 @@ tags: [knowledge, experience]
 - **2026-06-06** - 共享目录（share/）包含跨 agent 共同经验
 - **2026-06-06** - 共享目录（share/）包含跨 agent 共同经验
 - **2026-06-06** - 共享目录（share/）包含跨 agent 共同经验
+- **2026-06-06** - 共享目录（share/）包含跨 agent 共同经验
