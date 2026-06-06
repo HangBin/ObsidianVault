@@ -14,7 +14,7 @@ aliases:
 ### 2026年5月
 | 日期             | 主题                              | 标签                                        |
 | -------------- | ------------------------------- | ----------------------------------------- |
-| [[2026-06-06]] | GEP Evolver 闭环修复+基因库扩充+经验文档归档+MEMORY.md结构优化 | #gep #evolver #gene #solidify #experience #memory #knowledge |
+| [[2026-06-06]] | GEP Evolver 闭环修复+基因库扩充+经验文档归档+MEMORY.md结构优化+genes.json合并去重 | #gep #evolver #gene #solidify #experience #memory #knowledge #gene-merge |
 | [[2026-05-01]] | 11:41-11:46 心跳检查                | #heartbeat                                |
 | [[2026-05-02]] | 00:11-00:39 审查AGENTS.md和SOUL.md | #agents #soul #sync-script                |
 | [[2026-05-03]] | 00:02-00:06 按最新方案设计            | #archive #memory-format                   |
