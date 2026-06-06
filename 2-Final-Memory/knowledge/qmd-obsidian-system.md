@@ -63,3 +63,6 @@ tags: [knowledge, experience]
 - **2026-06-03** **结果**: ✅ 文件存在且frontmatter完整；✅ 无子文件；✅ 无其他日期文件残留；✅ 12:25对话记录已追加；✅ Obsidian双写同步
 - **2026-06-03**   ✅ Obsidian 已同步（cp 2026-06-03.md）
 - **2026-06-06** - knowledge/(4文件, 80KB): 专项经验（experience.md 71KB 为核心）
+- **2026-06-06** - knowledge/(4文件, 80KB): 专项经验（experience.md 71KB 为核心）
+- **2026-06-06**   - knowledge/(4文件): experience.md(71KB核心经验)、协作模式、QMD经验
+- **2026-06-06** - gene_experience_md_knowledge: 经验库知识

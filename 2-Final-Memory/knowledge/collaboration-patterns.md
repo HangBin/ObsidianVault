@@ -61,3 +61,5 @@ tags: [knowledge, experience]
 - **2026-06-06** - 新增第 8 章 "Final Agent 基因注入经验"，包含：
 - **2026-06-06** - 新增第 8 章 "Final Agent 基因注入经验"，包含：
 - **2026-06-06** - 新增第 8 章 "Final Agent 基因注入经验"，包含：
+- **2026-06-06** - 新增第 8 章 "Final Agent 基因注入经验"，包含：
+- **2026-06-06**   - knowledge/(4文件): experience.md(71KB核心经验)、协作模式、QMD经验
