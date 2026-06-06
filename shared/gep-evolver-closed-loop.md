@@ -342,6 +342,16 @@ for line in sys.stdin:
 4. **cron 脚本的 prompt 往往是最完整的操作规范**，不可忽略
 5. **跨 agent 共享目录**（如 `share/`、`/root/.openclaw/share/`）包含共同经验，必须扫描
 6. **违规记录是最好的 repair 基因来源**，重点扫描
+7. **子目录软链接规则**：`memory/` 下的子目录必须通过软链接映射到 Obsidian 对应目录，禁止新建独立目录。规则：
+   - `memory/archive/` → `ln -s /home/obsidian_vault/2-Final-Memory/archive`
+   - `memory/daily/` → `ln -s /home/obsidian_vault/2-Final-Memory/daily`
+   - `memory/knowledge/` → `ln -s /home/obsidian_vault/2-Final-Memory/knowledge`
+   - `memory/report/` → `ln -s /home/obsidian_vault/2-Final-Memory/report`
+   - `memory/shared/` → `ln -s /home/obsidian_vault/2-Final-Memory/shared`
+   - ⚠️ 操作顺序：先 `rm -rf memory/子目录` → 再 `ln -s 目标路径 memory/子目录`
+   - ⚠️ 如果 Obsidian 侧目录不存在，先 `mkdir -p` 再创建软链接
+   - ⚠️ 禁止在 memory/ 下新建同名实体目录（会导致数据分裂）
+   - ⚠️ 软链接后，写入 memory/子目录 = 直接写入 Obsidian，无需额外同步
 
 ### 8.2 扫描清单模板
 
@@ -682,7 +692,7 @@ cd ~/.openclaw/workspace-final && bash evolve.sh --strategy balanced  # 日常
 | self-improving-agent/SKILL.md | gene_learning_extraction_workflow | 提取.learnings/规范 |
 | share/learning-workflow/ | gene_learning_extraction_workflow | 提取学习工作流 |
 
-#### 第二轮深度扫描（遗漏的子目录文件 → 需补充的基因）
+#### 第二轮深度扫描（遗漏的子目录文件 → ✅ 已完成，18 个基因已写入）
 
 | 知识源文件 | 建议产出基因 | 经验提取方式 | 优先级 |
 |-----------|-------------|-------------|--------|
@@ -718,7 +728,7 @@ cd ~/.openclaw/workspace-final && bash evolve.sh --strategy balanced  # 日常
 | 统计 | 第一轮 | 第二轮（补充） | 总计 |
 |------|--------|---------------|------|
 | 知识源文件 | 21 | 27 | 48 |
-| 产出基因 | 25 | ~20（新增） | ~45 |
-| 其中 optimize | 17 | ~13 | ~30 |
-| 其中 repair | 6 | ~5 | ~11 |
-| 其中 innovate | 2 | ~2 | ~4 |
+| 产出基因 | 25 | **18（已写入）** | **46** |
+| 其中 optimize | 17 | **13** | **31** |
+| 其中 repair | 6 | **3** | **10** |
+| 其中 innovate | 2 | **2** | **5** |
