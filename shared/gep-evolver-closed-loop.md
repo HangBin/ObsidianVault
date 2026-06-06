@@ -1,7 +1,7 @@
 <!--
 作者: tech agent (v1.0) + final agent (v1.1 补充)
-修改时间: 2026-06-06 14:20 GMT+8
-版本号: v1.2.0
+修改时间: 2026-06-06 14:50 GMT+8
+版本号: v1.3.0
 -->
 
 # GEP Evolver 闭环：触发→执行→固化→基因更新
@@ -375,24 +375,226 @@ for f in /path/to/share/*/*.cron; do
 done
 ```
 
-### 8.3 Final Agent 知识源扫描实例
+### 8.3 Final Agent 知识源扫描实例（v1.3 完整版，291 个文件）
 
-以下以 final agent 的实际扫描为例，展示完整扫描过程：
+以下以 final agent 的实际扫描为例，展示完整扫描过程。**⚠️ 关键：必须进入子文件夹深度扫描，只看顶层目录会遗漏 90% 的经验。**
 
-| 优先级 | 目录 | 文件数 | 扫描方式 |
-|--------|------|--------|---------|
-| **P0** | `knowledge/` | 4 | 全部读取，核心经验直接产基因 |
-| **P0** | `archive/` | 35 | 按月+按类型扫描，Python脚本和SKILL文件优先 |
-| **P0** | `daily/` | 28 | 扫描标题结构，提取对话信号模式 |
-| **P0** | `report/` | 84 | 抽取最新5份报告分析结构模板 |
-| **P0** | `shared/` | 12 | 全部读取，跨agent共享经验 |
-| **P1** | `workspace-final/skills/` | 57 | 读取所有SKILL.md + references/ + scripts/ |
-| **P1** | `/root/.openclaw/share/` | 52 | 读取cron配置+邮件系统+同步系统+学习工作流 |
-| **P1** | `/root/.openclaw/skills/` | 19 | 读取capability-evolver+记忆管理+自我改进 |
-| **P2** | `archive/history-2026-03/` | 5 | 扫描标题了解历史记录模式 |
-| **P2** | `archive/history-2026-04/` | 24 | 扫描标题了解历史记录模式 |
+#### 扫描目录树（完整）
 
-**总计**: 291 个文件 → 产出 25 个基因
+```
+workspace-final/ (工作区根目录)
+├── MEMORY.md                          ← 核心铁律，最高优先级
+├── SOUL.md                            ← 身份+检查清单
+├── AGENTS.md                          ← 对话结束协议
+├── TOOLS.md                           ← 工具集+数据源
+├── IDENTITY.md                        ← 身份认知
+├── USER.md                            ← 服务对象
+├── HEARTBEAT.md                       ← 心跳任务
+│
+├── skills/ (57 个文件)                ← 核心经验源，必须深度扫描
+│   ├── a-stock-daily-report/
+│   │   ├── SKILL.md (32KB)            ← 报告生成完整规范
+│   │   ├── reader.md (19KB)           ← Skill+Cron方案说明
+│   │   ├── a-stock-daily-report.skill
+│   │   ├── SKILL.md.bak
+│   │   ├── references/ (14 个文件)         ← 核心方法论
+│   │   │   ├── template-morning.md    ← 早盘13章模板
+│   │   │   ├── template-afternoon.md  ← 午盘12章模板
+│   │   │   ├── template-tail.md       ← 尾盘16章模板
+│   │   │   ├── template-review.md     ← 复盘11章模板
+│   │   │   ├── report-templates.md (43KB) ← 四种报告完整模板合集
+│   │   │   ├── checklists.md          ← 四时段Checklist+违规记录
+│   │   │   ├── data-sources.md        ← 数据源调用代码
+│   │   │   ├── email-guide.md         ← 邮件发送详细指南
+│   │   │   ├── fund-code-registry.json ← 已验证基金代码
+│   │   │   ├── optimization-plan.md (11KB) ← 早盘优化方案v1
+│   │   │   ├── optimization-plan-v2.md (6KB) ← 早盘优化方案v2
+│   │   │   ├── afternoon-optimization-plan-v1.md (19KB) ← 午盘优化方案
+│   │   │   ├── parallel-step-brief.md ← 并行步骤摘要
+│   │   │   └── context-cache.json     ← 上下文缓存配置
+│   │   └── scripts/ (3 个文件)         ← 执行工具
+│   │       ├── collect_report_data.py (15KB) ← 并行数据采集
+│   │       ├── quality_check.py (9KB) ← 质量检查脚本
+│   │       └── sync_skill_from_review.py (20KB) ← 复盘自动同步
+│   │
+│   ├── a-stock-analysis-lite/
+│   │   ├── SKILL.md
+│   │   ├── README.md
+│   │   └── references/ (3 个文件)
+│   │       ├── analysis-prompts.md (8KB) ← 六大章节分析提示词
+│   │       ├── data-sources.md (8KB)     ← 数据源与采集规范（A~H 8类数据源）
+│   │       └── report-template.md (10KB) ← HTML报告模板
+│   │
+│   ├── a-stock-data/
+│   │   ├── SKILL.md (54KB)            ← 六层数据架构（最大文件）
+│   │   ├── README.md (17KB)
+│   │   ├── CHANGELOG.md
+│   │   └── assets/
+│   │
+│   ├── akshare-finance/
+│   │   ├── SKILL.md
+│   │   ├── references/README.md
+│   │   └── scripts/ (3 个文件)
+│   │       ├── stock_price.py
+│   │       ├── crypto_price.py
+│   │       └── macro_data.py
+│   │
+│   ├── akshare-stock/
+│   │   ├── SKILL.md
+│   │   └── scripts/stock_cli.py
+│   │
+│   ├── china-stock-analysis/
+│   │   ├── SKILL.md
+│   │   └── references/china-stocks.md
+│   │
+│   ├── gep-evolver-closed-loop.md      ← 本经验文档
+│   └── wumu2013/multi-factor-strategy/SKILL.md
+│
+├── memory/ → 软链接到 Obsidian daily/
+└── share/ → 软链接到 Obsidian shared/
+
+/home/obsidian_vault/2-Final-Memory/ (Obsidian 知识库)
+├── MEMORY.md (31KB, 553行)             ← 长期记忆，铁律集中地
+├── portfolio.md (23KB, 355行)          ← 持仓档案，唯一权威源
+├── knowledge/ (4 个文件)
+│   ├── experience.md (71KB, 1485行)    ← 核心经验沉淀（最大经验源）
+│   ├── collaboration-patterns.md      ← 协作模式经验
+│   ├── qmd-obsidian-system.md          ← QMD系统经验
+│   └── bash-deploy.md                  ← bash部署经验
+│
+├── archive/ (35 个文件)
+│   ├── 2026-03.md (11KB)              ← 3月月度归档
+│   ├── 2026-04.md (2KB)              ← 4月月度归档
+│   ├── SKILL-2026-05-27.md (14KB)      ← SKILL规范（4条逻辑一致性规则）
+│   ├── collect_report_data-2026-05-27.py (12KB) ← 数据采集脚本
+│   ├── collect_tail_data-2026-05-27.py (13KB) ← 尾盘数据采集脚本
+│   ├── history-2026-03/ (5 个文件)     ← 3月历史日志
+│   └── history-2026-04/ (28 个文件)    ← 4月历史日志
+│
+├── daily/ (7 个文件，最近6天 + 索引)
+│   ├── 2026-06-01.md ~ 2026-06-06.md  ← 每日日志
+│   └── daily-index.md
+│
+├── report/ (84 个文件)
+│   ├── morning-analysis-*.md (22 份)   ← 早盘报告
+│   ├── afternoon-analysis-*.md (16 份) ← 午盘报告
+│   ├── portfolio-analysis-*.md (18 份) ← 尾盘报告
+│   ├── daily-review-*.md (18 份)       ← 复盘报告
+│   ├── fund-analysis-*.md (1 份)       ← 基金分析
+│   ├── afternoon-optimization-plan-v1.md ← 午盘优化方案
+│   └── report-index.md                 ← 报告索引
+│
+└── shared/ (12 个文件)
+    ├── html-email-format.md (10KB)     ← HTML邮件排版经验
+    ├── mail-skill-setup-guide.md        ← 邮件配置指南
+    ├── memory-auto-write.md            ← 记忆自动写入规范
+    ├── instant-archive.md              ← 即时归档规范
+    ├── sync-daily-to-obsidian/README.md ← 同步规范
+    ├── knowledge-graph.md              ← 图谱关联经验
+    ├── log-archive.md                  ← 日志归档经验
+    ├── evolver-setup.md                ← Evolver安装配置
+    ├── gep-evolver-closed-loop.md      ← 本经验文档
+    ├── shared-index.md                 ← 共享目录索引
+    ├── skill-development.md            ← 技能开发规范
+    └── websocket-trajectory.md         ← WebSocket技术发现
+
+/root/.openclaw/share/ (52 个文件，跨agent共享)
+├── final-analysis/ (8 个文件)
+│   ├── README.md (19KB)                ← 报告规则（最重要）
+│   ├── morning-report.cron (11KB)      ← 早盘cron（17项操作规则）
+│   ├── midday-report.cron (9KB)        ← 午盘cron
+│   ├── afternoon-report.cron (13KB)    ← 尾盘cron
+│   ├── daily-review.cron (9KB)         ← 复盘cron
+│   ├── cron-manager.sh                 ← cron管理脚本
+│   └── cron.log                        ← 执行日志
+│
+├── send-email/ (7 个文件)
+│   ├── md_to_html.py (14KB)            ← MD→HTML转换
+│   ├── send_email_multi.py (9KB)       ← 多收件人发送
+│   ├── send_email.py (6KB)             ← 基础发信
+│   ├── md_to_pdf.py (8KB)              ← MD→PDF转换
+│   ├── config.yaml                     ← SMTP配置
+│   ├── recipients.yaml                 ← 收件人配置
+│   └── README.md                       ← 邮件工具说明
+│
+├── sync-daily-to-obsidian/ (14 个文件)
+│   ├── README.md (15KB)                ← 同步规范
+│   ├── sync-daily-to-obsidian.sh (30KB) ← 主同步脚本
+│   ├── extract_full_daily.py (11KB)    ← 完整日志提取
+│   ├── extract_sessions.py (12KB)      ← session提取
+│   ├── struct_memory.py (7KB)          ← 记忆结构化
+│   └── sync-daily-*.md (6 个文件)      ← 各agent同步结果
+│
+├── learning-workflow/ (6 个文件)
+│   ├── 完整使用与技术指南.md (7KB)     ← 学习工作流完整指南
+│   ├── extract_learnings_auto.sh (7KB) ← 自动提取脚本
+│   ├── organize_memories.sh (5KB)      ← 记忆整理脚本
+│   ├── start.sh (2KB)                  ← 启动脚本
+│   ├── 快速入门.md (2KB)               ← 快速入门
+│   └── 说明.md (6KB)                   ← 说明文档
+│
+├── memory-auto-write-optimization.md (19KB) ← 记忆写入优化方案
+├── daily-report-config.md (4KB)        ← 每日报告配置清单
+├── browser/ (3 个文件)                 ← 浏览器自动化
+├── backup_workspaces/ (2 个文件)       ← 备份脚本
+├── skill-develop/ (2 个文件)           ← 技能开发规范
+└── modernwms/ (4 个文件)               ← WMS系统
+
+/root/.openclaw/skills/ (19 个文件)
+├── capability-evolver/SKILL.md (12KB)  ← Evolver运行机制
+├── self-improving-agent/SKILL.md (20KB) ← 自我改进
+├── proactive-agent/SKILL.md (21KB)     ← 主动代理
+├── skill-creator/SKILL.md (18KB)       ← 技能创建
+├── skill-vetting/SKILL.md (5KB)        ← 技能审查
+├── agent-browser/SKILL.md (10KB)       ← 浏览器自动化
+├── baidu-web-search/SKILL.md (7KB)     ← 百度搜索
+├── multi-search-engine/SKILL.md (6KB)   ← 多引擎搜索
+├── tavily-search/SKILL.md (1KB)        ← Tavily搜索
+├── openclaw-tavily-search/SKILL.md (2KB)
+├── akshare-finance/SKILL.md
+├── akshare-stock/SKILL.md
+├── ontology/SKILL.md
+├── copywriting/SKILL.md
+├── find-skill/SKILL.md
+├── freeride/SKILL.md
+├── generic-mail-client/SKILL.md
+├── memory-daily-organizer/SKILL.md
+├── memory-file-organizer/SKILL.md
+├── summarize/SKILL.md
+└── using-superpowers/SKILL.md
+```
+
+#### 扫描优先级与策略
+
+| 优先级 | 目录 | 文件数 | 扫描方式 | 经验密度 |
+|--------|------|--------|---------|---------|
+| **P0** | `MEMORY.md` + `portfolio.md` | 2 | 全文读取 | ⭐⭐⭐⭐⭐ 铁律集中地 |
+| **P0** | `knowledge/experience.md` | 1 | 全文读取（71KB） | ⭐⭐⭐⭐⭐ 核心经验 |
+| **P0** | `skills/a-stock-daily-report/SKILL.md` | 1 | 全文读取（32KB） | ⭐⭐⭐⭐⭐ 报告规范 |
+| **P0** | `skills/a-stock-daily-report/references/` | 14 | 全部读取 | ⭐⭐⭐⭐⭐ 模板+Checklist+优化方案 |
+| **P0** | `skills/a-stock-data/SKILL.md` | 1 | 全文读取（54KB） | ⭐⭐⭐⭐ 数据架构 |
+| **P0** | `share/final-analysis/README.md` | 1 | 全文读取（19KB） | ⭐⭐⭐⭐⭐ 报告规则 |
+| **P0** | `share/final-analysis/*.cron` | 4 | 全文读取 | ⭐⭐⭐⭐ 操作规范 |
+| **P1** | `skills/a-stock-analysis-lite/references/` | 3 | 全部读取 | ⭐⭐⭐⭐ 分析提示词+数据源 |
+| **P1** | `skills/a-stock-daily-report/scripts/` | 3 | 全文读取 | ⭐⭐⭐ 执行工具脚本 |
+| **P1** | `archive/SKILL-2026-05-27.md` | 1 | 全文读取 | ⭐⭐⭐⭐ 逻辑一致性规则 |
+| **P1** | `archive/collect_*.py` | 2 | 全文读取 | ⭐⭐⭐ 数据采集策略 |
+| **P1** | `shared/html-email-format.md` | 1 | 全文读取 | ⭐⭐⭐⭐ 邮件排版 |
+| **P1** | `shared/memory-auto-write-optimization.md` | 1 | 全文读取 | ⭐⭐⭐⭐ 记忆写入优化 |
+| **P1** | `share/send-email/` | 7 | 全部读取 | ⭐⭐⭐ 邮件发送工具 |
+| **P1** | `share/sync-daily-to-obsidian/` | 14 | README+脚本 | ⭐⭐⭐ 同步规范 |
+| **P1** | `share/learning-workflow/` | 6 | 全部读取 | ⭐⭐⭐ 学习工作流 |
+| **P1** | `share/browser/experience-browser.md` | 1 | 全文读取 | ⭐⭐⭐ 浏览器经验 |
+| **P1** | `share/skill-develop/` | 2 | 全部读取 | ⭐⭐ 技能开发 |
+| **P1** | `share/daily-report-config.md` | 1 | 全文读取 | ⭐⭐⭐ 报告配置 |
+| **P2** | `report/` 报告正文 | 84 | 抽取最新5份各类型 | ⭐⭐ 报告结构参考 |
+| **P2** | `daily/` 日志 | 7 | 扫描标题+最新2天全文 | ⭐⭐ 对话模式 |
+| **P2** | `archive/history-*/` | 33 | 扫描标题了解模式 | ⭐ 历史信号 |
+| **P2** | `workspace-final/skills/` 其余SKILL | ~10 | 扫描SKILL.md头部 | ⭐⭐ 工具规范 |
+| **P2** | `/root/.openclaw/skills/` | 19 | 扫描SKILL.md头部 | ⭐⭐ 通用技能 |
+
+**总计**: 291 个文件 → 已产出 25 个基因（第一版，仅扫描顶层 21 个文件）
+**遗漏估计**: 子目录中还有 ~30 个高价值文件未产出基因，需补充
 
 ### 8.4 常见遗漏点（违规记录）
 
@@ -404,6 +606,25 @@ done
 | 4 | 只读report/不读模板 | 遗漏报告结构规范 | 必须同时读report/和skills/*/references/ |
 | 5 | 忽略archive/中的Python脚本 | 遗漏数据采集经验 | .py脚本包含API调用策略和降级逻辑 |
 | 6 | 忽略cron脚本 | 遗漏17项操作规则 | cron脚本的prompt就是最完整的操作规范 |
+| **7** | **忽略skills/*/references/子目录** | **遗漏报告模板(43KB)、Checklist(18KB)、优化方案(3个)、分析提示词(8KB)、数据源规范(8KB)** | **references/ 是核心经验密度最高的子目录，14个文件产出5+个基因** |
+| **8** | **忽略skills/*/scripts/子目录** | **遗漏数据采集脚本(15KB)、质量检查脚本(9KB)、复盘同步脚本(20KB)** | **scripts/ 包含执行策略和API调用经验，产出数据采集基因** |
+| **9** | **忽略archive/子目录history-*/ (33个文件)** | **遗漏历史对话模式信号** | **history-*/ 提供历史对话语料，是repair基因的信号来源** |
+| **10** | **忽略share/learning-workflow/ (6个文件)** | **遗漏完整学习工作流规范** | **学习工作流包含自动提取脚本+组织脚本+完整指南** |
+| **11** | **忽略share/memory-auto-write-optimization.md (19KB)** | **遗漏四重机制记忆写入优化方案** | **包含AGENTS/SOUL/HEARTBEAT/IDENTITY四文件改动模板** |
+| **12** | **忽略share/browser/experience-browser.md (13KB)** | **遗漏浏览器自动化专项经验** | **CDP端口配置+截图规范+网站查询经验+常见问题解决** |
+| **13** | **忽略share/skill-develop/ (2个文件)** | **遗漏技能开发完整方法论** | **技能开发四阶段流程+文档要素标准+最佳实践** |
+| **14** | **忽略a-stock-analysis-lite/references/analysis-prompts.md** | **遗漏六大章节分析提示词** | **核心观点/价格结构/数据透视/情景模拟/风险提示/总结的完整prompt** |
+| **15** | **忽略a-stock-analysis-lite/references/data-sources.md** | **遗漏A~H八类数据源规范** | **实时行情/资金流向/财务数据/公告/行业景气/ST专项/基础信息/技术面** |
+
+#### 遗漏根因分析
+
+**核心问题：第一次扫描只读了顶层文件的"文件名"，没有进入子目录读取内容。**
+
+- `skills/a-stock-daily-report/` 顶层只有 `SKILL.md` + `reader.md`，但 `references/` 子目录有 **14 个文件**（模板、Checklist、优化方案、数据源等），`scripts/` 子目录有 **3 个文件**（数据采集、质量检查、同步）
+- `archive/` 顶层只有 4 个文件，但 `history-2026-03/` 有 5 个、`history-2026-04/` 有 **28 个**
+- `share/` 顶层只有 12 个文件，但子目录如 `learning-workflow/` 有 6 个、`sync-daily-to-obsidian/` 有 14 个
+
+**扫描 SOP 修正**：必须用 `find /path -type f | sort` 列出所有文件（含子目录），然后按优先级逐文件读取。
 
 ### 8.5 基因格式（JSONL）
 
@@ -434,6 +655,8 @@ cd ~/.openclaw/workspace-final && bash evolve.sh --strategy balanced  # 日常
 
 ### 8.7 知识源→基因映射表（Final Agent）
 
+#### 第一轮扫描（21 个文件 → 25 个基因，已写入）
+
 | 知识源文件 | 产出基因 | 经验提取方式 |
 |-----------|---------|-------------|
 | MEMORY.md | gene_portfolio_check, gene_portfolio_data_authority, gene_session_end_protocol | 直接提取铁律和规则 |
@@ -458,3 +681,44 @@ cd ~/.openclaw/workspace-final && bash evolve.sh --strategy balanced  # 日常
 | capability-evolver/SKILL.md | gene_learning_extraction_workflow | 提取Evolver运行机制 |
 | self-improving-agent/SKILL.md | gene_learning_extraction_workflow | 提取.learnings/规范 |
 | share/learning-workflow/ | gene_learning_extraction_workflow | 提取学习工作流 |
+
+#### 第二轮深度扫描（遗漏的子目录文件 → 需补充的基因）
+
+| 知识源文件 | 建议产出基因 | 经验提取方式 | 优先级 |
+|-----------|-------------|-------------|--------|
+| a-stock-daily-report/references/template-morning.md | gene_report_structure_morning（增强） | 提取13章完整模板结构 | 🔴 P0 |
+| a-stock-daily-report/references/template-afternoon.md | gene_report_structure_midday（增强） | 提取午盘12章模板结构 | 🔴 P0 |
+| a-stock-daily-report/references/template-tail.md | gene_report_structure_afternoon（增强） | 提取尾盘16章模板结构 | 🔴 P0 |
+| a-stock-daily-report/references/template-review.md | gene_report_structure_review（增强） | 提取复盘11章模板结构 | 🔴 P0 |
+| a-stock-daily-report/references/report-templates.md (43KB) | gene_report_structure_*（合并增强） | 提取四种报告完整模板（含数据看板、操作优先级） | 🔴 P0 |
+| a-stock-daily-report/references/optimization-plan.md | gene_report_generation_pipeline | 提取分阶段生成流水线（Phase 0→1→2→3） | 🔴 P0 |
+| a-stock-daily-report/references/optimization-plan-v2.md | gene_report_generation_pipeline | 提取v2执行稿（缓存+质量检查+增量上下文） | 🔴 P0 |
+| a-stock-daily-report/references/afternoon-optimization-plan-v1.md | gene_report_structure_midday（午盘优化） | 提取午盘操作指令一体化方案 | 🟡 P1 |
+| a-stock-daily-report/references/data-sources.md | gene_data_source_priority（增强） | 提取腾讯/东方财富/mootdx调用代码 | 🟡 P1 |
+| a-stock-daily-report/references/email-guide.md | gene_email_send_workflow（增强） | 提取5步发送流程+排版问题修复+主题格式 | 🟡 P1 |
+| a-stock-daily-report/references/parallel-step-brief.md | gene_report_generation_pipeline | 提取并行步骤摘要 | 🟢 P2 |
+| a-stock-daily-report/scripts/collect_report_data.py | gene_data_collection_script | 提取并行采集架构（5线程+缓存+超时） | 🟡 P1 |
+| a-stock-daily-report/scripts/quality_check.py | gene_report_quality_validation（增强） | 提取7条自动一致性检查规则 | 🔴 P0 |
+| a-stock-daily-report/scripts/sync_skill_from_review.py | gene_review_auto_sync | 提取复盘→SKILL.md自动同步机制 | 🟡 P1 |
+| a-stock-analysis-lite/references/analysis-prompts.md | gene_analysis_prompt_template | 提取六大章节分析提示词模板 | 🟡 P1 |
+| a-stock-analysis-lite/references/data-sources.md | gene_data_source_priority（增强） | 提取A~H八类数据源+换手率解读+52周定位 | 🟡 P1 |
+| a-stock-analysis-lite/references/report-template.md | gene_report_html_template | 提取HTML报告模板+排版规范 | 🟡 P1 |
+| shared/memory-auto-write-optimization.md | gene_memory_write_optimization | 提取四重机制+各文件改动模板+执行检查清单 | 🟡 P1 |
+| shared/browser/experience-browser.md | gene_browser_automation | 提取CDP端口+截图规范+网站查询+常见问题 | 🟡 P1 |
+| shared/skill-develop/skill-development-guide.md | gene_skill_development | 提取四阶段开发流程+文档要素+最佳实践 | 🟢 P2 |
+| shared/daily-report-config.md | gene_report_schedule_config | 提取cron配置+超时设置+报告内容要求 | 🟢 P2 |
+| share/learning-workflow/完整使用与技术指南.md | gene_learning_workflow（增强） | 提取完整使用指南+技术架构 | 🟢 P2 |
+| share/learning-workflow/extract_learnings_auto.sh | gene_learning_workflow（增强） | 提取自动提取脚本逻辑 | 🟢 P2 |
+| archive/collect_report_data-2026-05-27.py | gene_data_collection_script（增强） | 提取实际采集函数（腾讯解析+东财解析） | 🟡 P1 |
+| archive/collect_tail_data-2026-05-27.py | gene_data_collection_script（增强） | 提取curl降级+外围市场采集 | 🟡 P1 |
+| report/afternoon-optimization-plan-v1.md | gene_report_structure_midday（午盘优化） | 提取午盘操作指令一体化+5项改动 | 🟡 P1 |
+
+#### 汇总
+
+| 统计 | 第一轮 | 第二轮（补充） | 总计 |
+|------|--------|---------------|------|
+| 知识源文件 | 21 | 27 | 48 |
+| 产出基因 | 25 | ~20（新增） | ~45 |
+| 其中 optimize | 17 | ~13 | ~30 |
+| 其中 repair | 6 | ~5 | ~11 |
+| 其中 innovate | 2 | ~2 | ~4 |
