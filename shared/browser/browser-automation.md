@@ -197,256 +197,35 @@ curl -s "https://www.6v520.com/zydy/2023-09-26/42788.html" > /tmp/page.html
 # 提取所有磁力链接
 curl -s "https://www.6v520.com/zydy/2023-09-26/42788.html" | grep -o "magnet:?xt=[^\"<>]*"
 # 提取特定集数（如138集）的链接
-curl -s "https://www.6v520.com/zydy/2023-09-26/42788.html" | grep -o "magnet:?xt=[^\"<>]*" | grep "8d76c55eac39b40ce4d9e79a9e86877b2da910a8"
-# 处理HTML实体编码（&amp; 转 &）
-curl -s "https://www.6v520.com/zydy/2023-09-26/42788.html" | grep -o "magnet:?xt=[^\"<>]*" | sed "s/&amp;/\&/g"
-```
-
-注意事项：
-
-```bash
-# ⚠️ 重要提醒：
-# ref编号（如e20、e22、e80）每次打开页面可能会变化
-# 如果提示"Could not locate element"，需要重新执行 snapshot 获取最新的ref
-agent-browser --cdp 9222 snapshot
-# 然后在输出中找到对应元素的ref，重新执行命令
-```
-
-#### 小红书热点新闻提取
-
-```bash
-# 1. 打开探索页面
-agent-browser --cdp 9222 open "https://www.xiaohongshu.com/explore"
-agent-browser --cdp 9222 screenshot "/tmp/xiaohongshu_explore.png"
-
-# 2. 提取热门笔记（修正版）
-agent-browser --cdp 9222 eval '
-  var notes = Array.from(document.querySelectorAll(".note-item")).slice(0, 3);
-  notes.map(function(note) {
-    var title = note.querySelector("h3") || note.querySelector("span");
-    return {
-      title: title ? title.textContent.trim() : "未知标题",
-      link: note.querySelector("a") ? note.querySelector("a").href : "",
-      description: "小红书热门笔记"
-    }
-  })
-'
-
-# 3. 获取热点标签
-agent-browser --cdp 9222 eval 'Array.from(document.querySelectorAll(".tag")).map(t => t.innerText)'
-```
-
-### 常用网站配置（一键使用）
-| 网站 | 完整URL | 特殊说明 |
-|------|---------|----------|
-| 小红书 | https://www.xiaohongshu.com/explore | 需登录，保持会话 |
-| 淘宝 | https://www.taobao.com | 需登录，避免风控 |
-| 6v520电影网 | https://www.6v520.com/zydy/ | 正常访问 |
-| 百度 | https://www.baidu.com | 简单访问 |
-| 知乎网 | https://www.zhihu.com/ | 需登录，避免风控 |
-| 哔哩哔哩 | https://www.bilibili.com/ | 需登录，避免风控 |
-
-### 常见问题解决（一看就懂）
-#### 问题1：9222端口显示"新标签页"
-**原因**：浏览器会话断开或未正确启动  
-**解决方案**：
-
-```bash
-# 1. 重启浏览器
-pkill chromium
-/usr/bin/chromium-browser --remote-debugging-port=9222 --no-sandbox &
-
-# 2. 等待3秒让浏览器启动
-sleep 3
-
-# 3. 重试连接
-timeout 10s agent-browser --cdp 9222 open "https://www.xiaohongshu.com/explore"
-```
-
-#### 问题2：CDP连接失败
-**原因**：端口被占用或浏览器异常  
-**解决方案**：
-
-```bash
-# 检查端口状态
-# （确保绑定在 127.0.0.1:9222）
-netstat -tlnp | grep 9222
-
-# 检查进程
-ps aux | grep chromium
-
-# 重启服务
-sudo systemctl restart chromium-cdp.service
-
-# 确认启动成功：
-# 应该返回包含 "Browser" 字段的 JSON。
-curl http://localhost:9222/json/version
-```
-
-#### 问题3：CDP连接失败
-
-**原因**：浏览器CDP兼容问题
-**解决方案**：
-
-```bash
-# 查看浏览器状态，确认detectedPath地址
-openclaw browser status
-
-# ✅ Google Chrome deb版本（147.x）具有更好的CDP兼容性
-root@wm210:~/.openclaw# openclaw browser status
-profile: openclaw
-enabled: true
-running: false
-transport: cdp
-cdpPort: 18800
-cdpUrl: http://127.0.0.1:18800
-browser: unknown
-detectedBrowser: chrome
-detectedPath: /usr/bin/google-chrome
-profileColor: #FF4500
-
-# ❌ 默认Chromium snap版本（146.x）CDP兼容性较差，导致小红书IP限制错误
-root@wm210:~/.openclaw# openclaw browser status
-profile: openclaw
-enabled: true
-running: false
-transport: cdp
-cdpPort: 18800
-cdpUrl: http://127.0.0.1:18800
-browser: unknown
-detectedBrowser: chromium
-detectedPath: /usr/bin/chromium-browser
-profileColor: #FF4500
-```
-
-#### 问题4：CDP连接失败
-
-**原因**：browser配置错误，未指定浏览器path路径，导致使用CDP兼容性较差默认Chromium snap版本
-**解决方案**：
-
-```bash
-  "browser": {
-    "enabled": true,
-    "path": "/usr/bin/google-chrome",
-    "headless": false,
-    "defaultProfile": "openclaw",
-    "profiles": {
-      "openclaw": {
-        "cdpUrl": "http://127.0.0.1:9222",
-        "color": "#4285F4"
-      }
-    }
-  }
-```
-
-#### 问题5：截图无法访问
-
-**原因**：HTTP服务未启动或路径错误  
-**解决方案**：
-
-```bash
-# 启动HTTP服务
-python3 -m http.server 8888 --bind 192.168.1.x --directory /tmp/ &
-
-# 验证文件存在
-ls -la /tmp/*.png
-
-# 检查HTTP状态
-curl -I http://192.168.1.x:8888/filename.png
-```
-
-#### 问题6：关于Chromium 版本问题
-
-**原因**：在 Ubuntu（以及许多 Linux 发行版）上，默认的 Chromium 安装是 **snap 软件包**。Snap 的 AppArmor 限制会干扰 OpenClaw 启动和监控浏览器进程的方式。
-**解决方案**：安装官方的 Google Chrome `.deb` 软件包，它不受 snap 沙箱限制 
-
-```bash
-# 从Google官方仓库重新下载.deb文件：
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-# 自动安装缺失依赖：
-sudo apt-get install -f
-# 手动安装依赖：根据错误日志，安装以下常见依赖（Ubuntu 20.04）：
-sudo apt-get install -y \
-  libappindicator1 \
-  libgconf-2-4 \
-  libatk-bridge2.0-0 \
-  libgtk-3-0 \
-  libnss3 \
-  libxss1 \
-  libx11-xcb1
-  
-#添加Google Chrome官方仓库：
-wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-
-# 更新软件包列表并安装：
-sudo apt update
-sudo apt install google-chrome-stable
-
-# 验证
-google-chrome --version  # 应显示版本号
-```
-
-### 快速上手指南（新手必看）
-
-```bash
-# 步骤1：在宿主机启动浏览器
-/usr/bin/chromium-browser --remote-debugging-port=9222 --no-sandbox &
-
-# 步骤2：在OpenClaw中连接
-agent-browser --cdp 9222 open "https://www.xiaohongshu.com/explore"
-
-# 步骤3：截图并分享
-agent-browser --cdp 9222 screenshot "/tmp/xiaohongshu.png"
-python3 -m http.server 8888 --bind 192.168.1.x --directory /tmp/ &
-echo "查看：http://192.168.1.x:8888/xiaohongshu.png"
-```
-
-### 性能优化建议
-- **优先级**：优先使用9222端口（有界面），避免IP限制
-- **超时设置**：agent-browser默认10秒超时，网络慢时可调整
-- **内存管理**：定期清理`/tmp/`目录的截图文件
-- **错误处理**：遇到连接失败立即切换9223端口作为备用
-
-### 安全注意事项
-- ✅ 使用`--no-sandbox`时确保在受控环境运行
-- ✅ 不要在公网暴露CDP端口（9222/9223）
-- ✅ 定期更新浏览器和agent-browser版本
-- ✅ 避免频繁请求同一网站触发风控
-
-### 文件作用分析
-
-#### agent-browser.env (环境配置)
-
-✅ **必需** - 环境变量配置文件
-
-- 设置CHROME_PATH=/snap/bin/chromium (浏览器路径)
-- 设置CHROMEDRIVER_PATH=/usr/bin/chromedriver (驱动路径)  
-- 设置CHROME_EXTRA_ARGS (安全参数)
-
-#### browser-stable.sh (浏览器控制脚本)
-
-✅ **必需** - 浏览器控制脚本
-
-- 提供统一的浏览器操作接口
-- 支持open、url、snapshot、screenshot、ping等命令
-- 自动处理CDP连接和超时
-
-#### chromium-cdp.service (服务配置)
-
-✅ **必需** - systemd服务配置
-
-- 自动启动9223端口无头浏览器服务
-- 确保CDP服务持续运行
-- 资源限制和自动重启机制
-
-#### experience-browser.md (专项经验文档)
-
-✅ **必需** - 浏览器如何使用、经验文档
 
 ---
 
-**最后更新**: 2026-04-24
+## 扩展经验（2026-04-27 补充）
+
+### agent-browser ref 格式规范
+- **必须加 @ 前缀**
+  - ✅ `agent-browser --cdp 9222 fill @e20 "关键词"`
+  - ❌ `agent-browser --cdp 9222 fill e20 "关键词"`（会报错）
+- **snapshot 获取 ref**: 使用 `agent-browser snapshot @e20` 获取元素引用
+- **适用场景**: 所有 agent-browser 的 fill/click/select 操作
+
+### 截图分享规范（重要！）
+- ❌ 错误：只用 localhost
+  - `http://127.0.0.1:8888/xxx.png` — 用户打不开！
+- ✅ 正确：获取真实 IP
+  ```bash
+  hostname -I | awk '{print $1}'  # → 192.168.1.210
+  http://192.168.1.210:8888/xxx.png  # 验证200 OK后再分享
+  ```
+
+### sed 转义问题（易错！）
+- ❌ 错误：单引号不转义
+  - `sed 's/&amp;/\&/g'` → 输出 `\&` 而非 `&`
+- ✅ 正确：双引号正确转义
+  - `sed "s/&amp;/\&/g"` → 输出 `&`
+
+---
+
+**最后更新**: 2026-04-27
 **更新者**: tech agent
-**验证状态**: ✅ 已验证可用，其他代理可直接学习使用
-**学习难度**: ⭐⭐⭐ (3/5) - 提供完整示例和快速上手指南
+**验证状态**: ✅ 已验证可用
