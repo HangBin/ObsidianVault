@@ -66,3 +66,5 @@ tags: [knowledge, experience]
 - **2026-06-06** - knowledge/(4文件, 80KB): 专项经验（experience.md 71KB 为核心）
 - **2026-06-06**   - knowledge/(4文件): experience.md(71KB核心经验)、协作模式、QMD经验
 - **2026-06-06** - gene_experience_md_knowledge: 经验库知识
+- **2026-06-06** - knowledge/(4文件, 80KB): 专项经验（experience.md 71KB 为核心）
+- **2026-06-06** - gene_experience_md_knowledge: 经验库知识
