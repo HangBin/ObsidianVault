@@ -1,7 +1,7 @@
 <!--
 作者: tech agent (v1.0) + final agent (v1.1 补充)
-修改时间: 2026-06-06 20:33 GMT+8
-版本号: v1.3.0
+修改时间: 2026-06-06 20:44 GMT+8
+版本号: v1.4.0
 -->
 
 # GEP Evolver 闭环：触发→执行→固化→基因更新
@@ -354,12 +354,13 @@ for line in sys.stdin:
 
 ### 8.1 扫描原则
 
-1. **必须进入子文件夹深度扫描**，禁止只看目录结构就下结论
-2. **先列目录 → 再按优先级读取 → 最后提炼基因**
-3. **每个 SKILL.md 的 `references/` 和 `scripts/` 子目录是核心经验源**，不可跳过
+1. **必须进入子文件夹深度扫描**，禁止只看目录结构就下结论。每个目录下的所有子目录（如 archive/history-2026-03/、archive/history-2026-04/、daily/、knowledge/、report/、shared/browser/ 等）都必须逐文件读取，不能只列目录名就跳过
+2. **先列目录 → 再按优先级读取 → 最后提炼基因**。列目录只完成 10%，核心工作是逐文件读取内容
+3. **每个 SKILL.md 的 `references/` 和 `scripts/` 子目录是核心经验源**，不可跳过。references/ 包含方法论，scripts/ 包含可执行代码，两者都是高密度经验源
 4. **cron 脚本的 prompt 往往是最完整的操作规范**，不可忽略
-5. **跨 agent 共享目录**（如 `share/`、`/root/.openclaw/share/`）包含共同经验，必须扫描
-6. **违规记录是最好的 repair 基因来源**，重点扫描
+5. **跨 agent 共享目录**（如 `share/`、`/home/obsidian_vault/shared/`、`/root/.openclaw/share/`）包含共同经验，必须扫描
+6. **违规记录是最好的 repair 基因来源**，重点扫描 daily/ 日志中的违规记录章节
+7. **全量读取是标准操作**：P0 目录必须 100% 文件读取，P1 目录按优先级逐个读取，P2 目录至少扫描标题结构。禁止"心理跳过"——不存在"这个文件不重要"的判断
 
 ### 8.2 扫描清单模板
 
@@ -399,18 +400,17 @@ done
 
 | 优先级 | 目录 | 文件数 | 扫描方式 |
 |--------|------|--------|---------|
-| **P0** | `knowledge/` | 4 | 全部读取，核心经验直接产基因 |
-| **P0** | `archive/` | 35 | 按月+按类型扫描，Python脚本和SKILL文件优先 |
-| **P0** | `daily/` | 28 | 扫描标题结构，提取对话信号模式 |
-| **P0** | `report/` | 84 | 抽取最新5份报告分析结构模板 |
-| **P0** | `shared/` | 12 | 全部读取，跨agent共享经验 |
-| **P1** | `workspace-final/skills/` | 57 | 读取所有SKILL.md + references/ + scripts/ |
+| **P0** | `knowledge/` | 4 | 全部读取（experience.md 71KB 为核心经验源，直接产基因） |
+| **P0** | `archive/` | 35 | 全部读取：2个月度归档索引 + SKILL副本 + 2个采集脚本 + 28个history日志 |
+| **P0** | `daily/` | 29 | 全部读取：5/1-6/6 每日操作日志，含违规记录、持仓变化、操作经验 |
+| **P0** | `report/` | 84 | 全部读取：19早盘+19午盘+21复盘+19持仓分析+1基金分析+1优化方案 |
+| **P0** | `shared/` | 12 | 全部读取：浏览器自动化、GEP闭环、邮件排版、归档经验等 |
+| **P0** | `workspace-final/` 根目录 | 11 | 全部读取：AGENTS.md, SOUL.md, TOOLS.md, MEMORY.md 等核心文件 |
+| **P1** | `workspace-final/skills/` | 53 | 全部读取：7个SKILL.md + 17个references/*.md + 7个scripts/*.py |
 | **P1** | `/root/.openclaw/share/` | 52 | 读取cron配置+邮件系统+同步系统+学习工作流 |
 | **P1** | `/root/.openclaw/skills/` | 19 | 读取capability-evolver+记忆管理+自我改进 |
-| **P2** | `archive/history-2026-03/` | 5 | 扫描标题了解历史记录模式 |
-| **P2** | `archive/history-2026-04/` | 24 | 扫描标题了解历史记录模式 |
 
-**总计**: 291 个文件 → 产出 25 个基因
+**总计**: 217 个文件，全量读取 → 最终产出 56 个财务专属基因 + 23 个移入 main 通用基因
 
 ### 8.4 常见遗漏点（违规记录）
 
@@ -422,6 +422,12 @@ done
 | 4 | 只读report/不读模板 | 遗漏报告结构规范 | 必须同时读report/和skills/*/references/ |
 | 5 | 忽略archive/中的Python脚本 | 遗漏数据采集经验 | .py脚本包含API调用策略和降级逻辑 |
 | 6 | 忽略cron脚本 | 遗漏17项操作规则 | cron脚本的prompt就是最完整的操作规范 |
+| 7 | 只列archive/标题不读内容 | 遗漏35个文件的历史经验 | archive/ 35个文件全部读取，包含28个history日志 |
+| 8 | 只列daily/标题不读内容 | 遗漏29天的操作日志 | daily/ 29个文件全部读取，违规记录是最好的repair基因来源 |
+| 9 | 只列knowledge/标题不读experience.md | 遗漏71KB核心经验 | knowledge/experience.md 是最大知识库，雪球验证码/东财push2/反爬策略都在里面 |
+| 10 | 只列report/标题不读报告内容 | 遗漏84份报告的结构模板 | report/ 84个文件全量读取，才能提取完整的四时段报告结构 |
+| 11 | 忽略workspace-final/根目录文件 | 遗漏AGENTS.md/SOUL.md/TOOLS.md等 | 根目录11个文件是核心规则源，MEMORY.md(软链接)、IDENTITY.md、USER.md都在这里 |
+| 12 | 跳过daily/中的违规记录章节 | 遗漏repair基因来源 | 违规记录是repair基因的最佳来源，每条违规=一个修复模式 |
 
 ### 8.5 基因格式（JSONL）
 
