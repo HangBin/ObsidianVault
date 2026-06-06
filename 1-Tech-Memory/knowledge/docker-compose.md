@@ -531,3 +531,4 @@ docker compose restart
 - **2026-06-05** - 选择器测试：选 `gene_docker_compose_deploy` ✅（之前选 `gene_gep_repair_from_errors`）
 - **2026-06-05** - 选择器测试：选 `gene_docker_compose_deploy` ✅（之前选 `gene_gep_repair_from_errors`）
 - **2026-06-05** - 选择器测试：选 `gene_docker_compose_deploy` ✅（之前选 `gene_gep_repair_from_errors`）
+- **2026-06-05** - 最佳匹配：`gene_docker_compose_deploy` (4/5 signals) ✅
