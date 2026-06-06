@@ -129,7 +129,7 @@
     - ✅ **备选方案**: 准备重启动、文件移动持久化、或直接 base64 嵌入（小文件）等替代方案
     - 📌 **应用场景**: 截图分享、临时文件下载、局域网调试服务、自动化脚本结果导出
     - 📌 **经验来源**: 淘宝搜索自动化任务（uno男士洗面奶）截图分享失败案例
-    - 📌 **专项文件**: `/home/obsidian_vault/shared/browser/experience-browser.md`
+    - 📌 **专项文件**: `/home/obsidian_vault/shared/browser/browser-automation.md`
 
 ---
 
@@ -144,7 +144,7 @@
 ## 📚 记忆体系
 - **MEMORY.md**（本文件）：长期宪法，主会话加载
 - **memory/YYYY-MM-DD.md**：每日原始日志，每次会话从零开始
-- **专项经验**: `/home/obsidian_vault/shared/browser/experience-browser.md`（Chromium CDP 自动化方案）
+- **专项经验**: `/home/obsidian_vault/shared/browser/browser-automation.md`（Chromium CDP 自动化方案）
 - **定期回顾**：每次会话开始读取前一日日志，提炼信息沉淀到 MEMORY.md
 
 
@@ -204,11 +204,17 @@
 -->
 ```
 
-**文件命名规则：**
+**文件命名规则（强制）：**
 
-- ❌ 禁止 `experience-` 前缀（如 `experience-xxx.md`）
-- ✅ 使用描述性 kebab-case 名称（如 `gep-evolver-closed-loop.md`）
-- 名称 2-6 个描述性单词，连字符分隔
+- ❌ **绝对禁止** `experience-` 前缀（如 `experience-xxx.md`）
+  - **原因**：`experience-` 是旧命名习惯，会导致文件名冗长、不统一
+  - **后果**：如果使用了 `experience-` 前缀，必须立即重命名为 kebab-case
+- ✅ **使用**描述性 kebab-case 名称（如 `gep-evolver-closed-loop.md`）
+  - 名称 2-6 个描述性单词，连字符分隔
+  - 名称必须传达文档内容，不能模糊
+  - ✅ 正确：`gep-evolver-closed-loop.md`、`docker-compose-deploy.md`
+  - ❌ 错误：`experience-gep-evolver.md`、`my-notes.md`、`temp.md`
+- ⚠️ **所有已有 `experience-` 前缀的文件必须逐步重命名**
 
 **引用规则：**
 
@@ -234,12 +240,13 @@
 | 记忆归档 | `memory-system.md` | 记忆归档流程与整理机制 |
 | 备份系统 | `backup-system.md` | 多工作区备份系统架构 |
 | 协作模式 | `collaboration-patterns.md` | 工作区隔离与跨Agent通信 |
-| 浏览器自动化 | `/shared/browser/experience-browser.md` | Chromium CDP 自动化方案 |
+| 浏览器自动化 | `/shared/browser/browser-automation.md` | Chromium CDP 自动化方案 |
 | Mission Control | `mission-control-dashboard.md` | Next.js 应用完整部署 |
 | Control Center | `openclaw-control-center-dashboard.md` | OpenClaw Control Center |
 | QMD+Obsidian | `qmd-obsidian-system.md` | 向量检索与知识库集成 |
-| 经验索引 | `experience-index.md` | 经验文件总索引 |
+| 知识图谱 | `/home/obsidian_vault/shared/knowledge-graph.md` | 知识库图谱关联经验 |
 | GEP Evolver 闭环 | `/home/obsidian_vault/shared/gep-evolver-closed-loop.md` | 触发→执行→固化→基因更新完整闭环 |
+| 日志归档 | `/home/obsidian_vault/shared/log-archive.md` | 日志归档专项经验 |
 
 **访问方式**: `/home/obsidian_vault/1-Tech-Memory/knowledge/`
 
@@ -251,7 +258,7 @@
 | `memory/MULTI_WORKSPACE_BACKUP_SETUP.md` | 多工作区备份完整改造说明 |
 | `reports/2026_AI_Development_Report_Summary.md` | AI大模型发展报告结构化摘要 |
 | `backups/workspaces_monthly_summary_2026-03.md` | 3月份备份执行总结 |
-| `/home/obsidian_vault/shared/browser/experience-browser.md` | **Chromium CDP 浏览器自动化方案**（绕过 OpenClaw 限制） |
+| `/home/obsidian_vault/shared/browser/browser-automation.md` | **Chromium CDP 浏览器自动化方案**（绕过 OpenClaw 限制） |
 | `/root/.openclaw/share/browser/INSTALL.md` | 完整安装指南（含多代理协作说明、FAQ） |
 | `/root/.openclaw/share/learning-workflow/` | 记忆归档与学习提取工作flow |
 | `/root/.openclaw/share/modernwms/` | Modern WMS 部署文档 |
@@ -992,7 +999,7 @@ curl -s "页面URL" | grep -o "magnet:?xt=[^\"<>]*" | sed "s/&amp;/\&/g" | grep 
 - 功能缺失 → FEATURE_REQUESTS.md
 - 发现更好方案 → LEARNINGS.md
 
-### 🌐 浏览器自动化经验（shared/browser/experience-browser.md）
+### 🌐 浏览器自动化经验（shared/browser/browser-automation.md）
 
 #### 核心要点
 - Chromium CDP 端口：9222（主）、9223（备用）
