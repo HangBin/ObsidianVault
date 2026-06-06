@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2-Final-Memory/report/report-index.md",
+                "file": "Personal/技术资料/OpenClaw/Skill技能/基础使用技能 capability-evolver安装配置.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "report-index"
+              "title": "基础使用技能 capability-evolver安装配置"
             }
           }
         ]
@@ -94,13 +94,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "2-Final-Memory/report/report-index.md",
+                "file": "Personal/技术资料/OpenClaw/Skill技能/基础使用技能 capability-evolver安装配置.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "report-index 的大纲"
+              "title": "基础使用技能 capability-evolver安装配置 的大纲"
             }
           },
           {
@@ -207,8 +207,18 @@
   },
   "active": "75a0f4c9bb7af97a",
   "lastOpenFiles": [
-    "2-Final-Memory/report/portfolio-analysis-2026-05-07.md",
+    "2-Final-Memory/report/portfolio-analysis-2026-06-05.md",
+    "2-Final-Memory/report/portfolio-analysis-2026-06-04.md",
+    "2-Final-Memory/report/morning-analysis-2026-06-05.md",
+    "2-Final-Memory/report/daily-review-2026-06-04.md",
+    "2-Final-Memory/report/afternoon-analysis-2026-06-05.md",
+    "2-Final-Memory/report/afternoon-analysis-2026-06-04.md",
+    "2-Final-Memory/daily/2026-06-05.md",
+    "1-Tech-Memory/knowledge/experience-browser.md",
+    "1-Tech-Memory/daily/2026-06-05.md",
+    "1-Tech-Memory/daily/2026-06-04.md",
     "2-Final-Memory/report/report-index.md",
+    "2-Final-Memory/report/portfolio-analysis-2026-05-07.md",
     "2-Final-Memory/report/portfolio-analysis-2026-06-03.md",
     "2-Final-Memory/report/morning-analysis-2026-06-04.md",
     "2-Final-Memory/report/morning-analysis-2026-06-03.md",
@@ -223,17 +233,7 @@
     "Personal/技术资料/OpenClaw/OpenClaw 备份内容.md",
     "Personal/技术资料/OpenClaw/未命名.md",
     "Personal/技术资料/OpenClaw/窗口命令.md",
-    "Personal/技术资料/OpenClaw/常用对话指令.md",
-    "Personal/技术资料/OpenClaw/部署安装--docker方式.md",
-    "Personal/技术资料/OpenClaw/部署安装--一键安装.md",
-    "Personal/技术资料/OpenClaw/人格文件相关/SOUL.md — 灵魂文件.md",
     "Personal/技术资料/OpenClaw/MCP",
-    "Personal/技术资料/OpenClaw/人格文件相关/OpenClaw核心优化规则（可直接写入MEMORY.md）.md",
-    "Personal/技术资料/OpenClaw/人格文件相关/HEARTBEAT.md -- 心跳任务.md",
-    "Personal/技术资料/OpenClaw/人格文件相关/AGENTS.md — 工作手册.md",
-    "Personal/技术资料/OpenClaw/人格文件相关/新闻助手的设置.md",
-    "Personal/技术资料/OpenClaw/人格文件相关/安全.md",
-    "Personal/技术资料/OpenClaw/人格文件相关/1. AI助手灵魂三件套.md",
     "Personal/技术资料/OpenClaw/QMD",
     "2-Final-Memory/report/morning-analysis-2026-05-27.md.bak",
     "images/1779688823181.png",
