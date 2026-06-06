@@ -235,3 +235,202 @@ for line in sys.stdin:
 3. **基因选择要避免局部最优**: 连续选同一基因说明信号或选择器有问题
 4. **自动检测机制很重要**: 不能依赖 executor agent 自行完成 solidify
 5. **知识源要持续扩充**: 79 个文件编码成了 52 个基因，还有提升空间
+
+---
+
+## 8. Final Agent 基因注入经验（v1.1, 2026-06-06）
+
+### 8.1 知识源扫描规范（强制）
+
+> **⚠️ 必须进入子文件夹深度扫描，禁止只看目录结构就下结论！**
+
+Final agent 的知识源分布在 6 大类 30+ 子目录中，总计 291 个文件。扫描时必须：
+
+#### 8.1.1 扫描清单（逐项执行，不可跳过）
+
+| 优先级 | 目录 | 文件数 | 扫描方式 |
+|--------|------|--------|---------|
+| **P0** | `knowledge/` | 4 | 全部读取，核心经验直接产基因 |
+| **P0** | `archive/` | 35 | 按月+按类型扫描，Python脚本和SKILL文件优先 |
+| **P0** | `daily/` | 28 | 扫描标题结构，提取对话信号模式 |
+| **P0** | `report/` | 84 | 抽取最新5份报告分析结构模板 |
+| **P0** | `shared/` | 12 | 全部读取，跨agent共享经验 |
+| **P1** | `workspace-final/skills/` | 57 | 读取所有SKILL.md + references/ + scripts/ |
+| **P1** | `/root/.openclaw/share/` | 52 | 读取cron配置+邮件系统+同步系统+学习工作流 |
+| **P1** | `/root/.openclaw/skills/` | 19 | 读取capability-evolver+记忆管理+自我改进 |
+| **P2** | `archive/history-2026-03/` | 5 | 扫描标题了解历史记录模式 |
+| **P2** | `archive/history-2026-04/` | 24 | 扫描标题了解历史记录模式 |
+
+#### 8.1.2 子文件夹扫描模板
+
+```bash
+# 1. 先列目录结构
+echo "=== 目录X ==="
+find /path/to/dir -type f | sort
+
+# 2. 按优先级读取核心文件
+for f in /path/to/dir/*/SKILL.md; do
+    echo "=== $(basename $(dirname $f)) ==="
+    head -30 "$f"
+done
+
+# 3. 扫描references子目录
+for f in /path/to/dir/*/references/*.md; do
+    echo "=== $(basename $(dirname $f))/$(basename $f) ==="
+    head -50 "$f"
+done
+
+# 4. 扫描scripts子目录（Python/Bash脚本）
+for f in /path/to/dir/*/scripts/*.py; do
+    echo "=== $(basename $(dirname $f))/$(basename $f) ==="
+    head -60 "$f"
+done
+
+# 5. 扫描cron配置
+for f in /path/to/share/final-analysis/*.cron; do
+    echo "=== $(basename $f) ==="
+    cat "$f"
+done
+```
+
+#### 8.1.3 常见遗漏点（违规记录）
+
+| # | 遗漏 | 后果 | 教训 |
+|---|------|------|------|
+| 1 | 只看目录结构不进入子文件夹 | 遗漏skills/下的references/和scripts/ | `find -type f` 必须配合逐文件读取 |
+| 2 | 忽略share/目录 | 遗漏cron配置+邮件系统+邮件模板 | share/是跨agent共享目录，必须扫描 |
+| 3 | 忽略workspace-final/skills/ | 遗漏SKILL.md+模板+checklists | skills/下的references/和scripts/是核心经验源 |
+| 4 | 只读report/不读模板 | 遗漏报告结构规范 | 必须同时读report/和skills/a-stock-daily-report/references/ |
+| 5 | 忽略archive/中的Python脚本 | 遗漏数据采集经验 | .py脚本包含API调用策略和降级逻辑 |
+| 6 | 忽略cron脚本 | 遗漏17项操作规则 | cron脚本的prompt就是最完整的操作规范 |
+
+### 8.2 基因注入方案（Final Agent 25个基因）
+
+#### 8.2.1 基因分类
+
+| 类别 | 数量 | 覆盖范围 |
+|------|------|---------|
+| optimize | 17 | 持仓管理、报告结构、数据源、邮件发送、记忆协议、基金推荐 |
+| repair | 6 | 反爬降级、代码验证、防跳过、碎片合并、同步可靠性、模板漂移 |
+| innovate | 2 | 市场状态识别、学习提取工作流 |
+
+#### 8.2.2 基因清单
+
+**Optimize（17个）**：
+
+| # | 基因ID | 核心策略 | 信号来源 |
+|---|--------|---------|---------|
+| 1 | gene_portfolio_check_before_advice | 分析前必查持仓，已清仓只能推荐重新建仓 | MEMORY.md + README.md |
+| 2 | gene_portfolio_data_authority | Obsidian版本为唯一权威源，禁止覆盖 | MEMORY.md |
+| 3 | gene_report_structure_morning | 早盘报告13章完整结构 | template-morning.md + checklists.md |
+| 4 | gene_report_structure_midday | 午盘报告9章结构 | README.md + checklists.md |
+| 5 | gene_report_structure_afternoon | 尾盘报告11章结构 | README.md + afternoon-report.cron |
+| 6 | gene_report_structure_review | 复盘报告11章结构 | README.md + checklists.md |
+| 7 | gene_report_logic_consistency | 报告逻辑一致性4条（不矛盾） | SKILL-2026-05-27.md |
+| 8 | gene_report_quality_validation | 操作建议具体化+命中率根因分析 | README.md + SKILL-2026-05-27.md |
+| 9 | gene_data_source_priority | 腾讯>东财>akshare>Tavily | TOOLS.md + a-stock-data/SKILL.md |
+| 10 | gene_fund_flow_api_strategy | push2只通过web_fetch | TOOLS.md |
+| 11 | gene_multi_source_data_architecture | 六层数据架构21个端点 | a-stock-data/SKILL.md |
+| 12 | gene_price_authority_rule | 数据源A为唯一价格基准 | a-stock-analysis-lite/references/ |
+| 13 | gene_table_format_preference | 6列表格结构 | experience.md + MEMORY.md |
+| 14 | gene_email_send_workflow | MD→HTML→验证→发送→清理 | html-email-format.md + mail-skill-setup-guide.md |
+| 15 | gene_new_fund_recommendation | 场外基金+API验证+7天预判 | README.md v3.2 |
+| 16 | gene_memory_daily_protocol | frontmatter+时间顺序+双写 | memory-auto-write.md + instant-archive.md |
+| 17 | gene_report_index_sync | wikilink+表格+倒序 | MEMORY.md |
+
+**Repair（6个）**：
+
+| # | 基因ID | 核心策略 | 信号来源 |
+|---|--------|---------|---------|
+| 18 | gene_anticrawl_fallback | 东财>同花顺>雪球，不硬扛WAF | experience.md + ERRORS.md |
+| 19 | gene_fund_code_verification | API验证代码，禁止凭记忆 | SOUL.md 违规记录 |
+| 20 | gene_session_end_protocol_enforce | 8步检查，每步必须有工具调用证据 | AGENTS.md + SOUL.md |
+| 21 | gene_memory_fragment_merge | 去重→融入→立即删除 | AGENTS.md |
+| 22 | gene_obsidian_sync_reliability | md5sum对比+原子删除 | AGENTS.md + sync-daily-to-obsidian/ |
+| 23 | gene_report_template_drift | 模板检查+章节完整性 | a-stock-daily-report/references/ |
+
+**Innovate（2个）**：
+
+| # | 基因ID | 核心策略 | 信号来源 |
+|---|--------|---------|---------|
+| 24 | gene_market_regime_detection | 8维度温度+恐慌预案+连续走势 | MEMORY.md + README.md v3.4 |
+| 25 | gene_learning_extraction_workflow | memory→.learnings→定期回顾 | learning-workflow/ + self-improving-agent/ |
+
+#### 8.2.3 基因格式（JSONL）
+
+```json
+{"type":"Gene","id":"gene_portfolio_check_before_advice","category":"optimize","signals_match":["持仓","基金","加仓","减仓","止损","建仓","清仓","操作建议"],"preconditions":["用户请求涉及持仓分析或投资决策"],"strategy":["读取portfolio.md获取最新持仓","核对每只基金状态","已清仓基金只能推荐重新建仓"],"constraints":{"max_files":3,"forbidden_paths":["node_modules",".git"],"required_reads":["/home/obsidian_vault/2-Final-Memory/portfolio.md"]},"validation":["推荐新基金前检查是否已持有同类型","操作建议与风险提示不矛盾"]}
+```
+
+### 8.3 运行配置
+
+#### 8.3.1 环境变量
+```bash
+export OPENCLAW_WORKSPACE=/root/.openclaw/workspace-final
+export EVOLVER_SESSION_SCOPE=final
+```
+
+#### 8.3.2 路径映射
+| 用途 | 路径 |
+|------|------|
+| 基因库 | ~/.openclaw/skills/capability-evolver/assets/gep/scopes/final/ |
+| 固化状态 | ~/.openclaw/workspace-final/memory/evolution/scopes/final/ |
+| 信号源 | ~/.openclaw/workspace-final/memory/ |
+| 经验源 | /home/obsidian_vault/2-Final-Memory/ |
+
+#### 8.3.3 运行命令
+```bash
+# 首次用review模式
+cd ~/.openclaw/workspace-final && bash evolve.sh --review
+
+# 日常低频后台（建议每天凌晨2:00）
+cd ~/.openclaw/workspace-final && bash evolve.sh --strategy balanced
+```
+
+#### 8.3.4 与现有cron的关系
+```
+现有系统（不受影响）:
+  cron 09:10 → 早盘报告
+  cron 12:00 → 午盘报告
+  cron 14:30 → 尾盘报告
+  cron 16:00 → 复盘报告
+
+新增系统（低频后台）:
+  cron 02:00 → evolve.sh --strategy balanced
+  → 基因库更新 → 下次报告时基因匹配生效
+```
+
+### 8.4 知识源→基因映射表
+
+| 知识源文件 | 产出基因 | 经验提取方式 |
+|-----------|---------|-------------|
+| MEMORY.md | gene_portfolio_check, gene_portfolio_data_authority, gene_session_end_protocol | 直接提取铁律和规则 |
+| share/final-analysis/README.md | gene_report_structure_*, gene_report_logic_consistency | 提取报告规则和章节要求 |
+| knowledge/experience.md | gene_anticrawl_fallback, gene_table_format | 提取实战经验和格式规范 |
+| archive/SKILL-2026-05-27.md | gene_report_logic_consistency, gene_report_quality | 提取4条逻辑一致性规则 |
+| a-stock-daily-report/SKILL.md | gene_report_structure_*, gene_new_fund_recommendation | 提取报告模板和基金推荐规范 |
+| a-stock-daily-report/references/checklists.md | gene_report_quality_validation | 提取Checklist |
+| a-stock-daily-report/references/fund-code-registry.json | gene_fund_code_verification | 提取已验证基金代码 |
+| a-stock-data/SKILL.md | gene_multi_source_data_architecture, gene_data_source_priority | 提取六层数据架构 |
+| a-stock-analysis-lite/references/data-sources.md | gene_price_authority_rule | 提取价格权威性规则 |
+| a-stock-analysis-lite/references/report-template.md | gene_report_structure_morning | 提取HTML报告模板 |
+| morning-report.cron | gene_report_structure_morning, gene_market_regime_detection | 提取17项操作规则 |
+| afternoon-report.cron | gene_report_structure_afternoon | 提取尾盘操作规则 |
+| shared/html-email-format.md | gene_email_send_workflow | 提取排版规则 |
+| shared/mail-skill-setup-guide.md | gene_email_send_workflow | 提取发送配置 |
+| shared/memory-auto-write.md | gene_memory_daily_protocol | 提取归档规范 |
+| shared/instant-archive.md | gene_memory_daily_protocol, gene_memory_fragment_merge | 提取即时归档格式 |
+| shared/sync-daily-to-obsidian/README.md | gene_obsidian_sync_reliability | 提取同步规范 |
+| shared/log-archive.md | gene_memory_cleanup_protocol | 提取归档目录规则 |
+| share/daily-report-config.md | gene_report_structure_* | 提取cron配置 |
+| capability-evolver/SKILL.md | gene_learning_extraction_workflow | 提取Evolver运行机制 |
+| self-improving-agent/SKILL.md | gene_learning_extraction_workflow | 提取.learnings/规范 |
+| share/learning-workflow/ | gene_learning_extraction_workflow | 提取学习工作流 |
+
+### 8.5 关键教训（Final Agent 特有）
+
+1. **子文件夹必须深度扫描**: 只看目录结构就规划，会遗漏 80% 的经验（如 references/、scripts/、cron 脚本）
+2. **cron 脚本是最完整的操作规范**: morning-report.cron 的 prompt 包含 17 项操作规则，比任何文档都详细
+3. **SKILL.md 不等于全部**: 每个 SKILL 的 references/ 子目录才是真正的方法论（模板、数据源、checklist）
+4. **违规记录是最好的基因来源**: MEMORY.md 中的违规记录直接产出了防跳过、代码验证等 repair 基因
+5. **跨 agent 共享目录是关键**: /root/.openclaw/share/ 包含邮件系统、同步系统、学习工作流，是所有 agent 的共同经验
