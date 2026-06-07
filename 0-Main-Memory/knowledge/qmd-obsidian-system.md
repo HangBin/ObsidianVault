@@ -30,3 +30,7 @@ tags:
 - **2026-06-07** - ✅ Obsidian `daily/2026-06-07.md` → 已同步
 - **2026-06-07** **触发**: 用户要求学习 GEP Evolver 闭环经验，全量读取 archive/daily/knowledge 三个目录（共58个文件），分析 GEP 运行规划和基因加强方案
 - **2026-06-07** - **knowledge/**: 9个文件（index + 7个经验文件 + experience.md 183KB）
+- **2026-06-07** - ✅ `2026-05-25.md` 和 `2026-05-29.md` → Obsidian 已同步且一致 → 删除工作区冗余副本
+- **2026-06-07** - ✅ Obsidian `daily/2026-06-07.md` → 已同步
+- **2026-06-07** - **knowledge/**: 9个文件（index + 7个经验文件 + experience.md 183KB）
+- **2026-06-07** - ✅ Obsidian `daily/2026-06-07.md` → 已同步（7355字节，MD5一致）
