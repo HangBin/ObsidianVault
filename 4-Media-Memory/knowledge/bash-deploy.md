@@ -10,3 +10,4 @@ tags: [knowledge, experience]
 
 - **2026-06-07** - 入口脚本: evolve.sh ✅ 已创建
 - **2026-06-07** **工具**: read(经验文档), exec(检查状态), write(修复脚本)
+- **2026-06-07** - 入口脚本: evolve.sh ✅ 已创建
