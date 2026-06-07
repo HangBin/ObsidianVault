@@ -4,17 +4,19 @@
   "workspace": "/root/.openclaw/workspace-proj",
   "cycle_count": 0,
   "last_run": null,
-  "last_solidify": null,
-  "genes_count": 20,
+  "last_solidify": "2026-06-07T13:23:00+08:00",
+  "genes_count": 38,
   "capsules_count": 0,
-  "events_count": 0,
+  "events_count": 3,
   "created": "2026-06-07T12:11:00+08:00",
-  "modified": "2026-06-07T12:11:00+08:00",
-  "status": "initialized",
+  "modified": "2026-06-07T13:23:00+08:00",
+  "status": "solidified",
   "gene_categories": {
-    "optimize": 14,
-    "repair": 4,
+    "optimize": 27,
+    "repair": 11,
     "innovate": 0,
-    "total": 20
-  }
+    "total": 38
+  },
+  "cycleCount": 4,
+  "lastRun": 1780807129463
 }
