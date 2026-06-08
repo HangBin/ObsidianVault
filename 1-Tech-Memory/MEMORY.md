@@ -389,15 +389,6 @@ qmd get <file>[:line] -l 50
 
 ---
 
-## Promoted From Short-Term Memory (2026-05-28)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:2:4 -->
-- created: 2026-05-25T15:44:00+08:00 modified: 2026-05-25T15:54:00+08:00 tags: daily-log tech-agent [score=0.868 recalls=0 avg=0.620 source=memory/2026-05-25.md:2-4]
-<!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:24:24 -->
-- **决策**: 按对话结束协议执行记忆归档 [score=0.868 recalls=0 avg=0.620 source=memory/2026-05-25.md:24-24]
-
----
-
 ## 🧬 Evolver 经验库（2026-06-04 深度扫描）
 
 > 此章节由 evolver-deep-scan.py 自动生成，从 Obsidian 记忆库中提炼
@@ -563,3 +554,12 @@ qmd get <file>[:line] -l 50
 - genes.jsonl: /root/.openclaw/skills/capability-evolver/assets/gep/scopes/tech/genes.jsonl
 - signals.js: /root/.openclaw/skills/capability-evolver/src/gep/signals.js
 - memoryGraph.js: /root/.openclaw/skills/capability-evolver/src/gep/memoryGraph.js
+
+## Promoted From Short-Term Memory (2026-06-08)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:10:13 -->
+- **触发**: 老板问"昨天增加了哪些基因，对你有帮助吗？有进步吗？" **工具**: memory_search, read (2026-06-05.md, MEMORY.md) **结果**: 完成回顾和解答 **决策**: 基于昨天的日志和 MEMORY.md 基因库章节，总结基因变化和使用方法 [score=0.807 recalls=0 avg=0.620 source=memory/2026-06-06.md:10-13]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:16:19 -->
+- **触发**: 老板要求跑一次 evolver **工具**: exec (bash evolve.sh), process (poll), git status **结果**: ⚠️ 部分完成 **决策**: executor agent 修改了 19 个文件但未完成 solidify [score=0.807 recalls=0 avg=0.620 source=memory/2026-06-06.md:16-19]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:54:57 -->
+- **触发**: 老板要求汇报 GEP 资产现状 **工具**: exec (多维度查询 genes/events/capsules/state) **结果**: 完成全面盘点，输出报告 **决策**: 基于 53 个基因、8 条 events、1 个 capsule、2 次 solidify 的完整数据 [score=0.807 recalls=0 avg=0.620 source=memory/2026-06-06.md:54-57]
