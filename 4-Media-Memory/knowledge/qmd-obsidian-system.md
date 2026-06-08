@@ -28,3 +28,4 @@ tags: [knowledge, experience]
 - **2026-06-07** - ✅ 保留: knowledge/experience.md（38KB）
 - **2026-06-07** - ✅ 保留: knowledge/experience.md（38KB）
 - **2026-06-07** - ✅ 保留: knowledge/experience.md（38KB）
+- **2026-06-08** - MEMORY.md (217行) → 身份认知、QMD使用、经验索引
