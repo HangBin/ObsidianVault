@@ -38,3 +38,4 @@ tags: [knowledge, experience]
 - **2026-06-08** - MEMORY.md (217行) → 身份认知、QMD使用、经验索引
 - **2026-06-08** - MEMORY.md (217行) → 身份认知、QMD使用、经验索引
 - **2026-06-08** 2. **搜索引擎**: baidu-web-search ✅ / tavily ✅ / multi-search-engine ✅
+- **2026-06-08** - MEMORY.md (217行) → 身份认知、QMD使用、经验索引
