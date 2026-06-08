@@ -44,3 +44,4 @@ tags: [knowledge, experience]
 - **2026-06-08** **结果**: ✅ 经验文档已写入 knowledge/xhs-publish-guide.md
 - **2026-06-08** - MEMORY.md (217行) → 身份认知、QMD使用、经验索引
 - **2026-06-08** - MEMORY.md (217行) → 身份认知、QMD使用、经验索引
+- **2026-06-08** - MEMORY.md (217行) → 身份认知、QMD使用、经验索引
