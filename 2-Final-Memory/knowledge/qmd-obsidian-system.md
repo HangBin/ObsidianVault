@@ -82,3 +82,4 @@ tags: [knowledge, experience]
 - **2026-06-06** - gene_experience_md_knowledge: 经验库知识
 - **2026-06-06** - knowledge/(4文件, 80KB): 专项经验（experience.md 71KB 为核心）
 - **2026-06-06** - gene_experience_md_knowledge: 经验库知识
+- **2026-06-08**   2. 📝 扫描 4 个遗漏文件并提取 10 个新基因（规则写入位置、经验文档结构化、梦日记管理、持仓确认、周末记忆维护、QMD/Obsidian使用、知识库维护、GEP scope隔离、基因注入SOP、市场情绪辅助）
