@@ -29,3 +29,5 @@ tags: [knowledge, experience]
 - **2026-06-07** - ✅ 保留: knowledge/experience.md（38KB）
 - **2026-06-07** - ✅ 保留: knowledge/experience.md（38KB）
 - **2026-06-08** - MEMORY.md (217行) → 身份认知、QMD使用、经验索引
+- **2026-06-08** - MEMORY.md (217行) → 身份认知、QMD使用、经验索引
+- **2026-06-08** 3. ✅ 昨日文件(2026-06-07.md) Obsidian已同步，无冗余
