@@ -9,3 +9,4 @@ tags: [knowledge, experience]
 ## 经验记录
 
 - **2026-06-09** - ✅ Playwright: 使用系统 Chrome 147
+- **2026-06-09** - ✅ Playwright: 使用系统 Chrome 147
