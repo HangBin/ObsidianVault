@@ -162,3 +162,10 @@ experience*.md       ← 专项经验详细教程
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:59:62 -->
 - **触发**: 大梦要求执行对话写入 **工具**: exec, read, edit **结果**: 完成记忆写入，修复重复记录 **决策**: 发现12:21记录重复，已清理 [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-18.md:59-62]
+
+## Promoted From Short-Term Memory (2026-06-09)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:10:13 -->
+- **触发**: 大梦要求执行记忆写入并检查记忆文件完整性 **工具**: exec, read, write, edit **结果**: 完成记忆文件创建、子文件检查、历史文件清理 **决策**: 按对话结束协议7步执行 [score=0.802 recalls=0 avg=0.620 source=memory/2026-06-07.md:10-13]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:34:37 -->
+- **触发**: 大梦要求学习 GEP 共享经验文档，并全量读取所有知识源目录 **工具**: read, exec (find + head) **结果**: 完成 GEP 架构理解 + 全量文件扫描 **决策**: 按 GEP 知识源扫描 SOP 逐文件读取，不遗漏 [score=0.802 recalls=0 avg=0.620 source=memory/2026-06-07.md:34-37]
