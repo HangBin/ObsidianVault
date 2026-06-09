@@ -557,23 +557,11 @@ qmd get <file>[:line] -l 50
 
 ## Promoted From Short-Term Memory (2026-06-09)
 
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:60:63 -->
-- **触发**: 老板要求处理报告中提出的 4 个改进建议 **工具**: exec (去重、信号降噪、文件编辑) **结果**: 完成改进1（去重）和改进2（信号降噪），改进3/4需长期积累 **决策**: 基因 53→52，信号阈值 5→20 [score=0.836 recalls=0 avg=0.620 source=memory/2026-06-06.md:60-63]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:66:69 -->
-- **触发**: 老板要求手动触发一次检测效果 **工具**: exec (bash evolve.sh), process (poll) **结果**: ✅ 完整闭环成功，intent 升级为 innovate，solidify 成功 **决策**: executor + 自动 solidify 端到端跑通 [score=0.836 recalls=0 avg=0.620 source=memory/2026-06-06.md:66-69]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:72:75 -->
-- **触发**: 老板要求将闭环经验总结进共享经验文档库 **工具**: write (经验文档), edit (MEMORY.md) **结果**: ✅ 经验文档写入 shared/，MEMORY.md 专项经验表格新增引用 **决策**: 经验文档 v1.0.0 发布 [score=0.836 recalls=0 avg=0.620 source=memory/2026-06-06.md:72-75]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:100:101 -->
-- **MEMORY.md 清理**: 删除 13 个冗余日期章节（1078→563 行） **MEMORY.md 专项经验表格**: 新增 8 个条目 [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-06.md:100-101]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:104:107 -->
-- **触发**: 老板要求规则不追加到末尾，融入原有章节 **工具**: edit (MEMORY.md) **结果**: ✅ 专项经验文档格式规范提取到外层，规则融入不堆积 **决策**: 格式规范独立成章，在身份认知铁律之前 [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-06.md:104-107]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:110:113 -->
-- **触发**: 系统事件，对话结束协议执行 **工具**: exec (文件检查), edit (daily log) **结果**: ✅ 全部完成 **决策**: 按 AGENTS.md 对话结束协议执行 [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-06.md:110-113]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:116:119 -->
-- | 检查项 | 状态 | |--------|------| | 今日记忆文件 | ✅ 存在，11个记录完整 | | 子文件 | ✅ 无（无需合并） | [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-06.md:116-119]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:120:123 -->
-- | Obsidian daily/ 同步 | ✅ md5 一致 | | Obsidian MEMORY.md 同步 | ✅ 软链接自动同步（563行） | | daily-index.md | ✅ 2026-06-06 条目存在 | | 其他日期文件 | ✅ 工作区无冗余副本（只有今天的文件） | [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-06.md:120-123]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:124:124 -->
-- | experience-前缀清理 | ✅ 全部重命名，无残留 | [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-06.md:124-124]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:127:130 -->
-- **触发**: 老板要求将 genes.json 和 genes.jsonl 合并去重 **工具**: python3 (合并逻辑), exec (验证加载) **结果**: ✅ 合并完成，19 个去重基因写入 genes.json **决策**: jsonl 优先覆盖 json 同名基因，genes.jsonl 保留不动作为历史记录 [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-06.md:127-130]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:78:81 -->
+- **触发**: 老板要求执行知识库提炼和 MEMORY.md 结构优化 **工具**: read/write/edit (多文件操作) **结果**: ✅ 全部完成 **决策**: 规则融入已有章节，经验文档独立，冗余章节删除 [score=0.836 recalls=0 avg=0.620 source=memory/2026-06-06.md:78-81]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:139:142 -->
+- **触发**: 系统事件，对话结束协议执行 **工具**: exec (文件检查), rm (删除重复子文件) **结果**: ✅ 全部完成 **决策**: 按 AGENTS.md 对话结束协议执行 [score=0.813 recalls=0 avg=0.620 source=memory/2026-06-06.md:139-142]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:145:148 -->
+- **触发**: 系统事件，对话结束协议再次执行 **工具**: exec (文件检查) **结果**: ✅ 全部通过 **决策**: 上轮已完成所有写入，本次确保持续同步 [score=0.813 recalls=0 avg=0.620 source=memory/2026-06-06.md:145-148]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:2:4 -->
+- created: 2026-06-06 modified: 2026-06-06 tags: [daily-log, tech-agent] [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-06.md:2-4]
