@@ -178,3 +178,10 @@ experience*.md       ← 专项经验详细教程
 - created: 2026-06-07 10:09 GMT+8 modified: 2026-06-07 10:10 GMT+8 tags: [proj-agent, daily-log, 2026-06-07] [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-07.md:2-4]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:24:27 -->
 - | 文件 | 操作 | 原因 | |------|------|------| | memory/2026-05-18.md | 删除 | Obsidian 已同步 | | memory/2026-05-18-1239.md | 删除 | 子文件，内容已融入主文件 | [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-07.md:24-27]
+
+## Promoted From Short-Term Memory (2026-06-10)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:41:44 -->
+- | 目录 | 文件数 | 读取方式 | |------|--------|---------| | shared/ (GEP经验) | 1 | 全文读取 | | 3-Proj-Memory/ 根目录 | 4 | 全文读取 | [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-07.md:41-44]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:45:48 -->
+- | daily/ | 5 | 全文读取 | | knowledge/ | 2 | 全文读取 | | archive/ 根目录 | 2 | 全文读取 | | archive/history-2026-03/ | 3 | head 摘要 | [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-07.md:45-48]
