@@ -169,3 +169,12 @@ experience*.md       ← 专项经验详细教程
 - **触发**: 大梦要求执行记忆写入并检查记忆文件完整性 **工具**: exec, read, write, edit **结果**: 完成记忆文件创建、子文件检查、历史文件清理 **决策**: 按对话结束协议7步执行 [score=0.802 recalls=0 avg=0.620 source=memory/2026-06-07.md:10-13]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:34:37 -->
 - **触发**: 大梦要求学习 GEP 共享经验文档，并全量读取所有知识源目录 **工具**: read, exec (find + head) **结果**: 完成 GEP 架构理解 + 全量文件扫描 **决策**: 按 GEP 知识源扫描 SOP 逐文件读取，不遗漏 [score=0.802 recalls=0 avg=0.620 source=memory/2026-06-07.md:34-37]
+
+## Promoted From Short-Term Memory (2026-06-10)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:63:66 -->
+- **触发**: 大梦要求固化 proj 基因 **工具**: write, exec **结果**: 完成 proj scope 基因库创建（21个基因） **决策**: 基于全量知识源扫描结果，从 MEMORY.md/experience.md/daily logs/archive 中提炼 [score=0.873 recalls=0 avg=0.620 source=memory/2026-06-07.md:63-66]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:2:4 -->
+- created: 2026-06-07 10:09 GMT+8 modified: 2026-06-07 10:10 GMT+8 tags: [proj-agent, daily-log, 2026-06-07] [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-07.md:2-4]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:24:27 -->
+- | 文件 | 操作 | 原因 | |------|------|------| | memory/2026-05-18.md | 删除 | Obsidian 已同步 | | memory/2026-05-18-1239.md | 删除 | 子文件，内容已融入主文件 | [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-07.md:24-27]

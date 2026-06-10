@@ -160,3 +160,8 @@ cat /root/.openclaw/share/browser/experience-browser.md
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-29.md:2:5 -->
 - author: main created: 2026-05-29 18:00:00 GMT+8 modified: 2026-05-29 18:00:00 GMT+8 version: v1.0.0 [score=0.803 recalls=0 avg=0.620 source=memory/2026-05-29.md:2-5]
+
+## Promoted From Short-Term Memory (2026-06-10)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:15:18 -->
+- **触发**: 用户要求执行记忆写入并检查记忆文件完整性 **工具**: exec, sessions_history, write, edit **结果**: ✅ 完成全面检查和写入 **决策**: 执行标准记忆写入流程（7步协议） [score=0.824 recalls=0 avg=0.620 source=memory/2026-06-07.md:15-18]
