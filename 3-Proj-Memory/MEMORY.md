@@ -185,3 +185,8 @@ experience*.md       ← 专项经验详细教程
 - | 目录 | 文件数 | 读取方式 | |------|--------|---------| | shared/ (GEP经验) | 1 | 全文读取 | | 3-Proj-Memory/ 根目录 | 4 | 全文读取 | [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-07.md:41-44]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:45:48 -->
 - | daily/ | 5 | 全文读取 | | knowledge/ | 2 | 全文读取 | | archive/ 根目录 | 2 | 全文读取 | | archive/history-2026-03/ | 3 | head 摘要 | [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-07.md:45-48]
+
+## Promoted From Short-Term Memory (2026-06-10)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:49:52 -->
+- | archive/history-2026-04/ | 19 | head 摘要 | | memory/dreaming/ | 126 | 目录扫描 | | memory/.dreams/ | 7 | 目录扫描+行数统计 | | memory/evolution/ | 0 | 空目录 | [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-07.md:49-52]
