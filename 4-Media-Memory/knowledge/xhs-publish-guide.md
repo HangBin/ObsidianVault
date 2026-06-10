@@ -1,19 +1,23 @@
 ---
 title: 小红书发布经验指南
-date: 2026-06-08
+date: 2026-06-10
 tags:
   - xiaohongshu
   - publish
   - experience
   - cookie
   - api
+  - anti-crawl
+  - xhs-cli
 ---
 
 # 小红书发布经验指南
 
 ## 概述
 
-本文档记录小红书发布的完整经验，包括 Cookie 管理、API 调用、CLI 使用、常见问题排查。
+本文档记录小红书发布的完整经验，包括 Cookie 管理、API 调用、CLI 使用、反爬机制、常见问题排查。
+
+> 2026-06-10 更新：新增反爬机制章节、签名算法详解、xhs-cli 绕过策略。
 
 ## 1. Cookie 管理
 
@@ -231,33 +235,95 @@ info = client.get_self_info()
   4. 检查是否触发 Captcha → 降低频率
 ```
 
-## 6. 注意事项
+## 6. 反爬机制（2026-06-10 新增）
 
-### 6.1 IP 风控
+### 6.1 五层防线
+
+| 层级 | 机制 | 严重程度 | 绕过方案 |
+|------|------|---------|----------|
+| 1️⃣ TLS 指纹 | JA3/JA4 识别 Python requests | 中 | `curl_cffi` 伪装 Chrome 指纹 |
+| 2️⃣ 请求签名 | x-s / x-t / x-s-common | 高 | `xhshow` 库生成 |
+| 3️⃣ IP 限流 | 数据中心 IP 直接拦截 | 高 | 住宅代理（中国地理位置） |
+| 4️⃣ SPA 渲染 | 部分接口需浏览器执行 JS | 中 | Playwright / 补环境 |
+| 5️⃣ 登录墙 | xsec_token / web_session | 中 | 登录态 Cookie |
+
+### 6.2 签名算法核心（xhshow 库）
+
+**x-s 签名流程**:
+```
+1. content_string = METHOD + URI + params/payload
+2. d_value = encrypt(content_string)  // 加密变换
+3. payload_array = [d_value, a1, xsec_appid, content_string, timestamp]
+4. xor_result = XOR_transform(payload_array)
+5. x3 = base64(xor_result[:PAYLOAD_LENGTH])
+6. signature_data = {x0: SDK_VERSION, x1: APP_ID, x2: PLATFORM, x3: x3, ...}
+7. x-s = XYS_PREFIX + base64(json(signature_data))
+```
+
+**必需 Cookie 字段**: `a1`（用户唯一标识）+ `web_session`（会话ID）
+
+**请求头**:
+- `x-s`: 主签名（xhshow 动态生成）
+- `x-t`: Unix 毫秒时间戳
+- `x-s-common`: 公共签名（基于 Cookie）
+- `x-b3-traceid`: 随机追踪 ID
+- `x-xray-traceid`: 随机追踪 ID
+
+### 6.3 xhs-cli 绕过策略（⭐ 关键参考）
+
+| 操作 | 方式 | 是否需要签名 |
+|------|------|-------------|
+| 搜索 | `/api/sns/web/v1/search/notes` | ✅ 需要 x-s（xhshow 生成） |
+| 读取笔记 | `xiaohongshu.com/explore/{note_id}` HTML 页面 | ❌ 完全绕过签名 |
+| 获取评论 | `/api/sns/web/v2/comment/page` | ✅ 需要 x-s |
+| 发布笔记 | 创作者平台 API | ✅ 需要创作者签名 |
+| 点赞/收藏 | `/api/sns/web/v1/note/like` | ✅ 需要 x-s |
+
+**关键**: 读取笔记走 HTML 解析（SSR 渲染），完全绕过 API 签名！
+
+### 6.4 签名算法变化频率
+
+- 约每月更新一次（如 xs version56）
+- 每次更新后旧签名失效（返回 406 错误）
+- Spider_XHS 项目持续跟踪：https://github.com/cv-cat/Spider_XHS
+- 最新签名 JS：`static/xhs_main_260411.js`
+
+### 6.5 实战建议
+
+1. **TLS 层**: `pip install curl_cffi` → `impersonate="chrome120"`
+2. **签名层**: `pip install xhshow` 生成 x-s/x-t/x-s-common
+3. **IP 层**: 住宅代理，每 IP 10-20 请求/分钟
+4. **读取笔记**: 走 HTML 解析绕过 API 签名
+5. **搜索 API**: 需要完整签名，注意 search_id 和 x-rap-param（JSVMP 生成）
+
+## 7. 注意事项
+
+### 7.1 IP 风控
 
 - 服务器 IP 访问小红书 API 可能触发验证码
 - 读操作（search/hot/feed）一般不受影响
 - 写操作（post/like/comment）更容易触发
 - **控制操作频率**，避免短时间内大量调用
 
-### 6.2 Cookie 安全
+### 7.2 Cookie 安全
 
 - Cookie 文件权限: `chmod 600`
 - 不要在日志或输出中暴露完整 Cookie 值
 - 定期更新 Cookie（建议每 7 天）
 
-### 6.3 发布限制
+### 7.3 发布限制
 
 - 自动发布存在平台反机器人检测
 - 建议发布间隔 > 60 秒
 - 图片需先上传到小红书 CDN 再发布
 - 草稿箱 API (`/api/galaxy/creator/note/draft`) 与发布 API 不同，需要额外参数
 
-### 6.4 数据读取
+### 7.4 数据读取
 
 - `read` 命令必须加 `--xsec-token`，否则返回空数据
 - `my-notes` 返回的列表包含 `xsec_token`，可直接用于 `read`
 - `search` 返回的 items 也包含 `xsec_token`
+- **替代方案**: 直接请求 HTML 页面 `xiaohongshu.com/explore/{note_id}` 绕过签名
 
 ## 7. 环境信息
 
