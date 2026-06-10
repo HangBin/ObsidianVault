@@ -53,3 +53,5 @@ tags: [knowledge, experience]
 - **2026-06-09** - 昨日文件（2026-06-08）：工作区已删除，Obsidian 有完整副本 ✅
 - **2026-06-09** - 今日文件（2026-06-09）：工作区 ↔ Obsidian md5 一致 ✅
 - **2026-06-09** - 昨日文件（2026-06-08）：工作区已删除，Obsidian 有完整副本 ✅
+- **2026-06-10** 1. ✅ 小红书文档更新: `knowledge/xhs-publish-guide.md` — 新增反爬机制章节（签名算法、绕过策略、实战建议）
+- **2026-06-10** 2. ✅ 闲鱼知识文档: `knowledge/xianyu-automation-guide.md` — Cookie管理、签名算法、API端点、反爬风控、发布流程

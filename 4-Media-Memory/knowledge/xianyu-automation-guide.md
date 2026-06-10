@@ -297,16 +297,28 @@ XianyuProductPublisher (Playwright 浏览器自动化)
 
 ## 9. 待解决问题
 
-### 9.1 登录 Token 风控拦截
+### 9.1 登录 Token 风控拦截（已定位）
 
 **问题**: `mtop.taobao.idlemessage.pc.login.token` 返回 `FAIL_SYS_USER_VALIDATE`
 
-**待尝试**:
-- [ ] 住宅代理 IP
-- [ ] 浏览器环境先访问再调用 API
-- [ ] 完整浏览器指纹
-- [ ] 降低请求频率
-- [ ] 用 accessToken 替代登录 Token（如果 Cookie 中已包含有效 token）
+**测试结果** (2026-06-10):
+- 间隔 5秒 × 10次: 前2次成功，后8次失败（概率性拦截）
+- 间隔 10秒 × 3次: 全部失败
+- 间隔 20秒 × 3次: 全部失败
+- 间隔 30秒 × 3次: 全部失败
+- 间隔 60秒 × 3次: 全部失败
+
+**结论**: 不是间隔时间问题，是登录 Token API 在服务器端被标记为高风险。连续调用会触发更强风控。
+
+**解决方案**: **绕过！登录 Token 不是必需的。**
+- Cookie 已包含完整认证信息（cookie2、sgcookie、_m_h5_tk 等）
+- 商品列表/详情 API 直接用 Cookie + execjs 签名就能调
+- 只需在首次获取 accessToken 时调一次登录 Token（可偶尔成功），后续用 Cookie 调 API
+
+**实际策略**: 
+1. 首次启动时尝试调登录 Token 获取 accessToken（可能成功）
+2. 如果失败，直接用 Cookie 调 API（不需要 accessToken）
+3. 登录 Token 仅用于获取 refreshToken，非必须
 
 ### 9.2 Cookie 自动刷新
 
