@@ -199,3 +199,12 @@ experience*.md       ← 专项经验详细教程
 - **触发**: 大梦要求深入扫描 archive 所有 25 个文件 **工具**: read, exec **结果**: 完成 archive 下 3 个目录 25 个文件的深度扫描 **决策**: 按 GEP 知识源扫描 SOP 逐文件读取 [score=0.878 recalls=0 avg=0.620 source=memory/2026-06-07.md:133-136]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:172:175 -->
 - **触发**: 大梦要求继续进化 **工具**: exec (node index.js run) **结果**: 两轮进化循环均成功完成 **决策**: Evolver 自动匹配基因→生成 prompt→executor 执行→solidify [score=0.868 recalls=0 avg=0.620 source=memory/2026-06-07.md:172-175]
+
+## Promoted From Short-Term Memory (2026-06-11)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:69:72 -->
+- | 文件 | 状态 | |------|------| | genes.jsonl | ✅ 21个基因（optimize:17, repair:4） | | evolution_state.json | ✅ cycle_count=0, status=initialized | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:69-72]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:73:76 -->
+- | personality_state.json | ✅ 身份/风格/边界/协作完整 | | events.jsonl | ✅ 1条初始化事件 | | capsules.json | ✅ 空（待积累） | | memory_graph.jsonl | ✅ 初始化记录 | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:73-76]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:95:98 -->
+- | gene_bid_domain_expertise | optimize | 投标/新能源/专业 | | gene_collaboration_via_main | optimize | 协作/main/汇报 | | gene_gep_knowledge_source_scan | optimize | 知识源扫描/GEP | | gene_workboard_task_management | optimize | 任务卡片/跟踪 | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:95-98]
