@@ -208,3 +208,10 @@ experience*.md       ← 专项经验详细教程
 - | personality_state.json | ✅ 身份/风格/边界/协作完整 | | events.jsonl | ✅ 1条初始化事件 | | capsules.json | ✅ 空（待积累） | | memory_graph.jsonl | ✅ 初始化记录 | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:73-76]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:95:98 -->
 - | gene_bid_domain_expertise | optimize | 投标/新能源/专业 | | gene_collaboration_via_main | optimize | 协作/main/汇报 | | gene_gep_knowledge_source_scan | optimize | 知识源扫描/GEP | | gene_workboard_task_management | optimize | 任务卡片/跟踪 | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:95-98]
+
+## Promoted From Short-Term Memory (2026-06-11)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:114:117 -->
+- | 项目 | 状态 | 说明 | |------|------|------| | skills/capability-evolver/ | ✅ | 完整框架已复制 | | .env 配置 | ✅ | OPENCLAW_WORKSPACE + EVOLVER_SESSION_SCOPE | [score=0.855 recalls=0 avg=0.620 source=memory/2026-06-07.md:114-117]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:118:120 -->
+- | 软链接修正 | ✅ | MEMORY.md → proj / USER.md → proj | | evolve.sh 入口 | ✅ | 运行脚本已创建 | | 首次 dry-run | ✅ | Evolver 运行成功，基因库正常加载 | [score=0.855 recalls=0 avg=0.620 source=memory/2026-06-07.md:118-120]
