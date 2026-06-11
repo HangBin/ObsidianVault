@@ -190,3 +190,12 @@ experience*.md       ← 专项经验详细教程
 
 <!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:49:52 -->
 - | archive/history-2026-04/ | 19 | head 摘要 | | memory/dreaming/ | 126 | 目录扫描 | | memory/.dreams/ | 7 | 目录扫描+行数统计 | | memory/evolution/ | 0 | 空目录 | [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-07.md:49-52]
+
+## Promoted From Short-Term Memory (2026-06-11)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:108:111 -->
+- **触发**: 大梦要求部署 Evolver 框架（定时运行暂不做） **工具**: exec, write, edit **结果**: Evolver 框架已复制+环境变量已配置+首次运行成功 **决策**: 从 capability-evolver/ 复制完整框架，修正软链接指向 proj 资源 [score=0.878 recalls=0 avg=0.620 source=memory/2026-06-07.md:108-111]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:133:136 -->
+- **触发**: 大梦要求深入扫描 archive 所有 25 个文件 **工具**: read, exec **结果**: 完成 archive 下 3 个目录 25 个文件的深度扫描 **决策**: 按 GEP 知识源扫描 SOP 逐文件读取 [score=0.878 recalls=0 avg=0.620 source=memory/2026-06-07.md:133-136]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:172:175 -->
+- **触发**: 大梦要求继续进化 **工具**: exec (node index.js run) **结果**: 两轮进化循环均成功完成 **决策**: Evolver 自动匹配基因→生成 prompt→executor 执行→solidify [score=0.868 recalls=0 avg=0.620 source=memory/2026-06-07.md:172-175]

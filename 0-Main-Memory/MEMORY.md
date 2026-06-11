@@ -165,3 +165,10 @@ cat /root/.openclaw/share/browser/experience-browser.md
 
 <!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:15:18 -->
 - **触发**: 用户要求执行记忆写入并检查记忆文件完整性 **工具**: exec, sessions_history, write, edit **结果**: ✅ 完成全面检查和写入 **决策**: 执行标准记忆写入流程（7步协议） [score=0.824 recalls=0 avg=0.620 source=memory/2026-06-07.md:15-18]
+
+## Promoted From Short-Term Memory (2026-06-11)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:2:5 -->
+- author: main created: 2026-06-07 10:10:00 GMT+8 modified: 2026-06-07 15:34:00 GMT+8 version: v1.0.0 [score=0.824 recalls=0 avg=0.620 source=memory/2026-06-07.md:2-5]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:34:37 -->
+- **触发**: 用户要求学习 `/home/obsidian_vault/shared/gep-evolver-closed-loop.md`，并全量读取 archive/daily/knowledge 三个目录 **工具**: read, exec（全量扫描三个目录） **结果**: ✅ 完成全量读取，产出分析报告 **决策**: 按 GEP 知识源扫描 SOP 执行，逐文件读取，不跳过任何子目录 [score=0.806 recalls=0 avg=0.620 source=memory/2026-06-07.md:34-37]
