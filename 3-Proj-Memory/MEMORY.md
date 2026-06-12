@@ -213,3 +213,10 @@ experience*.md       ← 专项经验详细教程
 - **触发**: 大梦要求重新扫描信号源（之前只有 11 个 session 文件，太少了） **工具**: exec, read, sessions_spawn [score=0.930 recalls=0 avg=0.620 source=memory/2026-06-07.md:189-190]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:124:127 -->
 - OPENCLAW_WORKSPACE=/root/.openclaw/workspace-proj EVOLVER_SESSION_SCOPE=proj EVOLVE_STRATEGY=balanced EVOLVER_ROLLBACK_MODE=hard [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:124-127]
+
+## Promoted From Short-Term Memory (2026-06-12)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:139:142 -->
+- | 文件 | 核心内容 | |------|----------| | history-2026-03/2026-03-27.md | 初始化、身份确认、严重错误纠正（未记录+称呼错误）、铁律重申 | | history-2026-03/2026-03-29.md | 身份确认、连通性测试(3次)、标准化回复格式、模型切换打招呼 | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:139-142]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:143:146 -->
+- | history-2026-03/2026-03-31.md | 初始化占位 | | history-2026-04/2026-04-01.md | 初始化占位 | | history-2026-04/2026-04-02.md | 初始化占位 | | history-2026-04/2026-04-04.md | 搬家事件、记忆系统优化、自动学习机制部署/测试/精简、冗余清理 | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:143-146]
