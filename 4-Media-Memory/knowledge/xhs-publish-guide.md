@@ -1,6 +1,7 @@
 ---
 title: 小红书发布经验指南
 date: 2026-06-10
+last_updated: 2026-06-12
 tags:
   - xiaohongshu
   - publish
@@ -9,6 +10,8 @@ tags:
   - api
   - anti-crawl
   - xhs-cli
+  - reverse-engineering
+  - spider-xhs
 ---
 
 # 小红书发布经验指南
@@ -249,7 +252,7 @@ info = client.get_self_info()
 
 ### 6.2 签名算法核心（xhshow 库）
 
-**x-s 签名流程**:
+**x-s 签名流程（7 步）**:
 ```
 1. content_string = METHOD + URI + params/payload
 2. d_value = encrypt(content_string)  // 加密变换
@@ -262,12 +265,15 @@ info = client.get_self_info()
 
 **必需 Cookie 字段**: `a1`（用户唯一标识）+ `web_session`（会话ID）
 
-**请求头**:
-- `x-s`: 主签名（xhshow 动态生成）
-- `x-t`: Unix 毫秒时间戳
-- `x-s-common`: 公共签名（基于 Cookie）
-- `x-b3-traceid`: 随机追踪 ID
-- `x-xray-traceid`: 随机追踪 ID
+**请求头完整说明**:
+
+| Header | 说明 | 生成方式 |
+|--------|------|---------|
+| `x-s` | 主签名 | xhshow 动态生成 |
+| `x-t` | Unix 毫秒时间戳 | `int(time.time() * 1000)` |
+| `x-s-common` | 公共签名 | 基于 Cookie 生成 |
+| `x-b3-traceid` | 追踪 ID | 随机生成 |
+| `x-xray-traceid` | 追踪 ID | 随机生成 |
 
 ### 6.3 xhs-cli 绕过策略（⭐ 关键参考）
 
@@ -281,20 +287,62 @@ info = client.get_self_info()
 
 **关键**: 读取笔记走 HTML 解析（SSR 渲染），完全绕过 API 签名！
 
+**创作者平台签名**（不同于 PC 端）:
+```python
+from xhs_cli.creator_signing import sign_creator
+sign = sign_creator(f"url={full_uri}", None, cookies["a1"])
+# 返回 {"x-s": ..., "x-t": ...}
+```
+
 ### 6.4 签名算法变化频率
 
-- 约每月更新一次（如 xs version56）
+- 约每月更新一次（如 xsversion56）
 - 每次更新后旧签名失效（返回 406 错误）
 - Spider_XHS 项目持续跟踪：https://github.com/cv-cat/Spider_XHS
 - 最新签名 JS：`static/xhs_main_260411.js`
 
-### 6.5 实战建议
+### 6.5 开源项目架构参考
 
-1. **TLS 层**: `pip install curl_cffi` → `impersonate="chrome120"`
-2. **签名层**: `pip install xhshow` 生成 x-s/x-t/x-s-common
-3. **IP 层**: 住宅代理，每 IP 10-20 请求/分钟
-4. **读取笔记**: 走 HTML 解析绕过 API 签名
-5. **搜索 API**: 需要完整签名，注意 search_id 和 x-rap-param（JSVMP 生成）
+**Spider_XHS（推荐，最完整）**:
+```
+Spider_XHS/
+├── apis/
+│   ├── xhs_pc_apis.py          # PC端完整API（采集）
+│   ├── xhs_creator_apis.py     # 创作者平台API（上传发布）
+│   └── xhs_pc_login_apis.py    # PC端登录（二维码/手机验证码）
+├── xhs_utils/
+│   ├── xhs_util.py             # PC端签名算法
+│   └── xhs_creator_util.py     # 创作者平台签名算法
+└── static/
+    ├── xhs_main_260411.js      # PC端签名核心JS（最新版）
+    └── xhs_rap.js              # x-rap-param JSVMP 补环境
+```
+
+**xhs-cli（轻量级）**:
+```
+xhs_cli/
+├── signing.py                  # 签名适配层（调用 xhshow）
+├── client.py                   # API 客户端
+└── client_mixins.py            # 业务逻辑 mixin
+```
+
+### 6.6 实战建议
+
+#### 采集（读）操作
+1. **搜索笔记**: 使用 xhshow 库生成签名，调用 `/api/sns/web/v1/search/notes`
+2. **读取笔记**: 走 HTML 解析（`xiaohongshu.com/explore/{note_id}`），完全绕过签名
+3. **获取评论**: 需要签名，调用 `/api/sns/web/v2/comment/page`
+
+#### 发布（写）操作
+1. **上传图片**: 需要创作者平台签名
+2. **创建笔记**: 需要创作者平台签名
+3. **注意**: 写操作风控更严格，建议用浏览器自动化
+
+#### 反检测措施
+1. **TLS 指纹**: `pip install curl_cffi` → `impersonate="chrome120"`
+2. **请求间隔**: 2-3 秒/请求（搜索），10-20 请求/分钟/IP
+3. **住宅代理**: 中国地理位置住宅 IP
+4. **浏览器指纹**: 完整 sec-ch-ua / sec-fetch 头
 
 ## 7. 注意事项
 
@@ -325,6 +373,18 @@ info = client.get_self_info()
 - `search` 返回的 items 也包含 `xsec_token`
 - **替代方案**: 直接请求 HTML 页面 `xiaohongshu.com/explore/{note_id}` 绕过签名
 
+### 7.5 闲鱼 vs 小红书反爬对比
+
+| 维度 | 闲鱼 | 小红书 |
+|------|------|--------|
+| 签名算法 | MD5（简单） | x-s 多层加密（复杂） |
+| 签名入口 | execjs 调用 JS | xhshow 库 / JS |
+| Cookie 要求 | cookie2 + sgcookie | a1 + web_session |
+| 变化频率 | 低 | 约每月一次 |
+| 绕过方案 | execjs 正确调用 | HTML 解析绕过 |
+| IP 风控 | 中 | 高（需住宅IP） |
+| 写操作风控 | 高 | 极高 |
+
 ## 7. 环境信息
 
 | 项目 | 值 |
@@ -337,7 +397,17 @@ info = client.get_self_info()
 | MCP 注册名 | `xhs-mcp` |
 | 当前用户 | 小红薯65103A5F (red_id: 5173229140) |
 
-## 8. 经验教训
+## 8. 关键资源
+
+| 资源 | 链接 | 说明 |
+|------|------|------|
+| Spider_XHS | github.com/cv-cat/Spider_XHS | 最完整的开源爬虫框架 |
+| xhs-cli | github.com/jackwener/xiaohongshu-cli | CLI 工具，HTML 解析绕过 |
+| MediaCrawler | github.com/NanmiCoder/MediaCrawler | 多平台爬虫 |
+| xhshow | PyPI | 签名算法库 |
+| Spider_XHS JS | static/xhs_main_260411.js | 最新签名核心 JS |
+
+## 9. 经验教训
 
 ### ✅ 已验证
 
