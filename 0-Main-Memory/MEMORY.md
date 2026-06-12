@@ -172,3 +172,12 @@ cat /root/.openclaw/share/browser/experience-browser.md
 - author: main created: 2026-06-07 10:10:00 GMT+8 modified: 2026-06-07 15:34:00 GMT+8 version: v1.0.0 [score=0.824 recalls=0 avg=0.620 source=memory/2026-06-07.md:2-5]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:34:37 -->
 - **触发**: 用户要求学习 `/home/obsidian_vault/shared/gep-evolver-closed-loop.md`，并全量读取 archive/daily/knowledge 三个目录 **工具**: read, exec（全量扫描三个目录） **结果**: ✅ 完成全量读取，产出分析报告 **决策**: 按 GEP 知识源扫描 SOP 执行，逐文件读取，不跳过任何子目录 [score=0.806 recalls=0 avg=0.620 source=memory/2026-06-07.md:34-37]
+
+## Promoted From Short-Term Memory (2026-06-12)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-08-0848.md:11:12 -->
+- assistant: 现在需要将子文件合并到主记忆文件中，并删除子文件： [score=0.837 recalls=0 avg=0.620 source=memory/2026-06-08-0848.md:11-12]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-08-0848.md:18:19 -->
+- assistant: 看起来主记忆文件已经包含了今天的主要内容。现在删除子文件： [score=0.837 recalls=0 avg=0.620 source=memory/2026-06-08-0848.md:18-19]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-08-0848.md:28:29 -->
+- assistant: 完美！我已经成功完成了以下工作： [score=0.837 recalls=0 avg=0.620 source=memory/2026-06-08-0848.md:28-29]
