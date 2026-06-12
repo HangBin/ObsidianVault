@@ -142,15 +142,6 @@ experience*.md       ← 专项经验详细教程
 
 ## Promoted From Short-Term Memory (2026-05-21)
 
-<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:38:40 -->
-- **触发**: 大梦指出 MEMORY.md 不应追加到末尾，应直接修改对应章节 **工具**: read, edit **结果**: 完成 MEMORY.md 结构重组 [score=0.836 recalls=0 avg=0.620 source=memory/2026-05-18.md:38-40]
-<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:2:4 -->
-- created: 2026-05-18 12:09 GMT+8 modified: 2026-05-18 12:36 GMT+8 tags: [proj-agent, daily-log, 2026-05-18] [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-18.md:2-4]
-<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:49:51 -->
-- **触发**: 大梦要求归档4月日志 **工具**: read, write, exec, edit **结果**: 完成2026-04月度归档 [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-18.md:49-51]
-
-## Promoted From Short-Term Memory (2026-05-21)
-
 <!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:59:62 -->
 - **触发**: 大梦要求执行对话写入 **工具**: exec, read, edit **结果**: 完成记忆写入，修复重复记录 **决策**: 发现12:21记录重复，已清理 [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-18.md:59-62]
 
@@ -220,3 +211,10 @@ experience*.md       ← 专项经验详细教程
 - | 文件 | 核心内容 | |------|----------| | history-2026-03/2026-03-27.md | 初始化、身份确认、严重错误纠正（未记录+称呼错误）、铁律重申 | | history-2026-03/2026-03-29.md | 身份确认、连通性测试(3次)、标准化回复格式、模型切换打招呼 | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:139-142]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:143:146 -->
 - | history-2026-03/2026-03-31.md | 初始化占位 | | history-2026-04/2026-04-01.md | 初始化占位 | | history-2026-04/2026-04-02.md | 初始化占位 | | history-2026-04/2026-04-04.md | 搬家事件、记忆系统优化、自动学习机制部署/测试/精简、冗余清理 | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:143-146]
+
+## Promoted From Short-Term Memory (2026-06-12)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:147:150 -->
+- | history-2026-04/2026-04-06.md | 学习 browser 截图转链接技巧（3种方案+安全注意） | | history-2026-04/2026-04-07.md | 项目简报、browser 学习整理、agent-browser 实战（3个动漫查询） | | history-2026-04/2026-04-08.md | 工作区整理（7个重复文件清理+软连接）、脚本冗余检查、定时任务整合 | | history-2026-04/2026-04-09.md | 初始化占位 | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:147-150]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:151:154 -->
+- | history-2026-04/2026-04-10.md | 初始化占位 | | history-2026-04/2026-04-11.md | 初始化占位 | | history-2026-04/2026-04-12.md | 初始化占位 | | history-2026-04/2026-04-13.md | 初始化占位 | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:151-154]
