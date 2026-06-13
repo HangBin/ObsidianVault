@@ -726,7 +726,94 @@ ws.send(json.dumps({"id": msg_id, "method": "Page.navigate", "params": {"url": "
 
 **最佳实践**：在 `run.sh` 启动 Chrome 后自动执行 cookies 注入，确保登录态始终有效。
 
-## 13. 相关文档
+## 13. 闭环测试全记录（2026-06-13 16:22）
+
+### 13.1 测试目标
+
+完整闭环：从启动浏览器到发布新商品，全程无需人工干预（除首次登录外）。
+
+### 13.2 测试结果：✅ 发布成功
+
+| 字段 | 值 |
+|------|------|
+| 商品名称 | 绝版收藏周杰伦签名专辑 全球仅此一张 带亲笔签名 |
+| 价格 | ¥888,888（测试天价） |
+| 分类 | 音乐唱片/专辑 |
+| 明星角色 | 周杰伦 |
+| 存储介质 | CD |
+| 所在地 | 南湖沃尔玛提货点 |
+| 商品ID | 1059858208480 |
+| 商品URL | https://www.goofish.com/item/id=1059858208480 |
+
+### 13.3 完整闭环步骤
+
+```
+1. run.sh 启动 Chrome（xvfb-run + CDP 端口 9222）
+2. CDP 连接已登录浏览器（ws://127.0.0.1:9222）
+3. 导航到 https://www.goofish.com/publish
+4. 上传图片（base64 → POST 到 stream-upload.goofish.com → 获得 fileId）
+5. 通过 React fiber 注入文件到上传组件
+6. 填写描述（contenteditable innerHTML 注入 + input 事件）
+7. 填写价格（HTMLInputDescriptor setter + input/change 事件）
+8. 等待页面自动识别分类（约 3 秒）
+9. 选择存储介质（见 13.4）
+10. 点击发布按钮 → 跳转商品详情页
+```
+
+### 13.4 🔑 Ant Design Select 选择方案（核心突破）
+
+**问题**：Ant Design 5 Select 组件不响应 DOM 事件（click / insertText），无法通过常规方式触发下拉菜单。
+
+**解决方案**：CDP `Input.dispatchKeyEvent` 逐字输入
+
+```python
+# 1. focus 搜索输入框
+js("document.querySelectorAll('.ant-select')[2].querySelector('input[type=search]').focus()")
+
+# 2. 逐字输入搜索关键词
+for char in 'CD':
+    cdp('Input.dispatchKeyEvent', {
+        'type': 'keyDown', 'text': char, 'key': char, 'code': '',
+        'windowsVirtualKeyCode': ord(char), 'nativeVirtualKeyCode': ord(char)
+    })
+    cdp('Input.dispatchKeyEvent', {
+        'type': 'keyUp', 'key': char, 'code': '',
+        'windowsVirtualKeyCode': ord(char), 'nativeVirtualKeyCode': ord(char)
+    })
+
+# 3. 等待 2-3 秒，下拉菜单出现
+# 4. 点击目标选项
+js("document.querySelector('.ant-select-item-option-content').parentElement.click()")
+# 或更精确：遍历所有元素找 textContent.trim() === 'CD' 且 children.length === 0 的元素
+```
+
+**三种方案对比**：
+
+| 方案 | 结果 | 原因 |
+|------|------|------|
+| DOM click | ❌ | Ant Design 5 拦截了合成事件 |
+| Input.insertText | ❌ | Select 组件不响应直接插入文本 |
+| Input.dispatchKeyEvent | ✅ | 模拟真实键盘输入，Select 组件正常响应 |
+
+### 13.5 踩坑记录
+
+1. **价格 React state 不同步**：DOM 设值后 React 可能未识别，但实际发布时以 DOM 值为准
+2. **分类自动识别有延迟**：上传图片后需等 3 秒让页面完成分类识别
+3. **Select 下拉通过 portal 渲染**：下拉菜单不在 Select DOM 内，而在 body 末尾
+4. **搜索框 focus 必须先于 keyEvent**：否则 keyEvent 不会输入到搜索框
+5. **选项精确匹配**：找选项时用 `textContent.trim() === 'CD' && children.length === 0` 避免误匹配
+
+### 13.6 无需人工介入的开关条件
+
+| 条件 | 说明 |
+|------|------|
+| Chrome 登录态有效 | cookies 未过期，无需手动登录 |
+| `/tmp/xianyu_cookies.txt` 存在 | 用于 session cookie 恢复 |
+| `run.sh` 可正常执行 | xvfb-run + CDP 端口可用 |
+
+**登录态过期后**：需手动在 Chrome 中登录一次闲鱼，再提取 cookies 保存到 `/tmp/xianyu_cookies.txt`。
+
+## 14. 相关文档
 
 | 文档 | 路径 | 说明 |
 |------|------|------|
