@@ -1,7 +1,7 @@
 ---
 title: 闲鱼自动化经验指南
 date: 2026-06-10
-last_updated: 2026-06-12
+last_updated: 2026-06-13
 tags:
   - xianyu
   - goofish
@@ -298,7 +298,7 @@ XianyuProductPublisher (Playwright 浏览器自动化)
 | Cookie 文件 | 数据库 cookies 表 |
 | 当前可用 Cookie | unb=748552523 (panbin5218) |
 
-## 9. CDP 浏览器自动化方案（2026-06-12 重大更新）
+## 9. CDP + Playwright 浏览器自动化方案（2026-06-13 重大更新）
 
 ### 9.1 方案概述
 
@@ -317,6 +317,8 @@ cookie_str = "; ".join(f"{c['name']}={c['value']}" for c in cookies)
 
 **关键**：必须用 `Network.getAllCookies`（CDP 专属方法），JS `document.cookie` 拿不到 httpOnly cookies（sgcookie、havana_lgc2_77 等）。
 
+**最新 cookies 位置**: `.config/xianyu_cookies_latest.txt`（2026-06-13 CDP 提取）
+
 ### 9.3 启动有界面浏览器
 
 ```bash
@@ -331,44 +333,79 @@ google-chrome --no-sandbox --disable-gpu --no-dev-shm-usage \
 ### 9.4 图片上传突破（核心难点）
 
 闲鱼上传组件是 React 组件，以下方法**均失败**：
-- DOM.setFileInputFiles → 触发了 DOM 事件但闲鱼不识别
+- DOM.setFileInputFiles → 触发了 DOM 事件但 React 不识别
 - Page.handleFileChooserDialog → Chrome 147 不支持
 - file:// 或 http://127.0.0.1 fetch → 浏览器无法访问
 - fake File 对象 → 闲鱼报"文件类型无法确定"
+- base64 编码注入 + change 事件 → React 仍然不识别（2026-06-12 验证）
 
-**验证可用的方法：base64 编码注入**
+**✅ 最终验证可用的方法：fetch 上传 + React fiber onChange 注入（2026-06-13）**
+
+原理：通过浏览器 fetch 直接调用闲鱼上传接口拿到 fileId，再通过 React fiber 树找到上传组件的 `onChange` 回调，直接调用注入 fileList 状态。
 
 ```python
-# 1. 读取图片并 base64 编码
-with open("image.jpg", "rb") as f:
-    img_b64 = base64.b64encode(f.read()).decode("ascii")
-
-# 2. 分块传输到浏览器（chunk_size=50000 避免表达式过大）
-for chunk in [img_b64[i:i+50000] for i in range(0, len(img_b64), 50000)]:
-    ws.send(json.dumps({"method":"Runtime.evaluate","params":{"expression":f"window.__imgB64='{chunk}';"}}))
-
-# 3. 浏览器内创建 Blob/File 并触发 change 事件
-js = """
+# Step 1: 通过浏览器 fetch 上传图片（利用页面 cookies）
+upload_js = """
 (async function() {
-    var binary = atob(window.__imgB64);
-    var bytes = new Uint8Array(binary.length);
-    for(var i=0; i<binary.length; i++) bytes[i] = binary.charCodeAt(i);
-    var blob = new Blob([bytes], {type: 'image/jpeg'});
-    var file = new File([blob], 'image.jpg', {type: 'image/jpeg'});
-    var fileInput = document.querySelector('input[type="file"]');
-    var dt = new DataTransfer();
-    dt.items.add(file);
-    fileInput.files = dt.files;
-    fileInput.dispatchEvent(new Event('change', {bubbles: true}));
-    return 'done';
+    try {
+        var binary = atob(window.__imgB64);
+        var bytes = new Uint8Array(binary.length);
+        for(var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+        var blob = new Blob([bytes], {type: 'image/png'});
+        var formData = new FormData();
+        formData.append('file', blob, 'opus48.png');
+        formData.append('floderId', '0');
+        formData.append('appkey', 'fleamarket');
+        var resp = await fetch('https://stream-upload.goofish.com/api/upload.api?floderId=0&appkey=fleamarket&_input_charset=utf-8', {
+            method: 'POST', body: formData, credentials: 'include'
+        });
+        var text = await resp.text();
+        return text;
+    } catch(e) { return 'error: ' + e.message; }
 })()
 """
-ws.send(json.dumps({"method":"Runtime.evaluate","params":{"expression": js, "awaitPromise": True}}))
+result = send_cdp("Runtime.evaluate", {"expression": upload_js, "awaitPromise": True})
+# 返回: {"fileId":"1252308764062160188","url":"https://img.alicdn.com/..."}
+
+# Step 2: 通过 React fiber 找到上传组件的 onChange
+# 从 #ice-container 的 __reactContainer$fiberKey 遍历 fiber 树
+# 查找 memoizedProps.fileList !== undefined && typeof memoizedProps.onChange === 'function'
+
+# Step 3: 调用 onChange 注入文件状态
+file_item = {
+    'fileId': '1252308764062160188',
+    'url': 'https://img.alicdn.com/imgextra/i1/O1CN01OsrPP51UVaQ3vgj8u_!!748552523-2-fleamarket.png',
+    'name': 'opus48.png', 'size': 104873, 'status': 'done', 'type': 'image/png'
+}
+target_fiber.memoizedProps.onChange({'fileList': [file_item]})
 ```
 
-### 9.5 下拉框操作
+**⚠️ 注意**：base64 分块传输仍然需要（图片需要在浏览器内存中），但不再依赖 DOM change 事件，而是直接调 React 回调。
 
-用 `Input.dispatchMouseEvent` 精确点击 `ant-select-selector` 打开下拉，然后用 `.ant-select-item` click() 选择选项。
+### 9.5 下拉框操作（ant-select）
+
+```python
+# 点击下拉打开
+selector = page.query_selector('.ant-select-selector')  # 或第N个
+selector.click()
+await asyncio.sleep(2)
+
+# 点击选项
+page.evaluate("""
+(() => {
+    const dropdown = document.querySelector('.ant-select-dropdown');
+    const items = dropdown.querySelectorAll('[class*="item"], [role="option"]');
+    for (const item of items) {
+        if (item.innerText.trim() === 'DeepSeek服务') { item.click(); break; }
+    }
+})()
+""")
+```
+
+**注意**：
+- 下拉可能渲染到 body 层（portal），不在 `.ant-select` 内部
+- 选项文本匹配用 `innerText.trim()`，不要包含旁白的 ID 数字
+- 如果 `query_selector` 找不到，可用 `page.mouse.click(x, y)` 坐标点击
 
 ### 9.6 发布页面结构（2026-06-12 确认）
 
@@ -396,27 +433,54 @@ ws.send(json.dumps({"method":"Runtime.evaluate","params":{"expression": js, "awa
 5. wait_until='networkidle' 在闲鱼 SPA 上永远等不到，必须用 'domcontentloaded'
 6. 服务器 IP 被闲鱼风控 — 机房 IP 无法登录，必须用住宅 IP
 
-### 9.8 完整发布流程
+### 9.8 完整发布流程（Playwright + CDP 方式，2026-06-13 验证）
 
-1. CDP 连接已登录的浏览器（9222端口）
-2. 导航到 https://www.goofish.com/publish
-3. 等待 8 秒 SPA 渲染
-4. base64 注入图片 - 触发 change 事件 - 等待 8 秒上传
-5. 填写描述（无 emoji）
-6. 选择分类、计价方式、服务类型
-7. 填写价格
-8. 点击发布 - 等待 8 秒 - 确认结果
+```python
+async with async_playwright() as p:
+    browser = await p.chromium.connect_over_cdp("http://127.0.0.1:9222")
+    context = browser.contexts[0]
+    page = context.pages[0]
+
+    # 1. 导航到发布页面
+    await page.goto('https://www.goofish.com/publish', wait_until='domcontentloaded')
+    await asyncio.sleep(8)
+
+    # 2. 上传图片（三步：base64注入 → fetch上传 → fiber onChange）
+    # 2a. 分块传输 base64 到浏览器
+    # 2b. 浏览器 fetch 上传到 stream-upload.goofish.com → 拿 fileId
+    # 2c. 遍历 fiber 树找 memoizedProps.onChange → 调用注入 fileList
+
+    # 3. 填写描述（contenteditable div，用 innerHTML）
+    await page.evaluate("editor.innerHTML = '<p>描述内容</p>'")
+
+    # 4. 填写价格
+    await page.query_selector('input[placeholder="0.00"]').fill('0.09')
+
+    # 5. 选择分类/计价方式/服务类型（见 9.5）
+
+    # 6. 点击发布按钮
+    await page.evaluate("document.querySelector('button:has-text(\'发布\')').click()")
+    await asyncio.sleep(8)
+
+    # 7. 验证：页面跳转到商品详情页 = 成功
+    assert 'item' in page.url
+```
+
+**关键依赖**：浏览器必须已登录闲鱼（9222端口的 google-chrome），Playwright 通过 CDP 连接复用登录态。
 
 ### 9.9 已验证成功案例
 
-| 商品 | 价格 | 分类 | 结果 |
-|------|------|------|------|
-| DeepSeek V4 API 包月畅用 | 4.00 | DeepSeek服务/元/次/指令优化 | 已上架 |
+| 商品 | 价格 | 分类 | 方式 | 结果 |
+|------|------|------|------|------|
+| DeepSeek V4 API 包月畅用 | 4.00 | DeepSeek服务/元/次/指令优化 | CDP base64注入(06-12) | ✅ 已上架 |
+| opus4.8全网底价0.09/刀 | 0.09 | DeepSeek服务/元/次/指令优化 | Playwright+CDP fiber注入(06-13) | ✅ 已上架 |
 
 Cookie 保存位置：
+- .config/xianyu_cookies_latest.txt — 最新完整 cookie string（CDP提取）
 - .config/xianyu_cookies.txt — 完整 cookie string
 - .config/xianyu_key_cookies.json — 关键 cookies
 - .config/xianyu_user_info.json — 用户标识信息
+- xianyu-publish/xianyu_cookies.txt — Playwright 脚本用 cookies
 
 ## 10. 待解决问题
 
@@ -449,11 +513,31 @@ Cookie 保存位置：
 
 **方案**: 利用 refreshToken 自动刷新，或通过浏览器自动获取新 Cookie
 
-### 10.3 发布商品 API 化
+### 10.3 发布商品 API 化（2026-06-13 进展）
 
-**问题**: 当前用 Playwright 浏览器模拟，速度慢且不稳定
+**抓包成果**: 通过 Playwright 拦截网络请求，成功捕获到真实发布 API 的完整请求格式：
 
-**方案**: 研究闲鱼发布 API，用 API 调用替代浏览器自动化（需要解决签名问题）
+```
+POST https://h5api.m.goofish.com/h5/mtop.idle.pc.idleitem.publish/1.0/
+Params: jsv=2.7.2&appKey=34839810&t=<timestamp>&sign=<execjs_sign>&...
+Body: data=<URL编码的JSON>
+```
+
+**请求体关键字段**（从抓包解码）：
+- `freebies`: false
+- `itemTypeStr`: "b"
+- `quantity`: "1"
+- `simpleItem`: true
+- `imageInfoDOList`: [{extraInfo:{...}, url, major:true, type:0, status:"done"}]
+- 还包含 title/desc/price/categoryId/shopId 等完整商品信息
+
+**签名验证**: execjs 调用 `generate_sign(t, token, data)` 已验证通过（用页面捕获的 prepublish.check 请求验证 sign 完全匹配）
+
+**当前状态**: Playwright+CDP 浏览器方案已能稳定发布，API 化方案作为性能优化方向保留。
+- 优势：浏览器方案可以绕过所有风控（复用用户登录态）
+- 风险：API 化后需要独立处理风控（RGV587_ERROR）
+
+**建议优先级**: 低。浏览器方案已稳定，API 化需要额外投入且引入风控风险。
 
 ## 11. 关键资源
 
@@ -470,5 +554,7 @@ Cookie 保存位置：
 | 文档 | 路径 | 说明 |
 |------|------|------|
 | 浏览器自动化经验 | /home/obsidian_vault/shared/browser/browser-automation.md | CDP 操作、图片上传突破等 |
-| 每日日志 | memory/2026-06-12.md | 今日操作记录 |
+| 每日日志 | memory/2026-06-12.md | CDP 发布实操记录 |
+| 每日日志 | memory/2026-06-13.md | Playwright+CDP 发布实操记录 |
 | 原始脚本 | xianyu-publish/publish.py | Playwright 发布脚本 |
+| 发布 API 抓包分析 | 见 10.3 节 | 真实发布请求格式 |
