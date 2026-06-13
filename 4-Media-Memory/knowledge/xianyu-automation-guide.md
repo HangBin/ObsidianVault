@@ -693,6 +693,39 @@ pip install websockets websocket-client
 3. **不支持批量上传不同图片**：当前脚本每次发布一个商品，批量模式需要商品列表 JSON
 4. **服务器 IP 风控**：机房 IP 可能被闲鱼风控，建议在住宅 IP 环境运行
 
+### 12.10 Session Cookies 恢复方案（2026-06-13）
+
+**问题**：Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等 `expires=-1` 的 cookies）会丢失，导致闲鱼登录态失效。
+
+**触发场景**：
+- 手动关闭 `:0` 桌面 Chrome 后重启
+- Chrome 崩溃后自动重启
+- 系统重启后 Chrome 自动启动
+
+**恢复方案**：CDP `Network.setCookie` 注入之前保存的 cookies
+
+```python
+# 1. 读取之前保存的 cookies
+with open("/tmp/xianyu_cookies.txt") as f:
+    cookie_str = f.read().strip()
+
+# 2. 解析并逐个注入
+for part in cookie_str.split("; "):
+    name, value = part.split("=", 1)
+    ws.send(json.dumps({"id": msg_id, "method": "Network.setCookie", "params": {
+        "name": name.strip(), "value": value.strip(),
+        "domain": ".goofish.com", "path": "/",
+        "httpOnly": False, "secure": True, "sameSite": "None"
+    }}))
+
+# 3. 刷新页面 → 登录态恢复
+ws.send(json.dumps({"id": msg_id, "method": "Page.navigate", "params": {"url": "https://www.goofish.com/"}}))
+```
+
+**前置条件**：`/tmp/xianyu_cookies.txt` 文件存在（35个cookies，1940字符）
+
+**最佳实践**：在 `run.sh` 启动 Chrome 后自动执行 cookies 注入，确保登录态始终有效。
+
 ## 13. 相关文档
 
 | 文档 | 路径 | 说明 |
