@@ -133,6 +133,26 @@ netstat -tlnp | grep 9222
 
 **记住**：MEMORY.md 是启动入口，细节在外围文档。保持精简，让 QMD 承担历史检索！
 
+## 📌 核心经验（2026-06-13）
+
+### 闲鱼一键自动发布 — 完全自动闭环
+- **执行时间**: 2026-06-13 14:30-15:35
+- **成果**: 完全自动闭环发布 3 个商品（¥0.09 / ¥8888 / ¥99999），用户全程无操作
+- **核心突破**: `xvfb-run --auto-servernum` 自动创建虚拟 X Server + 设置 DISPLAY → CDP 9222 端口自动监听
+- **Session cookies 恢复**: Chrome 重启后 cookie2/XSRF-TOKEN 丢失，通过 CDP `Network.setCookie` 从 `/tmp/xianyu_cookies.txt` 注入恢复
+- **图片上传修复**: fetch 返回结构嵌套 `{"object":{"fileId":"xxx"}}`，需取 `data.object.fileId`
+- **一键命令**: `bash run.sh --image img.png --desc '描述' --price 99999` 或 `bash run.sh`（读 config.json）
+- **脚本位置**: `/home/bill/run.sh`（入口）、`/home/bill/xianyu_start.sh`（Chrome启动）、`/home/bill/xianyu_publish.py`（CDP发布核心）
+- **经验文档**: `/home/obsidian_vault/4-Media-Memory/knowledge/xianyu-automation-guide.md`（708行）
+
+### 💡 关键教训
+- `sudo bash` 和 `sudo -u bill` 环境下 DISPLAY 变量为空 → Chrome 找不到 X Server → CDP 不通
+- `xvfb-run` 是唯一可靠方案：自动设置 DISPLAY + 虚拟桌面
+- Session cookies (expires=-1) 在 Chrome 重启后自动清理 → 必须从文件注入恢复
+- 闲鱼没有公开的发布 API（测试均返回 404）→ CDP 浏览器自动化是唯一可行方案
+
+
+
 ## 📌 核心经验（2026-06-12）
 
 ### 闲鱼商品发布 — CDP 自动化
