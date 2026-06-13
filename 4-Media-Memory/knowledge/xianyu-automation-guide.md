@@ -1,7 +1,7 @@
 ---
 title: 闲鱼自动化经验指南
 date: 2026-06-10
-last_updated: 2026-06-13
+last_updated: 2026-06-13 (15:01)
 tags:
   - xianyu
   - goofish
@@ -549,12 +549,159 @@ Body: data=<URL编码的JSON>
 | execjs | PyPI | Python 调用 JS 执行环境 |
 | PyExecJS | PyPI | execjs 的底层实现 |
 
-## 12. 相关文档
+## 12. 一键自动化方案（2026-06-13 重大更新）
+
+### 12.1 方案概述
+
+**完全无需手动启动浏览器**的一键发布方案。通过 `xvfb-run` 自动创建虚拟 X Server + 启动 Chrome，CDP 端口自动监听，全流程自动化。
+
+```bash
+# 一条命令完成全部操作
+bash run.sh --image /path/to/img.png --desc '商品描述' --price 0.09
+```
+
+### 12.2 脚本架构
+
+| 文件 | 功能 | 调用方式 |
+|------|------|---------|
+| `run.sh` | 一键入口：启动 Chrome → 检测登录态 → 发布 | `bash run.sh --image ... --desc ... --price ...` |
+| `xianyu_start.sh` | Chrome 启动脚本（xvfb-run） | 被 run.sh 内部调用 |
+| `xianyu_publish.py` | CDP 自动化发布核心（上传+填写+发布） | 被 run.sh 内部调用 |
+
+### 12.3 xvfb-run 启动 Chrome（核心突破）
+
+**问题**：`sudo bash` 和 `sudo -u bill` 环境下 `DISPLAY` 变量均为空，Chrome 找不到 X Server → CDP 9222 端口不监听。
+
+**解决方案**：`xvfb-run --auto-servernum` 自动创建虚拟 X Server（:99）并设置 `DISPLAY` 环境变量。
+
+```bash
+xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" \
+  /opt/google/chrome/chrome \
+  --remote-debugging-port=9222 \
+  --remote-allow-origins=http://127.0.0.1:9222 \
+  --password-store=basic \
+  --no-sandbox \
+  --disable-gpu \
+  --user-data-dir=/home/bill/.config/google-chrome \
+  https://www.goofish.com &>/dev/null &
+```
+
+**关键发现**：
+- `xvfb-run` 自动设置 `DISPLAY` = Chrome 能正常启动 + CDP 端口监听
+- `--auto-servernum` 自动选择可用的 X display 编号
+- `--server-args="-screen 0 1920x1080x24"` 设置分辨率
+- `&>/dev/null` 必须加，否则 xvfb 的 stderr 会阻塞 shell
+
+**对比之前失败的方案**：
+
+| 方案 | DISPLAY | CDP 端口 | 失败原因 |
+|------|---------|----------|---------|
+| `sudo bash xianyu_start.sh` | 空 | ❌ 不监听 | sudo 不保留 DISPLAY |
+| `sudo -u bill bash ...` | 空 | ❌ 不监听 | 同上 |
+| `su - bill -c '...'` | :0 | ❌ 不监听 | PAM 环境变量问题 |
+| `sudo -u bill DISPLAY=:0 ...` | :0 | ❌ 不监听 | root 无 :0 权限 |
+| **`xvfb-run --auto-servernum`** | **自动设置** | **✅ 监听** | **唯一可行方案** |
+
+### 12.4 图片上传修复（返回值解析）
+
+**问题**：fetch 上传返回成功但 `fileId` 为空。
+
+**根因**：闲鱼上传 API 返回结构嵌套在 `object` 字段中：
+```json
+{"object":{"fileId":"1252308768221179213","url":"https://img.alicdn.com/..."},"success":true}
+```
+脚本之前取 `data.get("fileId")` → 顶层没有 → 返回空。
+
+**修复**：
+```python
+file_id = data.get("fileId", "") or (data.get("object", {}) or {}).get("fileId", "")
+url = data.get("url", "") or (data.get("object", {}) or {}).get("url", "")
+```
+
+### 12.5 Cookies 提取与验证
+
+**提取方式**：通过 CDP `Network.getAllCookies` 获取完整 cookies（包括 httpOnly cookies）。
+
+```python
+# 必须用 Network.getAllCookies，document.cookie 拿不到 httpOnly cookies
+ws.send(json.dumps({"id":1,"method":"Network.getAllCookies"}))
+resp = json.loads(ws.recv())
+cookies = resp["result"]["cookies"]
+cookie_str = "; ".join(f"{c['name']}={c['value']}" for c in cookies)
+```
+
+**验证结果**：35 个 cookies，关键 cookies 完整：
+- `tracknick=panbin5218`（用户名）
+- `unb=748552523`（用户唯一标识）
+- `XSRF-TOKEN`、`cookie2`、`sgcookie`（登录态核心）
+
+**Cookies 直接调 API**：测试了多个闲鱼 API 路径均返回 404，闲鱼没有公开的发布 API → CDP 浏览器自动化是唯一可行方案。
+
+### 12.6 已验证发布记录（2026-06-13）
+
+| 商品 | 价格 | 商品ID | 方式 | 结果 |
+|------|------|--------|------|------|
+| Claude Opus 4.8 API | ¥0.09 | 1057911158600 | CDP fiber 注入 | ✅ 已上架 |
+| Claude Opus 4.8 API（测试） | ¥0.09 | 1057127547428 | run.sh 一键 | ✅ 已上架 |
+| MacBook Pro M4 Pro 14寸 | ¥8888 | 1059835968742 | run.sh 一键 | ✅ 已上架 |
+
+### 12.7 一键发布完整流程
+
+```
+bash run.sh --image img.png --desc '描述' --price 0.09
+  │
+  ├─ Step 1: start_chrome()
+  │    ├─ 检查 CDP 9222 是否已可用 → 是则跳过
+  │    ├─ xvfb-run 启动 Chrome
+  │    └─ 等待 CDP 就绪（最多 20s）
+  │
+  ├─ Step 2: check_login()
+  │    ├─ CDP 连接 → Runtime.evaluate → 页面内容
+  │    └─ 检测 panbin5218/订单 → 已登录
+  │
+  └─ Step 3: xianyu_publish.py publish
+       ├─ CDP 连接 → 找到 goofish.com tab
+       ├─ 检查登录态
+       ├─ 导航到 /publish
+       ├─ fetch 上传图片 → 拿到 fileId + url
+       ├─ React fiber onChange 注入 fileList
+       ├─ 填写描述（contenteditable innerHTML）
+       ├─ 填写价格（input value setter）
+       ├─ 截图确认
+       ├─ 点击发布按钮
+       └─ 验证：页面跳转到 /item/id=xxx → 成功
+```
+
+### 12.8 前置依赖
+
+```bash
+# 系统依赖
+apt-get install xvfb x11vnc
+
+# Python 依赖
+pip install websockets websocket-client
+
+# Chrome 已安装（google-chrome，非 snap chromium）
+# 路径: /opt/google/chrome/chrome
+# Profile: /home/bill/.config/google-chrome/
+```
+
+### 12.9 已知限制
+
+1. **登录态会过期**：Chrome profile 里的闲鱼 cookies 过期后需要手动重新登录一次
+2. **xvfb 虚拟桌面性能**：虚拟桌面下 Chrome 渲染性能略低，但发布功能正常
+3. **不支持批量上传不同图片**：当前脚本每次发布一个商品，批量模式需要商品列表 JSON
+4. **服务器 IP 风控**：机房 IP 可能被闲鱼风控，建议在住宅 IP 环境运行
+
+## 13. 相关文档
 
 | 文档 | 路径 | 说明 |
 |------|------|------|
+| 一键发布脚本 | /home/bill/run.sh | 一键启动+发布（入口） |
+| Chrome 启动脚本 | /home/bill/xianyu_start.sh | xvfb-run 启动 Chrome |
+| 发布核心脚本 | /home/bill/xianyu_publish.py | CDP 自动化发布核心 |
 | 浏览器自动化经验 | /home/obsidian_vault/shared/browser/browser-automation.md | CDP 操作、图片上传突破等 |
 | 每日日志 | memory/2026-06-12.md | CDP 发布实操记录 |
-| 每日日志 | memory/2026-06-13.md | Playwright+CDP 发布实操记录 |
+| 每日日志 | memory/2026-06-13.md | xvfb-run + CDP 发布实操记录 |
 | 原始脚本 | xianyu-publish/publish.py | Playwright 发布脚本 |
 | 发布 API 抓包分析 | 见 10.3 节 | 真实发布请求格式 |
