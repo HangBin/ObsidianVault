@@ -1,7 +1,7 @@
 ---
 title: 闲鱼自动化经验指南
 date: 2026-06-10
-last_updated: 2026-06-13 (15:01)
+last_updated: 2026-06-13 (16:44)
 tags:
   - xianyu
   - goofish
@@ -13,6 +13,10 @@ tags:
   - signature
   - cdp
   - browser-automation
+  - react-fiber
+  - ant-design
+  - xvfb
+  - automation
 author: media
 ---
 
@@ -317,7 +321,7 @@ cookie_str = "; ".join(f"{c['name']}={c['value']}" for c in cookies)
 
 **关键**：必须用 `Network.getAllCookies`（CDP 专属方法），JS `document.cookie` 拿不到 httpOnly cookies（sgcookie、havana_lgc2_77 等）。
 
-**最新 cookies 位置**: `.config/xianyu_cookies_latest.txt`（2026-06-13 CDP 提取）
+**Cookies 位置**: `/root/.openclaw/workspace-media/.config/xianyu_cookies.txt`（持久化，系统重启不丢失）
 
 ### 9.3 启动有界面浏览器
 
@@ -384,28 +388,22 @@ target_fiber.memoizedProps.onChange({'fileList': [file_item]})
 
 ### 9.5 下拉框操作（ant-select）
 
+> ⚠️ **已过时**。Ant Design 5 Select 组件不响应 DOM click 事件。
+> ✅ **正确方案见 §13.4**（CDP dispatchKeyEvent 逐字输入）。
+
+以下仅作历史参考：
+
 ```python
-# 点击下拉打开
-selector = page.query_selector('.ant-select-selector')  # 或第N个
-selector.click()
-await asyncio.sleep(2)
+# ❌ 旧方式：click 不生效
+selector = page.query_selector('.ant-select-selector')
+selector.click()  # Ant Design 5 拦截合成事件
 
-# 点击选项
-page.evaluate("""
-(() => {
-    const dropdown = document.querySelector('.ant-select-dropdown');
-    const items = dropdown.querySelectorAll('[class*="item"], [role="option"]');
-    for (const item of items) {
-        if (item.innerText.trim() === 'DeepSeek服务') { item.click(); break; }
-    }
-})()
-""")
+# ✅ 新方式（§13.4）：CDP dispatchKeyEvent
+# 1. focus 搜索输入框
+# 2. dispatchKeyEvent 逐字输入关键词
+# 3. 等 2-3 秒下拉出现
+# 4. 点击选项（textContent.trim() === '目标' && children.length === 0）
 ```
-
-**注意**：
-- 下拉可能渲染到 body 层（portal），不在 `.ant-select` 内部
-- 选项文本匹配用 `innerText.trim()`，不要包含旁白的 ID 数字
-- 如果 `query_selector` 找不到，可用 `page.mouse.click(x, y)` 坐标点击
 
 ### 9.6 发布页面结构（2026-06-12 确认）
 
@@ -722,7 +720,7 @@ for part in cookie_str.split("; "):
 ws.send(json.dumps({"id": msg_id, "method": "Page.navigate", "params": {"url": "https://www.goofish.com/"}}))
 ```
 
-**前置条件**：`/tmp/xianyu_cookies.txt` 文件存在（35个cookies，1940字符）
+**前置条件**：`/root/.openclaw/workspace-media/.config/xianyu_cookies.txt` 文件存在（35个cookies，1940字符）
 
 **最佳实践**：在 `run.sh` 启动 Chrome 后自动执行 cookies 注入，确保登录态始终有效。
 
