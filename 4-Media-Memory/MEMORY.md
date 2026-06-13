@@ -133,6 +133,27 @@ netstat -tlnp | grep 9222
 
 **记住**：MEMORY.md 是启动入口，细节在外围文档。保持精简，让 QMD 承担历史检索！
 
+## 📌 核心经验（2026-06-12）
+
+### 闲鱼商品发布 — CDP 自动化
+- **执行时间**: 2026-06-12 11:20-18:30
+- **成果**: 成功发布第1个商品"DeepSeek V4 API 包月畅用"（¥4，已上架）
+- **核心突破**: CDP DOM.setFileInputFiles + base64 图片注入绕过 React 事件限制
+- **签名算法**: md5(token + "&" + t + "&" + appKey + "&" + dataStr)，已验证
+- **第2商品卡点**: React 组件 fileList 状态无法通过 setState 更新，发布 API 调用失败（参数非法）
+- **关键标识符**: 上传接口 `stream-upload.goofish.com`，发布 API `mtop.idle.pc.idleitem.publish`
+
+### 无效知识文件根因分析
+- **问题**: 4 个无效文件被反复写入 knowledge/ 目录
+- **根因**: `sync-daily-to-obsidian.sh` 的 `promote_to_knowledge()` 函数 + cron 每 30 分钟触发
+- **教训**: 脚本自动写入 ≠ agent 主动记录；cron 驱动脚本需审查副作用
+- **状态**: 4 个文件已删除，脚本修复待确认
+
+### 💡 关键教训
+- DOM.setFileInputFiles 无法让 React 识别文件上传（beforeUpload 拦截机制）
+- React 组件状态更新需要找到正确的 fiber setState 调用方式
+- 签名算法验证通过但 API 参数格式仍需调试
+
 ## 📌 核心经验（2026-04-24）
 
 ### 上午 - 会话归档与学习沉淀
