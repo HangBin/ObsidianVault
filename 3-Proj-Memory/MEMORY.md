@@ -140,18 +140,6 @@ experience*.md       ← 专项经验详细教程
 > 📌 **更多经验细节** → 检索 `.learnings/` 或使用 `qmd search` 搜索共享文档
 
 
-## Promoted From Short-Term Memory (2026-05-21)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:59:62 -->
-- **触发**: 大梦要求执行对话写入 **工具**: exec, read, edit **结果**: 完成记忆写入，修复重复记录 **决策**: 发现12:21记录重复，已清理 [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-18.md:59-62]
-
-## Promoted From Short-Term Memory (2026-06-09)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:10:13 -->
-- **触发**: 大梦要求执行记忆写入并检查记忆文件完整性 **工具**: exec, read, write, edit **结果**: 完成记忆文件创建、子文件检查、历史文件清理 **决策**: 按对话结束协议7步执行 [score=0.802 recalls=0 avg=0.620 source=memory/2026-06-07.md:10-13]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:34:37 -->
-- **触发**: 大梦要求学习 GEP 共享经验文档，并全量读取所有知识源目录 **工具**: read, exec (find + head) **结果**: 完成 GEP 架构理解 + 全量文件扫描 **决策**: 按 GEP 知识源扫描 SOP 逐文件读取，不遗漏 [score=0.802 recalls=0 avg=0.620 source=memory/2026-06-07.md:34-37]
-
 ## Promoted From Short-Term Memory (2026-06-10)
 
 <!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:63:66 -->
@@ -218,3 +206,10 @@ experience*.md       ← 专项经验详细教程
 - | history-2026-04/2026-04-06.md | 学习 browser 截图转链接技巧（3种方案+安全注意） | | history-2026-04/2026-04-07.md | 项目简报、browser 学习整理、agent-browser 实战（3个动漫查询） | | history-2026-04/2026-04-08.md | 工作区整理（7个重复文件清理+软连接）、脚本冗余检查、定时任务整合 | | history-2026-04/2026-04-09.md | 初始化占位 | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:147-150]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:151:154 -->
 - | history-2026-04/2026-04-10.md | 初始化占位 | | history-2026-04/2026-04-11.md | 初始化占位 | | history-2026-04/2026-04-12.md | 初始化占位 | | history-2026-04/2026-04-13.md | 初始化占位 | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:151-154]
+
+## Promoted From Short-Term Memory (2026-06-13)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:155:158 -->
+- | history-2026-04/2026-04-14.md | 初始化占位 | | history-2026-04/2026-04-15.md | 初始化占位 | | history-2026-04/2026-04-16.md | 初始化占位 | | history-2026-04/2026-04-17.md | Light Sleep 反思 | [score=0.888 recalls=0 avg=0.620 source=memory/2026-06-07.md:155-158]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:159:162 -->
+- | history-2026-04/2026-04-18.md | Light Sleep + REM Sleep 反思 | | history-2026-04/2026-04-19.md | Light Sleep + REM Sleep 反思 | | history-2026-04/2026-04-20.md | 文件合并与归档整理、系统性记忆检查 | | history-2026-04/2026-04-21.md | Light Sleep + REM Sleep 反思 | [score=0.888 recalls=0 avg=0.620 source=memory/2026-06-07.md:159-162]
