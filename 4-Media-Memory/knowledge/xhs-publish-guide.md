@@ -1,26 +1,26 @@
 ---
 title: 小红书发布经验指南
 date: 2026-06-10
-last_updated: 2026-06-12
+last_updated: 2026-06-15 (10:59)
 tags:
   - xiaohongshu
   - publish
   - experience
   - cookie
-  - api
-  - anti-crawl
   - xhs-cli
-  - reverse-engineering
-  - spider-xhs
+  - anti-crawl
+author: media
 ---
 
 # 小红书发布经验指南
 
-## 概述
+> **⚡ 快速开始：**
+> ```bash
+> xhs post --title "标题" --body "正文" --images /path/to/img.jpg --json
+> ```
+> Cookie 检查：`xhs my-notes --json`（能返回笔记列表 = 登录态有效）
 
-本文档记录小红书发布的完整经验，包括 Cookie 管理、API 调用、CLI 使用、反爬机制、常见问题排查。
-
-> 2026-06-10 更新：新增反爬机制章节、签名算法详解、xhs-cli 绕过策略。
+---
 
 ## 1. Cookie 管理
 
@@ -47,7 +47,7 @@ tags:
 | `x-rednote-holderctry` | 持有地区 | ✅ |
 | `saved_at` | 保存时间戳（自动管理） | ✅ |
 
-### 1.3 Cookie 更新方式
+### 1.3 Cookie 更新
 
 ```python
 import json, time
@@ -66,10 +66,9 @@ with open(cookies_path, "w") as f:
 
 ### 1.4 Cookie 过期判断
 
-- xhs 的 Cookie TTL 为 7 天（`_COOKIE_TTL_SECONDS = 7 * 86400`）
-- 过期后 xhs 会尝试从浏览器刷新（`browser_cookie3`）
-- 刷新失败则仍然使用旧 Cookie，但 API 调用会报"登录已过期"
-- **写操作（发布/草稿）对 Cookie 更敏感**，读操作可能在 Cookie 过期后仍能工作
+- Cookie TTL 为 7 天
+- 过期后 API 调用报"登录已过期"（错误码 `-100`）
+- **写操作对 Cookie 更敏感**，读操作可能过期后仍能工作
 
 ### 1.5 获取新 Cookie
 
@@ -78,37 +77,24 @@ with open(cookies_path, "w") as f:
 xhs login
 
 # 方式2: 从浏览器提取
-# 在浏览器打开 https://www.xiaohongshu.com
-# F12 → Application → Cookies → 复制 a1 和 web_session
+# 打开 https://www.xiaohongshu.com → F12 → Application → Cookies → 复制 a1 和 web_session
 ```
+
+---
 
 ## 2. 发布流程
 
-### 2.1 CLI 发布（推荐）
+### 2.1 CLI 发布
 
 ```bash
 # 基本发布
-xhs post \
-  --title "笔记标题" \
-  --body "笔记正文内容" \
-  --images /path/to/image.jpg \
-  --json
+xhs post --title "笔记标题" --body "笔记正文" --images /path/to/image.jpg --json
 
 # 带话题
-xhs post \
-  --title "笔记标题" \
-  --body "笔记正文内容" \
-  --images /path/to/image.jpg \
-  --topic "话题关键词" \
-  --json
+xhs post --title "标题" --body "正文" --images /path/to/img.jpg --topic "话题关键词" --json
 
 # 私密发布
-xhs post \
-  --title "笔记标题" \
-  --body "笔记正文内容" \
-  --images /path/to/image.jpg \
-  --private \
-  --json
+xhs post --title "标题" --body "正文" --images /path/to/img.jpg --private --json
 ```
 
 ### 2.2 发布返回值
@@ -116,16 +102,9 @@ xhs post \
 ```json
 {
   "ok": true,
-  "schema_version": "1",
-  "data": {
-    "id": "6a267d1a0000000021021fca",
-    "score": 10
-  }
+  "data": { "id": "6a267d1a...", "score": 10 }
 }
 ```
-
-- `data.id`: 笔记 ID
-- `data.score`: 质量评分
 
 ### 2.3 Python API 发布
 
@@ -138,254 +117,120 @@ from xhs_cli.cookies import get_cookies
 browser, cookies = get_cookies("saved")
 client = XhsClient(cookies, timeout=30.0, request_delay=0.5)
 
-# 需要先上传图片获取 file_id
+# 先上传图片获取 file_id
 permit = client.get_upload_permit()
 client.upload_file(permit["fileId"], permit["token"], "/path/to/image.jpg")
 
 # 发布
 result = client.create_image_note(
-    title="笔记标题",
-    desc="笔记正文",
-    image_file_ids=[permit["fileId"]],
-    topics=[],
-    is_private=False,
+    title="笔记标题", desc="笔记正文",
+    image_file_ids=[permit["fileId"]], topics=[], is_private=False,
 )
 ```
+
+---
 
 ## 3. 阅读笔记
 
 ### 3.1 CLI 读取（必须加 --xsec-token）
 
 ```bash
-# ❌ 错误：不加 --xsec-token 返回空数据
+# ❌ 不加 --xsec-token 返回空数据
 xhs read "笔记ID" --json
 
-# ✅ 正确：加 --xsec-token
+# ✅ 加 --xsec-token
 xhs read "笔记ID" --xsec-token "xsec_token值" --json
 
 # 从 my-notes 获取 xsec_token
 xhs my-notes --json
-# 返回中的 xsec_token 字段即可用于 read
 ```
 
-### 3.2 Python API 读取
-
-```python
-# 需要 xsec_token
-result = client.get_note_detail(
-    "笔记ID",
-    xsec_token="xsec_token值",
-    xsec_source="pc_feed"
-)
-```
-
-### 3.3 搜索获取 xsec_token
+### 3.2 搜索获取 xsec_token
 
 ```bash
-# 搜索结果的 items 中包含 xsec_token
 xhs search "关键词" --json
 # 返回的 items[0].xsec_token 可用于 read
 ```
 
+---
+
 ## 4. 其他操作
 
-### 4.1 搜索
-
 ```bash
-xhs search "关键词" --json
-xhs hot --json
-xhs feed --json
+xhs search "关键词" --json    # 搜索
+xhs hot --json                 # 热门
+xhs feed --json                # 推荐
+xhs comments "笔记ID" --json   # 评论
+xhs my-notes --json            # 我的笔记
 ```
 
-### 4.2 评论
-
-```bash
-xhs comments "笔记ID" --json
-```
-
-### 4.3 我的笔记
-
-```bash
-xhs my-notes --json
-```
-
-### 4.4 用户信息
-
-```bash
-# Python API
-info = client.get_self_info()
-# 返回: nickname, user_id, red_id, desc 等
-```
+---
 
 ## 5. 错误码与排查
-
-### 5.1 常见错误码
 
 | 错误码 | 消息 | 原因 | 解决方案 |
 |--------|------|------|----------|
 | `-100` | 登录已过期 | Cookie 失效 | 更新 a1 + web_session |
-| `-9150` | 技术升级中，暂时无法发布 | 小红书平台维护 | 等待后重试 |
-| `-9110` | 笔记图片无法正常访问 | image_file_ids 无效 | 先上传图片获取有效 file_id |
-| `Captcha` | 验证码触发 | 服务器 IP 被风控 | 降低频率 / 使用代理 |
+| `-9150` | 技术升级中 | 平台维护 | 等待后重试 |
+| `-9110` | 图片无法访问 | image_file_ids 无效 | 先上传图片获取有效 file_id |
+| `Captcha` | 验证码触发 | IP 被风控 | 降低频率 / 使用代理 |
 
-### 5.2 排查流程
+---
 
-```
-发布失败 →
-  1. 检查 Cookie 是否过期 → 更新 a1 + web_session
-  2. 检查 API 返回错误码 → -100 需刷新 Cookie，-9150 需等待
-  3. 检查 image_file_ids 是否有效 → 先 upload_file 获取有效 ID
-  4. 检查是否触发 Captcha → 降低频率
-```
-
-## 6. 反爬机制（2026-06-10 新增）
+## 6. 反爬机制（2026-06-10）
 
 ### 6.1 五层防线
 
-| 层级 | 机制 | 严重程度 | 绕过方案 |
-|------|------|---------|----------|
-| 1️⃣ TLS 指纹 | JA3/JA4 识别 Python requests | 中 | `curl_cffi` 伪装 Chrome 指纹 |
-| 2️⃣ 请求签名 | x-s / x-t / x-s-common | 高 | `xhshow` 库生成 |
-| 3️⃣ IP 限流 | 数据中心 IP 直接拦截 | 高 | 住宅代理（中国地理位置） |
-| 4️⃣ SPA 渲染 | 部分接口需浏览器执行 JS | 中 | Playwright / 补环境 |
-| 5️⃣ 登录墙 | xsec_token / web_session | 中 | 登录态 Cookie |
+| 层级 | 机制 | 绕过方案 |
+|------|------|---------|
+| 1️⃣ TLS 指纹 | JA3/JA4 识别 Python | `curl_cffi` 伪装 Chrome |
+| 2️⃣ 请求签名 | x-s / x-t / x-s-common | `xhshow` 库生成 |
+| 3️⃣ IP 限流 | 数据中心 IP 拦截 | 住宅代理 |
+| 4️⃣ SPA 渲染 | 需浏览器执行 JS | Playwright / 补环境 |
+| 5️⃣ 登录墙 | xsec_token / web_session | 登录态 Cookie |
 
-### 6.2 签名算法核心（xhshow 库）
+### 6.2 xhs-cli 绕过策略
 
-**x-s 签名流程（7 步）**:
-```
-1. content_string = METHOD + URI + params/payload
-2. d_value = encrypt(content_string)  // 加密变换
-3. payload_array = [d_value, a1, xsec_appid, content_string, timestamp]
-4. xor_result = XOR_transform(payload_array)
-5. x3 = base64(xor_result[:PAYLOAD_LENGTH])
-6. signature_data = {x0: SDK_VERSION, x1: APP_ID, x2: PLATFORM, x3: x3, ...}
-7. x-s = XYS_PREFIX + base64(json(signature_data))
-```
-
-**必需 Cookie 字段**: `a1`（用户唯一标识）+ `web_session`（会话ID）
-
-**请求头完整说明**:
-
-| Header | 说明 | 生成方式 |
-|--------|------|---------|
-| `x-s` | 主签名 | xhshow 动态生成 |
-| `x-t` | Unix 毫秒时间戳 | `int(time.time() * 1000)` |
-| `x-s-common` | 公共签名 | 基于 Cookie 生成 |
-| `x-b3-traceid` | 追踪 ID | 随机生成 |
-| `x-xray-traceid` | 追踪 ID | 随机生成 |
-
-### 6.3 xhs-cli 绕过策略（⭐ 关键参考）
-
-| 操作 | 方式 | 是否需要签名 |
-|------|------|-------------|
-| 搜索 | `/api/sns/web/v1/search/notes` | ✅ 需要 x-s（xhshow 生成） |
-| 读取笔记 | `xiaohongshu.com/explore/{note_id}` HTML 页面 | ❌ 完全绕过签名 |
-| 获取评论 | `/api/sns/web/v2/comment/page` | ✅ 需要 x-s |
-| 发布笔记 | 创作者平台 API | ✅ 需要创作者签名 |
-| 点赞/收藏 | `/api/sns/web/v1/note/like` | ✅ 需要 x-s |
+| 操作 | 是否需要签名 |
+|------|-------------|
+| 搜索 | ✅ 需要 x-s |
+| 读取笔记 | ❌ 走 HTML 解析完全绕过 |
+| 发布笔记 | ✅ 需要创作者签名 |
+| 点赞/收藏 | ✅ 需要 x-s |
 
 **关键**: 读取笔记走 HTML 解析（SSR 渲染），完全绕过 API 签名！
 
-**创作者平台签名**（不同于 PC 端）:
-```python
-from xhs_cli.creator_signing import sign_creator
-sign = sign_creator(f"url={full_uri}", None, cookies["a1"])
-# 返回 {"x-s": ..., "x-t": ...}
-```
+### 6.3 反检测措施
 
-### 6.4 签名算法变化频率
-
-- 约每月更新一次（如 xsversion56）
-- 每次更新后旧签名失效（返回 406 错误）
-- Spider_XHS 项目持续跟踪：https://github.com/cv-cat/Spider_XHS
-- 最新签名 JS：`static/xhs_main_260411.js`
-
-### 6.5 开源项目架构参考
-
-**Spider_XHS（推荐，最完整）**:
-```
-Spider_XHS/
-├── apis/
-│   ├── xhs_pc_apis.py          # PC端完整API（采集）
-│   ├── xhs_creator_apis.py     # 创作者平台API（上传发布）
-│   └── xhs_pc_login_apis.py    # PC端登录（二维码/手机验证码）
-├── xhs_utils/
-│   ├── xhs_util.py             # PC端签名算法
-│   └── xhs_creator_util.py     # 创作者平台签名算法
-└── static/
-    ├── xhs_main_260411.js      # PC端签名核心JS（最新版）
-    └── xhs_rap.js              # x-rap-param JSVMP 补环境
-```
-
-**xhs-cli（轻量级）**:
-```
-xhs_cli/
-├── signing.py                  # 签名适配层（调用 xhshow）
-├── client.py                   # API 客户端
-└── client_mixins.py            # 业务逻辑 mixin
-```
-
-### 6.6 实战建议
-
-#### 采集（读）操作
-1. **搜索笔记**: 使用 xhshow 库生成签名，调用 `/api/sns/web/v1/search/notes`
-2. **读取笔记**: 走 HTML 解析（`xiaohongshu.com/explore/{note_id}`），完全绕过签名
-3. **获取评论**: 需要签名，调用 `/api/sns/web/v2/comment/page`
-
-#### 发布（写）操作
-1. **上传图片**: 需要创作者平台签名
-2. **创建笔记**: 需要创作者平台签名
-3. **注意**: 写操作风控更严格，建议用浏览器自动化
-
-#### 反检测措施
 1. **TLS 指纹**: `pip install curl_cffi` → `impersonate="chrome120"`
 2. **请求间隔**: 2-3 秒/请求（搜索），10-20 请求/分钟/IP
 3. **住宅代理**: 中国地理位置住宅 IP
-4. **浏览器指纹**: 完整 sec-ch-ua / sec-fetch 头
+
+---
 
 ## 7. 注意事项
 
 ### 7.1 IP 风控
 
-- 服务器 IP 访问小红书 API 可能触发验证码
-- 读操作（search/hot/feed）一般不受影响
+- 服务器 IP 可能触发验证码
 - 写操作（post/like/comment）更容易触发
-- **控制操作频率**，避免短时间内大量调用
+- 控制操作频率，避免短时间内大量调用
 
 ### 7.2 Cookie 安全
 
-- Cookie 文件权限: `chmod 600`
-- 不要在日志或输出中暴露完整 Cookie 值
-- 定期更新 Cookie（建议每 7 天）
+- 文件权限: `chmod 600`
+- 不要在日志中暴露完整 Cookie 值
+- 定期更新（建议每 7 天）
 
 ### 7.3 发布限制
 
-- 自动发布存在平台反机器人检测
-- 建议发布间隔 > 60 秒
+- 发布间隔 > 60 秒
 - 图片需先上传到小红书 CDN 再发布
-- 草稿箱 API (`/api/galaxy/creator/note/draft`) 与发布 API 不同，需要额外参数
+- 草稿箱 API 与发布 API 不同
 
-### 7.4 数据读取
+---
 
-- `read` 命令必须加 `--xsec-token`，否则返回空数据
-- `my-notes` 返回的列表包含 `xsec_token`，可直接用于 `read`
-- `search` 返回的 items 也包含 `xsec_token`
-- **替代方案**: 直接请求 HTML 页面 `xiaohongshu.com/explore/{note_id}` 绕过签名
-
-### 7.5 闲鱼 vs 小红书反爬对比
-
-| 维度 | 闲鱼 | 小红书 |
-|------|------|--------|
-| 签名算法 | MD5（简单） | x-s 多层加密（复杂） |
-| 签名入口 | execjs 调用 JS | xhshow 库 / JS |
-| Cookie 要求 | cookie2 + sgcookie | a1 + web_session |
-| 变化频率 | 低 | 约每月一次 |
-| 绕过方案 | execjs 正确调用 | HTML 解析绕过 |
-| IP 风控 | 中 | 高（需住宅IP） |
-| 写操作风控 | 高 | 极高 |
-
-## 7. 环境信息
+## 8. 环境信息
 
 | 项目 | 值 |
 |------|-----|
@@ -397,27 +242,18 @@ xhs_cli/
 | MCP 注册名 | `xhs-mcp` |
 | 当前用户 | 小红薯65103A5F (red_id: 5173229140) |
 
-## 8. 关键资源
-
-| 资源 | 链接 | 说明 |
-|------|------|------|
-| Spider_XHS | github.com/cv-cat/Spider_XHS | 最完整的开源爬虫框架 |
-| xhs-cli | github.com/jackwener/xiaohongshu-cli | CLI 工具，HTML 解析绕过 |
-| MediaCrawler | github.com/NanmiCoder/MediaCrawler | 多平台爬虫 |
-| xhshow | PyPI | 签名算法库 |
-| Spider_XHS JS | static/xhs_main_260411.js | 最新签名核心 JS |
+---
 
 ## 9. 经验教训
 
 ### ✅ 已验证
 
-1. **Cookie 更新到正确路径**: 必须更新 `~/.xiaohongshu-cli/cookies.json`，不是工作区的 `.config/` 目录
-2. **read 必须加 xsec-token**: 这是最容易被忽略的参数
-3. **发布是真实成功的**: CLI 返回的 ID 和 my-notes 确认一致
-4. **Python API 和 CLI 结果一致**: 同样的 Cookie 在两种方式下行为一致
+1. Cookie 必须更新到 `~/.xiaohongshu-cli/cookies.json`，不是 `.config/` 目录
+2. `read` 必须加 `--xsec-token`，否则返回空数据
+3. CLI 和 Python API 结果一致
 
 ### 🚨 踩坑记录
 
-1. **误判发布失败**: 因为 read 不加 xsec-token 返回空数据，误以为发布失败
-2. **Cookie 路径错误**: 更新到工作区的 `.config/` 目录无效
-3. **草稿箱 API 不同**: `_creator_post` 和 `_main_api_post` 的认证方式不同
+1. **误判发布失败**: read 不加 xsec-token 返回空，误以为发布失败
+2. **Cookie 路径错误**: 更新到 `.config/` 目录无效
+3. **草稿箱 API 不同**: `_creator_post` 和 `_main_api_post` 认证方式不同
