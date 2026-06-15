@@ -80,6 +80,7 @@ netstat -tlnp | grep 9222
 | `memory/knowledge` | `/home/obsidian_vault/4-Media-Memory/knowledge/` |
 | `memory/archive` | `/home/obsidian_vault/4-Media-Memory/archive/` |
 | `MEMORY.md` | `/home/obsidian_vault/4-Media-Memory/MEMORY.md` |
+| `xianyu-products/` | 闲鱼商品目录（每个商品独立子目录） |
 
 **关键规则**：
 - 读取经验文档用 Obsidian 绝对路径：`/home/obsidian_vault/4-Media-Memory/knowledge/xxx.md`
@@ -110,6 +111,9 @@ netstat -tlnp | grep 9222
 | `/home/obsidian_vault/4-Media-Memory/knowledge/xhs-publish-guide.md` | **小红书发布经验指南** |
 | `/home/obsidian_vault/4-Media-Memory/knowledge/experience.md` | **经验沉淀**（团队成立、规范、踩坑） |
 | `/home/obsidian_vault/shared/experience-archive.md` | **日志归档规范**（目录规则、操作流程、8条教训） |
+| `xianyu-products/README.md` | 闲鱼商品目录规范（命名、结构、发布流程） |
+| `/home/bill/run.sh` | 闲鱼发布脚本（启动→注入Cookie→检查→发布） |
+| `/home/bill/extract_xianyu_cookies.py` | Cookies 提取脚本（CDP 优先，SQLite 降级） |
 | `strategy/` | 内容策略与样例库（爆款文案、模板） |
 
 
