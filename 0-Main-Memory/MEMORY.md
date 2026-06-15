@@ -186,3 +186,8 @@ cat /root/.openclaw/share/browser/experience-browser.md
 
 <!-- openclaw-memory-promotion:memory:memory/2026-06-10.md:15:16 -->
 - **触发**: media 的会话卡在循环里，持续发送"任务复述确认"消息 **工具**: sessions_send (多次尝试回复), sessions_history, exec (数据库查询) [score=0.893 recalls=0 avg=0.620 source=memory/2026-06-10.md:15-16]
+
+## Promoted From Short-Term Memory (2026-06-15)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-08-0848.md:14:14 -->
+- assistant: [score=0.850 recalls=0 avg=0.620 source=memory/2026-06-08-0848.md:14-14]
