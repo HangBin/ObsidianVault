@@ -181,3 +181,8 @@ cat /root/.openclaw/share/browser/experience-browser.md
 - assistant: 看起来主记忆文件已经包含了今天的主要内容。现在删除子文件： [score=0.837 recalls=0 avg=0.620 source=memory/2026-06-08-0848.md:18-19]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-08-0848.md:28:29 -->
 - assistant: 完美！我已经成功完成了以下工作： [score=0.837 recalls=0 avg=0.620 source=memory/2026-06-08-0848.md:28-29]
+
+## Promoted From Short-Term Memory (2026-06-15)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-10.md:15:16 -->
+- **触发**: media 的会话卡在循环里，持续发送"任务复述确认"消息 **工具**: sessions_send (多次尝试回复), sessions_history, exec (数据库查询) [score=0.893 recalls=0 avg=0.620 source=memory/2026-06-10.md:15-16]
