@@ -242,7 +242,38 @@ asyncio.run(get_qrcode())
 PYEOF
 ```
 
-**Step 4: 发送二维码给用户**
+**Step 4: 验证二维码有效性（⭐ 2026-06-15 新增，发送前必做）**
+
+⚠️ **铁律：发送前必须先验证二维码是否有效！** 不要直接截图就发。
+
+验证方法（两步）：
+1. **OCR 识别**：对截图运行 OCR，检查是否包含"二维码已失效"文字
+2. **innerText 检查**：通过 CDP 执行 `document.body.innerText.includes('二维码已失效')`
+
+```python
+# OCR 验证
+result = subprocess.run(
+    ['tesseract', '/tmp/xianyu_qrcode_login.png', 'stdout', '-l', 'chi_sim+eng', '--psm', '6'],
+    capture_output=True, text=True, timeout=30
+)
+if '二维码已失效' in result.stdout:
+    print("❌ 二维码已失效，需要重启 Chrome")
+    # 执行重启流程（见 Step 4.5）
+```
+
+```python
+# innerText 双重检查
+await ws.send(json.dumps({"id":4,"method":"Runtime.evaluate","params":{
+    "expression": "document.body.innerText.includes('二维码已失效')"
+}}))
+r = json.loads(await ws.recv())
+if r["result"]["result"]["value"]:
+    print("❌ 二维码已失效")
+```
+
+**只有两步都确认没有"二维码已失效"，才能发送给用户。**
+
+**Step 5: 发送二维码给用户**
 
 在**回复**中直接写：
 ```
@@ -287,6 +318,7 @@ MEDIA:/tmp/xianyu_qrcode_login.png
 > - **先判断是否有"快速进入"按钮**（截图视觉识别，见 Step 4.5）
 > - **iframe 跨域无法 DOM 访问**
 > - **二维码失效时重启 Chrome**
+> - **发送前必须验证二维码有效性**（OCR + innerText 双重检查）
 
 ### 3.5 Cookie 文件位置
 
@@ -420,6 +452,7 @@ Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等）会丢失。ru
 | 06-15 | run.sh 的 xvfb-run 被闲鱼检测 | 虚拟桌面被反爬拦截 | 用 `xianyu_start.sh`（xvfb-run）启动 Chrome，CDP 9222 端口通常可用 |
 | 06-15 | 自己反复 kill Chrome 导致登录态丢失 | 不该动已有的 Chrome | **不要 kill 已有 Chrome**，直接用 CDP 连接 |
 | 06-15 | 截图二维码发给用户但用户看不到 | 用了错误的方式发图 | **用 `MEDIA:` 指令在回复中直接嵌入原图** |
+| 06-15 | 截图二维码已失效但直接发给了用户 | 没有先验证二维码有效性 | **发送前必须 OCR + innerText 双重检查"二维码已失效"** |
 | 06-15 | 登录页面有"快速进入"按钮但没识别 | 没有检查快速进入按钮 | **先检查是否有账户名+快速进入按钮，有就直接点** |
 
 ---
@@ -456,6 +489,7 @@ Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等）会丢失。ru
 | 自己写 CDP 脚本分析 fiber 树 | 直接跑 `run.sh` |
 | 自己写代码检测登录态 | `run.sh --check` |
 | 自己写截图+OCR+发送代码 | 截图后在回复中直接写 `MEDIA:/path/to/img.png` |
+| 截图后直接发送不验证 | 先 OCR + innerText 检查"二维码已失效"，确认有效再发 |
 | 自己尝试刷新 cookies | 发二维码让用户扫码 |
 | 用 `message` 工具的 `media`/`filePath` 发图 | **不支持，会返回 delivery-mirror** | 在回复中直接写 `MEDIA:/path/to/img.png` |
 | 重新分析 ant-select 操作 | 用 dispatchKeyEvent（已验证） |
