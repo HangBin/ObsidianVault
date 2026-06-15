@@ -191,3 +191,10 @@ cat /root/.openclaw/share/browser/experience-browser.md
 
 <!-- openclaw-memory-promotion:memory:memory/2026-06-08-0848.md:14:14 -->
 - assistant: [score=0.850 recalls=0 avg=0.620 source=memory/2026-06-08-0848.md:14-14]
+
+## Promoted From Short-Term Memory (2026-06-15)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-10.md:2:5 -->
+- author: main created: 2026-06-10 10:30:00 GMT+8 modified: 2026-06-10 10:30:00 GMT+8 version: v1.0.0 [score=0.849 recalls=0 avg=0.620 source=memory/2026-06-10.md:2-5]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-10.md:31:32 -->
+- media 的"任务复述确认"消息仍在持续发送（已持续约20分钟，数十次重复）。 所有 sessions_send 回复均被忽略。media 会话 status=failed 但消息路由未停止。 [score=0.849 recalls=0 avg=0.620 source=memory/2026-06-10.md:31-32]
