@@ -1,7 +1,7 @@
 ---
 title: 闲鱼自动化经验指南
 date: 2026-06-10
-last_updated: 2026-06-15 16:18
+last_updated: 2026-06-15 17:49
 tags:
   - xianyu
   - goofish
@@ -161,59 +161,137 @@ run.sh 启动 Chrome 时会自动注入 session cookies（从 `/tmp/xianyu_cooki
 
 ### 3.3 登录态过期（需用户扫码）
 
-当 cookies 彻底过期时：
+当 cookies 彻底过期时，执行以下**完整标准流程**：
 
-1. run.sh 已自动启动 Chrome（CDP 端口 9222）
-2. 导航到登录页并截图二维码
-3. 用 `message` 工具发送截图给用户
-4. 等待用户扫码确认
-5. 刷新页面验证登录态 → 继续发布
+#### ⭐ 完整登录恢复流程（每次照做，不要自己思考）
 
-### 3.4 截图二维码标准方式（2026-06-15 验证）
+**Step 1: 启动 Chrome**
+```bash
+cd /home/bill && bash xianyu_start.sh
+```
+脚本会自动检测 CDP 端口就绪（最多 20s）并检测登录态。
 
-**⚠️ 核心教训：发图片用 `MEDIA:` 指令，不要用 `message` 工具的 `media`/`filePath` 参数！**
+**Step 2: 检查登录态输出**
+- `✅ 闲鱼已登录，发布页面就绪！` → **跳到 Step 6（直接发布）**
+- `⚠️ 首页已加载但未登录` → 继续 Step 3
+- `❌ 需要登录` → 继续 Step 3
 
-`message` 工具的 `media`/`filePath` 参数在 webchat/qqbot channel 中**无法正确发送图片**（返回 `delivery-mirror`，messageId 为空，用户看不到）。
+**Step 3: 获取二维码截图（CDP + PIL 裁剪）**
 
-**正确方式：在回复中直接嵌入 `MEDIA:` 指令**
+通过 CDP 找到登录页面的二维码区域（在 iframe `passport.goofish.com/mini_login.htm` 中），裁剪并保存：
 
 ```python
 python3 << 'PYEOF'
-import json, websocket, urllib.request, base64, time
+import json, urllib.request, asyncio, websockets, base64
+from io import BytesIO
+from PIL import Image
 
-tabs = json.loads(urllib.request.urlopen("http://127.0.0.1:9222/json").read())
-page_tab = [t for t in tabs if t.get("type") == "page" and "goofish.com" in t.get("url","") and "xdomain" not in t.get("url","")][0]
-ws = websocket.create_connection(page_tab["webSocketDebuggerUrl"], timeout=15)
+async def get_qrcode():
+    resp = urllib.request.urlopen("http://127.0.0.1:9222/json/list")
+    pages = json.loads(resp.read())
+    goofish = [p for p in pages if "goofish.com" in p.get("url","") and "xdomain" not in p.get("url","")][0]
+    async with websockets.connect(goofish["webSocketDebuggerUrl"]) as ws:
+        # 点击登录按钮（顶部导航栏的登录按钮，class=item--m9jSTUup）
+        # ⚠️ 有两个登录元素：<a class="item--m9jSTUup"> 是顶部栏按钮（正确的），<a href="...login"> 是链接
+        await ws.send(json.dumps({"id":1,"method":"Runtime.evaluate","params":{"expression":
+            """(() => {
+                // 优先选顶部导航栏的登录按钮
+                const navBtn = document.querySelector('a.item--m9jSTUup');
+                if (navBtn) { navBtn.click(); return 'clicked_nav_login'; }
+                // 备选：有 href 的登录链接
+                const linkBtn = document.querySelector('a[href*="goofish.com/login"]');
+                if (linkBtn) { linkBtn.click(); return 'clicked_link_login'; }
+                return 'no_login_button';
+            })()"""}}))
+        await ws.recv()
+        await asyncio.sleep(5)  # iframe 需要 3-5 秒加载
 
-# 导航到登录页
-ws.send(json.dumps({"id":1,"method":"Page.navigate","params":{"url":"https://www.goofish.com/login"}}))
-ws.recv()
-time.sleep(3)
+        # 找到 passport iframe 位置
+        await ws.send(json.dumps({"id":2,"method":"Runtime.evaluate","params":{"expression":
+            """(() => {
+                const iframes = document.querySelectorAll('iframe');
+                for (const iframe of iframes) {
+                    if (iframe.src.includes('passport.goofish.com')) {
+                        const rect = iframe.getBoundingClientRect();
+                        return JSON.stringify({x: rect.x, y: rect.y, width: rect.width, height: rect.height});
+                    }
+                }
+                return 'no iframe';
+            })()"""}}))
+        r = json.loads(await ws.recv())
+        info = json.loads(r["result"]["result"]["value"])
 
-# 截图（二维码在右侧，clip x 从 250 开始，scale=2 放大）
-ws.send(json.dumps({"id":2,"method":"Page.captureScreenshot","params":{
-    "format": "png",
-    "clip": {"x": 250, "y": 100, "width": 500, "height": 600, "scale": 2}
-}}))
-resp = json.loads(ws.recv())
-img_data = base64.b64decode(resp["result"]["data"])
-with open("/tmp/xianyu_qrcode_fresh.png", "wb") as f:
-    f.write(img_data)
-ws.close()
-print(f"截图已保存: {len(img_data)} bytes")
+        # 截图
+        await ws.send(json.dumps({"id":3,"method":"Page.captureScreenshot","params":{"format":"png"}}))
+        r = json.loads(await ws.recv())
+        img = Image.open(BytesIO(base64.b64decode(r["result"]["data"])))
+
+        # 裁剪二维码区域（iframe 位置 + 20px 边距）
+        x = max(0, int(info['x']) - 20)
+        y = max(0, int(info['y']) - 20)
+        right = min(img.width, int(info['x'] + info['width']) + 20)
+        bottom = min(img.height, int(info['y'] + info['height']) + 20)
+        crop = img.crop((x, y, right, bottom))
+        crop = crop.resize((crop.width * 2, crop.height * 2), Image.LANCZOS)
+        crop.save("/tmp/xianyu_qrcode_login.png")
+        print(f"二维码截图已保存: {crop.size}")
+
+asyncio.run(get_qrcode())
 PYEOF
 ```
 
-然后在**回复**中直接写：
+**Step 4: 发送二维码给用户**
+
+在**回复**中直接写：
 ```
-MEDIA:/tmp/xianyu_qrcode_fresh.png
+MEDIA:/tmp/xianyu_qrcode_login.png
 ```
 
-**⚠️ 注意**：
-- **用 `MEDIA:` 前缀在回复中直接嵌入原图**，不要用 `message` 工具的 `media`/`filePath` 参数
-- **不要用 OCR 识别后再发**，直接发截图原图
-- 截图区域要包含完整二维码（右侧弹窗区域，x 从 250 开始）
-- 如果 `message` 工具返回 `delivery-mirror` + 空 messageId = 图片未送达，换 `MEDIA:` 方式
+⚠️ **铁律：用 `MEDIA:` 指令在回复中嵌入原图，不要用 `message` 工具的 `media`/`filePath` 参数！**
+
+**Step 4.5: 判断"快速进入"按钮（⭐ 2026-06-15 新增，截图前必做）**
+
+在截图之前，先检查登录页面是否显示账户名和"快速进入"按钮：
+```python
+await ws.send(json.dumps({"id":4,"method":"Runtime.evaluate","params":{"expression":
+    """(() => {
+        const text = document.body.innerText;
+        const hasQuickEntry = text.includes('快速进入') || text.includes('一键登录');
+        const hasAccount = /1[3-9]\\d{9}/.test(text) || text.includes('@');
+        return JSON.stringify({hasQuickEntry, hasAccount, snippet: text.substring(0, 300)});
+    })()"""}}))
+r = json.loads(await ws.recv())
+result = json.loads(r["result"]["result"]["value"])
+```
+
+- **有账户名 + "快速进入"按钮** → 直接点击快速进入，无需用户扫码：
+```python
+await ws.send(json.dumps({"id":5,"method":"Runtime.evaluate","params":{"expression":
+    """(() => {
+        const els = [...document.querySelectorAll('a, button, span, div')];
+        const quickBtn = els.find(el => (el.textContent || '').includes('快速进入') || (el.textContent || '').includes('一键登录'));
+        if (quickBtn) { quickBtn.click(); return 'clicked_quick_entry'; }
+        return 'no_quick_entry_button';
+    })()"""}}))
+```
+  等 5 秒，检查是否已登录（页面出现"宝贝描述"或"发布"），直接跳到 Step 6。
+
+- **没有快速进入按钮** → 截图二维码发给用户（Step 4），等待用户扫码确认。
+
+**Step 6: 确认登录态并发布**
+```bash
+bash /home/bill/run.sh --check
+# 如果登录态正常：
+bash /home/bill/run.sh xianyu-products/test-item-001
+```
+
+### 3.4 截图二维码标准方式（已合并到 3.3）
+
+> **已整合到 §3.3「完整登录恢复流程」Step 3-4 中，不再单独使用。**
+> 核心要点速查：
+> - 二维码在 `passport.goofish.com` 的 iframe 中 → 用 PIL 裁剪（见 Step 3）
+> - **用 `MEDIA:` 指令在回复中嵌入原图**，不用 `message` 工具
+> - **先判断是否有"快速进入"按钮**，有就直接点（见 Step 4.5）
 
 ### 3.5 Cookie 文件位置
 
@@ -334,7 +412,10 @@ Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等）会丢失。ru
 | 06-15 | 重复分析已有方案，浪费时间 | 没先读经验文档 | **先读 run.sh 再动手，不造轮子** |
 | 06-15 | 分类"其他服务"不支持网页版发布 | 闲鱼网页版限制 | 用"手机"等支持的分类 |
 | 06-15 | 描述中包含 emoji 被闲鱼拒绝 | 闲鱼不允许 emoji | **描述中不要包含 emoji** |
-| 06-15 | run.sh 的 xvfb-run 被闲鱼检测 | 虚拟桌面被反爬拦截 | 直接用 `:0` 真实 X session 的 Chrome + xianyu_publish.py |
+| 06-15 | run.sh 的 xvfb-run 被闲鱼检测 | 虚拟桌面被反爬拦截 | 用 `xianyu_start.sh`（xvfb-run）启动 Chrome，CDP 9222 端口通常可用 |
+| 06-15 | 自己反复 kill Chrome 导致登录态丢失 | 不该动已有的 Chrome | **不要 kill 已有 Chrome**，直接用 CDP 连接 |
+| 06-15 | 截图二维码发给用户但用户看不到 | 用了错误的方式发图 | **用 `MEDIA:` 指令在回复中直接嵌入原图** |
+| 06-15 | 登录页面有"快速进入"按钮但没识别 | 没有检查快速进入按钮 | **先检查是否有账户名+快速进入按钮，有就直接点** |
 
 ---
 
