@@ -1,7 +1,7 @@
 ---
 title: 闲鱼自动化经验指南
 date: 2026-06-10
-last_updated: 2026-06-13 (16:44)
+last_updated: 2026-06-15 (10:12)
 tags:
   - xianyu
   - goofish
@@ -811,7 +811,118 @@ js("document.querySelector('.ant-select-item-option-content').parentElement.clic
 
 **登录态过期后**：需手动在 Chrome 中登录一次闲鱼，再提取 cookies 保存到 `/tmp/xianyu_cookies.txt`。
 
-## 14. 相关文档
+## 14. 🚨 已知问题与防重复造轮子指南（2026-06-15）
+
+### 14.1 核心原则：先读文档再动手
+
+> **铁律：每次发布前，先读本章。不要直接写代码，先用 run.sh 跑。**
+
+经验文档已经记录了完整的成功路径。以下场景不需要重新分析：
+
+| 场景 | 正确做法 | 错误做法 |
+|------|---------|----------|
+| 发布商品 | 直接 `bash run.sh --image ... --desc ... --price ...` | ❌ 自己写 CDP 脚本从头分析 |
+| 上传图片 | run.sh 内部的 xianyu_publish.py 已包含完整流程 | ❌ 重新分析 fiber 树遍历 |
+| 登录态过期 | 先 `run.sh --check`，如果失败再让用户扫码 | ❌ 自己写代码检测登录态 |
+| 截图给用户扫码 | 用 `message` 工具发图（见 14.3） | ❌ 自己写截图+OCR+发送 |
+
+### 14.2 登录态过期处理流程（标准操作）
+
+```
+1. bash /home/bill/run.sh --check          # 检查登录态
+2. 如果输出 "✅ 登录态正常" → 直接发布
+3. 如果输出 "❌ 需要登录" → 执行以下步骤：
+   a. Chrome 已自动启动（CDP 端口 9222）
+   b. 导航到登录页：python3 脚本或用 run.sh 自动导航
+   c. 截图二维码区域（见 14.3）
+   d. 用 message 工具发送截图给用户
+   e. 等待用户扫码确认
+   f. 刷新页面验证登录态
+   g. 继续发布
+```
+
+**关键：run.sh 会自动启动 Chrome + 注入 cookies。** 大部分情况下 cookies 注入即可恢复登录态，不需要用户扫码。只有 cookies 彻底过期时才需要扫码。
+
+### 14.3 截图二维码给用户扫码的标准方式
+
+**问题**：`read` 工具读取图片后无法直接发送给用户。`message` 工具的 `MEDIA:` 指令可以发图。
+
+**正确流程**：
+
+```python
+# 1. 用 CDP 截图（裁剪登录弹窗区域，确保二维码完整）
+python3 << 'PYEOF'
+import json, websocket, urllib.request, base64, time
+
+tabs = json.loads(urllib.request.urlopen("http://127.0.0.1:9222/json").read())
+page_tab = [t for t in tabs if t.get("type") == "page"][0]
+ws = websocket.create_connection(page_tab["webSocketDebuggerUrl"], timeout=15)
+
+# 导航到登录页（如果不在登录页）
+ws.send(json.dumps({"id":1,"method":"Page.navigate","params":{"url":"https://www.goofish.com/login"}}))
+ws.recv()
+time.sleep(5)
+
+# 截图（裁剪右侧二维码区域，约 500x600）
+ws.send(json.dumps({"id":2,"method":"Page.captureScreenshot","params":{
+    "format": "png",
+    "clip": {"x": 250, "y": 100, "width": 500, "height": 600, "scale": 2}
+}}))
+resp = json.loads(ws.recv())
+img_data = base64.b64decode(resp["result"]["data"])
+with open("/tmp/xianyu_qrcode.png", "wb") as f:
+    f.write(img_data)
+ws.close()
+PYEOF
+```
+
+```
+# 2. 用 message 工具发送截图
+message(action="send", message="🔑 请用闲鱼 APP 扫码登录\n\nMEDIA:/tmp/xianyu_qrcode.png")
+```
+
+**⚠️ 注意事项**：
+- `message` 工具发送图片需要用 `MEDIA:` 前缀
+- 截图区域要包含完整二维码（右侧弹窗区域）
+- 如果 `message` 工具不可用，可以用 `exec` 启动一个临时 HTTP 服务提供图片
+- **不要用 OCR 识别二维码后再发——直接发原图**
+
+### 14.4 本次踩坑记录（2026-06-15）
+
+| 问题 | 根因 | 教训 |
+|------|------|------|
+| 自己写 CDP 脚本从头分析 fiber 树 | 没先读经验文档 | **先读 run.sh 再动手** |
+| fiber 遍历 500 个节点没找到上传组件 | 树深度 71 层，上传组件在更深位置 | **不需要自己写 fiber 遍历，run.sh 已验证可用** |
+| 截图没截到二维码 | 裁剪区域不对（左边而不是右边） | **登录弹窗的二维码在右侧，clip x 从 250 开始** |
+| 用 OCR 识别二维码再发 | 应该直接发原图 | **直接发截图原图，不需要 OCR** |
+| 图片上传成功但 fiber 注入失败 | 自己写的注入逻辑不完整 | **直接用 run.sh，已验证 2026-06-13 成功案例** |
+
+### 14.5 一键发布命令速查
+
+```bash
+# 发布商品
+bash /home/bill/run.sh --image /path/to/img.png --desc '商品描述' --price 0.01
+
+# 仅检查登录态
+bash /home/bill/run.sh --check
+
+# 使用配置文件
+bash /home/bill/run.sh --config product.json
+
+# 批量发布
+bash /home/bill/run.sh --batch products.json
+```
+
+**配置文件示例** (`/home/bill/config.json`)：
+```json
+{
+  "image": "/path/to/img.png",
+  "desc": "商品描述",
+  "price": 99
+}
+```
+
+## 15. 相关文档
 
 | 文档 | 路径 | 说明 |
 |------|------|------|
