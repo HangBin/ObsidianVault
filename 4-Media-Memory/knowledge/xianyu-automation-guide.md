@@ -1,7 +1,7 @@
 ---
 title: 闲鱼自动化经验指南
 date: 2026-06-10
-last_updated: 2026-06-15 (10:44)
+last_updated: 2026-06-15 (12:35)
 tags:
   - xianyu
   - goofish
@@ -18,7 +18,7 @@ author: media
 
 > **⚡ 快速开始：每次发布只需一条命令：**
 > ```bash
-> bash /home/bill/run.sh --image /path/to/img.png --desc '描述' --price 0.01
+> bash /home/bill/run.sh xianyu-products/test-item-001
 > ```
 > 先检查登录态：`bash /home/bill/run.sh --check`
 
@@ -32,8 +32,8 @@ author: media
 Step 1: 检查登录态
   bash /home/bill/run.sh --check
 
-Step 2a: 登录态正常 → 直接发布
-  bash /home/bill/run.sh --image /path/to/img.png --desc '描述' --price 0.01
+Step 2a: 登录态正常 → 从商品目录发布（推荐）
+  bash /home/bill/run.sh xianyu-products/test-item-001
 
 Step 2b: 登录态失效 → 截图二维码 → 发给用户扫码 → 等确认 → 再发布
 ```
@@ -43,7 +43,10 @@ Step 2b: 登录态失效 → 截图二维码 → 发给用户扫码 → 等确�
 ### 1.2 run.sh 命令速查
 
 ```bash
-# 发布商品
+# 从商品目录发布（推荐 ⭐）
+bash /home/bill/run.sh xianyu-products/test-item-001
+
+# 命令行指定（临时/测试用）
 bash /home/bill/run.sh --image /path/to/img.png --desc '商品描述' --price 0.01
 
 # 仅检查登录态
@@ -56,14 +59,57 @@ bash /home/bill/run.sh --config product.json
 bash /home/bill/run.sh --batch products.json
 ```
 
-### 1.3 配置文件示例
+### 1.3 商品目录结构（推荐方式）
 
+商品统一存放在 `xianyu-products/` 目录下，每个商品一个子目录：
+
+```
+xianyu-products/
+└── test-item-001/
+    ├── product.json       # 商品信息（名称、描述、价格、分类）
+    └── image.png          # 商品图片
+```
+
+**product.json 格式：**
 ```json
 {
-  "image": "/path/to/img.png",
-  "desc": "商品描述",
-  "price": 99
+  "name": "商品名称",
+  "description": "商品描述（用于发布）",
+  "price": 0.01,
+  "category": "分类名称",
+  "status": "draft|published|failed",
+  "created": "2026-06-15T11:50:00+08:00",
+  "image": "image.png"
 }
+```
+
+> run.sh 会自动在商品目录下查找图片文件（支持 png/jpg/jpeg/webp），
+> 无需在 product.json 中写完整路径，只需写文件名。
+
+### 1.4 快速创建新商品
+
+```bash
+# 1. 创建商品目录
+mkdir -p xianyu-products/my-item-002
+
+# 2. 放入图片
+cp ~/my-photo.png xianyu-products/my-item-002/image.png
+
+# 3. 创建 product.json
+cat > xianyu-products/my-item-002/product.json << 'EOF'
+{
+  "name": "我的商品",
+  "description": "商品描述信息",
+  "price": 99,
+  "category": "其他服务",
+  "status": "draft",
+  "created": "2026-06-15T12:00:00+08:00",
+  "image": "image.png"
+}
+EOF
+
+# 4. 发布
+bash /home/bill/run.sh xianyu-products/my-item-002
 ```
 
 ---
@@ -75,8 +121,24 @@ bash /home/bill/run.sh --batch products.json
 | `/home/bill/run.sh` | **一键入口** | 启动 Chrome → 注入 cookies → 检查登录态 → 发布 |
 | `/home/bill/xianyu_start.sh` | Chrome 启动脚本 | xvfb-run 启动 Chrome（被 run.sh 内部调用） |
 | `/home/bill/xianyu_publish.py` | 发布核心 | CDP 自动化：上传图片 → 填写信息 → 发布 |
+| `/home/bill/extract_xianyu_cookies.py` | Cookies 提取 | CDP 优先获取明文 cookies，SQLite 降级 |
 
 **run.sh 自动完成全流程，不需要单独跑 xianyu_start.sh 或 xianyu_publish.py。**
+
+### 2.1 商品目录（xianyu-products/）
+
+```
+xianyu-products/
+├── README.md              # 目录规范说明
+├── test-item-001/         # 每个商品一个子目录
+│   ├── product.json       # 商品信息
+│   └── image.png          # 商品图片
+└── ...
+```
+
+- 命名规范：`{类型}-{序号}`（如 `test-item-001`、`product-001`）
+- 发布时 run.sh 自动在目录下查找图片，支持 png/jpg/jpeg/webp
+- 详细规范见 `xianyu-products/README.md`
 
 ---
 
@@ -296,6 +358,8 @@ Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等）会丢失。ru
 | 自己尝试刷新 cookies | 发二维码让用户扫码 |
 | 重新分析 ant-select 操作 | 用 dispatchKeyEvent（已验证） |
 | 尝试 API 方式发布 | 用 CDP 浏览器自动化（API 有风控） |
+| 每次手动传 `--image --desc --price` | 用商品目录：`run.sh xianyu-products/xxx` |
+| 自己写 cookies 提取脚本 | 用 `extract_xianyu_cookies.py`（CDP 优先） |
 
 ---
 
@@ -306,7 +370,9 @@ Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等）会丢失。ru
 | 一键发布脚本 | `/home/bill/run.sh` | 入口脚本 |
 | Chrome 启动脚本 | `/home/bill/xianyu_start.sh` | xvfb-run 启动 |
 | 发布核心脚本 | `/home/bill/xianyu_publish.py` | CDP 自动化核心 |
+| Cookies 提取脚本 | `/home/bill/extract_xianyu_cookies.py` | CDP 优先，SQLite 降级 |
+| 商品目录规范 | `xianyu-products/README.md` | 命名/结构/流程 |
 | 浏览器自动化经验 | `/home/obsidian_vault/shared/browser/` | CDP 操作参考 |
 | 每日日志 | `memory/2026-06-12.md` | CDP 发布实操 |
 | 每日日志 | `memory/2026-06-13.md` | xvfb-run + CDP 实操 |
-| 每日日志 | `memory/2026-06-15.md` | run.sh 验证 + 经验更新 |
+| 每日日志 | `memory/2026-06-15.md` | run.sh 验证 + 经验更新 + 商品目录迁移 |
