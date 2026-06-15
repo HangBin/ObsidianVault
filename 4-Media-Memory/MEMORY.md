@@ -65,6 +65,22 @@ netstat -tlnp | grep 9222
 
 ## 📂 记忆体系（Obsidian 迁移后）
 
+### ⚠️ 软链接（Symlink）须知
+以下工作区 memory/ 下的目录是软链接，指向 Obsidian vault。**写入时两个位置都会自动同步，但读取时注意用绝对路径。**
+
+| 工作区路径 | → Obsidian 路径 |
+|------------|------------------|
+| `memory/daily` | `/home/obsidian_vault/4-Media-Memory/daily/` |
+| `memory/knowledge` | `/home/obsidian_vault/4-Media-Memory/knowledge/` |
+| `memory/archive` | `/home/obsidian_vault/4-Media-Memory/archive/` |
+| `MEMORY.md` | `/home/obsidian_vault/4-Media-Memory/MEMORY.md` |
+
+**关键规则**：
+- 写入 `memory/YYYY-MM-DD.md` 时，必须同时写入 Obsidian `daily/YYYY-MM-DD.md`（双写）
+- 写入 `memory/knowledge/xxx.md` 时，Obsidian `knowledge/xxx.md` 自动同步（软链接）
+- 读取经验文档时用 Obsidian 绝对路径：`/home/obsidian_vault/4-Media-Memory/knowledge/xxx.md`
+- **不要只用工作区相对路径读 knowledge/，那里是软链接，部分工具可能解析异常**
+
 | 路径 | 说明 |
 |------|------|
 | `/home/obsidian_vault/4-Media-Memory/MEMORY.md` | 长期记忆（软链接自 `~/.openclaw/workspace-media/MEMORY.md`） |
