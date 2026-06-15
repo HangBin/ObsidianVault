@@ -37,6 +37,12 @@
 ## ⚠️ 核心操作铁律
 **即时记录原则**：每次工具调用、用户交互、文案产出后立即写入 `memory/YYYY-MM-DD.md`，禁止堆积。
 
+**不重复造轮子**：先读经验文档再动手，不要自己写脚本分析已有方案。发布闲鱼→`run.sh`，发布小红书→`xhs` CLI。
+
+**截图分享流程**：CDP 截图 → HTTP 服务 → `curl -I` 验证 200 → 发链接。不要 OCR 识别后再发。
+
+**路径规范**：统一用 `~` 不要硬编码。读取 knowledge 用 Obsidian 绝对路径。
+
 ---
 
 ## 📜 工作原则（索引）
@@ -106,36 +112,5 @@ netstat -tlnp | grep 9222
 | `/home/obsidian_vault/shared/experience-archive.md` | **日志归档规范**（目录规则、操作流程、8条教训） |
 | `strategy/` | 内容策略与样例库（爆款文案、模板） |
 
----
 
----
-
-## 📌 核心经验
-
-### 闲鱼自动化发布（2026-06-12 → 06-13 → 06-15）
-- **当前方案**: `bash /home/bill/run.sh --image ... --desc ... --price ...` 一键发布
-- **核心突破**: `xvfb-run --auto-servernum` 自动创建虚拟 X Server → CDP 9222 端口监听
-- **登录态管理**: run.sh 自动从 `/tmp/xianyu_cookies.txt` 注入 session cookies；过期时截图二维码让用户扫码
-- **图片上传**: fetch 上传 + React fiber onChange 注入（三步法）
-- **已验证商品**: DeepSeek V4 API (¥4)、Claude Opus 4.8 (¥0.09)、MacBook Pro M4 (¥8888)、周杰伦签名专辑 (¥888,888)
-- **经验文档**: `/home/obsidian_vault/4-Media-Memory/knowledge/xianyu-automation-guide.md`
-- **踩坑**: sudo 环境 DISPLAY 为空 → xvfb-run 是唯一方案；session cookies 重启后丢失需注入；fiber 树深度 71 层不要自己写遍历
-
-### 小红书发布（2026-06-10）
-- **方案**: `xhs` CLI / Python API（Cookie: a1 + web_session）
-- **经验文档**: `/home/obsidian_vault/4-Media-Memory/knowledge/xhs-publish-guide.md`
-- **踩坑**: read 必须加 `--xsec-token`；Cookie 路径是 `~/.xiaohongshu-cli/cookies.json` 不是 `.config/`
-
-### 记忆体系与规范（2026-04-20 → 04-24）
-- **MEMORY.md 精简**: 21.7KB → 2.9KB（-86%），核心规则保留，操作外移到知识库
-- **软链接**: `memory/daily`、`memory/knowledge`、`memory/archive`、`MEMORY.md` → Obsidian vault
-- **即时记录铁律**: 每次工具调用后立即写入 daily log，禁止堆积
-- **截图分享流程**: CDP 截图 → HTTP 服务 → curl 验证 200 → 发链接
-- **QMD 搜索**: `qmd search "关键词" -c share/knowledge/daily --max-results 5`
-
-### 💡 通用踩坑
-- 文档有明确步骤但没执行到位，比不知道更严重（明知故犯）
-- 分享前必须验证链接 200
-- 路径统一用 `~` 不要硬编码
-- **先读经验文档再动手，不重复造轮子**
 
