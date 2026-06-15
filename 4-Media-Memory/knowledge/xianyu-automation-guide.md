@@ -226,14 +226,16 @@ async def get_qrcode():
         r = json.loads(await ws.recv())
         img = Image.open(BytesIO(base64.b64decode(r["result"]["data"])))
 
-        # 裁剪二维码区域（iframe 位置 + 20px 边距）
-        x = max(0, int(info['x']) - 20)
-        y = max(0, int(info['y']) - 20)
-        right = min(img.width, int(info['x'] + info['width']) + 20)
-        bottom = min(img.height, int(info['y'] + info['height']) + 20)
-        crop = img.crop((x, y, right, bottom))
-        crop = crop.resize((crop.width * 2, crop.height * 2), Image.LANCZOS)
+        # 裁剪二维码区域
+        # ⚠️ 先截整个 iframe 放大 3x 发原图，确保二维码完整
+        ix = int(info['x'])
+        iy = int(info['y'])
+        iw = int(info['width'])
+        ih = int(info['height'])
+        crop = img.crop((ix, iy, ix + iw, iy + ih))
+        crop = crop.resize((iw * 3, ih * 3), Image.LANCZOS)
         crop.save("/tmp/xianyu_qrcode_login.png")
+        print(f"二维码截图已保存: {crop.size}")
         print(f"二维码截图已保存: {crop.size}")
 
 asyncio.run(get_qrcode())
@@ -251,48 +253,30 @@ MEDIA:/tmp/xianyu_qrcode_login.png
 
 **Step 4.5: 判断"快速进入"按钮（⭐ 2026-06-15 新增，截图后判断）**
 
-⚠️ **关键限制**："快速进入"按钮在跨域 iframe 里，`document.body.innerText` 无法访问。必须通过**截图视觉识别**来判断。
+⚠️ **关键限制**："快速进入"按钮在跨域 iframe (`passport.goofish.com`) 里，`document.body.innerText` 无法访问 iframe 内容（跨域限制）。必须通过**截图视觉识别**来判断。
 
-判断流程：
-```python
-await ws.send(json.dumps({"id":4,"method":"Runtime.evaluate","params":{"expression":
-    """(() => {
-        const text = document.body.innerText;
-        const hasQuickEntry = text.includes('快速进入') || text.includes('一键登录');
-        const hasAccount = /1[3-9]\\d{9}/.test(text) || text.includes('@');
-        return JSON.stringify({hasQuickEntry, hasAccount, snippet: text.substring(0, 300)});
-    })()"""}}))
-r = json.loads(await ws.recv())
-result = json.loads(r["result"]["result"]["value"])
-```
+判断流程（截图后观察）：
+1. 查看 Step 3 截图的登录弹窗区域
+2. **有账户名 + "快速进入"/"一键登录"按钮** → 点击快速进入：
+   - 先尝试通过 CDP frameId 在 iframe context 中查找（可能因跨域失败）
+   - 如果失败，用**坐标点击**（通过 OCR tsv 输出获取按钮精确坐标）
+   - 等 5 秒，检查是否已登录
+3. **只有二维码 + "其他账号登录"** → 截图发给用户扫码（Step 4）
+4. **二维码已失效** → **重启 Chrome**（⭐ 2026-06-15 新增）：
+   ```bash
+   pkill -9 -f google-chrome; sleep 3
+   rm -f /home/bill/.config/google-chrome/SingletonLock
+   rm -f /home/bill/.config/google-chrome/SingletonSocket
+   rm -f /home/bill/.config/google-chrome/SingletonCookie
+   rm -f /home/bill/.config/google-chrome/DevToolsActivePort
+   cd /home/bill && bash xianyu_start.sh
+   ```
+   然后重新走 Step 2-4。
 
-- **有账户名 + "快速进入"按钮** → 直接点击快速进入，无需用户扫码：
-```python
-await ws.send(json.dumps({"id":5,"method":"Runtime.evaluate","params":{"expression":
-    """(() => {
-        const els = [...document.querySelectorAll('a, button, span, div')];
-        const quickBtn = els.find(el => (el.textContent || '').includes('快速进入') || (el.textContent || '').includes('一键登录'));
-        if (quickBtn) { quickBtn.click(); return 'clicked_quick_entry'; }
-        return 'no_quick_entry_button';
-    })()"""}}))
-```
-  等 5 秒，检查是否已登录（页面出现"宝贝描述"或"发布"），直接跳到 Step 6。
-
-- **没有快速进入按钮** → 截图二维码发给用户（Step 4），等待用户扫码确认。
-- **二维码已失效** → **重启 Chrome**（⭐ 2026-06-15 新增）：
-  ```bash
-  pkill -9 -f google-chrome; sleep 3
-  rm -f /home/bill/.config/google-chrome/SingletonLock /home/bill/.config/google-chrome/SingletonSocket /home/bill/.config/google-chrome/SingletonCookie /home/bill/.config/google-chrome/DevToolsActivePort
-  cd /home/bill && bash xianyu_start.sh
-  ```
-  然后重新走 Step 2-4。
-
-**Step 6: 确认登录态并发布**
-```bash
-bash /home/bill/run.sh --check
-# 如果登录态正常：
-bash /home/bill/run.sh xianyu-products/test-item-001
-```
+⚠️ **iframe 跨域限制详情**：
+- `contentDocument` / `contentWindow.document` 被跨域拦截
+- `Runtime.evaluate` 的 `frameId` 参数在 Chrome 147 里对跨域 iframe 无效
+- 唯一可靠方式是截图视觉识别
 
 ### 3.4 截图二维码标准方式（已合并到 3.3）
 
@@ -350,6 +334,16 @@ xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" \
 ```
 
 **关键**：`xvfb-run --auto-servernum` 自动创建虚拟 X Server 并设置 `DISPLAY`，这是唯一可行的方案。
+
+⚠️ **已知限制**：
+- `xvfb-run` 启动的 Chrome 被闲鱼风控检测虚拟桌面，**cookies 注入后仍可能无法登录**
+- 如果 `xvfb-run` 方式无法登录，需要在 `:0` 真实桌面启动 Chrome
+- `:0` 启动方式（在 pts/3 等有 DISPLAY 的终端执行）：
+  ```bash
+  export DISPLAY=:0
+  /opt/google/chrome/chrome --remote-debugging-port=9222 --remote-allow-origins=* --no-sandbox --disable-gpu --password-store=basic --user-data-dir=/home/bill/.config/google-chrome https://www.goofish.com &
+  ```
+- CDP 连接后如果 `json/list` 返回空，确认 `--remote-allow-origins=*`（不能写 `http://127.0.0.1:9222`）
 
 ### 5.2 图片上传（三步法，2026-06-13 验证）
 
