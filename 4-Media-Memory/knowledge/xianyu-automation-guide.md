@@ -332,6 +332,9 @@ Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等）会丢失。ru
 | 06-15 | message 工具 media/filePath 参数发图失败 | webchat/qqbot channel 不支持 | **用 MEDIA: 指令在回复中嵌入原图** |
 | 06-15 | 截图裁剪区域错误（截到空白） | 没确认二维码位置 | 先打开登录页截图检查，确认二维码在右侧再裁剪 |
 | 06-15 | 重复分析已有方案，浪费时间 | 没先读经验文档 | **先读 run.sh 再动手，不造轮子** |
+| 06-15 | 分类"其他服务"不支持网页版发布 | 闲鱼网页版限制 | 用"手机"等支持的分类 |
+| 06-15 | 描述中包含 emoji 被闲鱼拒绝 | 闲鱼不允许 emoji | **描述中不要包含 emoji** |
+| 06-15 | run.sh 的 xvfb-run 被闲鱼检测 | 虚拟桌面被反爬拦截 | 直接用 `:0` 真实 X session 的 Chrome + xianyu_publish.py |
 
 ---
 
