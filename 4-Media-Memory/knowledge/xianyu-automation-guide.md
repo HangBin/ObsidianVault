@@ -1,7 +1,7 @@
 ---
 title: 闲鱼自动化经验指南
 date: 2026-06-10
-last_updated: 2026-06-15 (12:35)
+last_updated: 2026-06-15 16:18
 tags:
   - xianyu
   - goofish
@@ -169,20 +169,26 @@ run.sh 启动 Chrome 时会自动注入 session cookies（从 `/tmp/xianyu_cooki
 4. 等待用户扫码确认
 5. 刷新页面验证登录态 → 继续发布
 
-### 3.4 截图二维码标准方式
+### 3.4 截图二维码标准方式（2026-06-15 验证）
+
+**⚠️ 核心教训：发图片用 `MEDIA:` 指令，不要用 `message` 工具的 `media`/`filePath` 参数！**
+
+`message` 工具的 `media`/`filePath` 参数在 webchat/qqbot channel 中**无法正确发送图片**（返回 `delivery-mirror`，messageId 为空，用户看不到）。
+
+**正确方式：在回复中直接嵌入 `MEDIA:` 指令**
 
 ```python
 python3 << 'PYEOF'
 import json, websocket, urllib.request, base64, time
 
 tabs = json.loads(urllib.request.urlopen("http://127.0.0.1:9222/json").read())
-page_tab = [t for t in tabs if t.get("type") == "page"][0]
+page_tab = [t for t in tabs if t.get("type") == "page" and "goofish.com" in t.get("url","") and "xdomain" not in t.get("url","")][0]
 ws = websocket.create_connection(page_tab["webSocketDebuggerUrl"], timeout=15)
 
 # 导航到登录页
 ws.send(json.dumps({"id":1,"method":"Page.navigate","params":{"url":"https://www.goofish.com/login"}}))
 ws.recv()
-time.sleep(5)
+time.sleep(3)
 
 # 截图（二维码在右侧，clip x 从 250 开始，scale=2 放大）
 ws.send(json.dumps({"id":2,"method":"Page.captureScreenshot","params":{
@@ -191,20 +197,23 @@ ws.send(json.dumps({"id":2,"method":"Page.captureScreenshot","params":{
 }}))
 resp = json.loads(ws.recv())
 img_data = base64.b64decode(resp["result"]["data"])
-with open("/tmp/xianyu_qrcode.png", "wb") as f:
+with open("/tmp/xianyu_qrcode_fresh.png", "wb") as f:
     f.write(img_data)
 ws.close()
+print(f"截图已保存: {len(img_data)} bytes")
 PYEOF
 ```
 
-```python
-# 发送给用户
-message(action="send", message="🔑 请用闲鱼 APP 扫码登录\n\nMEDIA:/tmp/xianyu_qrcode.png")
+然后在**回复**中直接写：
+```
+MEDIA:/tmp/xianyu_qrcode_fresh.png
 ```
 
 **⚠️ 注意**：
-- 用 `MEDIA:` 前缀发原图，**不要用 OCR 识别后再发**
+- **用 `MEDIA:` 前缀在回复中直接嵌入原图**，不要用 `message` 工具的 `media`/`filePath` 参数
+- **不要用 OCR 识别后再发**，直接发截图原图
 - 截图区域要包含完整二维码（右侧弹窗区域，x 从 250 开始）
+- 如果 `message` 工具返回 `delivery-mirror` + 空 messageId = 图片未送达，换 `MEDIA:` 方式
 
 ### 3.5 Cookie 文件位置
 
@@ -320,6 +329,9 @@ Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等）会丢失。ru
 | 06-15 | 自己写 CDP 脚本从头分析 | 没先读经验文档 | **先读 run.sh 再动手** |
 | 06-15 | 截图没截到二维码 | 裁剪区域在左侧 | 二维码在右侧，x 从 250 开始 |
 | 06-15 | 用 OCR 识别二维码再发 | 应该直接发原图 | 用 MEDIA: 发原图 |
+| 06-15 | message 工具 media/filePath 参数发图失败 | webchat/qqbot channel 不支持 | **用 MEDIA: 指令在回复中嵌入原图** |
+| 06-15 | 截图裁剪区域错误（截到空白） | 没确认二维码位置 | 先打开登录页截图检查，确认二维码在右侧再裁剪 |
+| 06-15 | 重复分析已有方案，浪费时间 | 没先读经验文档 | **先读 run.sh 再动手，不造轮子** |
 
 ---
 
@@ -354,8 +366,9 @@ Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等）会丢失。ru
 |-----------|-----------|
 | 自己写 CDP 脚本分析 fiber 树 | 直接跑 `run.sh` |
 | 自己写代码检测登录态 | `run.sh --check` |
-| 自己写截图+OCR+发送代码 | 用 `message` + `MEDIA:` 发原图 |
+| 自己写截图+OCR+发送代码 | 截图后在回复中直接写 `MEDIA:/path/to/img.png` |
 | 自己尝试刷新 cookies | 发二维码让用户扫码 |
+| 用 `message` 工具的 `media`/`filePath` 发图 | **不支持，会返回 delivery-mirror** | 在回复中直接写 `MEDIA:/path/to/img.png` |
 | 重新分析 ant-select 操作 | 用 dispatchKeyEvent（已验证） |
 | 尝试 API 方式发布 | 用 CDP 浏览器自动化（API 有风控） |
 | 每次手动传 `--image --desc --price` | 用商品目录：`run.sh xianyu-products/xxx` |
