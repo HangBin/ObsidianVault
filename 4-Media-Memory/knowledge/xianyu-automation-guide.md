@@ -277,10 +277,22 @@ if r["result"]["result"]["value"]:
 
 在**回复**中直接写：
 ```
-MEDIA:/tmp/xianyu_qrcode_login.png
+MEDIA:/root/.openclaw/canvas/xianyu-qrcode.png
 ```
 
-⚠️ **铁律：用 `MEDIA:` 指令在回复中嵌入原图，不要用 `message` 工具的 `media`/`filePath` 参数！**
+⚠️ **铁律：用 `MEDIA:` 指令在回复中嵌入原图，路径必须放在 canvas 目录（`/root/.openclaw/canvas/`）！**
+
+**发送步骤：**
+1. 截图保存到任意位置
+2. 复制到 canvas 目录：`cp /tmp/xianyu_qrcode_login.png /root/.openclaw/canvas/xianyu-qrcode.png`
+3. 在回复中写：`MEDIA:/root/.openclaw/canvas/xianyu-qrcode.png`
+4. webchat 会自动将 MEDIA: 行渲染为内嵌图片
+
+**踩坑记录（2026-06-16）：**
+- ❌ `MEDIA:/tmp/xxx.png` — webchat 不渲染 `/tmp/` 路径
+- ❌ `message` 工具的 `media`/`filePath` 参数 — 返回 delivery-mirror
+- ❌ `read` 工具读取图片 — 模型 LongCat-2.0-Preview 不支持图片理解
+- ✅ `MEDIA:/root/.openclaw/canvas/xxx.png` — webchat 能渲染 canvas 目录的图片
 
 **Step 4.5: 判断"快速进入"按钮（⭐ 2026-06-15 新增，截图后判断）**
 
