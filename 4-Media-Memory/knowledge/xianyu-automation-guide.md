@@ -194,6 +194,20 @@ run.sh 启动 Chrome 时会自动注入 session cookies（从 `/tmp/xianyu_cooki
 - **不要 kill 已有 Chrome**：Chrome 里有 session cookies（httpOnly），重启后会丢失。直接用 CDP 连接复用登录态
 - 如果 Chrome 已自动重启（crash watchdog），session cookies 会丢失 → 通过 CDP `Network.setCookie` 注入之前保存的 cookies（见 §5.4）
 
+### 3.2.1 Cookies 持久化存储
+
+> **2026-06-16 新增**：Cookies 默认存储在 `/root/.openclaw/workspace-media/.config/`（工作区持久化目录）。
+
+| 文件 | 说明 |
+|------|------|
+| `xianyu_cookies_latest.txt` | 最新提取的 cookies（每次更新） |
+| `xianyu_cookies.txt` | 持久化副本 |
+
+**自动备份机制**：
+- `extract_cookies.py` 提取 cookies 后自动备份到工作区 `.config/`
+- `run.sh` 的 `inject_session_cookies()` 注入成功后，自动从 Chrome 提取最新 cookies 并备份
+- `/tmp/xianyu_cookies.txt` 仅作为临时读取文件，**重启后会丢失**
+
 ### 3.3 登录态过期（需用户扫码）
 
 当 cookies 彻底过期时，执行以下**完整标准流程**：
@@ -417,11 +431,11 @@ MEDIA:/tmp/xianyu_qrcode.png
 
 | 文件 | 说明 |
 |------|------|
-| `/tmp/xianyu_cookies.txt` | 最新完整 cookie string（CDP 提取，run.sh 读取） |
-| `/root/.openclaw/workspace-media/.config/xianyu_cookies.txt` | 持久化备份 |
-| `/root/.openclaw/workspace-media/.config/xianyu_cookies_latest.txt` | 最新提取（**实际主文件**） |
+| `/root/.openclaw/workspace-media/.config/xianyu_cookies_latest.txt` | **主文件**（最新提取，持久化） |
+| `/root/.openclaw/workspace-media/.config/xianyu_cookies.txt` | 持久化副本 |
+| `/tmp/xianyu_cookies.txt` | 临时读取文件（重启会丢，run.sh 从此路径读取） |
 
-> ⚠️ **2026-06-16 修正**：`/tmp/xianyu_cookies.txt` 经常不存在，最新 cookies 实际存储在 `/root/.openclaw/workspace-media/.config/xianyu_cookies_latest.txt`。run.sh 注入逻辑从 `/tmp/` 读取，使用前需先 `cp` 过去。
+> ⚠️ **2026-06-16 修正**：Cookies 默认存储在 `/root/.openclaw/workspace-media/.config/`。`/tmp/xianyu_cookies.txt` 仅作临时用途，重启后会被清空。extract_cookies.py 和 run.sh 都会自动备份到工作区。
 
 ---
 
