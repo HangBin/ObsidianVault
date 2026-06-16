@@ -20,7 +20,7 @@ author: media
 
 > **⚡ 快速开始：每次发布只需一条命令：**
 > ```bash
-> bash /home/bill/run.sh xianyu-products/test-item-001
+> bash /home/bill/run.sh /root/.openclaw/workspace-media/xianyu-products/test-item-001
 > ```
 > 先检查登录态：`bash /home/bill/run.sh --check`
 
@@ -35,7 +35,7 @@ Step 1: 检查登录态
   bash /home/bill/run.sh --check
 
 Step 2a: 登录态正常 → 从商品目录发布（推荐）
-  bash /home/bill/run.sh xianyu-products/test-item-001
+  bash /home/bill/run.sh /root/.openclaw/workspace-media/xianyu-products/test-item-001
 
 Step 2b: 登录态失效 → 截图二维码 → 发给用户扫码 → 等确认 → 再发布
 ```
@@ -56,14 +56,14 @@ Step 2b: 登录态失效 → 截图二维码 → 发给用户扫码 → 等确�
 | 用 `message` 工具的 `media`/`filePath` 发图 | 在回复中写 `MEDIA:/path/to/img.png` |
 | 重新分析 ant-select 操作 | 用 dispatchKeyEvent（已验证） |
 | 尝试 API 方式发布 | 用 CDP 浏览器自动化（API 有风控） |
-| 每次手动传 `--image --desc --price` | 用商品目录：`run.sh xianyu-products/xxx` |
+| 每次手动传 `--image --desc --price` | 用商品目录：`run.sh /root/.openclaw/workspace-media/xianyu-products/xxx`（绝对路径） |
 | 自己写 cookies 提取脚本 | 用 `extract_xianyu_cookies.py`（CDP 优先） |
 
 ### 1.2 run.sh 命令速查
 
 ```bash
 # 从商品目录发布（推荐 ⭐）
-bash /home/bill/run.sh xianyu-products/test-item-001
+bash /home/bill/run.sh /root/.openclaw/workspace-media/xianyu-products/test-item-001
 
 # 命令行指定（临时/测试用）
 bash /home/bill/run.sh --image /path/to/img.png --desc '商品描述' --price 0.01
@@ -95,7 +95,7 @@ bash /home/bill/run.sh --batch products.json
 ```json
 {
   "name": "商品名称",
-  "description": "商品描述（用于发布）",
+  "desc": "商品描述（用于发布）",
   "price": 0.01,
   "category": "分类名称",
   "status": "draft|published|failed",
@@ -104,6 +104,8 @@ bash /home/bill/run.sh --batch products.json
 }
 ```
 
+> ⚠️ **字段名是 `desc` 不是 `description`**！run.sh 的 `load_config()` 只读 `cfg.get('desc','')`，写 `description` 会导致描述为空白。
+
 > run.sh 会自动在商品目录下查找图片文件（支持 png/jpg/jpeg/webp），
 > 无需在 product.json 中写完整路径，只需写文件名。
 
@@ -111,13 +113,13 @@ bash /home/bill/run.sh --batch products.json
 
 ```bash
 # 1. 创建商品目录
-mkdir -p xianyu-products/my-item-002
+mkdir -p /root/.openclaw/workspace-media/xianyu-products/my-item-002
 
 # 2. 放入图片
-cp ~/my-photo.png xianyu-products/my-item-002/image.png
+cp ~/my-photo.png /root/.openclaw/workspace-media/xianyu-products/my-item-002/image.png
 
 # 3. 创建 product.json
-cat > xianyu-products/my-item-002/product.json << 'EOF'
+cat > /root/.openclaw/workspace-media/xianyu-products/my-item-002/product.json << 'EOF'
 {
   "name": "我的商品",
   "description": "商品描述信息",
@@ -130,7 +132,7 @@ cat > xianyu-products/my-item-002/product.json << 'EOF'
 EOF
 
 # 4. 发布
-bash /home/bill/run.sh xianyu-products/my-item-002
+bash /home/bill/run.sh /root/.openclaw/workspace-media/xianyu-products/my-item-002
 ```
 
 ---
@@ -146,10 +148,10 @@ bash /home/bill/run.sh xianyu-products/my-item-002
 
 **run.sh 自动完成全流程，不需要单独跑 xianyu_start.sh 或 xianyu_publish.py。**
 
-### 2.1 商品目录（xianyu-products/）
+### 2.1 商品目录
 
 ```
-xianyu-products/
+/root/.openclaw/workspace-media/xianyu-products/
 ├── README.md              # 目录规范说明
 ├── test-item-001/         # 每个商品一个子目录
 │   ├── product.json       # 商品信息
@@ -158,6 +160,7 @@ xianyu-products/
 ```
 
 - **绝对路径**：`/root/.openclaw/workspace-media/xianyu-products/`（工作区内）
+- **发布时传参**：必须传绝对路径，因为 run.sh 在 `/home/bill/` 执行，相对路径会解析到 `/home/bill/xianyu-products/`（不存在）
 - 命名规范：`{类型}-{序号}`（如 `test-item-001`、`product-001`）
 - 发布时 run.sh 自动在目录下查找图片，支持 png/jpg/jpeg/webp
 - 详细规范见 `/root/.openclaw/workspace-media/xianyu-products/README.md`
