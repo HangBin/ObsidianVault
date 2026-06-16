@@ -198,3 +198,12 @@ cat /root/.openclaw/share/browser/experience-browser.md
 - author: main created: 2026-06-10 10:30:00 GMT+8 modified: 2026-06-10 10:30:00 GMT+8 version: v1.0.0 [score=0.849 recalls=0 avg=0.620 source=memory/2026-06-10.md:2-5]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-10.md:31:32 -->
 - media 的"任务复述确认"消息仍在持续发送（已持续约20分钟，数十次重复）。 所有 sessions_send 回复均被忽略。media 会话 status=failed 但消息路由未停止。 [score=0.849 recalls=0 avg=0.620 source=memory/2026-06-10.md:31-32]
+
+## Promoted From Short-Term Memory (2026-06-16)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-10.md:35:36 -->
+- media 的 Python 进程已不在运行（ps aux 无相关进程），但 OpenClaw 消息路由仍在转发它的最后一条消息。 这是一个"僵尸会话"——进程已死，消息路由未清理。 [score=0.869 recalls=0 avg=0.620 source=memory/2026-06-10.md:35-36]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-10.md:39:42 -->
+- 已执行 gateway restart（SIGUSR1），gateway 重启成功（pid 1589）。 但 media 的重复消息仍在发送——重启不会自动清理 failed 会话。 media 的 transcript 文件在 /root/.openclaw/agents/media/sessions/2de6cea3-82f7-47c5-b5cf-f92e17230276.jsonl 彻底清理需要删除该 transcript 文件，属于破坏性操作，需用户确认。 [score=0.869 recalls=0 avg=0.620 source=memory/2026-06-10.md:39-42]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-10.md:43:43 -->
+- 已完全停止继续回应循环。 [score=0.869 recalls=0 avg=0.620 source=memory/2026-06-10.md:43-43]
