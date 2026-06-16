@@ -1,7 +1,7 @@
 ---
 title: 闲鱼自动化经验指南
 date: 2026-06-10
-last_updated: 2026-06-15 18:36
+last_updated: 2026-06-16 12:26
 tags:
   - xianyu
   - goofish
@@ -11,6 +11,8 @@ tags:
   - browser-automation
   - xvfb
   - automation
+  - cookies
+  - product-catalog
 author: media
 ---
 
@@ -78,14 +80,16 @@ bash /home/bill/run.sh --batch products.json
 
 ### 1.3 商品目录结构（推荐方式）
 
-商品统一存放在 `xianyu-products/` 目录下，每个商品一个子目录：
+商品统一存放在工作区的 `xianyu-products/` 目录下，每个商品一个子目录：
 
 ```
-xianyu-products/
+/root/.openclaw/workspace-media/xianyu-products/
 └── test-item-001/
     ├── product.json       # 商品信息（名称、描述、价格、分类）
     └── image.png          # 商品图片
 ```
+
+> ⚠️ **2026-06-16 修正**：商品目录实际路径为 `/root/.openclaw/workspace-media/xianyu-products/`，不在 `/home/bill/` 下。run.sh 支持商品目录参数，会自动查找 `product.json`。
 
 **product.json 格式：**
 ```json
@@ -153,9 +157,10 @@ xianyu-products/
 └── ...
 ```
 
+- **绝对路径**：`/root/.openclaw/workspace-media/xianyu-products/`（工作区内）
 - 命名规范：`{类型}-{序号}`（如 `test-item-001`、`product-001`）
 - 发布时 run.sh 自动在目录下查找图片，支持 png/jpg/jpeg/webp
-- 详细规范见 `xianyu-products/README.md`
+- 详细规范见 `/root/.openclaw/workspace-media/xianyu-products/README.md`
 
 ---
 
@@ -170,6 +175,11 @@ bash /home/bill/run.sh --check
 输出：
 - `✅ 登录态正常` → 直接发布
 - `⚠️ 需要登录` → 需要用户扫码
+
+> ⚠️ **2026-06-16 补充**：run.sh 的 `check_login()` 比上述流程更复杂：
+> 1. 检测关键词：`立即登录`/`登录后可以更懂你` → NEED_LOGIN，`宝贝描述`/`描述一下` → READY，`panbin5218`/`订单` → LOGGED_IN_HOME
+> 2. 如果未登录 → **自动尝试注入 cookies + 刷新重试**（不是直接报失败）
+> 3. 注入失败才最终报 `❌ 登录态恢复失败`
 
 ### 3.2 登录态恢复（自动）
 
@@ -333,8 +343,33 @@ MEDIA:/tmp/xianyu_qrcode.png
 判断流程（截图后观察）：
 1. 查看 Step 3 截图的登录弹窗区域
 2. **有账户名 + "快速进入"/"一键登录"按钮** → 点击快速进入：
-   - 先尝试通过 CDP frameId 在 iframe context 中查找（可能因跨域失败）
-   - 如果失败，用**坐标点击**（通过 OCR tsv 输出获取按钮精确坐标）
+   ```python
+   # 通过 OCR tsv 获取按钮坐标（tsv 输出第12-15列是 x1,y1,x2,y2）
+   result = subprocess.run(
+       ['tesseract', '/tmp/xianyu_qrcode_login.png', 'stdout',
+        '-l', 'chi_sim+eng', '--psm', '6', 'tsv'],
+       capture_output=True, text=True, timeout=30
+   )
+   for line in result.stdout.split('\n'):
+       cols = line.split('\t')
+       if len(cols) >= 15 and '快速进入' in cols[11]:
+           x1, y1, x2, y2 = int(cols[12]), int(cols[13]), int(cols[14]), int(cols[15])
+           cx, cy = (x1+x2)//2, (y1+y2)//2
+           await ws.send(json.dumps({"id:99,"method":"Input.dispatchMouseEvent","params":{
+               "type":"mousePressed","x":cx,"y":cy,"button":"left","clickCount":1
+           }}))
+           await ws.recv()
+           await ws.send(json.dumps({"id:100,"method":"Input.dispatchMouseEvent","params":{
+               "type":"mouseReleased","x":cx,"y":cy,"button":"left","clickCount":1
+           }}))
+           await ws.recv()
+           print(f"✅ 已点击快速进入按钮 ({cx},{cy})")
+           break
+   else:
+       print("⚠️ 未找到快速进入按钮，尝试 frameId 方式")
+       # 备选：通过 CDP frameId（可能因跨域失败）
+       # 如果失败，直接截图发给用户扫码
+   ```
    - 等 5 秒，检查是否已登录
 3. **只有二维码 + "其他账号登录"** → 截图发给用户扫码（Step 4）
 4. **二维码已失效** → **重启 Chrome**（⭐ 2026-06-15 新增）：
@@ -379,9 +414,11 @@ MEDIA:/tmp/xianyu_qrcode.png
 
 | 文件 | 说明 |
 |------|------|
-| `/tmp/xianyu_cookies.txt` | 最新完整 cookie string（CDP 提取） |
+| `/tmp/xianyu_cookies.txt` | 最新完整 cookie string（CDP 提取，run.sh 读取） |
 | `/root/.openclaw/workspace-media/.config/xianyu_cookies.txt` | 持久化备份 |
-| `/root/.openclaw/workspace-media/.config/xianyu_cookies_latest.txt` | 最新提取 |
+| `/root/.openclaw/workspace-media/.config/xianyu_cookies_latest.txt` | 最新提取（**实际主文件**） |
+
+> ⚠️ **2026-06-16 修正**：`/tmp/xianyu_cookies.txt` 经常不存在，最新 cookies 实际存储在 `/root/.openclaw/workspace-media/.config/xianyu_cookies_latest.txt`。run.sh 注入逻辑从 `/tmp/` 读取，使用前需先 `cp` 过去。
 
 ---
 
@@ -425,7 +462,9 @@ xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" \
   https://www.goofish.com &>/dev/null &
 ```
 
-**关键**：`xvfb-run --auto-servernum` 自动创建虚拟 X Server 并设置 `DISPLAY`，这是唯一可行的方案。
+**关键**：`xvfb-run --auto-servernum` 自动创建虚拟 X Server 并设置 `DISPLAY`（无需手动 export），这是唯一可行的方案。
+
+> ⚠️ run.sh 中 `CHROME_BIN="/usr/bin/google-chrome"`（软链接），不是直接写 `/opt/google/chrome/chrome`。
 
 ⚠️ **已知限制**：
 - `xvfb-run` 启动的 Chrome 被闲鱼风控检测虚拟桌面，**cookies 注入后仍可能无法登录**
@@ -506,7 +545,8 @@ Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等）会丢失。ru
 | 项目 | 值 |
 |------|-----|
 | Chrome | google-chrome（非 snap chromium） |
-| Chrome 路径 | `/opt/google/chrome/chrome` |
+| Chrome 路径 | `/usr/bin/google-chrome`（软链接 → `/etc/alternatives/google-chrome`，实际指向 `/opt/google/chrome/chrome`） |
+| Chrome 实际二进制 | `/opt/google/chrome/chrome` |
 | Chrome Profile | `/home/bill/.config/google-chrome/` |
 | CDP 端口 | 9222（google-chrome），9223（snap chromium，不要用） |
 | xvfb-run | 已安装 |
@@ -521,6 +561,7 @@ Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等）会丢失。ru
 2. **不支持批量上传不同图片**：每次发布一个商品，批量模式需要商品列表 JSON
 3. **服务器 IP 风控**：机房 IP 可能被闲鱼风控，建议在住宅 IP 环境运行
 4. **部分分类不支持网页版发布**：如"其他服务"，需用手机闲鱼 APP 完成
+5. **run.sh 不支持 `--help`**：传 `--help` 会报"未知参数"并退出
 
 ---
 
@@ -532,7 +573,7 @@ Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等）会丢失。ru
 | Chrome 启动脚本 | `/home/bill/xianyu_start.sh` | xvfb-run 启动 |
 | 发布核心脚本 | `/home/bill/xianyu_publish.py` | CDP 自动化核心 |
 | Cookies 提取脚本 | `/home/bill/extract_xianyu_cookies.py` | CDP 优先，SQLite 降级 |
-| 商品目录规范 | `xianyu-products/README.md` | 命名/结构/流程 |
+| 商品目录规范 | `/root/.openclaw/workspace-media/xianyu-products/README.md` | 命名/结构/流程（工作区内） |
 | 浏览器自动化经验 | `/home/obsidian_vault/shared/browser/` | CDP 操作参考 |
 | 每日日志 | `memory/2026-06-12.md` | CDP 发布实操 |
 | 每日日志 | `memory/2026-06-13.md` | xvfb-run + CDP 实操 |
