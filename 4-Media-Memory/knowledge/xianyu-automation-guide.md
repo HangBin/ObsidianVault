@@ -305,13 +305,19 @@ MEDIA:/root/.openclaw/canvas/xianyu-qrcode.png
 3. **只有二维码 + "其他账号登录"** → 截图发给用户扫码（Step 4）
 4. **二维码已失效** → **重启 Chrome**（⭐ 2026-06-15 新增）：
    ```bash
-   pkill -9 -f google-chrome; sleep 3
+   # ⚠️ 分三步执行，避免 pkill 误杀当前进程！
+   # 第一步：清理锁文件
    rm -f /home/bill/.config/google-chrome/SingletonLock
    rm -f /home/bill/.config/google-chrome/SingletonSocket
    rm -f /home/bill/.config/google-chrome/SingletonCookie
    rm -f /home/bill/.config/google-chrome/DevToolsActivePort
+   # 第二步：杀掉 Chrome（用 exec background 模式避免误杀）
+   pkill -9 -f google-chrome
+   sleep 3
+   # 第三步：重新启动
    cd /home/bill && bash xianyu_start.sh
    ```
+   ⚠️ **铁律：pkill 必须放在独立的 exec 步骤中执行，不要和启动命令放在同一个 shell 脚本里！** 否则当前进程会被 SIGKILL。
    然后重新走 Step 2-4。
 
 ⚠️ **iframe 跨域限制详情**：
