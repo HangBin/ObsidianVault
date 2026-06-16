@@ -207,3 +207,8 @@ cat /root/.openclaw/share/browser/experience-browser.md
 - 已执行 gateway restart（SIGUSR1），gateway 重启成功（pid 1589）。 但 media 的重复消息仍在发送——重启不会自动清理 failed 会话。 media 的 transcript 文件在 /root/.openclaw/agents/media/sessions/2de6cea3-82f7-47c5-b5cf-f92e17230276.jsonl 彻底清理需要删除该 transcript 文件，属于破坏性操作，需用户确认。 [score=0.869 recalls=0 avg=0.620 source=memory/2026-06-10.md:39-42]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-10.md:43:43 -->
 - 已完全停止继续回应循环。 [score=0.869 recalls=0 avg=0.620 source=memory/2026-06-10.md:43-43]
+
+## Promoted From Short-Term Memory (2026-06-16)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-08-0848.md:16:16 -->
+- assistant: [score=0.819 recalls=0 avg=0.620 source=memory/2026-06-08-0848.md:16-16]

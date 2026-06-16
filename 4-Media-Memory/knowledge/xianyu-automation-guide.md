@@ -501,34 +501,7 @@ Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等）会丢失。ru
 
 ---
 
-## 7. 踩坑记录
-
-| 日期 | 问题 | 根因 | 教训 |
-|------|------|------|------|
-| 06-10 | 签名不一致导致非法请求 | Node.js 手动算 MD5 ≠ execjs | 用 execjs 调用 JS 文件 |
-| 06-10 | Cookie 不完整 | 缺少 cookie2/sgcookie | 确保所有字段齐全 |
-| 06-12 | fiber 遍历不到上传组件 | 树深度 71 层，BFS 覆盖不全 | 不需要自己写，run.sh 已验证 |
-| 06-12 | 描述中包含 emoji | 闲鱼不允许 | 去掉所有 emoji |
-| 06-12 | wait_until='networkidle' 超时 | 闲鱼 SPA 永远等不到 | 用 'domcontentloaded' |
-| 06-13 | fetch 上传 fileId 为空 | 返回结构嵌套在 object 字段 | `data.get("fileId") or data.get("object",{}).get("fileId")` |
-| 06-13 | Ant Design Select 不响应 click | AD5 拦截合成事件 | 用 dispatchKeyEvent 逐字输入 |
-| 06-15 | 自己写 CDP 脚本从头分析 | 没先读经验文档 | **先读 run.sh 再动手** |
-| 06-15 | 截图没截到二维码 | 裁剪区域在左侧 | 二维码在右侧，x 从 250 开始 |
-| 06-15 | 用 OCR 识别二维码再发 | 应该直接发原图 | 用 MEDIA: 发原图 |
-| 06-15 | message 工具 media/filePath 参数发图失败 | webchat/qqbot channel 不支持 | **用 MEDIA: 指令在回复中嵌入原图** |
-| 06-15 | 截图裁剪区域错误（截到空白） | 没确认二维码位置 | 先打开登录页截图检查，确认二维码在右侧再裁剪 |
-| 06-15 | 重复分析已有方案，浪费时间 | 没先读经验文档 | **先读 run.sh 再动手，不造轮子** |
-| 06-15 | 分类"其他服务"不支持网页版发布 | 闲鱼网页版限制 | 用"手机"等支持的分类 |
-| 06-15 | 描述中包含 emoji 被闲鱼拒绝 | 闲鱼不允许 emoji | **描述中不要包含 emoji** |
-| 06-15 | run.sh 的 xvfb-run 被闲鱼检测 | 虚拟桌面被反爬拦截 | 用 `xianyu_start.sh`（xvfb-run）启动 Chrome，CDP 9222 端口通常可用 |
-| 06-15 | 自己反复 kill Chrome 导致登录态丢失 | 不该动已有的 Chrome | **不要 kill 已有 Chrome**，直接用 CDP 连接 |
-| 06-15 | 截图二维码发给用户但用户看不到 | 用了错误的方式发图 | **用 `MEDIA:` 指令在回复中直接嵌入原图** |
-| 06-15 | 截图二维码已失效但直接发给了用户 | 没有先验证二维码有效性 | **发送前必须 OCR + innerText 双重检查"二维码已失效"** |
-| 06-15 | 登录页面有"快速进入"按钮但没识别 | 没有检查快速进入按钮 | **先检查是否有账户名+快速进入按钮，有就直接点** |
-
----
-
-## 8. 环境信息
+## 7. 环境信息
 
 | 项目 | 值 |
 |------|-----|
@@ -542,7 +515,7 @@ Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等）会丢失。ru
 
 ---
 
-## 9. 已知限制
+## 8. 已知限制
 
 1. **登录态会过期**：cookies 过期后需要用户扫码重新登录
 2. **不支持批量上传不同图片**：每次发布一个商品，批量模式需要商品列表 JSON
@@ -551,26 +524,7 @@ Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等）会丢失。ru
 
 ---
 
-## 10. 防重复造轮子清单
-
-> **每次发布前过一遍这个清单，不要做多余的事。**
-
-| ❌ 不要做 | ✅ 正确做法 |
-|-----------|-----------|
-| 自己写 CDP 脚本分析 fiber 树 | 直接跑 `run.sh` |
-| 自己写代码检测登录态 | `run.sh --check` |
-| 自己写截图+OCR+发送代码 | 截图后在回复中直接写 `MEDIA:/path/to/img.png` |
-| 截图后直接发送不验证 | 先 OCR + innerText 检查"二维码已失效"，确认有效再发 |
-| 自己尝试刷新 cookies | 发二维码让用户扫码 |
-| 用 `message` 工具的 `media`/`filePath` 发图 | **不支持，会返回 delivery-mirror** | 在回复中直接写 `MEDIA:/path/to/img.png` |
-| 重新分析 ant-select 操作 | 用 dispatchKeyEvent（已验证） |
-| 尝试 API 方式发布 | 用 CDP 浏览器自动化（API 有风控） |
-| 每次手动传 `--image --desc --price` | 用商品目录：`run.sh xianyu-products/xxx` |
-| 自己写 cookies 提取脚本 | 用 `extract_xianyu_cookies.py`（CDP 优先） |
-
----
-
-## 11. 相关文档
+## 9. 相关文档
 
 | 文档 | 路径 | 说明 |
 |------|------|------|
