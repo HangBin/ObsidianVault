@@ -275,22 +275,21 @@ if r["result"]["result"]["value"]:
 
 **Step 5: 发送二维码给用户**
 
-在**回复**中直接写：
-```
-MEDIA:/root/.openclaw/canvas/xianyu-qrcode.png
-```
-
-⚠️ **铁律：用 `MEDIA:` 指令在回复中嵌入原图，路径必须放在 canvas 目录（`/root/.openclaw/canvas/`）！**
+⚠️ **铁律：用 `read` 工具读取图片文件，Gateway 会自动将图片注入到回复中！**
 
 **发送步骤：**
 1. 截图保存到任意位置
-2. 复制到 canvas 目录：`cp /tmp/xianyu_qrcode_login.png /root/.openclaw/canvas/xianyu-qrcode.png`
-3. 在回复中写：`MEDIA:/root/.openclaw/canvas/xianyu-qrcode.png`
-4. webchat 会自动将 MEDIA: 行渲染为内嵌图片
-5. **⚠️ 回复中只能写一行 `MEDIA:`，不要同时写多个路径！** 否则会渲染出重复图片。
+2. 用 `read` 工具读取截图文件：`read(path="/tmp/xianyu_qrcode_login.png")`
+3. Gateway 会自动将图片上传到 outgoing media 目录
+4. 在回复中写文字说明：`请用手机闲鱼 APP 扫码登录 ✅`
+5. **⚠️ 不要在回复中写 `MEDIA:` 指令或图片路径！** 否则会渲染出重复图片（Gateway 自动注入 + 手动 MEDIA: 指令 = 双倍图片）
+6. **⚠️ 不要在回复中写图片文件名或路径！** 任何图片路径都会被 Gateway 再次注入
 
-**验证记录（2026-06-16）：**
-- ✅ `MEDIA:/root/.openclaw/canvas/xxx.png` — webchat 能渲染 canvas 目录的图片（已验证）
+**踩坑记录（2026-06-16）：**
+- ❌ `MEDIA:/tmp/xxx.png` — webchat 不渲染 `/tmp/` 路径
+- ❌ `MEDIA:/root/.openclaw/canvas/xxx.png` — 虽然能渲染，但和 Gateway 自动注入叠加导致重复图片
+- ❌ 回复中写图片文件名/路径 — Gateway 会再次注入导致重复
+- ✅ `read` 工具读取图片 + 回复中只写文字 — Gateway 自动注入一张图片（唯一正确方式）
 
 **Step 4.5: 判断"快速进入"按钮（⭐ 2026-06-15 新增，截图后判断）**
 
