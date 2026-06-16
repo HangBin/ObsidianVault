@@ -540,11 +540,128 @@ for char in '关键词':
 
 ### 5.4 Session Cookies 恢复
 
+### 5.5 分类识别失败：网页版不支持该分类
+
+**故障现象**：
+```
+📂 Step 8.5: 检查分类...
+⚠️ 当前分类网页版不支持发布，需要修改分类
+   当前分类: 其他服务
+   网页版暂不支持发布此分类，请使用闲鱼APP扫码继续发布
+```
+
+**根因**：
+闲鱼根据图片内容自动识别分类。如果图片特征不明显（如纯色图、非商品图片），会被归为"其他服务"分类，而"其他服务"在网页版不支持发布。
+
+**案例 1：纯色图被识别为"其他服务"**
+- 图片尺寸：800x800
+- 颜色：纯橙色 (255, 87, 51)
+- 识别结果：其他服务
+- 尝试分类修正失败：下拉列表里只有"其他服务"的子分类，没有"手机"等主流分类
+
+**解决方法 1：生成正确的商品图片**
+```python
+# 使用 PIL 生成手机特征图片
+from PIL import Image, ImageDraw
+img = Image.new('RGB', (800, 800), (240, 240, 245))
+draw = ImageDraw.Draw(img)
+# 画手机轮廓 + 屏幕内容
+draw.rounded_rectangle([200, 100, 600, 700], radius=40, fill=(60, 60, 70))
+draw.rounded_rectangle([220, 140, 580, 660], radius=20, fill=(135, 206, 235))
+img.save("image.png")
+```
+重新上传后分类自动识别为"手机"，发布成功。
+
+**解决方法 2：通过 CDP 手动修改分类**
+在 `xianyu_publish.py` 的 Step 8（截图确认）和 Step 9（点击发布）之间插入分类检查和修正。
+
+**发布成功验证**：
+```
+✅ 发布完成！
+   最终页面: 测试_闲鱼 | https://www.goofish.com/item?id=1059579249693
+```
+商品ID: 1059579249693，链接: https://www.goofish.com/item?id=1059579249693
+
+**经验教训**：
+1. 图片内容决定分类识别——纯色图会被归为"其他服务"
+2. 优先用正确的商品图片，手动修改分类是兜底方案
+
+### 5.6 run.sh 配置加载失败：bash 内嵌 python 引号冲突
+
+**故障现象**：
+```bash
+bash run.sh xianyu-products/test-item-001
+# 输出：
+Traceback (most recent call last):
+  File "<string>", line 14
+NameError: name 'desc' is not defined
+```
+
+**根因**：
+run.sh 的 `load_config()` 函数用 `python3 -c "..."` 内嵌 python 代码，但 f-string 里的双引号在 bash 双引号中被截断。
+
+**解决方法**：改用外部脚本 `_load_config.py`（详见 5.7 外部脚本文件说明）
+
+
+
+> **补充 1：load_config 输出格式**
+> - 旧：三行（img\\ndesc\\nprice），read 只读第一行
+> - 新：一行空格分隔（img desc price）
+
+> **补充 2：category 参数传递**
+> ```bash
+> local CAT=$(python3 -c "import json; print(json.load(open('$CONFIG')).get('category',''))")
+> publish "$IMAGE" "$DESC" "$PRICE" "$CAT"
+> ```
+
+> **补充 3：check_and_fix_category/select_category**
+> 见 5.5 分类识别失败的代码示例。
+
+> **补充 4：CDPSession.send_cdp → .send**
+> ```python
+> # ❌
+> await session.send_cdp("Input.dispatchKeyEvent", {...})
+> # ✅
+> await session.send("Input.dispatchKeyEvent", {...})
+> ```
+
+> **补充 5：生成手机图片**
+> ```python
+> from PIL import Image, ImageDraw
+> img = Image.new('RGB', (800, 800), (240, 240, 245))
+> draw = ImageDraw.Draw(img)
+> draw.rounded_rectangle([200, 100, 600, 700], radius=40, fill=(60, 60, 70))
+> img.save("image.png")
+> ```
+### 5.7 发布成功案例（2026-06-16）
+
+**商品**：test-item-001（测试商品）
+**最终发布**：2026-06-16 13:10
+**结果**：✅ 成功上架
+
+**关键数据**：
+- 商品ID: 1059579249693
+- 链接: https://www.goofish.com/item?id=1059579249693
+- 描述: 测试
+- 价格: ¥0.01
+- 分类: 手机
+- 图片: 800x800 手机特征图（PIL 生成）
+
+**修复链路**：
+1. Cookies 自动备份 → 扫码后自动保存到工作区 `.config/`
+2. run.sh 修复 → 支持从 product.json 读取 category 并传递
+3. 图片生成 → 用 PIL 生成手机特征图代替纯色图
+4. 分类修正 → 上传后自动识别为"手机"，无需手动修正
+5. 发布成功 → 商品ID 1059579249693
+
+**验证方式**：
+- 浏览器访问 https://www.goofish.com/item?id=1059579249693
+- 查看闲鱼个人中心"我发布的"页面
+
 Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等）会丢失。run.sh 通过 CDP `Network.setCookie` 自动注入恢复。
 
 ---
 
-## 5.5 run.sh 缺少 category 参数传递
 
 **现象**：
 `product.json` 有 `category` 字段，但 `xianyu_publish.py` 收不到分类参数。
@@ -576,7 +693,6 @@ publish "$IMAGE" "$DESC" "$PRICE" "$CAT"
 ```
 
 
-## 5.6 外部脚本文件说明
 
 **新建文件**：
 | 文件 | 路径 | 说明 |
@@ -590,7 +706,6 @@ publish "$IMAGE" "$DESC" "$PRICE" "$CAT"
 3. **避免语法错误**：bash 解析 `python3 -c` 时代码块必须完整，内部不能有 bash 命令
 
 
-## 5.7 发布成功案例（2026-06-16）
 
 **商品**：test-item-001（测试商品）
 **最终发布**：2026-06-16 13:10
