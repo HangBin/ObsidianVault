@@ -40,6 +40,23 @@ Step 2b: 登录态失效 → 截图二维码 → 发给用户扫码 → 等确�
 
 **铁律：先检查 → 失效就发二维码 → 不做多余分析**
 
+### 1.1.1 防重复造轮子清单（⭐ 每次必读）
+
+> **先读这个清单，不要做多余的事。所有"不要做"都有已验证的替代方案。**
+
+| ❌ 不要做 | ✅ 正确做法 |
+|-----------|----------|
+| 自己写 CDP 脚本分析 fiber 树 | 直接跑 `run.sh` |
+| 自己写代码检测登录态 | `run.sh --check` |
+| 自己写截图+OCR+发送代码 | 截图后在回复中写 `MEDIA:/path/to/img.png` |
+| 截图后直接发送不验证 | 先 OCR + innerText 检查"二维码已失效"，确认有效再发 |
+| 自己尝试刷新 cookies | 发二维码让用户扫码 |
+| 用 `message` 工具的 `media`/`filePath` 发图 | 在回复中写 `MEDIA:/path/to/img.png` |
+| 重新分析 ant-select 操作 | 用 dispatchKeyEvent（已验证） |
+| 尝试 API 方式发布 | 用 CDP 浏览器自动化（API 有风控） |
+| 每次手动传 `--image --desc --price` | 用商品目录：`run.sh xianyu-products/xxx` |
+| 自己写 cookies 提取脚本 | 用 `extract_xianyu_cookies.py`（CDP 优先） |
+
 ### 1.2 run.sh 命令速查
 
 ```bash
@@ -159,6 +176,11 @@ bash /home/bill/run.sh --check
 run.sh 启动 Chrome 时会自动注入 session cookies（从 `/tmp/xianyu_cookies.txt`）。
 **大部分情况下 cookies 注入即可恢复登录态，不需要用户扫码。**
 
+⚠️ **踩坑提醒**：
+- Cookie 必须包含完整字段（cookie2、sgcookie、_m_h5_tk 等），缺少字段会导致所有 API 返回 `FAIL_SYS_ILLEGAL_ACCESS`
+- **不要 kill 已有 Chrome**：Chrome 里有 session cookies（httpOnly），重启后会丢失。直接用 CDP 连接复用登录态
+- 如果 Chrome 已自动重启（crash watchdog），session cookies 会丢失 → 通过 CDP `Network.setCookie` 注入之前保存的 cookies（见 §5.4）
+
 ### 3.3 登录态过期（需用户扫码）
 
 当 cookies 彻底过期时，执行以下**完整标准流程**：
@@ -275,32 +297,34 @@ if r["result"]["result"]["value"]:
 
 **Step 5: 发送二维码给用户**
 
-⚠️ **铁律：通过 `assistant-media` 路由获取 ticket URL，在回复中写链接！**
+⚠️ **铁律：在回复中直接写 `MEDIA:/path/to/image.png`，Gateway 会自动注入图片到 webchat 回复！**
 
-**发送步骤：**
-1. 截图保存到任意位置
-2. 复制到 canvas 目录：`cp /tmp/xianyu_qrcode_login.png /root/.openclaw/canvas/xianyu-qrcode.png`
-3. 通过 `assistant-media` 路由获取 ticket URL：
-   ```bash
-   # 用 Python 获取
-   TOKEN=$GATEWAY_AUTH_TOKEN
-   curl -s -H "Authorization: Bearer $TOKEN" \
-     "http://127.0.0.1:18789/__openclaw__/assistant-media?meta=1&source=/root/.openclaw/canvas/xianyu-qrcode.png"
-   # 返回 JSON 中的 mediaTicket 字段
-   ```
-4. 在回复中写 ticket URL：
-   ```
-   http://192.168.1.210:18789/__openclaw__/assistant-media?source=%2Froot%2F.openclaw%2Fcanvas%2Fxianyu-qrcode.png&mediaTicket=<ticket>
-   ```
-5. **⚠️ 只写一个链接！** 写多个会导致重复图片
-6. **⚠️ 不要同时用 `read` 工具读取图片！** 否则 Gateway 会自动注入 + 你手动写链接 = 重复图片
+**发送方式（3种，按优先级排序）：**
 
-**踩坑记录（2026-06-16）：**
-- ❌ `MEDIA:/tmp/xxx.png` — webchat 不渲染 `/tmp/` 路径
-- ❌ `MEDIA:/root/.openclaw/canvas/xxx.png` — 和 Gateway 自动注入叠加导致重复
-- ❌ `read` 工具读取图片 — 加载慢/不稳定，且和手动链接叠加导致重复
-- ❌ `assistant-media` 路由不支持 `/tmp/` 和工作区路径 — 只支持 canvas 目录
-- ✅ `assistant-media` ticket URL（canvas 路径）— 浏览器可直接打开，无需额外认证（2026-06-16 已验证）
+| 方式 | 写法 | webchat 显示 | 浏览器打开 | 推荐 |
+|------|------|-------------|-----------|------|
+| **方式1** | 回复中写 `MEDIA:/tmp/xxx.png` | ✅ 直接显示 | ✅ 能打开 | ⭐ **首选** |
+| **方式2** | `read` 工具读图片 | ❌ 不注入 | — | ❌ 不用 |
+| **方式3** | `assistant-media` ticket URL | ❌ 需登录 | ✅ 能打开 | ⚠️ 备选 |
+
+**正确写法（方式1）：**
+```
+🔑 请用闲鱼 APP 扫码登录
+
+MEDIA:/tmp/xianyu_qrcode.png
+```
+
+**⚠️ 注意事项：**
+1. **只写一行 `MEDIA:`！** 不要同时用 `read` 工具读图片（会叠加导致重复）
+2. **不要写图片的 ticket URL + MEDIA: 同时** = 重复图片
+3. **MEDIA: 后面跟的是服务器本地路径**（`/tmp/`、`/root/` 等），不是 URL
+4. **Gateway 会自动把图片注入到 webchat 回复中**，用户直接看到图片
+
+**踩坑记录（2026-06-16 验证）：**
+- ❌ `read` 工具读取图片 — webchat 里 Gateway 不自动注入，看不到
+- ❌ `assistant-media` ticket URL — webchat 里需要登录才能打开
+- ❌ `message` 工具的 `MEDIA:` 参数 — webchat 里报 "requires target" 错误
+- ✅ `MEDIA:/tmp/xxx.png` 写在回复里 — webchat 直接显示图片（2026-06-16 验证通过）
 
 **Step 4.5: 判断"快速进入"按钮（⭐ 2026-06-15 新增，截图后判断）**
 
@@ -346,6 +370,11 @@ if r["result"]["result"]["value"]:
 > - **二维码失效时重启 Chrome**
 > - **发送前必须验证二维码有效性**（OCR + innerText 双重检查）
 
+⚠️ **踩坑提醒**：
+- **截图裁剪区域**：二维码在右侧（x 从 250 开始），不在左侧。裁剪前先看截图确认位置
+- **重复分析已有方案**：run.sh 已验证可用，不需要自己写 CDP 脚本从头分析
+- **xvfb-run 被闲鱼检测**：虚拟桌面可能被反爬拦截，导致二维码立即失效。如果多次重启仍失效，考虑用真实桌面 Chrome
+
 ### 3.5 Cookie 文件位置
 
 | 文件 | 说明 |
@@ -372,6 +401,11 @@ if r["result"]["result"]["value"]:
 | 发布按钮 | button | 文本"发布" |
 
 **⚠️ 闲鱼没有标题输入框！** 商品标题自动从描述中提取。
+
+⚠️ **踩坑提醒**：
+- **部分分类不支持网页版发布**（如"其他服务"）：需用手机闲鱼 APP 完成，或选择"手机"等支持的分类
+- **分类自动识别有延迟**：上传图片后需等 3 秒让页面完成识别
+- **价格 React state 可能不同步**：DOM 设值后 React 可能未识别，但实际发布时以 DOM 值为准
 
 ---
 
@@ -415,9 +449,20 @@ xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" \
 - ❌ fake File 对象 — 闲鱼报"文件类型无法确定"
 - ❌ base64 + change 事件 — React 不识别
 
+⚠️ **踩坑提醒**：
+- **fetch 返回的 fileId 可能嵌套在 `object` 字段中**：`data.get("fileId") or data.get("object",{}).get("fileId")`
+- **描述中不要包含 emoji**：闲鱼会拒绝发布，提示"商品描述不能包含emoji"
+- **wait_until='networkidle' 在闲鱼 SPA 上永远等不到**：用 `'domcontentloaded'`
+- **fiber 树深度可达 71 层**：上传组件在更深位置，BFS 可能覆盖不全 → 直接用 run.sh 已验证的方案
+
 ### 5.3 Ant Design Select 操作
 
-**唯一可行方案**：CDP `Input.dispatchKeyEvent` 逐字输入
+**唯一可行方案**：CDP `Input.dispatchKeyEvent` 逐字输入（Ant Design 5 拦截合成事件，click/insertText 均无效）
+
+⚠️ **踩坑提醒**：
+- **必须 focus 搜索框再 keyEvent**：否则 keyEvent 不会输入到搜索框
+- **选项在 portal 渲染**：下拉菜单不在 Select DOM 内，而在 body 末尾
+- **精确匹配选项**：用 `textContent.trim() === '目标' && children.length === 0` 避免误匹配
 
 ```python
 # 1. focus 搜索输入框
