@@ -544,6 +544,76 @@ Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等）会丢失。ru
 
 ---
 
+## 5.5 run.sh 缺少 category 参数传递
+
+**现象**：
+`product.json` 有 `category` 字段，但 `xianyu_publish.py` 收不到分类参数。
+
+**根因**：
+`run.sh` 的 `publish()` 函数定义了 3 个参数（image、desc、price），没有 category。调用处也没传 category。
+
+**解决方法**：
+```bash
+# run.sh 修改 publish() 函数
+publish() {
+    local image="$1" desc="$2" price="$3" category="$4"
+    
+    local cat_arg=""
+    [ -n "$category" ] && cat_arg="--category $category"
+    
+    python3 "$SCRIPT_DIR/xianyu_publish.py" publish \
+        --image "$image" \
+        --desc "$desc" \
+        --price "$price" $cat_arg
+}
+
+# 调用处从 product.json 读取 category
+local CAT=""
+if [ -n "$CONFIG" ]; then
+    CAT=$(python3 -c "import json; print(json.load(open('$CONFIG')).get('category',''))" 2>/dev/null)
+fi
+publish "$IMAGE" "$DESC" "$PRICE" "$CAT"
+```
+
+
+## 5.6 外部脚本文件说明
+
+**新建文件**：
+| 文件 | 路径 | 说明 |
+|------|------|------|
+| `_backup_cookies.py` | `/home/bill/_backup_cookies.py` | CDP 提取 cookies 并备份到工作区 `.config/` |
+| `_load_config.py` | `/home/bill/_load_config.py` | 加载 product.json，输出空格分隔的 img/desc/price |
+
+**为什么用外部脚本**：
+1. **避免引号嵌套冲突**：bash `python3 -c "..."` 内嵌 python 代码时，f-string 的引号会被 bash 解析
+2. **提高可维护性**：外部脚本可单独测试、调试
+3. **避免语法错误**：bash 解析 `python3 -c` 时代码块必须完整，内部不能有 bash 命令
+
+
+## 5.7 发布成功案例（2026-06-16）
+
+**商品**：test-item-001（测试商品）
+**最终发布**：2026-06-16 13:10
+**结果**：✅ 成功上架
+
+**关键数据**：
+- 商品ID: 1059579249693
+- 链接: https://www.goofish.com/item?id=1059579249693
+- 描述: 测试
+- 价格: ¥0.01
+- 分类: 手机
+- 图片: 800x800 手机特征图（PIL 生成）
+
+**修复链路**：
+1. Cookies 自动备份 → 扫码后自动保存到工作区 `.config/`
+2. run.sh 修复 → 支持从 product.json 读取 category 并传递
+3. 图片生成 → 用 PIL 生成手机特征图代替纯色图
+4. 分类修正 → 上传后自动识别为"手机"，无需手动修正
+5. 发布成功 → 商品ID 1059579249693
+
+**验证方式**：
+- 浏览器访问 https://www.goofish.com/item?id=1059579249693
+- 查看闲鱼个人中心"我发布的"页面
 ## 6. 已验证成功案例
 
 | 商品 | 价格 | 商品ID | 日期 | 方式 |
@@ -595,3 +665,5 @@ Chrome 重启后 session cookies（`cookie2`、`XSRF-TOKEN` 等）会丢失。ru
 | 每日日志 | `memory/2026-06-12.md` | CDP 发布实操 |
 | 每日日志 | `memory/2026-06-13.md` | xvfb-run + CDP 实操 |
 | 每日日志 | `memory/2026-06-15.md` | run.sh 验证 + 经验更新 + 商品目录迁移 |
+
+
