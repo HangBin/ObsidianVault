@@ -771,6 +771,7 @@ publish "$IMAGE" "$DESC" "$PRICE" "$CAT"
 4. **部分分类不支持网页版发布**：如"其他服务"，需用手机闲鱼 APP 完成
 5. **pkill 误杀风险**：重启 Chrome 时 `pkill -9 -f google-chrome` 可能误杀当前 shell 进程（包括 run.sh 自身）。**铁律**：pkill 必须放在独立的 exec 步骤中，不要和启动命令在同一个 shell 里执行
 6. **二维码有效期 > 60秒**：闲鱼登录二维码在 60 秒内未检测到失效，实际有效期可能更长。失效检测需要更长时间等待或依赖 innerText 判断
+8. **"快速进入"按钮出现条件**：只有在 Chrome profile 中有历史登录记录（`tracknick`、`unb` 等 cookies 存在且有效）时才会出现。重启 Chrome + 清除 cookies 后只显示扫码登录。该按钮在跨域 iframe 中，只能通过截图视觉识别（OCR + tsv 坐标定位）
 7. **run.sh cookies 注入时机**：run.sh 从持久化路径 `/root/.openclaw/workspace-media/.config/xianyu_cookies.txt` 读取 cookies。重启后 `/tmp/` 被清空不影响，持久化目录中的 cookies 始终可用。extract_cookies.py 提取后会自动备份到此路径
 5. **run.sh 不支持 `--help`**：传 `--help` 会报"未知参数"并退出
 
