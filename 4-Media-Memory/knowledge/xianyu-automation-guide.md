@@ -436,11 +436,10 @@ MEDIA:/tmp/xianyu_qrcode.png
 
 | 文件 | 说明 |
 |------|------|
-| `/root/.openclaw/workspace-media/.config/xianyu_cookies_latest.txt` | **主文件**（最新提取，持久化） |
-| `/root/.openclaw/workspace-media/.config/xianyu_cookies.txt` | 持久化副本 |
-| `/tmp/xianyu_cookies.txt` | 临时读取文件（重启会丢，run.sh 从此路径读取） |
+| `/root/.openclaw/workspace-media/.config/xianyu_cookies.txt` | **主文件**（持久化，run.sh 注入来源） |
+| `/root/.openclaw/workspace-media/.config/xianyu_cookies_latest.txt` | 最新提取备份 |
 
-> ⚠️ **2026-06-16 修正**：Cookies 默认存储在 `/root/.openclaw/workspace-media/.config/`。`/tmp/xianyu_cookies.txt` 仅作临时用途，重启后会被清空。extract_cookies.py 和 run.sh 都会自动备份到工作区。
+> ⚠️ **2026-06-17 修正**：run.sh 的 `COOKIES_FILE` 已改为持久化路径 `/root/.openclaw/workspace-media/.config/xianyu_cookies.txt`，重启后不丢失。`/tmp/xianyu_cookies.txt` 不再作为读取路径。
 
 ---
 
@@ -772,7 +771,7 @@ publish "$IMAGE" "$DESC" "$PRICE" "$CAT"
 4. **部分分类不支持网页版发布**：如"其他服务"，需用手机闲鱼 APP 完成
 5. **pkill 误杀风险**：重启 Chrome 时 `pkill -9 -f google-chrome` 可能误杀当前 shell 进程（包括 run.sh 自身）。**铁律**：pkill 必须放在独立的 exec 步骤中，不要和启动命令在同一个 shell 里执行
 6. **二维码有效期 > 60秒**：闲鱼登录二维码在 60 秒内未检测到失效，实际有效期可能更长。失效检测需要更长时间等待或依赖 innerText 判断
-7. **run.sh cookies 注入时机**：`/tmp/xianyu_cookies.txt` 不存在时 run.sh 会跳过注入，但 Chrome 启动后从 SQLite 自动恢复了 cookies（SQLite 解密提取 → Chrome 自动加载），所以**重启后不一定需要手动注入**
+7. **run.sh cookies 注入时机**：run.sh 从持久化路径 `/root/.openclaw/workspace-media/.config/xianyu_cookies.txt` 读取 cookies。重启后 `/tmp/` 被清空不影响，持久化目录中的 cookies 始终可用。extract_cookies.py 提取后会自动备份到此路径
 5. **run.sh 不支持 `--help`**：传 `--help` 会报"未知参数"并退出
 
 ---
