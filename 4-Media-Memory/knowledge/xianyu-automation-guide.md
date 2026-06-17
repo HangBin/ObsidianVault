@@ -733,7 +733,113 @@ publish "$IMAGE" "$DESC" "$PRICE" "$CAT"
 **验证方式**：
 - 浏览器访问 https://www.goofish.com/item?id=1059579249693
 - 查看闲鱼个人中心"我发布的"页面
-## 6. 已验证成功案例
+## 6. 消息读取（2026-06-17 新增）
+
+### 6.1 消息入口
+
+闲鱼网页版消息页面：`https://www.goofish.com/im`
+
+> ⚠️ 需要有效 cookies 登录态。如果 cookies 过期，会跳转到登录页。
+
+### 6.2 页面结构
+
+| 区域 | 说明 |
+|------|------|
+| 左侧列表 | 联系人列表，每个联系人显示：昵称 + 最后消息预览 + 时间 |
+| 右侧区域 | 当前选中联系人的完整聊天记录 |
+| 顶部导航 | 搜索、消息、通知消息 |
+
+### 6.3 读取消息列表的步骤
+
+**Step 1: 确保登录态有效**
+```bash
+# 检查登录态
+bash /home/bill/run.sh --check
+# 如果 cookies 过期，先注入持久化 cookies
+python3 -c "
+import json, urllib.request, asyncio, websockets
+async def inject():
+    resp = urllib.request.urlopen('http://127.0.0.1:9222/json/list')
+    pages = json.loads(resp.read())
+    page = [p for p in pages if 'goofish.com' in p.get('url','') and 'xdomain' not in p.get('url','')][0]
+    async with websockets.connect(page['webSocketDebuggerUrl']) as ws:
+        with open('/root/.openclaw/workspace-media/.config/xianyu_cookies.txt') as f:
+            cookies = [p.strip().split('=',1) for p in f.read().strip().split('; ') if '=' in p]
+        for name, value in cookies:
+            await ws.send(json.dumps({'id':1,'method':'Network.setCookie','params':{'name':name,'value':value,'domain':'.goofish.com','path':'/'}}))
+            await ws.recv()
+asyncio.run(inject())
+"
+```
+
+**Step 2: 导航到消息页面**
+```javascript
+// 通过 CDP 执行
+await ws.send(json.dumps({'id':1,'method':'Page.navigate','params':{'url':'https://www.goofish.com/im?spm=a21ybx.personal.sidebar.2.43346ac297N2Ah'}}))
+```
+
+**Step 3: 等待页面加载后读取联系人列表**
+```javascript
+// 读取左侧联系人列表
+await ws.send(json.dumps({'id':2,'method':'Runtime.evaluate','params':{'expression':'''
+(() => {
+    const allDivs = document.querySelectorAll('div');
+    const contacts = [];
+    for (const div of allDivs) {
+        if (div.children.length >= 2) {
+            const rect = div.getBoundingClientRect();
+            if (rect.width > 100 && rect.height > 30 && rect.height < 120) {
+                const text = div.textContent.trim();
+                if (text.length > 3 && text.length < 100) {
+                    contacts.push({
+                        text: text.substring(0, 60),
+                        rect: {x: rect.x, y: rect.y, w: rect.width, h: rect.height}
+                    });
+                }
+            }
+        }
+    }
+    return JSON.stringify(contacts);
+})()
+'''}}))
+```
+
+**Step 4: 点击联系人读取详细对话**
+```javascript
+// 点击第 i 个联系人（从 0 开始）
+// 先获取联系人坐标
+const contact = contacts[i];
+const cx = contact.x + contact.w / 2;  // 中心 x
+const cy = contact.y + contact.h / 2;  // 中心 y
+
+await ws.send(json.dumps({'id':3,'method':'Input.dispatchMouseEvent','params':{'type':'mousePressed','x':cx,'y':cy,'button':'left','clickCount':1}}))
+await ws.recv()
+await ws.send(json.dumps({'id':4,'method':'Input.dispatchMouseEvent','params':{'type':'mouseReleased','x':cx,'y':cy,'button':'left','clickCount':1}}))
+await ws.recv()
+await asyncio.sleep(2);  // 等待右侧聊天区域更新
+
+// 读取右侧聊天内容
+await ws.send(json.dumps({'id':5,'method':'Runtime.evaluate','params':{'expression':'document.body.innerText.substring(0, 2000)'}}))
+```
+
+### 6.4 注意事项
+
+1. **需要有效 cookies**：消息页面需要登录态，cookies 过期会跳转登录页
+2. **联系人列表 DOM 不稳定**：闲鱼 SPA 的 DOM 结构可能随时调整，选择器可能需要更新
+3. **右侧聊天区域更新有延迟**：点击联系人后需等 1-2 秒让右侧区域加载完成
+4. **不能自动回复**：读取消息可行，但发送消息需要模拟键盘输入，且闲鱼可能有反爬检测
+5. **通知消息**："通知消息"是系统通知（如交易状态变化），不是用户私信
+
+### 6.5 已验证结果（2026-06-17）
+
+- ✅ 消息页面可正常加载
+- ✅ 联系人列表可读取（6 个联系人）
+- ✅ 每个联系人的最后消息预览可获取
+- ⚠️ 右侧聊天区域在点击联系人后未完全切换（可能是 SPA 路由缓存），实际聊天内容需要进一步验证
+
+---
+
+## 7. 已验证成功案例
 
 | 商品 | 价格 | 商品ID | 日期 | 方式 |
 |------|------|--------|------|------|
@@ -748,7 +854,7 @@ publish "$IMAGE" "$DESC" "$PRICE" "$CAT"
 
 ---
 
-## 7. 环境信息
+## 8. 环境信息
 
 | 项目 | 值 |
 |------|-----|
@@ -763,7 +869,7 @@ publish "$IMAGE" "$DESC" "$PRICE" "$CAT"
 
 ---
 
-## 8. 已知限制
+## 9. 已知限制
 
 1. **登录态会过期**：cookies 过期后需要用户扫码重新登录
 2. **不支持批量上传不同图片**：每次发布一个商品，批量模式需要商品列表 JSON
@@ -777,7 +883,7 @@ publish "$IMAGE" "$DESC" "$PRICE" "$CAT"
 
 ---
 
-## 9. 相关文档
+## 10. 相关文档
 
 | 文档 | 路径 | 说明 |
 |------|------|------|
