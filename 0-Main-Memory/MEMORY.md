@@ -217,3 +217,8 @@ cat /root/.openclaw/share/browser/experience-browser.md
 
 <!-- openclaw-memory-promotion:memory:memory/2026-06-08-0848.md:21:21 -->
 - assistant: [score=0.813 recalls=0 avg=0.620 source=memory/2026-06-08-0848.md:21-21]
+
+## Promoted From Short-Term Memory (2026-06-17)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-08-0848.md:24:24 -->
+- assistant: [score=0.812 recalls=0 avg=0.620 source=memory/2026-06-08-0848.md:24-24]
