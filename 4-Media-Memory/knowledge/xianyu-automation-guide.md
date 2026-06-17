@@ -53,6 +53,7 @@ Step 2b: 登录态失效 → 截图二维码 → 发给用户扫码 → 等确�
 | 自己写截图+OCR+发送代码 | 截图后在回复中写 `MEDIA:/path/to/img.png` |
 | 截图后直接发送不验证 | 先 OCR + innerText 检查"二维码已失效"，确认有效再发 |
 | 自己尝试刷新 cookies | 发二维码让用户扫码 |
+| 在 product.json 里写 category 字段 | **不写 category**，让闲鱼自动识别分类（2026-06-17 验证：不写分类比写"手机"更稳定） |
 | 用 `message` 工具的 `media`/`filePath` 发图 | 在回复中写 `MEDIA:/path/to/img.png` |
 | 重新分析 ant-select 操作 | 用 dispatchKeyEvent（已验证） |
 | 尝试 API 方式发布 | 用 CDP 浏览器自动化（API 有风控） |
@@ -97,7 +98,6 @@ bash /home/bill/run.sh --batch products.json
   "name": "商品名称",
   "desc": "商品描述（用于发布）",
   "price": 0.01,
-  "category": "分类名称",
   "status": "draft|published|failed",
   "created": "2026-06-15T11:50:00+08:00",
   "image": "image.png"
@@ -105,6 +105,8 @@ bash /home/bill/run.sh --batch products.json
 ```
 
 > ⚠️ **字段名是 `desc` 不是 `description`**！run.sh 的 `load_config()` 只读 `cfg.get('desc','')`，写 `description` 会导致描述为空白。
+
+> ⚠️ **2026-06-17 更新：不需要 `category` 字段！** 不指定分类让闲鱼自动识别，发布更稳定。指定分类（如 `"手机"`）反而可能导致"网页版不支持该分类"错误。run.sh 不传 `--category` 时 `xianyu_publish.py` 自动跳过分类选择。
 
 > run.sh 会自动在商品目录下查找图片文件（支持 png/jpg/jpeg/webp），
 > 无需在 product.json 中写完整路径，只需写文件名。
@@ -193,6 +195,7 @@ run.sh 启动 Chrome 时会自动注入 session cookies（从 `/tmp/xianyu_cooki
 - Cookie 必须包含完整字段（cookie2、sgcookie、_m_h5_tk 等），缺少字段会导致所有 API 返回 `FAIL_SYS_ILLEGAL_ACCESS`
 - **不要 kill 已有 Chrome**：Chrome 里有 session cookies（httpOnly），重启后会丢失。直接用 CDP 连接复用登录态
 - 如果 Chrome 已自动重启（crash watchdog），session cookies 会丢失 → 通过 CDP `Network.setCookie` 注入之前保存的 cookies（见 §5.4）
+- ⚠️ **2026-06-17 新增：run.sh 检测 UNKNOWN 但实际已登录** — 发布商品后页面会跳转到 `/item?id=xxx`（商品详情页），此时 run.sh 的 `check_login()` 在首页找不到 `panbin5218`/`订单` 关键词，返回 `UNKNOWN`。**实际登录态正常**，直接调 `python3 xianyu_publish.py publish --image ... --desc ... --price ...` 即可绕过检测正常发布。不需要重启 Chrome 或重新扫码。
 
 ### 3.2.1 Cookies 持久化存储
 
@@ -739,6 +742,8 @@ publish "$IMAGE" "$DESC" "$PRICE" "$CAT"
 | MacBook Pro M4 Pro 14寸 | ¥8888 | 1059835968742 | 06-13 | run.sh 一键 |
 | 周杰伦签名专辑（测试） | ¥888,888 | 1059858208480 | 06-13 | run.sh 一键 |
 | 测试商品 | ¥0.01 | — | 06-15 | run.sh 一键 |
+| 测试商品-001 | ¥0.01 | 1057980679964 | 06-17 | run.sh 一键（无category） |
+| 测试商品-002 | ¥0.02 | 1057981571117 | 06-17 | xianyu_publish.py 手动（run.sh检测UNKNOWN） |
 
 ---
 
