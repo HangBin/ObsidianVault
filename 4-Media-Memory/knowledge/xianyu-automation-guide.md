@@ -188,8 +188,10 @@ bash /home/bill/run.sh --check
 
 ### 3.2 登录态恢复（自动）
 
-run.sh 启动 Chrome 时会自动注入 session cookies（从 `/tmp/xianyu_cookies.txt`）。
+run.sh 启动 Chrome 时会自动注入 session cookies（从持久化路径 `/root/.openclaw/workspace-media/.config/xianyu_cookies.txt` 读取）。
 **大部分情况下 cookies 注入即可恢复登录态，不需要用户扫码。**
+
+> ⚠️ **2026-06-17 修正**：`COOKIES_FILE` 已从 `/tmp/xianyu_cookies.txt`（重启会丢）改为持久化路径 `/root/.openclaw/workspace-media/.config/xianyu_cookies.txt`，重启后不丢失。
 
 ⚠️ **踩坑提醒**：
 - Cookie 必须包含完整字段（cookie2、sgcookie、_m_h5_tk 等），缺少字段会导致所有 API 返回 `FAIL_SYS_ILLEGAL_ACCESS`
@@ -768,6 +770,9 @@ publish "$IMAGE" "$DESC" "$PRICE" "$CAT"
 2. **不支持批量上传不同图片**：每次发布一个商品，批量模式需要商品列表 JSON
 3. **服务器 IP 风控**：机房 IP 可能被闲鱼风控，建议在住宅 IP 环境运行
 4. **部分分类不支持网页版发布**：如"其他服务"，需用手机闲鱼 APP 完成
+5. **pkill 误杀风险**：重启 Chrome 时 `pkill -9 -f google-chrome` 可能误杀当前 shell 进程（包括 run.sh 自身）。**铁律**：pkill 必须放在独立的 exec 步骤中，不要和启动命令在同一个 shell 里执行
+6. **二维码有效期 > 60秒**：闲鱼登录二维码在 60 秒内未检测到失效，实际有效期可能更长。失效检测需要更长时间等待或依赖 innerText 判断
+7. **run.sh cookies 注入时机**：`/tmp/xianyu_cookies.txt` 不存在时 run.sh 会跳过注入，但 Chrome 启动后从 SQLite 自动恢复了 cookies（SQLite 解密提取 → Chrome 自动加载），所以**重启后不一定需要手动注入**
 5. **run.sh 不支持 `--help`**：传 `--help` 会报"未知参数"并退出
 
 ---
