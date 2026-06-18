@@ -122,35 +122,6 @@ cat /root/.openclaw/share/browser/experience-browser.md
 
 > ⚠️ 2026-05-18 清理：删除底部低质量自动 promotion 条目（均为 recalls=0 的无价值条目），改为索引式引用。
 
-## Promoted From Short-Term Memory (2026-05-20)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:15:18 -->
-- **触发**: 用户要求学习 `/root/.openclaw/share/memory-auto-write-optimization.md` 并更新核心文件 **工具**: read, edit, exec, write **结果**: ✅ 成功更新 3 个核心文件 **决策**: 对比共享文档与现有核心文件，发现 3 处需要更新的点 [score=0.807 recalls=0 avg=0.620 source=memory/2026-05-18.md:15-18]
-<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:31:34 -->
-- **触发**: 用户指出 2026-05-18.md 缺少 YAML frontmatter **工具**: read, write **结果**: ✅ 已补充标准 frontmatter 并修正标题格式 **决策**: 创建 daily log 时必须包含 frontmatter，这是自己定的规则，不可跳过 [score=0.807 recalls=0 avg=0.620 source=memory/2026-05-18.md:31-34]
-<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:42:45 -->
-- **触发**: 用户询问是否需要将教训固化到核心文件 **工具**: read, edit, exec, cp **结果**: ✅ 更新 AGENTS.md 步骤1 + SOUL.md 检查清单① **决策**: 把 frontmatter 完整 YAML 模板直接嵌入执行步骤，减少跳过概率 [score=0.807 recalls=0 avg=0.620 source=memory/2026-05-18.md:42-45]
-
-## Promoted From Short-Term Memory (2026-05-21)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-18.md:2:5 -->
-- author: main created: 2026-05-18 10:31:00 GMT+8 modified: 2026-05-18 10:44:00 GMT+8 version: v1.0.0 [score=0.804 recalls=0 avg=0.620 source=memory/2026-05-18.md:2-5]
-
-## Promoted From Short-Term Memory (2026-05-28)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:15:18 -->
-- **触发**: 用户提供记忆碎片，要求写成梦境日记 **工具**: 无（纯文本创作） **结果**: ✅ 完成梦境日记，以"服务器黄昏"为意象，描述记忆整理与老板指令的场景 **决策**: 用诗意的语言将技术操作（记忆写入、文件清理、索引更新）转化为梦境叙事 [score=0.810 recalls=0 avg=0.620 source=memory/2026-05-25.md:15-18]
-
-## Promoted From Short-Term Memory (2026-05-28)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:21:24 -->
-- **触发**: 用户要求写入今日记忆并检查 2026-05-18 的完整性 **工具**: read, exec, write, sessions_history **结果**: ✅ 完成 **决策**: 执行标准记忆写入流程 [score=0.818 recalls=0 avg=0.620 source=memory/2026-05-25.md:21-24]
-
-## Promoted From Short-Term Memory (2026-05-29)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-05-25.md:2:5 -->
-- author: main created: 2026-05-25 18:39:00 GMT+8 modified: 2026-05-25 18:39:00 GMT+8 version: v1.0.0 [score=0.855 recalls=0 avg=0.620 source=memory/2026-05-25.md:2-5]
-
 ## Promoted From Short-Term Memory (2026-06-01)
 
 <!-- openclaw-memory-promotion:memory:memory/2026-05-29.md:15:18 -->
@@ -232,3 +203,24 @@ cat /root/.openclaw/share/browser/experience-browser.md
 
 <!-- openclaw-memory-promotion:memory:memory/2026-06-08-0848.md:9:9 -->
 - assistant: [score=0.806 recalls=0 avg=0.620 source=memory/2026-06-08-0848.md:9-9]
+
+## Promoted From Short-Term Memory (2026-06-18)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-10.md:22:23 -->
+- 10:30 - media 会话死循环事件: 给 media 发了多条终止循环的消息，全部被忽略; media 的会话需要重启才能停止循环 [score=0.954 recalls=0 avg=0.620 source=memory/2026-06-10.md:22-23]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-10.md:25:28 -->
+- 10:30 - media 会话死循环事件: 已尝试四次通过 sessions_send 终止循环，均失败; media 的会话虽然 status=failed，但消息路由仍在工作，形成"僵尸循环"; 最终结论：media 的会话需要重启（gateway restart）才能彻底停止; 已完全停止继续回应循环，等待用户指示 [score=0.954 recalls=0 avg=0.620 source=memory/2026-06-10.md:25-28]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-10.md:18:21 -->
+- 10:30 - media 会话死循环事件: media 的会话状态为 failed，但最后一条消息不断重复发送; 数据库诊断完成：两个闲鱼 Cookie（2207836320265 已启用完整，748552523 未启用且缺少 cookie2/sgcookie）; unb=2217700069084 在数据库中不存在; 小红书 Cookie 不在数据库中，已隔离 [score=0.924 recalls=0 avg=0.620 source=memory/2026-06-10.md:18-21]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-08-0848.md:35:37 -->
+- ✅ 已完成的任务: **创建了完整的《1000元30天赚第一桶金—完整操作手册》**; 包含方案一（信息差套利）、方案二（AI+内容服务）、方案三（短视频带货）; 每个方案都有：预算分配、选品策略、完整操作流程、预期收益模型、避坑指南 [score=0.869 recalls=0 avg=0.620 source=memory/2026-06-08-0848.md:35-37]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-08-0848.md:43:46 -->
+- ✅ 已完成的任务: **完整的闭环架构**; 每日执行节奏（8个时间节点）; 每周复盘清单（6个检查项）; 30天里程碑（6个阶段目标） [score=0.869 recalls=0 avg=0.620 source=memory/2026-06-08-0848.md:43-46]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-10.md:7:8 -->
+- main-agent; daily-log [score=0.848 recalls=0 avg=0.620 source=memory/2026-06-10.md:7-8]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-08-0848.md:3:5 -->
+- Session: 2026-06-08 08:48:32 GMT+8: **Session Key**: agent:main:main; **Session ID**: ab2dfb28-ef2a-444d-8a1f-d1e9c1d75de8; **Source**: gateway:sessions.reset [score=0.848 recalls=0 avg=0.620 source=memory/2026-06-08-0848.md:3-5]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-08-0848.md:39:41 -->
+- ✅ 已完成的任务: **详细的OpenClaw操作指南**; 每个方案都配套了具体的OpenClaw工具使用方法; 包括：sessions_send调用、cron定时任务、AI辅助策略 [score=0.848 recalls=0 avg=0.620 source=memory/2026-06-08-0848.md:39-41]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-08-0848.md:47:47 -->
+- ✅ 已完成的任务: 风险对冲策略（方案间切换机制） [score=0.848 recalls=0 avg=0.620 source=memory/2026-06-08-0848.md:47-47]
