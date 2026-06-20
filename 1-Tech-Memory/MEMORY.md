@@ -252,6 +252,7 @@
 | Evolver配置 | `/home/obsidian_vault/shared/evolver-setup.md` | Evolver 安装配置经验 |
 | WebSocket+Trajectory | `/home/obsidian_vault/shared/websocket-trajectory.md` | WebSocket 连接+trajectory 格式 |
 | 记忆自动写入 | `/home/obsidian_vault/shared/memory-auto-write.md` | 记忆自动写入规范（5条规则） |
+| FreeLLMAPI 安装部署 | `experience-freellmapi.md` | 完整安装流程+编译踩坑+keyless修复+局域网配置 |
 
 **访问方式**: `/home/obsidian_vault/1-Tech-Memory/knowledge/`
 
