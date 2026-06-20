@@ -571,3 +571,23 @@ qmd get <file>[:line] -l 50
 - 基因状态: 基因: 53 个（无新增）; 事件: 0（无新增）; 胶囊: 0（无新增） [score=0.861 recalls=0 avg=0.620 source=memory/2026-06-06.md:36-38]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:93:93 -->
 - 执行摘要: **新建经验文档 (5个)**: [score=0.851 recalls=0 avg=0.620 source=memory/2026-06-06.md:93-93]
+
+## 📦 已安装项目
+
+### FreeLLMAPI (2026-06-20)
+- **路径**: `/home/freellmapi`
+- **版本**: v0.2.1
+- **用途**: OpenAI 兼容 LLM 代理聚合，堆叠 16 个免费 Provider 的 API
+- **访问**: Dashboard http://localhost:5173 / API http://[::]:3001/v1/chat/completions
+- **统一 API Key**: `freellmapi-36de985aea262e45a78f9430d5d21129cc33a2e0a82d8806`
+- **Dashboard 账号**: `panbin521@sina.com`
+- **编译依赖**: GCC 10+ (better-sqlite3 需要 C++20)
+- **已配置 keyless Provider**: Pollinations、LLM7、Kilo Gateway（无需 API Key）
+- **无效 Key**: OpenRouter Key 验证 401，已禁用
+- **局域网配置**: Vite host=0.0.0.0, DASHBOARD_ORIGINS 含 192.168.1.210
+
+### 编译踩坑记录
+- **better-sqlite3 + GCC 9.4**: `-std=c++20` 不支持 → 需安装 gcc-10/g++-10
+- **npm install 超时**: 进程容易被 SIGKILL，不用管道 `| tail` 避免 exit code 丢失
+- **keyless Provider**: 需在 api_keys 表插入 sentinel 记录（key='no-key'，AES-256-GCM 加密）
+- **端口清理**: 重启前用 `fuser -k <port>/tcp` 清理残留进程

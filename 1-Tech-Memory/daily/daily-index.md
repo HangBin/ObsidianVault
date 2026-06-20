@@ -1,6 +1,6 @@
 ---
 created: 2026-05-14
-modified: 2026-05-18 11:03 GMT+8
+modified: 2026-06-20 15:48 GMT+8
 tags:
   - tech-agent
   - index
@@ -14,6 +14,7 @@ aliases:
 ### 2026年5月
 | 日期             | 主题                              | 标签                                        |
 | -------------- | ------------------------------- | ----------------------------------------- |
+| [[2026-06-20]] | FreeLLMAPI 安装部署+keyless Provider修复+局域网访问配置 | #freellmapi #install #keyless #network |
 | [[2026-06-06]] | GEP Evolver 闭环修复+基因库扩充+经验文档归档+MEMORY.md结构优化+genes.json合并去重 | #gep #evolver #gene #solidify #experience #memory #knowledge #gene-merge |
 | [[2026-05-01]] | 11:41-11:46 心跳检查                | #heartbeat                                |
 | [[2026-05-02]] | 00:11-00:39 审查AGENTS.md和SOUL.md | #agents #soul #sync-script                |
