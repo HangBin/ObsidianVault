@@ -555,13 +555,25 @@ qmd get <file>[:line] -l 50
 - signals.js: /root/.openclaw/skills/capability-evolver/src/gep/signals.js
 - memoryGraph.js: /root/.openclaw/skills/capability-evolver/src/gep/memoryGraph.js
 
-## Promoted From Short-Term Memory (2026-06-09)
+## Promoted From Short-Term Memory (2026-06-20)
 
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:78:81 -->
-- **触发**: 老板要求执行知识库提炼和 MEMORY.md 结构优化 **工具**: read/write/edit (多文件操作) **结果**: ✅ 全部完成 **决策**: 规则融入已有章节，经验文档独立，冗余章节删除 [score=0.836 recalls=0 avg=0.620 source=memory/2026-06-06.md:78-81]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:139:142 -->
-- **触发**: 系统事件，对话结束协议执行 **工具**: exec (文件检查), rm (删除重复子文件) **结果**: ✅ 全部完成 **决策**: 按 AGENTS.md 对话结束协议执行 [score=0.813 recalls=0 avg=0.620 source=memory/2026-06-06.md:139-142]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:145:148 -->
-- **触发**: 系统事件，对话结束协议再次执行 **工具**: exec (文件检查) **结果**: ✅ 全部通过 **决策**: 上轮已完成所有写入，本次确保持续同步 [score=0.813 recalls=0 avg=0.620 source=memory/2026-06-06.md:145-148]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:2:4 -->
-- created: 2026-06-06 modified: 2026-06-06 tags: [daily-log, tech-agent] [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-06.md:2-4]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:133:136 -->
+- 合并详情: 合并前: genes.json 4 个 + genes.jsonl 16 个（1 个重叠）; 合并后: genes.json 19 个（去重后）; 分类: repair 10 / optimize 8 / innovate 1; 加载验证: 19 scope + 58 main = 75 总基因 ✅ [score=0.962 recalls=0 avg=0.620 source=memory/2026-06-06.md:133-136]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:151:154 -->
+- 检查详情: 今日记忆文件: ✅ 5896字节，11+条记录; 子文件: ✅ 无; Obsidian daily/: ✅ 同步完整（md5一致）; Obsidian MEMORY.md: ✅ 563行，软链接自动同步 [score=0.950 recalls=0 avg=0.620 source=memory/2026-06-06.md:151-154]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:155:158 -->
+- 检查详情: 工作区冗余: ✅ 无（只有今天的文件）; experience-前缀: ✅ 已全部清理; 专项经验新建文档: ✅ 5个（instant-archive/skill-development/evolver-setup/websocket-trajectory/memory-auto-write）; 知识库更新文档: ✅ 5个（memory-system/qmd-obsidian-system/collaboration-patterns/browser-automation×2） [score=0.950 recalls=0 avg=0.620 source=memory/2026-06-06.md:155-158]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:22:25 -->
+- 运行详情: 运行命令: cd workspace-tech && bash evolve.sh; 策略: balanced (实际 gene_gep_optimize_prompt_and_assets); 信号: 62 个信号（log_error, errsig, protocol_drift, bash_script_error, octal_trap 等）; Hub 匹配: 无（below_threshold） [score=0.872 recalls=0 avg=0.620 source=memory/2026-06-06.md:22-25]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:26:26 -->
+- 运行详情: 选择基因: gene_gep_optimize_prompt_and_assets（optimize 类别） [score=0.872 recalls=0 avg=0.620 source=memory/2026-06-06.md:26-26]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:29:32 -->
+- Executor Agent 产出: 修改了 19 个文件，+10245/-9600 行; 主要修改: .learnings/ (ERRORS.md, FEATURE_REQUESTS.md, LEARNINGS.md), DREAMS.md, memory/.dreams/, memory/2026-06-05.md; 新增: memory/evolution/scopes/tech/asset_call_log.jsonl; 未完成: solidify（未输出 5 个 Mandatory Objects） [score=0.872 recalls=0 avg=0.620 source=memory/2026-06-06.md:29-32]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:33:33 -->
+- Executor Agent 产出: 未 commit: 所有修改在工作区未提交 [score=0.872 recalls=0 avg=0.620 source=memory/2026-06-06.md:33-33]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:41:43 -->
+- 问题分析: executor agent 执行了 gene_gep_optimize_prompt_and_assets 策略，修改了 learnings 和 dreams 文件; 但没完成 solidify 步骤——没有输出 5 个 Mandatory Objects; 与昨天的问题一致：executor agent 在 solidify 前超时或遇到困难 [score=0.872 recalls=0 avg=0.620 source=memory/2026-06-06.md:41-43]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:46:49 -->
+- 修复：Solidify 固化自动检测机制: **根因1**: executor agent 修改文件后 token 耗尽，没有运行 `node index.js solidify`; **根因2**: 直接运行 `node index.js solidify` 时缺少 `OPENCLAW_WORKSPACE` 和 `EVOLVER_SESSION_SCOPE` 环境变量，导致读取到错误的 state 文件路径; **修复方案**: 在 `evolve.sh` 末尾添加自动检测逻辑; 检测 `evolution_solidify_state.json` 是否有 pending run（有 last_run 但无 last_solidify 或 run_id 不匹配） [score=0.872 recalls=0 avg=0.620 source=memory/2026-06-06.md:46-49]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:50:51 -->
+- 修复：Solidify 固化自动检测机制: 如果有，自动运行 `OPENCLAW_WORKSPACE=/root/.openclaw/workspace-tech EVOLVER_SESSION_SCOPE=tech node index.js solidify`; **验证结果**: ✅ 手动测试 solidify 成功，executor + 自动 solidify 端到端跑通 [score=0.872 recalls=0 avg=0.620 source=memory/2026-06-06.md:50-51]

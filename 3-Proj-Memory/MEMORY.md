@@ -140,45 +140,6 @@ experience*.md       ← 专项经验详细教程
 > 📌 **更多经验细节** → 检索 `.learnings/` 或使用 `qmd search` 搜索共享文档
 
 
-## Promoted From Short-Term Memory (2026-06-10)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:63:66 -->
-- **触发**: 大梦要求固化 proj 基因 **工具**: write, exec **结果**: 完成 proj scope 基因库创建（21个基因） **决策**: 基于全量知识源扫描结果，从 MEMORY.md/experience.md/daily logs/archive 中提炼 [score=0.873 recalls=0 avg=0.620 source=memory/2026-06-07.md:63-66]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:2:4 -->
-- created: 2026-06-07 10:09 GMT+8 modified: 2026-06-07 10:10 GMT+8 tags: [proj-agent, daily-log, 2026-06-07] [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-07.md:2-4]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:24:27 -->
-- | 文件 | 操作 | 原因 | |------|------|------| | memory/2026-05-18.md | 删除 | Obsidian 已同步 | | memory/2026-05-18-1239.md | 删除 | 子文件，内容已融入主文件 | [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-07.md:24-27]
-
-## Promoted From Short-Term Memory (2026-06-10)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:41:44 -->
-- | 目录 | 文件数 | 读取方式 | |------|--------|---------| | shared/ (GEP经验) | 1 | 全文读取 | | 3-Proj-Memory/ 根目录 | 4 | 全文读取 | [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-07.md:41-44]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:45:48 -->
-- | daily/ | 5 | 全文读取 | | knowledge/ | 2 | 全文读取 | | archive/ 根目录 | 2 | 全文读取 | | archive/history-2026-03/ | 3 | head 摘要 | [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-07.md:45-48]
-
-## Promoted From Short-Term Memory (2026-06-10)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:49:52 -->
-- | archive/history-2026-04/ | 19 | head 摘要 | | memory/dreaming/ | 126 | 目录扫描 | | memory/.dreams/ | 7 | 目录扫描+行数统计 | | memory/evolution/ | 0 | 空目录 | [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-07.md:49-52]
-
-## Promoted From Short-Term Memory (2026-06-11)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:108:111 -->
-- **触发**: 大梦要求部署 Evolver 框架（定时运行暂不做） **工具**: exec, write, edit **结果**: Evolver 框架已复制+环境变量已配置+首次运行成功 **决策**: 从 capability-evolver/ 复制完整框架，修正软链接指向 proj 资源 [score=0.878 recalls=0 avg=0.620 source=memory/2026-06-07.md:108-111]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:133:136 -->
-- **触发**: 大梦要求深入扫描 archive 所有 25 个文件 **工具**: read, exec **结果**: 完成 archive 下 3 个目录 25 个文件的深度扫描 **决策**: 按 GEP 知识源扫描 SOP 逐文件读取 [score=0.878 recalls=0 avg=0.620 source=memory/2026-06-07.md:133-136]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:172:175 -->
-- **触发**: 大梦要求继续进化 **工具**: exec (node index.js run) **结果**: 两轮进化循环均成功完成 **决策**: Evolver 自动匹配基因→生成 prompt→executor 执行→solidify [score=0.868 recalls=0 avg=0.620 source=memory/2026-06-07.md:172-175]
-
-## Promoted From Short-Term Memory (2026-06-11)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:69:72 -->
-- | 文件 | 状态 | |------|------| | genes.jsonl | ✅ 21个基因（optimize:17, repair:4） | | evolution_state.json | ✅ cycle_count=0, status=initialized | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:69-72]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:73:76 -->
-- | personality_state.json | ✅ 身份/风格/边界/协作完整 | | events.jsonl | ✅ 1条初始化事件 | | capsules.json | ✅ 空（待积累） | | memory_graph.jsonl | ✅ 初始化记录 | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:73-76]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:95:98 -->
-- | gene_bid_domain_expertise | optimize | 投标/新能源/专业 | | gene_collaboration_via_main | optimize | 协作/main/汇报 | | gene_gep_knowledge_source_scan | optimize | 知识源扫描/GEP | | gene_workboard_task_management | optimize | 任务卡片/跟踪 | [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:95-98]
-
 ## Promoted From Short-Term Memory (2026-06-11)
 
 <!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:114:117 -->
@@ -213,3 +174,26 @@ experience*.md       ← 专项经验详细教程
 - | history-2026-04/2026-04-14.md | 初始化占位 | | history-2026-04/2026-04-15.md | 初始化占位 | | history-2026-04/2026-04-16.md | 初始化占位 | | history-2026-04/2026-04-17.md | Light Sleep 反思 | [score=0.888 recalls=0 avg=0.620 source=memory/2026-06-07.md:155-158]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:159:162 -->
 - | history-2026-04/2026-04-18.md | Light Sleep + REM Sleep 反思 | | history-2026-04/2026-04-19.md | Light Sleep + REM Sleep 反思 | | history-2026-04/2026-04-20.md | 文件合并与归档整理、系统性记忆检查 | | history-2026-04/2026-04-21.md | Light Sleep + REM Sleep 反思 | [score=0.888 recalls=0 avg=0.620 source=memory/2026-06-07.md:159-162]
+
+## Promoted From Short-Term Memory (2026-06-20)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:59:60 -->
+- 关键发现: **experience.md 严重膨胀**: 包含大量从 archive 目录重复复制的内容; **无 skills/ 目录**: proj 工作区没有安装技能 [score=0.943 recalls=0 avg=0.620 source=memory/2026-06-07.md:59-60]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:165:168 -->
+- 关键发现: **4/13-4/16 完全空白**：连续4天无任何会话记录; **4/9-4/12 无实际内容**：仅初始化占位文件; **dreaming 系统持续运行**：light/deep/rem 各42个文件，但内容多为重复的"初始化占位"反思; **extract_learnings.sh 已手动删除**：大梦确认脚本已清理，由 tech 定时任务替代 [score=0.924 recalls=0 avg=0.620 source=memory/2026-06-07.md:165-168]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:184:186 -->
+- 当前基因库状态: 基因总数: 21（无新增，已有基因覆盖了主要信号）; Capsules: 0（待后续成功执行积累）; Events: 2（Cycle #0001 + #0002） [score=0.924 recalls=0 avg=0.620 source=memory/2026-06-07.md:184-186]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:16:19 -->
+- 检查发现：: ✅ 今日记忆文件不存在 → 已创建; ✅ 无今日子文件（memory/2026-06-07*.md 无匹配）; ⚠️ 工作区存在历史冗余：`memory/2026-05-18.md` 和 `memory/2026-05-18-1239.md`（子文件）; ✅ Obsidian daily/ 已有 2026-05-18.md（已同步） [score=0.871 recalls=0 avg=0.620 source=memory/2026-06-07.md:16-19]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:20:21 -->
+- 检查发现：: ✅ Obsidian daily/ 已有 2026-05-03.md 和 2026-05-07.md; ✅ 已清理工作区冗余：删除 2026-05-18.md（Obsidian已同步）和子文件 2026-05-18-1239.md [score=0.853 recalls=0 avg=0.620 source=memory/2026-06-07.md:20-21]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:30:31 -->
+- 双写同步：: ✅ 本地 memory/2026-06-07.md 已创建; ✅ Obsidian daily/2026-06-07.md 已同步 [score=0.853 recalls=0 avg=0.620 source=memory/2026-06-07.md:30-31]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:55:58 -->
+- 关键发现: **GEP 架构已理解**: 触发→执行→固化→基因更新闭环; **proj 没有 GEP 基因库**: evolution/scopes/proj/ 为空; **dreaming 系统活跃**: 126 个文件（light/deep/rem 各42个）; **.dreams 数据丰富**: events.jsonl 498行、short-term-recall 14890行 [score=0.853 recalls=0 avg=0.620 source=memory/2026-06-07.md:55-58]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:104:105 -->
+- 双写同步: ✅ 本地 memory/evolution/scopes/proj/ 已创建; ✅ Obsidian 3-Proj-Memory/evolution/scopes/proj/ 已同步 [score=0.834 recalls=0 avg=0.620 source=memory/2026-06-07.md:104-105]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:169:169 -->
+- 关键发现: **experience.md 严重膨胀**：knowledge/experience.md 包含大量从 archive 重复复制的内容 [score=0.834 recalls=0 avg=0.620 source=memory/2026-06-07.md:169-169]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:178:181 -->
+- 进化结果: **Cycle #0001**: 信号 `user_feature_request` → 匹配 `gene_gep_repair_from_errors` → executor 执行 → ✅ success (score: 0.54); **Cycle #0002**: 信号 `user_feature_request` → 匹配 `gene_gep_repair_from_errors` → executor 执行 → ✅ success (score: 0.54); **人格状态**: rigor=0.7, creativity=0.35, verbosity=0.25, risk_tolerance=0.4, obedience=0.85; **记忆图谱**: 新增 signal/hypothesis/attempt/outcome 节点 [score=0.834 recalls=0 avg=0.620 source=memory/2026-06-07.md:178-181]
