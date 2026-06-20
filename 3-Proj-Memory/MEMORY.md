@@ -140,20 +140,6 @@ experience*.md       ← 专项经验详细教程
 > 📌 **更多经验细节** → 检索 `.learnings/` 或使用 `qmd search` 搜索共享文档
 
 
-## Promoted From Short-Term Memory (2026-06-11)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:114:117 -->
-- | 项目 | 状态 | 说明 | |------|------|------| | skills/capability-evolver/ | ✅ | 完整框架已复制 | | .env 配置 | ✅ | OPENCLAW_WORKSPACE + EVOLVER_SESSION_SCOPE | [score=0.855 recalls=0 avg=0.620 source=memory/2026-06-07.md:114-117]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:118:120 -->
-- | 软链接修正 | ✅ | MEMORY.md → proj / USER.md → proj | | evolve.sh 入口 | ✅ | 运行脚本已创建 | | 首次 dry-run | ✅ | Evolver 运行成功，基因库正常加载 | [score=0.855 recalls=0 avg=0.620 source=memory/2026-06-07.md:118-120]
-
-## Promoted From Short-Term Memory (2026-06-12)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:189:190 -->
-- **触发**: 大梦要求重新扫描信号源（之前只有 11 个 session 文件，太少了） **工具**: exec, read, sessions_spawn [score=0.930 recalls=0 avg=0.620 source=memory/2026-06-07.md:189-190]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:124:127 -->
-- OPENCLAW_WORKSPACE=/root/.openclaw/workspace-proj EVOLVER_SESSION_SCOPE=proj EVOLVE_STRATEGY=balanced EVOLVER_ROLLBACK_MODE=hard [score=0.866 recalls=0 avg=0.620 source=memory/2026-06-07.md:124-127]
-
 ## Promoted From Short-Term Memory (2026-06-12)
 
 <!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:139:142 -->
@@ -197,3 +183,18 @@ experience*.md       ← 专项经验详细教程
 - 关键发现: **experience.md 严重膨胀**：knowledge/experience.md 包含大量从 archive 重复复制的内容 [score=0.834 recalls=0 avg=0.620 source=memory/2026-06-07.md:169-169]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:178:181 -->
 - 进化结果: **Cycle #0001**: 信号 `user_feature_request` → 匹配 `gene_gep_repair_from_errors` → executor 执行 → ✅ success (score: 0.54); **Cycle #0002**: 信号 `user_feature_request` → 匹配 `gene_gep_repair_from_errors` → executor 执行 → ✅ success (score: 0.54); **人格状态**: rigor=0.7, creativity=0.35, verbosity=0.25, risk_tolerance=0.4, obedience=0.85; **记忆图谱**: 新增 signal/hypothesis/attempt/outcome 节点 [score=0.834 recalls=0 avg=0.620 source=memory/2026-06-07.md:178-181]
+
+## Promoted From Short-Term Memory (2026-06-20)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:83:86 -->
+- 基因清单: | gene_realtime_logging_mandatory | repair | 记录/日志/遗漏 | | gene_naming_convention_strict | optimize | 命名/碎片/合并 | | gene_standardized_reply_format | optimize | 回复格式/简洁 | | gene_memory_end_of_session_protocol | optimize | 对话结束/7步协议 | [score=0.865 recalls=0 avg=0.620 source=memory/2026-06-07.md:83-86]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:87:90 -->
+- 基因清单: | gene_agent_browser_cdp_operations | optimize | browser/CDP/截图 | | gene_screenshot_to_link_pipeline | optimize | 截图转链接/HTTP | | gene_workspace_permission_boundary | repair | 权限/越界/违规 | | gene_violation_record_and_learn | repair | 违规/错误/纠正 | [score=0.865 recalls=0 avg=0.620 source=memory/2026-06-07.md:87-90]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:91:94 -->
+- 基因清单: | gene_automated_learning_pipeline | optimize | 自动提取/定时任务 | | gene_dreaming_noise_filter | repair | 梦想/噪音/过滤 | | gene_memory_sync_dual_write | optimize | 双写/Obsidian同步 | | gene_search_engine_priority | optimize | 搜索/引擎优先级 | [score=0.865 recalls=0 avg=0.620 source=memory/2026-06-07.md:91-94]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:79:82 -->
+- 基因清单: | ID | 类别 | 信号词 | |----|------|--------| | gene_proj_identity_core | optimize | 身份/铁律/边界 | | gene_session_startup_sequence | optimize | 启动/初始化/问候 | [score=0.833 recalls=0 avg=0.620 source=memory/2026-06-07.md:79-82]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:99:101 -->
+- 基因清单: | gene_self_improvement_capture | optimize | 自我改进/学习 | | gene_model_switch_greeting | optimize | 模型切换/打招呼 | | gene_tesseract_ocr_fallback | optimize | OCR/图片识别/降级 | [score=0.833 recalls=0 avg=0.620 source=memory/2026-06-07.md:99-101]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-07.md:128:129 -->
+- 环境变量: EVOLVER_LLM_REVIEW=0 EVOLVE_ALLOW_SELF_MODIFY=false [score=0.823 recalls=0 avg=0.620 source=memory/2026-06-07.md:128-129]

@@ -557,23 +557,17 @@ qmd get <file>[:line] -l 50
 
 ## Promoted From Short-Term Memory (2026-06-20)
 
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:133:136 -->
-- 合并详情: 合并前: genes.json 4 个 + genes.jsonl 16 个（1 个重叠）; 合并后: genes.json 19 个（去重后）; 分类: repair 10 / optimize 8 / innovate 1; 加载验证: 19 scope + 58 main = 75 总基因 ✅ [score=0.962 recalls=0 avg=0.620 source=memory/2026-06-06.md:133-136]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:151:154 -->
-- 检查详情: 今日记忆文件: ✅ 5896字节，11+条记录; 子文件: ✅ 无; Obsidian daily/: ✅ 同步完整（md5一致）; Obsidian MEMORY.md: ✅ 563行，软链接自动同步 [score=0.950 recalls=0 avg=0.620 source=memory/2026-06-06.md:151-154]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:155:158 -->
-- 检查详情: 工作区冗余: ✅ 无（只有今天的文件）; experience-前缀: ✅ 已全部清理; 专项经验新建文档: ✅ 5个（instant-archive/skill-development/evolver-setup/websocket-trajectory/memory-auto-write）; 知识库更新文档: ✅ 5个（memory-system/qmd-obsidian-system/collaboration-patterns/browser-automation×2） [score=0.950 recalls=0 avg=0.620 source=memory/2026-06-06.md:155-158]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:22:25 -->
-- 运行详情: 运行命令: cd workspace-tech && bash evolve.sh; 策略: balanced (实际 gene_gep_optimize_prompt_and_assets); 信号: 62 个信号（log_error, errsig, protocol_drift, bash_script_error, octal_trap 等）; Hub 匹配: 无（below_threshold） [score=0.872 recalls=0 avg=0.620 source=memory/2026-06-06.md:22-25]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:26:26 -->
-- 运行详情: 选择基因: gene_gep_optimize_prompt_and_assets（optimize 类别） [score=0.872 recalls=0 avg=0.620 source=memory/2026-06-06.md:26-26]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:29:32 -->
-- Executor Agent 产出: 修改了 19 个文件，+10245/-9600 行; 主要修改: .learnings/ (ERRORS.md, FEATURE_REQUESTS.md, LEARNINGS.md), DREAMS.md, memory/.dreams/, memory/2026-06-05.md; 新增: memory/evolution/scopes/tech/asset_call_log.jsonl; 未完成: solidify（未输出 5 个 Mandatory Objects） [score=0.872 recalls=0 avg=0.620 source=memory/2026-06-06.md:29-32]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:33:33 -->
-- Executor Agent 产出: 未 commit: 所有修改在工作区未提交 [score=0.872 recalls=0 avg=0.620 source=memory/2026-06-06.md:33-33]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:41:43 -->
-- 问题分析: executor agent 执行了 gene_gep_optimize_prompt_and_assets 策略，修改了 learnings 和 dreams 文件; 但没完成 solidify 步骤——没有输出 5 个 Mandatory Objects; 与昨天的问题一致：executor agent 在 solidify 前超时或遇到困难 [score=0.872 recalls=0 avg=0.620 source=memory/2026-06-06.md:41-43]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:46:49 -->
-- 修复：Solidify 固化自动检测机制: **根因1**: executor agent 修改文件后 token 耗尽，没有运行 `node index.js solidify`; **根因2**: 直接运行 `node index.js solidify` 时缺少 `OPENCLAW_WORKSPACE` 和 `EVOLVER_SESSION_SCOPE` 环境变量，导致读取到错误的 state 文件路径; **修复方案**: 在 `evolve.sh` 末尾添加自动检测逻辑; 检测 `evolution_solidify_state.json` 是否有 pending run（有 last_run 但无 last_solidify 或 run_id 不匹配） [score=0.872 recalls=0 avg=0.620 source=memory/2026-06-06.md:46-49]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:50:51 -->
-- 修复：Solidify 固化自动检测机制: 如果有，自动运行 `OPENCLAW_WORKSPACE=/root/.openclaw/workspace-tech EVOLVER_SESSION_SCOPE=tech node index.js solidify`; **验证结果**: ✅ 手动测试 solidify 成功，executor + 自动 solidify 端到端跑通 [score=0.872 recalls=0 avg=0.620 source=memory/2026-06-06.md:50-51]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:84:86 -->
+- 执行摘要: **重命名**: 7 个 experience- 前缀文件 → kebab-case **规则修复**: 文件命名规则强化（含原因+后果+重命名要求） **更新已有文档 (7个)**: [score=0.871 recalls=0 avg=0.620 source=memory/2026-06-06.md:84-86]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:87:90 -->
+- 执行摘要: memory-system.md: +碎片清理流程 +知识调用流程; qmd-obsidian-system.md: +QMD编译根因 +完整修复方案 +软链接架构; collaboration-patterns.md: +控制界面协作模式; browser-automation.md (shared/): +ref格式 +截图分享 +sed转义 [score=0.871 recalls=0 avg=0.620 source=memory/2026-06-06.md:87-90]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:91:91 -->
+- 执行摘要: browser-automation.md (knowledge/): 精简索引重写 [score=0.871 recalls=0 avg=0.620 source=memory/2026-06-06.md:91-91]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:94:97 -->
+- 执行摘要: instant-archive.md: 即时归档规范; skill-development.md: 技能开发规范; evolver-setup.md: Evolver 安装配置; websocket-trajectory.md: WebSocket+trajectory 技术发现 [score=0.871 recalls=0 avg=0.620 source=memory/2026-06-06.md:94-97]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:98:98 -->
+- 执行摘要: memory-auto-write.md: 记忆自动写入规范 [score=0.871 recalls=0 avg=0.620 source=memory/2026-06-06.md:98-98]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:36:38 -->
+- 基因状态: 基因: 53 个（无新增）; 事件: 0（无新增）; 胶囊: 0（无新增） [score=0.861 recalls=0 avg=0.620 source=memory/2026-06-06.md:36-38]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:93:93 -->
+- 执行摘要: **新建经验文档 (5个)**: [score=0.851 recalls=0 avg=0.620 source=memory/2026-06-06.md:93-93]
