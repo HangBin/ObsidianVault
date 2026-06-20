@@ -118,3 +118,12 @@ netstat -tlnp | grep 9222
 
 
 
+
+## Promoted From Short-Term Memory (2026-06-20)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:14:15 -->
+- 08:58 - 记忆写入 + 旧文件清理: **触发**: 用户要求写入今天记忆并清理旧文件 **工具**: sessions_list, write, exec, md5sum [score=0.801 recalls=0 avg=0.620 source=memory/2026-06-17.md:14-15]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:17:20 -->
+- 08:58 - 记忆写入 + 旧文件清理: **昨日记忆完整性**: 2026-06-16.md 共 10 条记录（09:44→13:36），Obsidian md5 一致; **子文件合并**: 2026-06-16-1336.md → 合并 13:36 记录后删除; **今日记忆文件**: 已创建 2026-06-17.md（frontmatter 完整）; **旧文件清理**: 2026-06-16.md → Obsidian 已同步 → 已删除 [score=0.801 recalls=0 avg=0.620 source=memory/2026-06-17.md:17-20]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:21:21 -->
+- 08:58 - 记忆写入 + 旧文件清理: **决策**: 工作区只允许保留当天文件，昨天文件同步后立即删除 [score=0.801 recalls=0 avg=0.620 source=memory/2026-06-17.md:21-21]
