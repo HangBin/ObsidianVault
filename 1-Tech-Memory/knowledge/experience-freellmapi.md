@@ -1,8 +1,8 @@
 ---
 author: tech agent
 created: 2026-06-20 16:15:00 GMT+8
-modified: 2026-06-20 16:15:00 GMT+8
-version: v1.0.0
+modified: 2026-06-22 17:05:00 GMT+8
+version: v1.1.0
 source: tech agent memory/2026-06-20.md
 tags: [tech-agent, experience, knowledge, freellmapi, install, nodejs, gcc]
 ---
@@ -296,7 +296,129 @@ curl http://localhost:3001/v1/models \
 
 ---
 
-## 12. 关键路径速查
+## 12. 开机自启动（systemd）
+
+### 服务文件路径
+`/etc/systemd/system/freellmapi.service`
+
+### 创建服务文件
+```bash
+cat > /etc/systemd/system/freellmapi.service << 'EOF'
+[Unit]
+Description=Freellmapi Server (API + Dashboard)
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/home/freellmapi
+ExecStart=/usr/bin/npm run dev:lan
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=freellmapi
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+### 启用并启动
+```bash
+systemctl daemon-reload        # 重新加载 systemd 配置
+systemctl enable freellmapi     # 设置开机自启动
+systemctl start freellmapi      # 立即启动
+systemctl status freellmapi     # 查看状态
+```
+
+### 验证
+```bash
+systemctl is-active freellmapi   # 应返回 active
+curl -s -o /dev/null -w "%{http_code}" http://192.168.1.210:5173/   # 应返回 200
+curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:3001/          # 应返回 200
+```
+
+### 查看日志
+```bash
+journalctl -u freellmapi -f         # 实时跟踪
+journalctl -u freellmapi --since today  # 今天的日志
+journalctl -u freellmapi -n 50      # 最近 50 行
+```
+
+### 重启/停止
+```bash
+systemctl restart freellmapi    # 重启
+systemctl stop freellmapi       # 停止
+```
+
+### 注意事项
+- `dev:lan` 使用 `concurrently` 同时启动 server + client，systemd 下正常工作
+- `Restart=always` 确保进程崩溃后 5 秒自动重启
+- 日志通过 `journalctl` 查看，不再依赖终端输出
+- 如果 `.env` 配置变更，需要 `systemctl restart freellmapi` 生效
+
+---
+
+## 13. 删除开机自启动
+
+### 停止并禁用服务
+```bash
+systemctl stop freellmapi       # 停止服务
+systemctl disable freellmapi    # 取消开机自启动
+rm /etc/systemd/system/freellmapi.service  # 删除服务文件
+systemctl daemon-reload        # 重新加载 systemd
+```
+
+### 验证已删除
+```bash
+systemctl is-active freellmapi   # 应返回 inactive
+systemctl is-enabled freellmapi  # 应返回 disabled
+```
+
+---
+
+## 14. 完全卸载 freellmapi
+
+### 步骤 1：停止服务
+```bash
+systemctl stop freellmapi
+systemctl disable freellmapi
+rm /etc/systemd/system/freellmapi.service
+systemctl daemon-reload
+```
+
+### 步骤 2：删除项目文件
+```bash
+rm -rf /home/freellmapi
+```
+
+### 步骤 3：清理残留进程（如果有）
+```bash
+pkill -f "concurrently.*freellmapi" 2>/dev/null
+pkill -f "tsx watch src/index.ts" 2>/dev/null
+pkill -f "vite --host" 2>/dev/null
+```
+
+### 步骤 4：检查端口释放
+```bash
+lsof -i :5173 -i :3001 2>/dev/null
+# 应无输出
+```
+
+### 步骤 5：检查是否还有相关全局安装
+```bash
+npm ls -g --depth=0 2>/dev/null | grep freellmapi
+# 应无输出
+```
+
+### ⚠️ 注意
+- 数据库文件在 `/home/freellmapi/server/data/freeapi.db`，删除项目会丢失所有配置和 Key
+- 如需保留数据，先备份 `.env` 和 `server/data/freeapi.db`
+
+---
+
+## 15. 关键路径速查
 
 | 项目 | 路径 |
 |------|------|
