@@ -150,3 +150,12 @@ netstat -tlnp | grep 9222
 - 10:06 - cookies 持久化修复 + 闲鱼消息读取 + 经验文档更新: **cookies 持久化**: run.sh COOKIES_FILE 从 /tmp/xianyu_cookies.txt → /root/.openclaw/workspace-media/.config/xianyu_cookies.txt，重启后注入成功（23个cookies）; **二维码验证**: 截图+OCR+tsv方案验证通过，但60秒内未检测到失效（有效期>60s）；"快速进入"按钮只在有历史登录记录时出现; **闲鱼消息读取**: 通过 goofish.com/im 成功读取6个联系人的消息列表; **经验文档更新**: 新增§6消息读取章节（含步骤、注意事项、验证结果）；更新§1.3不写category、§3.2 cookies路径、§8已知限制 [score=0.817 recalls=0 avg=0.620 source=memory/2026-06-17.md:50-53]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:54:54 -->
 - 10:06 - cookies 持久化修复 + 闲鱼消息读取 + 经验文档更新: **决策**: cookies 路径已修复；消息读取功能已验证可用；二维码失效检测需要更长时间等待 [score=0.817 recalls=0 avg=0.620 source=memory/2026-06-17.md:54-54]
+
+## Promoted From Short-Term Memory (2026-06-22)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:57:58 -->
+- 12:38 - "快速进入"按钮验证 + 对话结束: **触发**: 用户要求验证经验文档中点击"快速进入"按钮的可行性 **工具**: exec(导航到登录页), exec(清除cookies), exec(悬停panbin5218→退出登录), python3(截图+OCR+DOM查询) [score=0.849 recalls=0 avg=0.620 source=memory/2026-06-17.md:57-58]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:60:63 -->
+- 12:38 - "快速进入"按钮验证 + 对话结束: ❌ "快速进入"按钮在所有测试场景中均未出现（已登录、清除cookies、退出登录后）; 原因：该按钮需要 Chrome profile 中有历史登录会话记录，当前环境（Chrome重启+SQLite恢复cookies）不满足条件; 退出登录按钮点击后跳转到个人中心，未真正退出; 经验文档中的技术方案（截图→OCR tsv→模拟点击）本身正确，但需要真实有历史登录记录的环境才能验证 [score=0.849 recalls=0 avg=0.620 source=memory/2026-06-17.md:60-63]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:64:64 -->
+- 12:38 - "快速进入"按钮验证 + 对话结束: **决策**: 不更新经验文档，等"快速进入"按钮出现时再执行验证 [score=0.849 recalls=0 avg=0.620 source=memory/2026-06-17.md:64-64]
