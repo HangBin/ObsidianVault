@@ -127,3 +127,26 @@ netstat -tlnp | grep 9222
 - 08:58 - 记忆写入 + 旧文件清理: **昨日记忆完整性**: 2026-06-16.md 共 10 条记录（09:44→13:36），Obsidian md5 一致; **子文件合并**: 2026-06-16-1336.md → 合并 13:36 记录后删除; **今日记忆文件**: 已创建 2026-06-17.md（frontmatter 完整）; **旧文件清理**: 2026-06-16.md → Obsidian 已同步 → 已删除 [score=0.801 recalls=0 avg=0.620 source=memory/2026-06-17.md:17-20]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:21:21 -->
 - 08:58 - 记忆写入 + 旧文件清理: **决策**: 工作区只允许保留当天文件，昨天文件同步后立即删除 [score=0.801 recalls=0 avg=0.620 source=memory/2026-06-17.md:21-21]
+
+## Promoted From Short-Term Memory (2026-06-22)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:24:25 -->
+- 09:49 - 闲鱼测试商品批量发布: **触发**: 用户要求启动浏览器、扫码登录、发布xianyu-products里所有测试商品 **工具**: exec(xianyu_start.sh), edit(去掉category字段), exec(run.sh ×2), exec(xianyu_publish.py ×1), sessions_list [score=0.849 recalls=0 avg=0.620 source=memory/2026-06-17.md:24-25]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:27:30 -->
+- 09:49 - 闲鱼测试商品批量发布: 启动 Chrome → 登录态正常（panbin5218）✅; 修改两个商品 product.json，去掉 category 字段（用户要求不写手机分类）; test-item-001: 商品ID 1057980679964 ✅ 已发布; test-item-002: run.sh 检测为 UNKNOWN → 手动调 xianyu_publish.py → 商品ID 1057981571117 ✅ 已发布 [score=0.849 recalls=0 avg=0.620 source=memory/2026-06-17.md:27-30]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:31:31 -->
+- 09:49 - 闲鱼测试商品批量发布: **决策**: run.sh 检测逻辑在页面跳转后可能返回 UNKNOWN，直接调 xianyu_publish.py 可绕过检测 [score=0.849 recalls=0 avg=0.620 source=memory/2026-06-17.md:31-31]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:34:35 -->
+- 10:06 - 二维码功能 + 失效状态验证: **触发**: 用户要求验证二维码功能和失效状态处理 **工具**: exec(run.sh --check), exec(pkill+restart), python3(CDP截图+OCR), python3(extract_cookies), python3(失效等待) [score=0.817 recalls=0 avg=0.620 source=memory/2026-06-17.md:34-35]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:37:40 -->
+- 10:06 - 二维码功能 + 失效状态验证: 二维码截图获取 ✅：CDP + PIL 裁剪 passport iframe 区域放大 3x; OCR 有效性验证 ✅：能识别"手机扫码安全登录"，未检测到"二维码已失效"; 扫码登录 ✅：用户扫码后登录态恢复，panbin5218 + 订单; Cookies 提取 ✅：extract_cookies.py 从 SQLite 提取 20 个 cookies 并保存 [score=0.817 recalls=0 avg=0.620 source=memory/2026-06-17.md:37-40]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:41:43 -->
+- 10:06 - 二维码功能 + 失效状态验证: 二维码失效检测 ⏳：等待 60 秒未检测到失效（闲鱼二维码有效期 > 60s）; ⚠️ pkill 误杀：重启 Chrome 时 pkill -9 -f google-chrome 误杀了 2 次当前进程; ⚠️ cookies 注入时机：/tmp/xianyu_cookies.txt 不存在时 run.sh 跳过注入，但 Chrome 从 SQLite 自动恢复 [score=0.817 recalls=0 avg=0.620 source=memory/2026-06-17.md:41-43]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:44:44 -->
+- 10:06 - 二维码功能 + 失效状态验证: **决策**: 更新经验文档 §8 已知限制（新增 pkill 风险、二维码有效期、cookies 注入时机）；§1.3 确认不写 category；§3.2 补充 run.sh UNKNOWN 误判场景 [score=0.817 recalls=0 avg=0.620 source=memory/2026-06-17.md:44-44]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:47:48 -->
+- 10:06 - cookies 持久化修复 + 闲鱼消息读取 + 经验文档更新: **触发**: 用户指出 cookies 存在 /tmp/ 会丢失、要求验证二维码失效处理、读取闲鱼消息、更新经验文档 **工具**: edit(run.sh COOKIES_FILE), exec(重启Chrome+注入cookies), exec(消息页面截图+DOM), edit(经验文档新增§6消息读取) [score=0.817 recalls=0 avg=0.620 source=memory/2026-06-17.md:47-48]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:50:53 -->
+- 10:06 - cookies 持久化修复 + 闲鱼消息读取 + 经验文档更新: **cookies 持久化**: run.sh COOKIES_FILE 从 /tmp/xianyu_cookies.txt → /root/.openclaw/workspace-media/.config/xianyu_cookies.txt，重启后注入成功（23个cookies）; **二维码验证**: 截图+OCR+tsv方案验证通过，但60秒内未检测到失效（有效期>60s）；"快速进入"按钮只在有历史登录记录时出现; **闲鱼消息读取**: 通过 goofish.com/im 成功读取6个联系人的消息列表; **经验文档更新**: 新增§6消息读取章节（含步骤、注意事项、验证结果）；更新§1.3不写category、§3.2 cookies路径、§8已知限制 [score=0.817 recalls=0 avg=0.620 source=memory/2026-06-17.md:50-53]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:54:54 -->
+- 10:06 - cookies 持久化修复 + 闲鱼消息读取 + 经验文档更新: **决策**: cookies 路径已修复；消息读取功能已验证可用；二维码失效检测需要更长时间等待 [score=0.817 recalls=0 avg=0.620 source=memory/2026-06-17.md:54-54]
