@@ -159,3 +159,12 @@ netstat -tlnp | grep 9222
 - 12:38 - "快速进入"按钮验证 + 对话结束: ❌ "快速进入"按钮在所有测试场景中均未出现（已登录、清除cookies、退出登录后）; 原因：该按钮需要 Chrome profile 中有历史登录会话记录，当前环境（Chrome重启+SQLite恢复cookies）不满足条件; 退出登录按钮点击后跳转到个人中心，未真正退出; 经验文档中的技术方案（截图→OCR tsv→模拟点击）本身正确，但需要真实有历史登录记录的环境才能验证 [score=0.849 recalls=0 avg=0.620 source=memory/2026-06-17.md:60-63]
 <!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:64:64 -->
 - 12:38 - "快速进入"按钮验证 + 对话结束: **决策**: 不更新经验文档，等"快速进入"按钮出现时再执行验证 [score=0.849 recalls=0 avg=0.620 source=memory/2026-06-17.md:64-64]
+
+## Promoted From Short-Term Memory (2026-06-23)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:5:6 -->
+- daily-log; media-agent [score=0.891 recalls=0 avg=0.620 source=memory/2026-06-17.md:5-6]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:7:8 -->
+- created: 2026-06-17T08:58:00+08:00 modified: 2026-06-17T08:58:00+08:00 [score=0.891 recalls=0 avg=0.620 source=memory/2026-06-17.md:7-8]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-17.md:2:3 -->
+- date: 2026-06-17 weekday: Tuesday [score=0.881 recalls=0 avg=0.620 source=memory/2026-06-17.md:2-3]
