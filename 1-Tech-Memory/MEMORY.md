@@ -556,23 +556,6 @@ qmd get <file>[:line] -l 50
 - signals.js: /root/.openclaw/skills/capability-evolver/src/gep/signals.js
 - memoryGraph.js: /root/.openclaw/skills/capability-evolver/src/gep/memoryGraph.js
 
-## Promoted From Short-Term Memory (2026-06-20)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:84:86 -->
-- 执行摘要: **重命名**: 7 个 experience- 前缀文件 → kebab-case **规则修复**: 文件命名规则强化（含原因+后果+重命名要求） **更新已有文档 (7个)**: [score=0.871 recalls=0 avg=0.620 source=memory/2026-06-06.md:84-86]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:87:90 -->
-- 执行摘要: memory-system.md: +碎片清理流程 +知识调用流程; qmd-obsidian-system.md: +QMD编译根因 +完整修复方案 +软链接架构; collaboration-patterns.md: +控制界面协作模式; browser-automation.md (shared/): +ref格式 +截图分享 +sed转义 [score=0.871 recalls=0 avg=0.620 source=memory/2026-06-06.md:87-90]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:91:91 -->
-- 执行摘要: browser-automation.md (knowledge/): 精简索引重写 [score=0.871 recalls=0 avg=0.620 source=memory/2026-06-06.md:91-91]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:94:97 -->
-- 执行摘要: instant-archive.md: 即时归档规范; skill-development.md: 技能开发规范; evolver-setup.md: Evolver 安装配置; websocket-trajectory.md: WebSocket+trajectory 技术发现 [score=0.871 recalls=0 avg=0.620 source=memory/2026-06-06.md:94-97]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:98:98 -->
-- 执行摘要: memory-auto-write.md: 记忆自动写入规范 [score=0.871 recalls=0 avg=0.620 source=memory/2026-06-06.md:98-98]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:36:38 -->
-- 基因状态: 基因: 53 个（无新增）; 事件: 0（无新增）; 胶囊: 0（无新增） [score=0.861 recalls=0 avg=0.620 source=memory/2026-06-06.md:36-38]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-06.md:93:93 -->
-- 执行摘要: **新建经验文档 (5个)**: [score=0.851 recalls=0 avg=0.620 source=memory/2026-06-06.md:93-93]
-
 ## 📦 已安装项目
 
 ### FreeLLMAPI (2026-06-20)
@@ -592,3 +575,12 @@ qmd get <file>[:line] -l 50
 - **npm install 超时**: 进程容易被 SIGKILL，不用管道 `| tail` 避免 exit code 丢失
 - **keyless Provider**: 需在 api_keys 表插入 sentinel 记录（key='no-key'，AES-256-GCM 加密）
 - **端口清理**: 重启前用 `fuser -k <port>/tcp` 清理残留进程
+
+## Promoted From Short-Term Memory (2026-06-25)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-22.md:14:14 -->
+- 16:19 - 修复 5173 端口服务不可达: **决策**: 服务未配置为开机自启，崩溃后需手动重启。后续可考虑 systemd 或 pm2 守护进程。 [score=0.810 recalls=0 avg=0.620 source=memory/2026-06-22.md:14-14]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-22.md:4:5 -->
+- 16:19 - 修复 5173 端口服务不可达: **触发**: 老板报告 http://192.168.1.210:5173/ 打不开 **工具**: exec (lsof/ss/curl), process (poll) [score=0.810 recalls=0 avg=0.620 source=memory/2026-06-22.md:4-5]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-22.md:7:10 -->
+- 16:19 - 修复 5173 端口服务不可达: 端口 5173 和 3001 均无服务运行; 定位到项目：`/home/freellmapi`（freellmapi monorepo，包含 server + client）; 前端 client 是 Vite + React，端口 5173，host 0.0.0.0; 后端 server 是 tsx watch，端口 3001 [score=0.810 recalls=0 avg=0.620 source=memory/2026-06-22.md:7-10]
