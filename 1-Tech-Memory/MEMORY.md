@@ -576,11 +576,15 @@ qmd get <file>[:line] -l 50
 - **keyless Provider**: 需在 api_keys 表插入 sentinel 记录（key='no-key'，AES-256-GCM 加密）
 - **端口清理**: 重启前用 `fuser -k <port>/tcp` 清理残留进程
 
-## Promoted From Short-Term Memory (2026-06-25)
+## Promoted From Short-Term Memory (2026-06-26)
 
-<!-- openclaw-memory-promotion:memory:memory/2026-06-22.md:14:14 -->
-- 16:19 - 修复 5173 端口服务不可达: **决策**: 服务未配置为开机自启，崩溃后需手动重启。后续可考虑 systemd 或 pm2 守护进程。 [score=0.810 recalls=0 avg=0.620 source=memory/2026-06-22.md:14-14]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-22.md:4:5 -->
-- 16:19 - 修复 5173 端口服务不可达: **触发**: 老板报告 http://192.168.1.210:5173/ 打不开 **工具**: exec (lsof/ss/curl), process (poll) [score=0.810 recalls=0 avg=0.620 source=memory/2026-06-22.md:4-5]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-22.md:7:10 -->
-- 16:19 - 修复 5173 端口服务不可达: 端口 5173 和 3001 均无服务运行; 定位到项目：`/home/freellmapi`（freellmapi monorepo，包含 server + client）; 前端 client 是 Vite + React，端口 5173，host 0.0.0.0; 后端 server 是 tsx watch，端口 3001 [score=0.810 recalls=0 avg=0.620 source=memory/2026-06-22.md:7-10]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-22.md:11:13 -->
+- 16:19 - 修复 5173 端口服务不可达: 执行 `npm run dev:lan` 重新启动; 前端: http://192.168.1.210:5173/ → 200 ✅; 后端: http://127.0.0.1:3001/ → 200 ✅ [score=0.836 recalls=0 avg=0.620 source=memory/2026-06-22.md:11-13]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-22.md:17:18 -->
+- 17:03 - 配置 freellmapi 开机自启动 + 经验文档: **触发**: 老板要求设置开机自启动，并编写操作经验文档 **工具**: exec (systemctl/curl), edit (经验文档) [score=0.836 recalls=0 avg=0.620 source=memory/2026-06-22.md:17-18]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-22.md:24:27 -->
+- 17:03 - 配置 freellmapi 开机自启动 + 经验文档: §12 开机自启动（systemd 服务文件 + 启用/验证/日志/重启命令）; §13 删除开机自启动（停止+禁用+删除服务文件）; §14 完全卸载 freellmapi（5 步：停止→删项目→清进程→查端口→查全局安装）; 版本升级到 v1.1.0 [score=0.836 recalls=0 avg=0.620 source=memory/2026-06-22.md:24-27]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-22.md:20:23 -->
+- 17:03 - 配置 freellmapi 开机自启动 + 经验文档: 创建 `/etc/systemd/system/freellmapi.service`，使用 `npm run dev:lan` 启动; `Restart=always` + `RestartSec=5` 自动重启; 验证：前端 5173 → 200 ✅，后端 3001 → 200 ✅，`systemctl is-active` → active ✅; 更新经验文档 `experience-freellmapi.md`，新增 3 个章节： [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-22.md:20-23]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-22.md:28:28 -->
+- 17:03 - 配置 freellmapi 开机自启动 + 经验文档: **决策**: systemd 是最可靠的守护方式，比 pm2 更底层、更稳定 [score=0.804 recalls=0 avg=0.620 source=memory/2026-06-22.md:28-28]
