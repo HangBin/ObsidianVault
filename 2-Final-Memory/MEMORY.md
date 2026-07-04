@@ -540,13 +540,6 @@ tags:
 - 5个减仓/止损条件全部触发
 - 综合评分7.5/10
 
-## Promoted From Short-Term Memory (2026-06-15)
-
-<!-- openclaw-memory-promotion:memory:memory/2026-06-12.md:12:15 -->
-- **触发**: 收到 main session 的 inter-session message，确认午盘报告已记录 **工具**: 无 **结果**: 午盘报告已确认记录到 daily log，等待尾盘报告 cron 触发 **决策**: 收到确认信息，继续等待后续任务 [score=0.816 recalls=0 avg=0.620 source=memory/2026-06-12.md:12-15]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-12.md:18:20 -->
-- **触发**: cron 定时任务 **工具**: exec data collection + web_fetch 资金流向 + tavily_search + write 报告 **结果**: ✅ 尾盘报告完成，邮件已发送 [score=0.811 recalls=0 avg=0.620 source=memory/2026-06-12.md:18-20]
-
 ## 📅 2026-06-15 关键知识
 
 ### 今日市场特征
@@ -566,3 +559,12 @@ tags:
 
 ### 工具问题
 - md_to_html.py 生成的 HTML 中仍有 `<pre>` 标签（来自缩进文本），需修复缩进处理逻辑
+
+## Promoted From Short-Term Memory (2026-07-04)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-30.md:12:15 -->
+- 09:14 - 晨报 cron 完成通知: **触发**: main session 发送 inter-session 通知 **工具**: 无（仅确认） **结果**: 晨报邮件发送成功，报告已存档 **决策**: 等待老板进一步指示，不主动操作 [score=0.880 recalls=0 avg=0.620 source=memory/2026-06-30.md:12-15]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-30.md:2:3 -->
+- created: 2026-06-30T00:00:00 modified: 2026-06-30 09:14 GMT+8 [score=0.857 recalls=0 avg=0.620 source=memory/2026-06-30.md:2-3]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-30.md:5:6 -->
+- daily-log; final-agent [score=0.847 recalls=0 avg=0.620 source=memory/2026-06-30.md:5-6]
