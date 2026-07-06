@@ -560,11 +560,21 @@ tags:
 ### 工具问题
 - md_to_html.py 生成的 HTML 中仍有 `<pre>` 标签（来自缩进文本），需修复缩进处理逻辑
 
-## Promoted From Short-Term Memory (2026-07-04)
+## Promoted From Short-Term Memory (2026-07-06)
 
-<!-- openclaw-memory-promotion:memory:memory/2026-06-30.md:12:15 -->
-- 09:14 - 晨报 cron 完成通知: **触发**: main session 发送 inter-session 通知 **工具**: 无（仅确认） **结果**: 晨报邮件发送成功，报告已存档 **决策**: 等待老板进一步指示，不主动操作 [score=0.880 recalls=0 avg=0.620 source=memory/2026-06-30.md:12-15]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-30.md:2:3 -->
-- created: 2026-06-30T00:00:00 modified: 2026-06-30 09:14 GMT+8 [score=0.857 recalls=0 avg=0.620 source=memory/2026-06-30.md:2-3]
-<!-- openclaw-memory-promotion:memory:memory/2026-06-30.md:5:6 -->
-- daily-log; final-agent [score=0.847 recalls=0 avg=0.620 source=memory/2026-06-30.md:5-6]
+<!-- openclaw-memory-promotion:memory:memory/2026-07-01.md:13:15 -->
+- 11:41 - 早盘+午盘合并配置更新: **触发**: 老板要求将早盘和午盘合并为一份午盘综合报告（12:15发布） **工具**: cron, edit, write, exec **结果**: 成功完成全部配置更新 [score=0.876 recalls=0 avg=0.620 source=memory/2026-07-01.md:13-15]
+<!-- openclaw-memory-promotion:memory:memory/2026-07-01.md:25:25 -->
+- 11:41 - 早盘+午盘合并配置更新: 更新 template-tail.md 和 template-review.md 中的"早盘"引用 [score=0.876 recalls=0 avg=0.620 source=memory/2026-07-01.md:25-25]
+<!-- openclaw-memory-promotion:memory:memory/2026-07-01.md:21:24 -->
+- 11:41 - 早盘+午盘合并配置更新: 新建 template-merged.md 合并模板; 更新 SKILL.md（四时段→三时段）; 更新 checklists.md（四时段→三时段）; 更新 report-templates.md [score=0.863 recalls=0 avg=0.620 source=memory/2026-07-01.md:21-24]
+<!-- openclaw-memory-promotion:memory:memory/2026-07-01-1115.md:14:14 -->
+- Conversation Summary: assistant: [assistant turn failed before producing content] [score=0.812 recalls=0 avg=0.620 source=memory/2026-07-01-1115.md:14-14]
+<!-- openclaw-memory-promotion:memory:memory/2026-07-01-1115.md:3:5 -->
+- Session: 2026-07-01 11:15:30 GMT+8: **Session Key**: agent:final:main; **Session ID**: bc3eb27a-cf32-42fa-8c3b-3d0921497d9d; **Source**: gateway:sessions.reset [score=0.812 recalls=0 avg=0.620 source=memory/2026-07-01-1115.md:3-5]
+<!-- openclaw-memory-promotion:memory:memory/2026-07-01-1115.md:9:12 -->
+- Conversation Summary: user: 我觉得早盘有点多余，你看是否可以将早盘和午盘合并？ assistant: [assistant turn failed before producing content] user: 我觉得早盘有点多余，你看是否可以将早盘和午盘合并？ assistant: [assistant turn failed before producing content] [score=0.812 recalls=0 avg=0.620 source=memory/2026-07-01-1115.md:9-12]
+<!-- openclaw-memory-promotion:memory:memory/2026-07-01.md:17:20 -->
+- 11:41 - 早盘+午盘合并配置更新: 早盘cron已禁用（jobId: 6876eec3）; 午盘cron已更新为合并报告（jobId: df01bb1b），包含早盘13章+午盘7章内容; 尾盘cron已更新引用（读午盘综合报告而非早盘+午盘）; 复盘cron已更新引用（读午盘综合+尾盘两份报告） [score=0.812 recalls=0 avg=0.620 source=memory/2026-07-01.md:17-20]
+<!-- openclaw-memory-promotion:memory:memory/2026-07-01.md:2:3 -->
+- created: 2026-07-01T00:00:00 modified: 2026-07-01 11:41 GMT+8 [score=0.802 recalls=0 avg=0.620 source=memory/2026-07-01.md:2-3]
