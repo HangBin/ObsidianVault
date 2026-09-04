@@ -34,3 +34,8 @@ aliases:
 | [[2026-05-25]] | 新增复述确认规则 + 记忆完整性检查 | #soul #memory-system |
 | [[2026-06-04]] | capability-evolver 组件配置完成 | #evolver #node-register |
 | [[2026-06-05]] | 记忆归档与完整性检查 | #memory-archive #integrity-check |
+
+### 2026年9月
+| 日期             | 主题                              | 标签                                        |
+| -------------- | ------------------------------- | ----------------------------------------- |
+| [[2026-09-04]] | OpenClaw 升级到 2026.9.1（Node 22.23.2 + doctor --fix 迁移 + 5 插件更新） | #openclaw #upgrade #doctor #node #migration |
