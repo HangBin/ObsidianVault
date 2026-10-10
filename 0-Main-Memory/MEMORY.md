@@ -77,6 +77,29 @@ qmd ls share
 
 ---
 
+## 🔧 系统配置经验：OpenClaw 模型可见性双层控制（2026-10-10 固化）
+<!-- project: path:/root/.openclaw/workspace -->
+**现象**：`models.providers` 里已完整定义 sensenova（`deepseek-v4-flash` / `sensenova-6.8-flash-lite`），但 `/models` UI 选择列表里看不到这两个模型。
+
+**根因**：模型可见性由**两层**控制，缺一不可：
+| 层 | 配置路径 | 作用 |
+|----|---------|------|
+| ① 定义层 | `models.providers.<name>.models[]` | 模型是否存在、有 API Key 可用 |
+| ② 白名单层 | `agents.defaults.modelPolicy.allow[]` | UI 是否列出该模型 |
+
+只配 ① 不进 ② → 模型在 UI 不可见，但 `primary`/`fallbacks` 引用仍正常生效（运行层不校验 allow）→ 表现为「能用但选不到」。
+
+**当前基准配置**（2026-10-10）：
+- `primary`: `sensenova/deepseek-v4-flash`
+- `fallbacks`: `sensenova/sensenova-6.8-flash-lite`（首位，已去重）→ `longcat/LongCat-2.0` → `zai/glm-*` → `openrouter/free` 等免费模型
+- `allow`：21 项，已含 `sensenova/deepseek-v4-flash`、`sensenova/sensenova-6.8-flash-lite`
+
+**操作守则**：
+1. 改模型相关配置前，先备份：`cp openclaw.json openclaw.json.bak-$(date +%Y%m%d-%H%M%S)`
+2. 改完必须校验：`python3 -c "import json; json.load(open('openclaw.json'))"`
+3. 要新增可用模型 → 同时检查 provider 定义 + `modelPolicy.allow` 两处
+4. 改配置需 Gateway 重启/reload 才生效；生效前的 UI 仍是旧状态
+
 ## ⚠️ 核心铁律
 **未经允许，不准轻易删除文件**
 - 删除操作先确认范围和后果，获得授权后再执行
